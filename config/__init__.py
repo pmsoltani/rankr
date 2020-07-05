@@ -1,1 +1,1 @@
-import config  # noqa
+from config.config import ShanghaiConfig  # noqa

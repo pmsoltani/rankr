@@ -17,4 +17,16 @@ class BaseConfig(object):
 
 
 class ShanghaiConfig(BaseConfig):
+    BASE = env("SHANGHAI_BASE")
     URL = env("SHANGHAI_URL")
+    FIELDS = {
+        "World Rank": "Rank",
+        "URL": "URL",
+        "Institution*": "University",
+        "Institution": "University",
+        "Country/Region": "Country",
+        "By location": "Country",
+        "National/RegionalRank": "National Rank",
+        "National/Regional Rank": "National Rank",
+        "Total Score": "Total Score",
+    }
