@@ -14,3 +14,7 @@ class BaseConfig(object):
     MAIN_DIR = Path.cwd() / DATA_DIR
 
     USER_AGENT = env("USER_AGENT")
+
+
+class ShanghaiConfig(BaseConfig):
+    URL = env("SHANGHAI_URL")
