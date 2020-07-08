@@ -119,18 +119,15 @@ class ShanghaiCrawler(shc):
 
         return (self.tbl_headers, self.tbl_contents)
 
-
-def csv_export(table: Tuple[List[str], List], location: str):
-    """Exports a table to a .csv file.
-
-    Args:
-        table (Tuple[List[str], List]): The table to be exported
-        location (str): The location of the output file.
-    """
-    with io.open(location, "w", newline="", encoding="utf-8") as csv_file:
-        writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
-        writer.writerow(table[0])
-        writer.writerows(row for row in table[1] if row)
+    def ـcsv_export(self):
+        """Exports a table to a .csv file."""
+        with io.open(
+            self.file_path, "w", newline="", encoding="utf-8"
+        ) as csv_file:
+            writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
+            writer.writerow(self.tbl_headers)
+            writer.writerows(row for row in self.tbl_contents if row)
+            print(f"Saved file: {self.file_path}")
 
 
 # p = get_page(shc.URL)
