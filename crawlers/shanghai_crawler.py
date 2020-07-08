@@ -52,6 +52,29 @@ def clean_headers(headers: List[str]) -> list:
     return new_headers
 
 
+class ShanghaiCrawler(shc):
+    def __init__(
+        self,
+        url: str,
+        year: int,
+        field: str = "All",
+        subject: str = "All",
+        wait: int = 10,
+        tries: int = 5,
+    ):
+        self.url = url
+        self.year = year
+        self.field = field
+        self.subject = subject
+
+        self.wait = wait
+        self.tries = tries
+
+        self.file_name = f"ARWU_{self.year}_{self.field}_{self.subject}.csv"
+        self.file_path = Path(shc.MAIN_DIR) / self.file_name
+        self.file_path.parent.mkdir(parents=True, exist_ok=True)
+
+
 def get_page(url: str) -> BeautifulSoup:
     """Requests a page for data extraction
 
