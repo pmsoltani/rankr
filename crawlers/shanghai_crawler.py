@@ -10,10 +10,6 @@ from bs4 import BeautifulSoup
 from config import ShanghaiConfig as shc
 
 
-class Base(object):
-    headers = {"User-Agent": shc.USER_AGENT}
-
-
 def vacuum(string: str) -> str:
     """Cleans the input text for further processing
 
@@ -68,7 +64,7 @@ def get_page(url: str) -> BeautifulSoup:
     Returns:
         BeautifulSoup: Soup
     """
-    page = requests.get(url, headers=Base.headers)
+    page = requests.get(url, headers=shc.headers)
     if page.status_code != 200:
         raise HTTPError(f"Error getting page: {url}")
     return BeautifulSoup(page.content, "html.parser")
@@ -94,7 +90,7 @@ def get_table(page) -> Tuple[List[str], List[List[str]]]:
                 values.append(Path(val.find("img")["src"]).stem)
                 continue
             if val.find("a") and val.text:
-                values.append(shc.BASE + val.find("a")["href"])
+                values.append(shc.BASE_URL + val.find("a")["href"])
             values.append(val.text)
 
         rows.append(values)

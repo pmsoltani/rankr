@@ -19,6 +19,7 @@ class BaseConfig(object):
 
 
 class ShanghaiConfig(BaseConfig):
+    headers = {"User-Agent": BaseConfig.USER_AGENT}
     BASE_URL = env("SHANGHAI_BASE")
     _raw_urls = env("SHANGHAI_URLS_FILE", "shanghai_urls.json")
 
