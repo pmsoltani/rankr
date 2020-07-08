@@ -24,6 +24,34 @@ def vacuum(string: str) -> str:
     return " ".join([word for word in string.split(" ") if word])
 
 
+def country_name_mapper(country: str) -> str:
+    country_names = {
+        "usa": "United States",
+        "unitedstates": "United States",
+        "uk": "United Kingdom",
+        "unitedkingdom": "United Kingdom",
+        "unitedarabemirates": "United Arab Emirates",
+        "china-hongkong": "Hong Kong",
+        "china-hk": "Hong Kong",
+        "hongkong,china": "Hong Kong",
+        "macau": "Macao",
+        "china-macau": "Macao",
+        "china-mc": "Macao",
+        "china-taiwan": "Taiwan",
+        "taiwan,china": "Taiwan",
+        "china-tw": "Taiwan",
+        "czech": "Czech Republic",
+        "czechrepublic": "Czech Republic",
+        "new zealand": "New Zealand",
+        "puertorico": "Puerto Rico",
+        "saudiarabia": "Saudi Arabia",
+        "southafrica": "South Africa",
+        "southkorea": "South Korea",
+    }
+
+    return country_names.get(country.lower(), country)
+
+
 class ShanghaiCrawler(shc):
     def __init__(
         self,
@@ -93,7 +121,7 @@ class ShanghaiCrawler(shc):
             for val in row.find_all("td"):
                 if val.find("img"):
                     country = Path(val.find("img")["src"]).stem
-                    values.append(country)
+                    values.append(country_name_mapper(country))
                     continue
                 if val.find("a") and val.text:
                     values.append(shc.BASE_URL + val.find("a")["href"])
