@@ -90,33 +90,34 @@ class ShanghaiCrawler(shc):
         print(f"Downloaded page: {self.url}")
         return self.page
 
+    def ـget_tbl(self) -> Tuple[List[str], List[List[str]]]:
+        """Finds the ranking table within the page and extracts its data
 
-def get_table(page) -> Tuple[List[str], List[List[str]]]:
-    """Finds the ranking table within the page and extracts its data
+        Returns:
+            Tuple[List[str], List[List[str]]]: Table headers and content
+        """
+        tbl = self.page.find("table", attrs={"id": "UniversityRanking"})
 
-    Args:
-        page ([type]): The page to be processed
-    Returns:
-        Tuple[List[str], List[List[str]]]: Table headers and content
-    """
-    table = page.find("table", attrs={"id": "UniversityRanking"})
-    headers = [header.text for header in table.find_all("th")]
-    headers = clean_headers(headers)
-    rows = []
+        self.tbl_headers: List[str] = [h.text for h in tbl.find_all("th")]
+        self.ـclean_headers()
 
-    for row in table.find_all("tr"):
-        values = []
-        for val in row.find_all("td"):
-            if val.find("img"):
-                values.append(Path(val.find("img")["src"]).stem)
-                continue
-            if val.find("a") and val.text:
-                values.append(shc.BASE_URL + val.find("a")["href"])
-            values.append(val.text)
+        self.tbl_contents: List[List[str]] = []
+        for row in tbl.find_all("tr"):
+            values = []
+            for val in row.find_all("td"):
+                if val.find("img"):
+                    country = Path(val.find("img")["src"]).stem
+                    values.append(country)
+                    continue
+                if val.find("a") and val.text:
+                    values.append(shc.BASE_URL + val.find("a")["href"])
+                values.append(val.text)
 
-        rows.append(values)
+            if values:
+                values.extend([self.year, self.field, self.subject])
+                self.tbl_contents.append(values)
 
-    return (headers, rows)
+        return (self.tbl_headers, self.tbl_contents)
 
 
 def csv_export(table: Tuple[List[str], List], location: str):
@@ -132,6 +133,6 @@ def csv_export(table: Tuple[List[str], List], location: str):
         writer.writerows(row for row in table[1] if row)
 
 
-p = get_page(shc.URL)
-tbl = get_table(p)
-csv_export(tbl, "test.csv")
+# p = get_page(shc.URL)
+# tbl = get_table(p)
+# csv_export(tbl, "test.csv")
