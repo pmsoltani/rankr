@@ -1,4 +1,6 @@
+import json
 from pathlib import Path
+from typing import List
 
 from environs import Env
 
@@ -17,8 +19,12 @@ class BaseConfig(object):
 
 
 class ShanghaiConfig(BaseConfig):
-    BASE = env("SHANGHAI_BASE")
-    URL = env("SHANGHAI_URL")
+    BASE_URL = env("SHANGHAI_BASE")
+    _raw_urls = env("SHANGHAI_URLS_FILE", "shanghai_urls.json")
+
+    with open(Path.cwd() / _raw_urls, "r") as urls_file:
+        URLS: List[dict] = json.loads(urls_file.read())
+
     FIELDS = {
         "World Rank": "Rank",
         "URL": "URL",
