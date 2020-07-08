@@ -24,35 +24,6 @@ def vacuum(string: str) -> str:
     return " ".join([word for word in string.split(" ") if word])
 
 
-def clean_headers(headers: List[str]) -> list:
-    """Cleans a list of headers
-
-    Args:
-        headers (List[str]): A list of column names to be cleaned
-
-    Returns:
-        list: Cleaned column names
-    """
-    new_headers = []
-    if "url" not in [h.lower() for h in headers]:
-        headers.insert(1, "URL")
-
-    for h in headers:
-        h = vacuum(h)
-        if h.startswith("By location"):
-            h = "By location"
-
-        if shc.FIELDS.get(h):
-            new_headers.append(shc.FIELDS.get(h))
-
-        if h.startswith("Score on"):
-            tmp = h.replace("Score on", "").strip().split(" ")
-            tmp = [t for t in tmp if t.strip()]
-            new_headers.extend(tmp)
-
-    return new_headers
-
-
 class ShanghaiCrawler(shc):
     def __init__(
         self,
@@ -143,6 +114,34 @@ class ShanghaiCrawler(shc):
             writer.writerow(self.tbl_headers)
             writer.writerows(row for row in self.tbl_contents if row)
             print(f"Saved file: {self.file_path}")
+
+    def ـclean_headers(self) -> list:
+        """Cleans a list of headers
+
+        Returns:
+            list: Cleaned column names
+        """
+        new_headers = []
+        if "url" not in [h.lower() for h in self.tbl_headers]:
+            self.tbl_headers.insert(1, "URL")
+
+        for h in self.tbl_headers:
+            h = vacuum(h)
+            if h.startswith("By location"):
+                h = "By location"
+
+            if shc.FIELDS.get(h):
+                new_headers.append(shc.FIELDS.get(h))
+
+            if h.startswith("Score on"):
+                tmp = h.replace("Score on", "").strip().split(" ")
+                tmp = [t for t in tmp if t.strip()]
+                new_headers.extend(tmp)
+
+        new_headers.extend(["Year", "Field", "Subject"])
+
+        self.tbl_headers = new_headers
+        return self.tbl_headers
 
 
 # p = get_page(shc.URL)
