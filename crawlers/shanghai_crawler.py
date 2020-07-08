@@ -74,23 +74,21 @@ class ShanghaiCrawler(shc):
         self.file_path = Path(shc.MAIN_DIR) / self.file_name
         self.file_path.parent.mkdir(parents=True, exist_ok=True)
 
+    def ـget_page(self) -> BeautifulSoup:
+        """Requests a page for data extraction
 
-def get_page(url: str) -> BeautifulSoup:
-    """Requests a page for data extraction
+        Raises:
+            HTTPError: If the request is not successful
 
-    Args:
-        url (str): URL of the page
-
-    Raises:
-        HTTPError: If the request is not successful
-
-    Returns:
-        BeautifulSoup: Soup
-    """
-    page = requests.get(url, headers=shc.headers)
-    if page.status_code != 200:
-        raise HTTPError(f"Error getting page: {url}")
-    return BeautifulSoup(page.content, "html.parser")
+        Returns:
+            BeautifulSoup: Soup
+        """
+        page = requests.get(self.url, headers=shc.headers)
+        if page.status_code != 200:
+            raise HTTPError(f"Error getting page: {self.url}")
+        self.page = BeautifulSoup(page.content, "html.parser")
+        print(f"Downloaded page: {self.url}")
+        return self.page
 
 
 def get_table(page) -> Tuple[List[str], List[List[str]]]:
