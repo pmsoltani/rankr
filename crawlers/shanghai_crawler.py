@@ -1,5 +1,6 @@
 import io
 import csv
+import time
 from pathlib import Path
 from typing import List, Tuple
 
@@ -73,6 +74,20 @@ class ShanghaiCrawler(shc):
         self.file_name = f"ARWU_{self.year}_{self.field}_{self.subject}.csv"
         self.file_path = Path(shc.MAIN_DIR) / self.file_name
         self.file_path.parent.mkdir(parents=True, exist_ok=True)
+
+    def crawl(self):
+        for i in range(self.tries):
+            try:
+                self.ـget_page()
+                self.ـget_tbl()
+                self.ـcsv_export()
+            except HTTPError as exc:
+                print(exc, type(exc))
+                print(f"Waiting for {self.wait} seconds.")
+                time.sleep(self.wait)
+                continue
+
+            break
 
     def ـget_page(self) -> BeautifulSoup:
         """Requests a page for data extraction
