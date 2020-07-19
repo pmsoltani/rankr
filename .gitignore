@@ -65,3 +65,6 @@ thumbs.db
 
 # config
 instance/*
+
+# output
+.csv
