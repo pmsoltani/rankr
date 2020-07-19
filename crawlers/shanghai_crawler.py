@@ -5,10 +5,10 @@ from pathlib import Path
 from typing import List, Tuple
 
 import requests
-from requests.exceptions import HTTPError
+from requests.exceptions import ConnectionError
 from bs4 import BeautifulSoup
 
-from config import ShanghaiConfig as shc
+from config import ShanghaiConfig
 
 
 def vacuum(string: str) -> str:
@@ -52,7 +52,7 @@ def country_name_mapper(country: str) -> str:
     return country_names.get(country.lower(), country)
 
 
-class ShanghaiCrawler(shc):
+class ShanghaiCrawler(ShanghaiConfig):
     def __init__(
         self,
         url: str,
@@ -71,7 +71,7 @@ class ShanghaiCrawler(shc):
         self.tries = tries
 
         self.file_name = f"ARWU_{self.year}_{self.field}_{self.subject}.csv"
-        self.file_path = Path(shc.MAIN_DIR) / self.file_name
+        self.file_path = Path(ShanghaiCrawler.MAIN_DIR) / self.file_name
         self.file_path.parent.mkdir(parents=True, exist_ok=True)
 
     def crawl(self):
@@ -80,7 +80,7 @@ class ShanghaiCrawler(shc):
                 self.ـget_page()
                 self.ـget_tbl()
                 self.ـcsv_export()
-            except HTTPError as exc:
+            except ConnectionError as exc:
                 print(exc, type(exc))
                 print(f"Waiting for {self.wait} seconds.")
                 time.sleep(self.wait)
@@ -92,14 +92,14 @@ class ShanghaiCrawler(shc):
         """Requests a page for data extraction
 
         Raises:
-            HTTPError: If the request is not successful
+            ConnectionError: If the request is not successful
 
         Returns:
             BeautifulSoup: Soup
         """
-        page = requests.get(self.url, headers=shc.headers)
+        page = requests.get(self.url, headers=ShanghaiCrawler.headers)
         if page.status_code != 200:
-            raise HTTPError(f"Error getting page: {self.url}")
+            raise ConnectionError(f"Error getting page: {self.url}")
         self.page = BeautifulSoup(page.content, "html.parser")
         print(f"Downloaded page: {self.url}")
         return self.page
@@ -124,7 +124,9 @@ class ShanghaiCrawler(shc):
                     values.append(country_name_mapper(country))
                     continue
                 if val.find("a") and val.text:
-                    values.append(shc.BASE_URL + val.find("a")["href"])
+                    values.append(
+                        ShanghaiCrawler.BASE_URL + val.find("a")["href"]
+                    )
                 values.append(val.text)
 
             if values:
@@ -158,8 +160,8 @@ class ShanghaiCrawler(shc):
             if h.startswith("By location"):
                 h = "By location"
 
-            if shc.FIELDS.get(h):
-                new_headers.append(shc.FIELDS.get(h))
+            if ShanghaiCrawler.FIELDS.get(h):
+                new_headers.append(ShanghaiCrawler.FIELDS.get(h))
 
             if h.startswith("Score on"):
                 tmp = h.replace("Score on", "").strip().split(" ")
@@ -170,8 +172,3 @@ class ShanghaiCrawler(shc):
 
         self.tbl_headers = new_headers
         return self.tbl_headers
-
-
-# p = get_page(shc.URL)
-# tbl = get_table(p)
-# csv_export(tbl, "test.csv")
