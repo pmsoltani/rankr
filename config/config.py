@@ -43,3 +43,25 @@ class ShanghaiConfig(BaseConfig):
         "National/Regional Rank": "National Rank",
         "Total Score": "Total Score",
     }
+
+
+class THEConfig(BaseConfig):
+    headers = {"User-Agent": BaseConfig.USER_AGENT}
+    BASE_URL = env("THE_BASE")
+    _raw_urls = env("THE_URLS_FILE", "the_urls.json")
+    URLS = BaseConfig.get_urls(Path.cwd() / _raw_urls)
+
+    FIELDS = {
+        "Rank": "Rank",
+        "URL": "URL",
+        "Overall": "Overall",
+        "Teaching": "Teaching",
+        "Research": "Research",
+        "Citations": "Citations",
+        "Industry Income": "Industry Income",
+        "International Outlook": "International Outlook",
+        "No. of FTE Students": "No. of FTE Students",
+        "No. of students per staff": "No. of students per staff",
+        "International Students": "International Students",
+        "Female:Male Ratio": "Female:Male Ratio",
+    }
