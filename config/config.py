@@ -17,14 +17,18 @@ class BaseConfig(object):
 
     USER_AGENT = env("USER_AGENT")
 
+    @classmethod
+    def get_urls(cls, path: Path) -> List[dict]:
+        with open(path, "r") as urls_file:
+            url_list = json.loads(urls_file.read())
+        return url_list
+
 
 class ShanghaiConfig(BaseConfig):
     headers = {"User-Agent": BaseConfig.USER_AGENT}
     BASE_URL = env("SHANGHAI_BASE")
     _raw_urls = env("SHANGHAI_URLS_FILE", "shanghai_urls.json")
-
-    with open(Path.cwd() / _raw_urls, "r") as urls_file:
-        URLS: List[dict] = json.loads(urls_file.read())
+    URLS = BaseConfig.get_urls(Path.cwd() / _raw_urls)
 
     FIELDS = {
         "World Rank": "Rank",
@@ -32,6 +36,8 @@ class ShanghaiConfig(BaseConfig):
         "Institution*": "University",
         "Institution": "University",
         "Country/Region": "Country",
+        "Country /Region": "Country",
+        "Country / Region": "Country",
         "By location": "Country",
         "National/RegionalRank": "National Rank",
         "National/Regional Rank": "National Rank",
