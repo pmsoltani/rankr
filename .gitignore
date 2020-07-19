@@ -67,4 +67,4 @@ thumbs.db
 instance/*
 
 # output
-.csv
+*.csv
