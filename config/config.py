@@ -30,6 +30,8 @@ class ShanghaiConfig(BaseConfig):
     _raw_urls = env("SHANGHAI_URLS_FILE", "shanghai_urls.json")
     URLS = BaseConfig.get_urls(Path.cwd() / _raw_urls)
 
+    DOWNLOAD_DIR = BaseConfig.MAIN_DIR / 'Shanghai'
+
     FIELDS = {
         "World Rank": "Rank",
         "URL": "URL",
@@ -50,6 +52,8 @@ class THEConfig(BaseConfig):
     BASE_URL = env("THE_BASE")
     _raw_urls = env("THE_URLS_FILE", "the_urls.json")
     URLS = BaseConfig.get_urls(Path.cwd() / _raw_urls)
+
+    DOWNLOAD_DIR = BaseConfig.MAIN_DIR / 'THE'
 
     FIELDS = {
         "Rank": "Rank",
