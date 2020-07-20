@@ -71,7 +71,7 @@ class ShanghaiCrawler(ShanghaiConfig):
         self.tries = tries
 
         self.file_name = f"ARWU_{self.year}_{self.field}_{self.subject}.csv"
-        self.file_path = Path(ShanghaiCrawler.MAIN_DIR) / self.file_name
+        self.file_path = Path(ShanghaiCrawler.DOWNLOAD_DIR) / self.file_name
         self.file_path.parent.mkdir(parents=True, exist_ok=True)
 
     def crawl(self):
