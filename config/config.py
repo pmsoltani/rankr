@@ -30,7 +30,7 @@ class ShanghaiConfig(BaseConfig):
     _raw_urls = env("SHANGHAI_URLS_FILE", "shanghai_urls.json")
     URLS = BaseConfig.get_urls(Path.cwd() / _raw_urls)
 
-    DOWNLOAD_DIR = BaseConfig.MAIN_DIR / 'Shanghai'
+    DOWNLOAD_DIR = BaseConfig.MAIN_DIR / "Shanghai"
 
     FIELDS = {
         "World Rank": "Rank",
@@ -53,7 +53,7 @@ class THEConfig(BaseConfig):
     _raw_urls = env("THE_URLS_FILE", "the_urls.json")
     URLS = BaseConfig.get_urls(Path.cwd() / _raw_urls)
 
-    DOWNLOAD_DIR = BaseConfig.MAIN_DIR / 'THE'
+    DOWNLOAD_DIR = BaseConfig.MAIN_DIR / "THE"
 
     FIELDS = {
         "Rank": "Rank",
@@ -68,4 +68,10 @@ class THEConfig(BaseConfig):
         "No. of students per staff": "No. of students per staff",
         "International Students": "International Students",
         "Female:Male Ratio": "Female:Male Ratio",
+        "Overall": "Overall",
+        "Teaching": "Teaching",
+        "Research": "Research",
+        "Citations": "Citations",
+        "Industry Income": "Industry Income",
+        "International Outlook": "International Outlook",
     }
