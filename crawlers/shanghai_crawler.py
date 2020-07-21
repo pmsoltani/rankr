@@ -70,7 +70,7 @@ class ShanghaiCrawler(ShanghaiConfig):
         self.wait = wait
         self.tries = tries
 
-        self.file_name = f"ARWU_{self.year}_{self.field}_{self.subject}.csv"
+        self.file_name = f"Shanghai_{self.year}_{self.field}_{self.subject}.csv"
         self.file_path = Path(ShanghaiCrawler.DOWNLOAD_DIR) / self.file_name
         self.file_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -130,7 +130,6 @@ class ShanghaiCrawler(ShanghaiConfig):
                 values.append(val.text)
 
             if values:
-                values.extend([self.year, self.field, self.subject])
                 self.tbl_contents.append(values)
 
         return (self.tbl_headers, self.tbl_contents)
@@ -141,8 +140,12 @@ class ShanghaiCrawler(ShanghaiConfig):
             self.file_path, "w", newline="", encoding="utf-8"
         ) as csv_file:
             writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
-            writer.writerow(self.tbl_headers)
-            writer.writerows(row for row in self.tbl_contents if row)
+            writer.writerow(self.tbl_headers + ["Year", "Field", "Subject"])
+            writer.writerows(
+                row + [self.year, self.field, self.subject]
+                for row in self.tbl_contents
+                if row
+            )
             print(f"Saved file: {self.file_path}")
 
     def ـclean_headers(self) -> list:
@@ -167,8 +170,6 @@ class ShanghaiCrawler(ShanghaiConfig):
                 tmp = h.replace("Score on", "").strip().split(" ")
                 tmp = [t for t in tmp if t.strip()]
                 new_headers.extend(tmp)
-
-        new_headers.extend(["Year", "Field", "Subject"])
 
         self.tbl_headers = new_headers
         return self.tbl_headers
