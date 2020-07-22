@@ -17,6 +17,8 @@ class BaseConfig(object):
 
     USER_AGENT = env("USER_AGENT")
 
+    CRAWLER_ENGINE = env.list("CRAWLER_ENGINE", ["QS", "Shanghai", "THE"])
+
     @classmethod
     def get_urls(cls, path: Path) -> List[dict]:
         with open(path, "r") as urls_file:
