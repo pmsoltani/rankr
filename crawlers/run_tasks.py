@@ -1,8 +1,10 @@
-from config import BaseConfig, ShanghaiConfig, THEConfig
-from crawlers import ShanghaiCrawler, THECrawler
+from config import BaseConfig, QSConfig, ShanghaiConfig, THEConfig
+from crawlers import QSCrawler, ShanghaiCrawler, THECrawler
 
 
 def engine_select(engine: str):
+    if engine == "QS":
+        return (QSConfig, QSCrawler)
     if engine == "Shanghai":
         return (ShanghaiConfig, ShanghaiCrawler)
     if engine == "THE":
