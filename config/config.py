@@ -26,6 +26,29 @@ class BaseConfig(object):
         return url_list
 
 
+class QSConfig(BaseConfig):
+    headers = {"User-Agent": BaseConfig.USER_AGENT}
+    BASE_URL = env("QS_BASE")
+    _raw_urls = env("QS_URLS_FILE", "qs_urls.json")
+    URLS = BaseConfig.get_urls(Path.cwd() / _raw_urls)
+
+    DOWNLOAD_DIR = BaseConfig.MAIN_DIR / "QS"
+
+    FIELDS = {
+        "# RANK": "Rank",
+        "UNIVERSITY": "University",
+        "URL": "URL",
+        "LOCATION": "Country",
+        "OVERALL SCORE": "Overall Score",
+        "Academic Reputation": "Academic Reputation",
+        "Employer Reputation": "Employer Reputation",
+        "Faculty Student": "Faculty Student",
+        "International Faculty": "International Faculty",
+        "International Students": "International Students",
+        "Citations per Faculty": "Citations per Faculty",
+    }
+
+
 class ShanghaiConfig(BaseConfig):
     headers = {"User-Agent": BaseConfig.USER_AGENT}
     BASE_URL = env("SHANGHAI_BASE")
