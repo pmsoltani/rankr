@@ -132,6 +132,8 @@ class ShanghaiCrawler(ShanghaiConfig):
             if values:
                 self.tbl_contents.append(values)
 
+        if not self.tbl_headers or not self.tbl_contents:
+            raise ConnectionError(f"Error getting page: {self.url}")
         return (self.tbl_headers, self.tbl_contents)
 
     def ـcsv_export(self):
