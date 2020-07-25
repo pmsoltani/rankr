@@ -125,6 +125,8 @@ class THECrawler(THEConfig):
                     tbl_contents.append(values)
             self.tbl_contents.append(tbl_contents)
 
+        if not self.tbl_headers or not self.tbl_contents:
+            raise ConnectionError(f"Error getting page: {self.url}")
         return (self.tbl_headers, self.tbl_contents)
 
     def ـcsv_export(self):
