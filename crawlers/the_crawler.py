@@ -159,10 +159,13 @@ class THECrawler(THEConfig):
         return new_headers
 
     def _tbl_merger(self, on_cols: List[str]) -> List[List[str]]:
-        on_cols = [self.tbl_headers[1].index(c) for c in on_cols]
+        if self.tbl_headers[0] == self.tbl_headers[1]:
+            return (self.tbl_headers[0], self.tbl_contents[0])
+
         self.tbl_headers[0].extend(
-            [c for j, c in enumerate(self.tbl_headers[1]) if j not in on_cols]
+            [c for c in self.tbl_headers[1] if c not in on_cols]
         )
+        on_cols = [self.tbl_headers[1].index(c) for c in on_cols]
 
         for i, row in enumerate(self.tbl_contents[0]):
             row_match = True
@@ -181,13 +184,3 @@ class THECrawler(THEConfig):
             )
 
         return (self.tbl_headers[0], self.tbl_contents[0])
-
-
-# if __name__ == "__main__":
-#     for page in THEConfig.URLS:
-#         if not page.get("crawl"):
-#             continue
-#         p = THECrawler(
-#             page["url"], page["year"], page["field"], page["subject"]
-#         )
-#         p.crawl()
