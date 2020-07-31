@@ -11,6 +11,18 @@ env.read_env()
 APP_ENV = env("APP_ENV", "development")
 
 
+class DBConfig(object):
+    DIALECT = env("DIALECT")
+    with env.prefixed(f"{DIALECT.upper()}_"):
+        _DRIVER = env("DRIVER")
+        _USER = env("USER")
+        _PASS = env("PASS")
+        _HOST = env("HOST")
+        _PORT = env("PORT")
+        _NAME = env("NAME")
+    DB_URI = f"{DIALECT}+{_DRIVER}://{_USER}:{_PASS}@{_HOST}:{_PORT}/{_NAME}"
+
+
 class BaseConfig(object):
     DATA_DIR = env("DATA_DIR", "data")
     MAIN_DIR = Path.cwd() / DATA_DIR
