@@ -2,7 +2,7 @@ from sqlalchemy import Column
 from sqlalchemy.orm import relationship
 from sqlalchemy.types import Integer, String
 
-from ranker.db_models.base import Base
+from rankr.db_models.base import Base
 
 
 class Institution(Base):

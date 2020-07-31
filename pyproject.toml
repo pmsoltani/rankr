@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "ranker"
+name = "rankr"
 version = "0.1.0"
 description = "Scripts for crawling academic ranking websites"
 authors = ["Pooria Soltani <pooria.ms@gmail.com>"]

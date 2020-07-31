@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy_utils import create_database, database_exists
 
 from config import BaseConfig, DBConfig
-from ranker.db_models import (
+from rankr.db_models import (
     Acronym,
     Alias,
     Base,

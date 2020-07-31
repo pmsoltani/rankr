@@ -4,7 +4,7 @@ from sqlalchemy import Column, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.types import DECIMAL, Enum, Integer, String
 
-from ranker.db_models.base import Base
+from rankr.db_models.base import Base
 
 
 class RankingSystemEnum(enum.Enum):
