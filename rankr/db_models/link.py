@@ -4,14 +4,14 @@ from sqlalchemy import Column, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.types import Enum, Integer, String
 
+from config import DBConfig
 from rankr.db_models.base import Base
 
 
-class LinkTypeEnum(enum.Enum):
-    homepage = 1
-    qs_profile = 2
-    shanghai_profile = 3
-    the_profile = 4
+link_types = ["homepage"]
+for ranking_system in DBConfig.METRICS["ranking_systems"]:
+    link_types.append(f"{ranking_system}_profile")
+LinkTypeEnum = enum.Enum("LinkTypeEnum", {type: type for type in link_types},)
 
 
 class Link(Base):
