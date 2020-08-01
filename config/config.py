@@ -21,6 +21,10 @@ class DBConfig(object):
         _PORT = env("PORT")
         _NAME = env("NAME")
     DB_URI = f"{DIALECT}+{_DRIVER}://{_USER}:{_PASS}@{_HOST}:{_PORT}/{_NAME}"
+    GRID_DATABASE_DIR = env.list(
+        "GRID_DATABASE_DIR", ["data", "grid", "full_tables"]
+    )
+    GRID_DATABASE_DIR = Path.cwd().joinpath(*GRID_DATABASE_DIR)
 
 
 class BaseConfig(object):
