@@ -26,11 +26,10 @@ class DBConfig(object):
     )
     GRID_DATABASE_DIR = Path.cwd().joinpath(*GRID_DATABASE_DIR)
 
-    @property
-    def METRICS(self):
-        metrics_file_path = env("METRICS_FILE_PATH", "metrics.json")
-        with open(metrics_file_path, "r") as metrics_file:
-            return json.loads(metrics_file.read())
+    METRICS: dict
+    _metrics_file_path = env("METRICS_FILE_PATH", "metrics.json")
+    with open(_metrics_file_path, "r") as metrics_file:
+        METRICS = json.loads(metrics_file.read())
 
 
 class BaseConfig(object):
