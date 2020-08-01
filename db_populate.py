@@ -3,7 +3,7 @@ from typing import List
 from sqlalchemy.orm import Session
 from sqlalchemy_utils import create_database, database_exists
 
-from config import BaseConfig, DBConfig
+from config import DBConfig
 from rankr.db_models import (
     Acronym,
     Alias,
@@ -18,26 +18,6 @@ from rankr.db_models import (
 from utils import get_row, nullify, whole_csv
 
 
-def fill_attribute(attr: str, path: str, cls, db: Session):
-    obj_list: List[cls] = []
-    rows = get_row(path)
-    for row in rows:
-        nullify(row)
-        institution: Institution = db.query(Institution).filter(
-            Institution.grid_id == row["grid_id"]
-        ).first()
-        if not institution:
-            continue
-        row.pop("grid_id", None)
-        obj = cls(**row)
-        if attr == "links":
-            obj.type = "homepage"
-        if obj not in getattr(institution, attr):
-            setattr(obj, "institution", institution)
-        obj_list.append(obj)
-    return obj_list
-
-
 if not database_exists(engine.url):
     encoding = "utf8mb4" if DBConfig.DIALECT == "mysql" else "utf8"
     create_database(engine.url, encoding=encoding)
@@ -45,16 +25,15 @@ if not database_exists(engine.url):
 Base.metadata.create_all(engine)
 db: Session
 
-data_dir = BaseConfig.MAIN_DIR / "grid" / "full_tables"
 
 # institutions
 try:
     institution_attrs = [
-        whole_csv(data_dir / f"{attr}.csv", "grid_id")
+        whole_csv(DBConfig.GRID_DATABASE_DIR / f"{attr}.csv", "grid_id")
         for attr in ["addresses", "acronyms", "aliases", "links", "types"]
     ]
     db = SessionLocal()
-    rows = get_row(data_dir / "institutes.csv")
+    rows = get_row(DBConfig.GRID_DATABASE_DIR / "institutes.csv")
     institutions_list: List[Institution] = []
     for row in rows:
         nullify(row)
@@ -63,13 +42,7 @@ try:
             attr.get(grid_id) for attr in institution_attrs
         ]
         if address:
-            address = {
-                k: v
-                for k, v in address[0].items()
-                if k
-                in ["lat", "lng", "city", "state", "country", "country_code"]
-            }
-            institution = Institution(**{**row, **address})
+            institution = Institution(**{**row, **address[0]})
         else:
             institution = Institution(**row)
 
