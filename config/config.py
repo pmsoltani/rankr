@@ -26,6 +26,12 @@ class DBConfig(object):
     )
     GRID_DATABASE_DIR = Path.cwd().joinpath(*GRID_DATABASE_DIR)
 
+    @property
+    def METRICS(self):
+        metrics_file_path = env("METRICS_FILE_PATH", "metrics.json")
+        with open(metrics_file_path, "r") as metrics_file:
+            return json.loads(metrics_file.read())
+
 
 class BaseConfig(object):
     DATA_DIR = env("DATA_DIR", "data")
@@ -38,8 +44,7 @@ class BaseConfig(object):
     @classmethod
     def get_urls(cls, path: Path) -> List[dict]:
         with open(path, "r") as urls_file:
-            url_list = json.loads(urls_file.read())
-        return url_list
+            return json.loads(urls_file.read())
 
 
 class QSConfig(BaseConfig):
