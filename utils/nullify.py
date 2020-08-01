@@ -1,5 +1,5 @@
 def nullify(
-    data: dict, null_types: tuple = (None, "", " ", "-", "#N/A")
+    data: dict, null_types: tuple = (None, "", " ", "-", "#N/A", "\\")
 ) -> None:
     """Changes the null-looking values in a dictionary to None
 
