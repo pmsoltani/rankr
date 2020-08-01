@@ -35,7 +35,7 @@ class Ranking(Base):
     field: str = Column(String(255), nullable=False)
     subject: str = Column(String(255), nullable=False)
     metric: MetricEnum = Column(Enum(MetricEnum), nullable=False, index=True)
-    value: float = Column(DECIMAL(13, 3), nullable=False)
+    value: float = Column(DECIMAL(13, 3))
     value_type: ValueTypeEnum = Column(Enum(ValueTypeEnum), nullable=False)
 
     # Relationships
