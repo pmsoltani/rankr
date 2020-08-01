@@ -38,7 +38,7 @@ class Institution(Base):
     )
 
     def __init__(self, **kwargs):
-        kwargs.pop("email_address", None)
+        kwargs = {k: v for k, v in kwargs.items() if k in self.__table__.c}
         super().__init__(**kwargs)
 
     def __repr__(self):

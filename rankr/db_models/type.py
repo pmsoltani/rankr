@@ -29,4 +29,5 @@ class Type(Base):
     institution = relationship("Institution", back_populates="types")
 
     def __init__(self, **kwargs):
+        kwargs = {k: v for k, v in kwargs.items() if k in self.__table__.c}
         super().__init__(**kwargs)
