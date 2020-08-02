@@ -21,3 +21,6 @@ class Alias(Base):
     def __init__(self, **kwargs):
         kwargs = {k: v for k, v in kwargs.items() if k in self.__table__.c}
         super().__init__(**kwargs)
+
+    def __repr__(self):
+        return self.alias
