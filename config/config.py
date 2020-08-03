@@ -11,6 +11,33 @@ env.read_env()
 APP_ENV = env("APP_ENV", "development")
 
 
+class DBConfig(object):
+    DIALECT = env("DIALECT")
+    with env.prefixed(f"{DIALECT.upper()}_"):
+        _DRIVER = env("DRIVER")
+        _USER = env("USER")
+        _PASS = env("PASS")
+        _HOST = env("HOST")
+        _PORT = env("PORT")
+        _NAME = env("NAME")
+    DB_URI = f"{DIALECT}+{_DRIVER}://{_USER}:{_PASS}@{_HOST}:{_PORT}/{_NAME}"
+    GRID_DATABASE_DIR = env.list(
+        "GRID_DATABASE_DIR", ["data", "grid", "full_tables"]
+    )
+    GRID_DATABASE_DIR = Path.cwd().joinpath(*GRID_DATABASE_DIR)
+
+    RANKINGS: dict
+    _rankings_file_path = env.path("RANKINGS_FILE_PATH", "rankings.json")
+    with open(_rankings_file_path, "r") as json_file:
+        RANKINGS = json.loads(json_file.read())
+
+    MATCHES: dict = {}
+    _matches_file_path = env.path("MATCHES_FILE_PATH", "matches.json")
+    if _matches_file_path:
+        with open(_matches_file_path, "r") as json_file:
+            MATCHES = json.loads(json_file.read())
+
+
 class BaseConfig(object):
     DATA_DIR = env("DATA_DIR", "data")
     MAIN_DIR = Path.cwd() / DATA_DIR
@@ -22,8 +49,7 @@ class BaseConfig(object):
     @classmethod
     def get_urls(cls, path: Path) -> List[dict]:
         with open(path, "r") as urls_file:
-            url_list = json.loads(urls_file.read())
-        return url_list
+            return json.loads(urls_file.read())
 
 
 class QSConfig(BaseConfig):
