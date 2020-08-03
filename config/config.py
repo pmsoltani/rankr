@@ -17,6 +17,9 @@ def read_json_config(path: Path) -> List[dict]:
 
 
 class DBConfig(object):
+    DATA_DIR = env("DATA_DIR", "data")
+    MAIN_DIR = Path.cwd() / DATA_DIR
+
     DIALECT = env("DIALECT")
     with env.prefixed(f"{DIALECT.upper()}_"):
         _DRIVER = env("DRIVER")
