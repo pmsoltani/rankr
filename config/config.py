@@ -26,10 +26,10 @@ class DBConfig(object):
     )
     GRID_DATABASE_DIR = Path.cwd().joinpath(*GRID_DATABASE_DIR)
 
-    METRICS: dict
-    _metrics_file_path = env.path("METRICS_FILE_PATH", "metrics.json")
-    with open(_metrics_file_path, "r") as json_file:
-        METRICS = json.loads(json_file.read())
+    RANKINGS: dict
+    _rankings_file_path = env.path("RANKINGS_FILE_PATH", "rankings.json")
+    with open(_rankings_file_path, "r") as json_file:
+        RANKINGS = json.loads(json_file.read())
 
     MATCHES: dict = {}
     _matches_file_path = env.path("MATCHES_FILE_PATH", "matches.json")
