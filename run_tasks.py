@@ -3,11 +3,11 @@ from crawlers import QSCrawler, ShanghaiCrawler, THECrawler
 
 
 def engine_select(engine: str):
-    if engine == "QS":
+    if engine == "qs":
         return (QSConfig, QSCrawler)
-    if engine == "Shanghai":
+    if engine == "shanghai":
         return (ShanghaiConfig, ShanghaiCrawler)
-    if engine == "THE":
+    if engine == "the":
         return (THEConfig, THECrawler)
 
 
@@ -18,6 +18,11 @@ if __name__ == "__main__":
             if not page.get("crawl"):
                 continue
             p = crawler(
-                page["url"], page["year"], page["field"], page["subject"]
+                url=page["url"],
+                year=page["year"],
+                ranking_system=page["ranking_system"],
+                ranking_type=page["ranking_type"],
+                field=page["field"],
+                subject=page["subject"],
             )
             p.crawl()
