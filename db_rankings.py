@@ -17,13 +17,6 @@ for system in ranking_systems:
         if file.suffix != ".csv":
             continue
 
-        # ranking_info = dict(
-        #     zip(
-        #         ["Ranking System","Ranking Type","Year","Field","Subject"],
-        #         file.stem.split("_"),
-        #     )
-        # )
-
         print(f"Processing file ({cnt}/{len(files)}): {file.stem}")
         try:
             db = SessionLocal()
