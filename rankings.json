@@ -1,5 +1,14 @@
 {
   "ranking_systems": ["qs", "shanghai", "the"],
+  "non_metrics": [
+    "url",
+    "university",
+    "institution",
+    "country",
+    "year",
+    "field",
+    "subject"
+  ],
   "metrics": {
     "Rank": { "name": "Rank", "type": "integer" },
 
