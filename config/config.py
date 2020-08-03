@@ -49,7 +49,7 @@ class CrawlerConfig(object):
 
     USER_AGENT = env("USER_AGENT")
 
-    CRAWLER_ENGINE = env.list("CRAWLER_ENGINE", ["QS", "Shanghai", "THE"])
+    CRAWLER_ENGINE = env.list("CRAWLER_ENGINE", ["qs", "shanghai", "the"])
     _country_names_path = env("COUNTRY_NAMES", "country_names.json")
     COUNTRY_NAMES = read_json_config(_country_names_path)
 
@@ -60,11 +60,11 @@ class QSConfig(CrawlerConfig):
     _raw_urls = env("QS_URLS_FILE", "qs_urls.json")
     URLS = read_json_config(Path.cwd() / _raw_urls)
 
-    DOWNLOAD_DIR = CrawlerConfig.MAIN_DIR / "QS"
+    DOWNLOAD_DIR = CrawlerConfig.MAIN_DIR / "qs"
 
     FIELDS = {
         "# RANK": "Rank",
-        "UNIVERSITY": "University",
+        "UNIVERSITY": "Institution",
         "URL": "URL",
         "LOCATION": "Country",
         "OVERALL SCORE": "Overall Score",
@@ -83,17 +83,11 @@ class ShanghaiConfig(CrawlerConfig):
     _raw_urls = env("SHANGHAI_URLS_FILE", "shanghai_urls.json")
     URLS = read_json_config(Path.cwd() / _raw_urls)
 
-    DOWNLOAD_DIR = CrawlerConfig.MAIN_DIR / "Shanghai"
+    DOWNLOAD_DIR = CrawlerConfig.MAIN_DIR / "shanghai"
 
     FIELDS = {
         "World Rank": "Rank",
         "URL": "URL",
-        "Institution*": "University",
-        "Institution": "University",
-        "Country/Region": "Country",
-        "Country /Region": "Country",
-        "Country / Region": "Country",
-        "By location": "Country",
         "National/RegionalRank": "National Rank",
         "National/Regional Rank": "National Rank",
         "Total Score": "Total Score",
@@ -106,7 +100,7 @@ class THEConfig(CrawlerConfig):
     _raw_urls = env("THE_URLS_FILE", "the_urls.json")
     URLS = read_json_config(Path.cwd() / _raw_urls)
 
-    DOWNLOAD_DIR = CrawlerConfig.MAIN_DIR / "THE"
+    DOWNLOAD_DIR = CrawlerConfig.MAIN_DIR / "the"
 
     FIELDS = {
         "Rank": "Rank",
