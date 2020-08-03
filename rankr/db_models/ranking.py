@@ -13,6 +13,10 @@ RankingSystemEnum = enum.Enum(
     "RankingSystemEnum",
     {r_s: r_s for r_s in DBConfig.METRICS["ranking_systems"]},
 )
+RankingTypeEnum = enum.Enum(
+    "RankingTypeEnum",
+    {type: type for type in DBConfig.METRICS["ranking_types"]},
+)
 MetricEnum = enum.Enum(
     "MetricEnum",
     {m["name"]: m["name"] for m in DBConfig.METRICS["metrics"].values()},
@@ -30,6 +34,9 @@ class Ranking(Base):
     institution_id: int = Column(Integer, ForeignKey("institution.id"))
     ranking_system: RankingSystemEnum = Column(
         Enum(RankingSystemEnum), nullable=False, index=True
+    )
+    ranking_type: RankingTypeEnum = Column(
+        Enum(RankingTypeEnum), nullable=False, index=True
     )
     year: int = Column(Integer)
     field: str = Column(String(255), nullable=False)
