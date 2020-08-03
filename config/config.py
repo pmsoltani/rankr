@@ -50,6 +50,8 @@ class BaseConfig(object):
     USER_AGENT = env("USER_AGENT")
 
     CRAWLER_ENGINE = env.list("CRAWLER_ENGINE", ["QS", "Shanghai", "THE"])
+    _country_names_path = env("COUNTRY_NAMES", "country_names.json")
+    COUNTRY_NAMES = read_json_config(_country_names_path)
 
 
 class QSConfig(BaseConfig):
