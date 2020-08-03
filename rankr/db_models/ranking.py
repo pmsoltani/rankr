@@ -11,7 +11,7 @@ from rankr.db_models.institution import Institution
 
 RankingSystemEnum = enum.Enum(
     "RankingSystemEnum",
-    {r_s: r_s for r_s in DBConfig.METRICS["ranking_systems"]},
+    {system: system for system in DBConfig.METRICS["ranking_systems"]},
 )
 RankingTypeEnum = enum.Enum(
     "RankingTypeEnum",
