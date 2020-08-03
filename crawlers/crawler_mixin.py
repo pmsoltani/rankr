@@ -65,13 +65,20 @@ class CrawlerMixin(object):
 
     def _csv_export(self):
         """Exports a table to a .csv file."""
+        row_extension = {
+            "Ranking System": self.ranking_system,
+            "Ranking Type": self.ranking_type,
+            "Year": self.year,
+            "Field": self.field,
+            "Subject": self.subject,
+        }
         with io.open(
             self.file_path, "w", newline="", encoding="utf-8"
         ) as csv_file:
             writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
-            writer.writerow(self.tbl_headers + ["Year", "Field", "Subject"])
+            writer.writerow(self.tbl_headers + list(row_extension))
             writer.writerows(
-                row + [self.year, self.field, self.subject]
+                row + list(row_extension.values())
                 for row in self.tbl_contents
                 if row
             )
