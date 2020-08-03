@@ -9,19 +9,7 @@ from bs4 import BeautifulSoup
 from furl import furl
 
 from config import THEConfig
-
-
-def vacuum(string: str) -> str:
-    """Cleans the input text for further processing
-
-    Args:
-        string (str): Input text
-
-    Returns:
-        str: Clean text
-    """
-    string = string.replace("\r", " ").replace("\n", " ").replace("\t", " ")
-    return " ".join([word for word in string.split(" ") if word])
+from utils import text_process
 
 
 class THECrawler(THEConfig):
@@ -122,7 +110,7 @@ class THECrawler(THEConfig):
                         )
                         values.append(THEConfig.BASE_URL + url_elem["href"])
                         values.append(url_elem.text)
-                        values.append(vacuum(country_elem.text))
+                        values.append(text_process(country_elem.text))
                         continue
                     values.append(val.text)
 
@@ -156,7 +144,7 @@ class THECrawler(THEConfig):
         new_headers = []
 
         for h in headers:
-            h = vacuum(h)
+            h = text_process(h)
             if h.startswith("NameCountry/Region"):
                 new_headers.extend(["URL", "University", "Country"])
 
