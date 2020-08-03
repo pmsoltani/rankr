@@ -2,7 +2,7 @@ from typing import List
 
 from config import DBConfig
 from rankr.db_models import Ranking
-from utils import value_process
+from utils.value_process import value_process
 
 ranking_systems = tuple(DBConfig.RANKINGS["ranking_systems"])
 metric_types = DBConfig.RANKINGS["metrics"]
@@ -21,7 +21,7 @@ def metrics_process(row: dict) -> List[Ranking]:
     """
     metrics = []
     for col in row:
-        if col in non_metric_cols:
+        if col.lower() in non_metric_cols:
             continue
 
         metric = metric_types[col]["name"]
