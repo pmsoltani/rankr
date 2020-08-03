@@ -11,16 +11,15 @@ class CrawlerMixin(object):
     def country_name_mapper(cls, country: str) -> str:
         return cls.COUNTRY_NAMES.get(country.lower(), country)
 
-    def crawl(self, use_merger: bool = False):
+    def crawl(self):
         for i in range(self.tries):
             try:
                 self._get_page()
                 self._get_tbl()
-                if use_merger:
+                if len(self.urls) > 1:
                     self._tbl_merger(on_cols=self.merge_on_cols)
                 self._csv_export()
-            except ConnectionError as exc:
-                print(exc, type(exc))
+            except ConnectionError:
                 print(f"Waiting for {self.wait} seconds.")
                 time.sleep(self.wait)
                 continue
@@ -39,14 +38,13 @@ class CrawlerMixin(object):
             BeautifulSoup: Soup
         """
         session = HTMLSession()
-        urls = [self.url / path for path in self.url_paths]
         self.pages = []
         try:
-            for url in urls:
+            for url in self.urls:
                 page = session.get(url, headers=self.headers)
                 if page.status_code != 200:
                     raise ConnectionError(f"Error getting page: {url}")
-                if self.javascript:
+                if self.use_js:
                     page.html.render()
                     self.pages.append(
                         BeautifulSoup(page.html.html, "html.parser")
