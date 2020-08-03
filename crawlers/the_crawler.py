@@ -1,4 +1,3 @@
-from pathlib import Path
 from typing import List, Tuple
 
 from furl import furl
@@ -12,34 +11,18 @@ class THECrawler(CrawlerMixin, THEConfig):
     def __init__(
         self,
         url: str,
-        year: int,
         url_paths: List[str] = ["stats", "scores"],
         use_js: bool = True,
-        ranking_system: str = "the",
-        ranking_type: str = "university ranking",
-        field: str = "All",
-        subject: str = "All",
-        merge_on_cols: List[str] = ["Rank", "University", "Country", "URL"],
-        wait: int = 10,
-        tries: int = 5,
+        merge_on_cols: List[str] = ["Rank", "Institution", "Country", "URL"],
+        **kwargs,
     ):
         fragments = [furl(url).fragment.add(p) for p in url_paths]
         self.urls = [furl(url).copy().set(fragment=str(f)) for f in fragments]
         self.use_js = use_js
-        self.ranking_system = ranking_system
-        self.ranking_type = ranking_type
-        self.year = year
-        self.field = field
-        self.subject = subject
-
-        self.wait = wait
-        self.tries = tries
-
-        self.file_name = f"THE_{self.year}_{self.field}_{self.subject}.csv"
-        self.file_path = Path(THECrawler.DOWNLOAD_DIR) / self.file_name
-        self.file_path.parent.mkdir(parents=True, exist_ok=True)
-
         self.merge_on_cols = merge_on_cols
+        self.header_group_keyword = "country"
+
+        super().__init__(**kwargs)
 
     def _get_tbl(self) -> Tuple[List[List[str]], List[List[List[str]]]]:
         """Finds the ranking table within the page and extracts its data
@@ -84,7 +67,7 @@ class THECrawler(CrawlerMixin, THEConfig):
             self.tbl_contents.append(tbl_contents)
 
         if not self.tbl_headers or not self.tbl_contents:
-            raise ConnectionError(f"Error getting page: {self.url}")
+            raise ConnectionError("Error getting page!")
         return (self.tbl_headers, self.tbl_contents)
 
     def _clean_headers(self, headers: List[str]) -> List[str]:
@@ -100,8 +83,8 @@ class THECrawler(CrawlerMixin, THEConfig):
 
         for h in headers:
             h = text_process(h)
-            if "country" in h.lower():
-                new_headers.extend(["URL", "University", "Country"])
+            if self.header_group_keyword in h.lower():
+                new_headers.extend(["URL", "Institution", "Country"])
 
             if THECrawler.FIELDS.get(h):
                 new_headers.append(THECrawler.FIELDS.get(h))
@@ -144,8 +127,5 @@ class THECrawler(CrawlerMixin, THEConfig):
                     if j not in on_cols
                 ]
             )
-
-        self.tbl_headers = self.tbl_headers[0]
-        self.tbl_contents = self.tbl_contents[0]
 
         return (self.tbl_headers, self.tbl_contents)
