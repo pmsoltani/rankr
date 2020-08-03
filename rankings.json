@@ -3,9 +3,10 @@
   "ranking_types": ["university ranking", "subject ranking"],
   "non_metrics": [
     "url",
-    "university",
     "institution",
     "country",
+    "ranking system",
+    "Ranking type",
     "year",
     "field",
     "subject"
