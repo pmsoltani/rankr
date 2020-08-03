@@ -43,7 +43,7 @@ class DBConfig(object):
             MATCHES = json.loads(json_file.read())
 
 
-class BaseConfig(object):
+class CrawlerConfig(object):
     DATA_DIR = env("DATA_DIR", "data")
     MAIN_DIR = Path.cwd() / DATA_DIR
 
@@ -54,13 +54,13 @@ class BaseConfig(object):
     COUNTRY_NAMES = read_json_config(_country_names_path)
 
 
-class QSConfig(BaseConfig):
-    headers = {"User-Agent": BaseConfig.USER_AGENT}
+class QSConfig(CrawlerConfig):
+    headers = {"User-Agent": CrawlerConfig.USER_AGENT}
     BASE_URL = env("QS_BASE")
     _raw_urls = env("QS_URLS_FILE", "qs_urls.json")
     URLS = read_json_config(Path.cwd() / _raw_urls)
 
-    DOWNLOAD_DIR = BaseConfig.MAIN_DIR / "QS"
+    DOWNLOAD_DIR = CrawlerConfig.MAIN_DIR / "QS"
 
     FIELDS = {
         "# RANK": "Rank",
@@ -77,13 +77,13 @@ class QSConfig(BaseConfig):
     }
 
 
-class ShanghaiConfig(BaseConfig):
-    headers = {"User-Agent": BaseConfig.USER_AGENT}
+class ShanghaiConfig(CrawlerConfig):
+    headers = {"User-Agent": CrawlerConfig.USER_AGENT}
     BASE_URL = env("SHANGHAI_BASE")
     _raw_urls = env("SHANGHAI_URLS_FILE", "shanghai_urls.json")
     URLS = read_json_config(Path.cwd() / _raw_urls)
 
-    DOWNLOAD_DIR = BaseConfig.MAIN_DIR / "Shanghai"
+    DOWNLOAD_DIR = CrawlerConfig.MAIN_DIR / "Shanghai"
 
     FIELDS = {
         "World Rank": "Rank",
@@ -100,13 +100,13 @@ class ShanghaiConfig(BaseConfig):
     }
 
 
-class THEConfig(BaseConfig):
-    headers = {"User-Agent": BaseConfig.USER_AGENT}
+class THEConfig(CrawlerConfig):
+    headers = {"User-Agent": CrawlerConfig.USER_AGENT}
     BASE_URL = env("THE_BASE")
     _raw_urls = env("THE_URLS_FILE", "the_urls.json")
     URLS = read_json_config(Path.cwd() / _raw_urls)
 
-    DOWNLOAD_DIR = BaseConfig.MAIN_DIR / "THE"
+    DOWNLOAD_DIR = CrawlerConfig.MAIN_DIR / "THE"
 
     FIELDS = {
         "Rank": "Rank",
