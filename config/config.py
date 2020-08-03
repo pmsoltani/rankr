@@ -11,6 +11,11 @@ env.read_env()
 APP_ENV = env("APP_ENV", "development")
 
 
+def read_json_config(path: Path) -> List[dict]:
+    with open(path, "r") as urls_file:
+        return json.loads(urls_file.read())
+
+
 class DBConfig(object):
     DIALECT = env("DIALECT")
     with env.prefixed(f"{DIALECT.upper()}_"):
@@ -46,17 +51,12 @@ class BaseConfig(object):
 
     CRAWLER_ENGINE = env.list("CRAWLER_ENGINE", ["QS", "Shanghai", "THE"])
 
-    @classmethod
-    def get_urls(cls, path: Path) -> List[dict]:
-        with open(path, "r") as urls_file:
-            return json.loads(urls_file.read())
-
 
 class QSConfig(BaseConfig):
     headers = {"User-Agent": BaseConfig.USER_AGENT}
     BASE_URL = env("QS_BASE")
     _raw_urls = env("QS_URLS_FILE", "qs_urls.json")
-    URLS = BaseConfig.get_urls(Path.cwd() / _raw_urls)
+    URLS = read_json_config(Path.cwd() / _raw_urls)
 
     DOWNLOAD_DIR = BaseConfig.MAIN_DIR / "QS"
 
@@ -79,7 +79,7 @@ class ShanghaiConfig(BaseConfig):
     headers = {"User-Agent": BaseConfig.USER_AGENT}
     BASE_URL = env("SHANGHAI_BASE")
     _raw_urls = env("SHANGHAI_URLS_FILE", "shanghai_urls.json")
-    URLS = BaseConfig.get_urls(Path.cwd() / _raw_urls)
+    URLS = read_json_config(Path.cwd() / _raw_urls)
 
     DOWNLOAD_DIR = BaseConfig.MAIN_DIR / "Shanghai"
 
@@ -102,7 +102,7 @@ class THEConfig(BaseConfig):
     headers = {"User-Agent": BaseConfig.USER_AGENT}
     BASE_URL = env("THE_BASE")
     _raw_urls = env("THE_URLS_FILE", "the_urls.json")
-    URLS = BaseConfig.get_urls(Path.cwd() / _raw_urls)
+    URLS = read_json_config(Path.cwd() / _raw_urls)
 
     DOWNLOAD_DIR = BaseConfig.MAIN_DIR / "THE"
 
