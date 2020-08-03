@@ -1,32 +1,33 @@
-import io
-import csv
-import time
 from pathlib import Path
 from typing import List, Tuple
 
-from requests_html import HTMLSession
-from bs4 import BeautifulSoup
 from furl import furl
 
 from config import THEConfig
+from crawlers import CrawlerMixin
 from utils import text_process
 
 
-class THECrawler(THEConfig):
+class THECrawler(CrawlerMixin, THEConfig):
     def __init__(
         self,
         url: str,
         year: int,
-        url_paths: Tuple[str] = ("stats", "scores"),
+        url_paths: List[str] = ["stats", "scores"],
         use_js: bool = True,
+        ranking_system: str = "the",
+        ranking_type: str = "university ranking",
         field: str = "All",
         subject: str = "All",
+        merge_on_cols: List[str] = ["Rank", "University", "Country", "URL"],
         wait: int = 10,
         tries: int = 5,
     ):
-        self.url = furl(url)
-        self.url_paths = url_paths
+        fragments = [furl(url).fragment.add(p) for p in url_paths]
+        self.urls = [furl(url).copy().set(fragment=str(f)) for f in fragments]
         self.use_js = use_js
+        self.ranking_system = ranking_system
+        self.ranking_type = ranking_type
         self.year = year
         self.field = field
         self.subject = subject
@@ -38,55 +39,14 @@ class THECrawler(THEConfig):
         self.file_path = Path(THECrawler.DOWNLOAD_DIR) / self.file_name
         self.file_path.parent.mkdir(parents=True, exist_ok=True)
 
-    def crawl(self):
-        for i in range(self.tries):
-            try:
-                self.ـget_page()
-                self.ـget_tbl()
-                self._tbl_merger(
-                    on_cols=["Rank", "University", "Country", "URL"]
-                )
-                self.ـcsv_export()
-            except ConnectionError as exc:
-                print(exc, type(exc))
-                print(f"Waiting for {self.wait} seconds.")
-                time.sleep(self.wait)
-                continue
+        self.merge_on_cols = merge_on_cols
 
-            break
-
-    def ـget_page(self) -> BeautifulSoup:
-        """Requests a page for data extraction
-
-        Raises:
-            ConnectionError: If the request is not successful
-
-        Returns:
-            BeautifulSoup: Soup
-        """
-        session = HTMLSession()
-        urls = [self.url + "/stats", self.url + "/scores"]
-        self.pages = []
-        try:
-            for url in urls:
-                page = session.get(url, headers=THECrawler.headers)
-                if page.status_code != 200:
-                    raise ConnectionError(f"Error getting page: {url}")
-                page.html.render()
-                self.pages.append(BeautifulSoup(page.html.html, "html.parser"))
-
-                print(f"Downloaded page: {url}")
-            return self.pages
-        except Exception:
-            pass
-        finally:
-            session.close()
-
-    def ـget_tbl(self) -> Tuple[List[List[str]], List[List[List[str]]]]:
+    def _get_tbl(self) -> Tuple[List[List[str]], List[List[List[str]]]]:
         """Finds the ranking table within the page and extracts its data
 
         Returns:
-            Tuple[List[str], List[List[str]]]: Table headers and content
+            Tuple[List[List[str]], List[List[List[str]]]]: Table headers
+            and content
         """
         self.tbl_headers: List[List[str]] = []
         self.tbl_contents: List[List[List[str]]] = []
@@ -94,7 +54,7 @@ class THECrawler(THEConfig):
             tbl = page.find("table", attrs={"id": "datatable-1"})
 
             tbl_headers = [h.text for h in tbl.find("thead").find_all("th")]
-            tbl_headers = self.ـclean_headers(tbl_headers)
+            tbl_headers = self._clean_headers(tbl_headers)
             self.tbl_headers.append(tbl_headers)
 
             tbl_contents: List[List[str]] = []
@@ -105,47 +65,42 @@ class THECrawler(THEConfig):
                         url_elem = val.find(
                             "a", attrs={"class": "ranking-institution-title"}
                         )
+                        url = furl(THEConfig.BASE_URL) / url_elem["href"]
                         country_elem = val.find(
                             "div", attrs={"class", "location"}
                         )
-                        values.append(THEConfig.BASE_URL + url_elem["href"])
+                        country = THECrawler.country_name_mapper(
+                            text_process(country_elem.text)
+                        )
+
+                        values.append(url.url)
                         values.append(url_elem.text)
-                        values.append(text_process(country_elem.text))
+                        values.append(country)
                         continue
                     values.append(val.text)
 
                 if values:
-                    tbl_contents.append(values)
+                    tbl_contents.append([v.strip() for v in values])
             self.tbl_contents.append(tbl_contents)
 
         if not self.tbl_headers or not self.tbl_contents:
             raise ConnectionError(f"Error getting page: {self.url}")
         return (self.tbl_headers, self.tbl_contents)
 
-    def ـcsv_export(self):
-        """Exports a table to a .csv file."""
-        with io.open(
-            self.file_path, "w", newline="", encoding="utf-8"
-        ) as csv_file:
-            writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
-            writer.writerow(self.tbl_headers[0] + ["Year", "Field", "Subject"])
-            writer.writerows(
-                row + [self.year, self.field, self.subject]
-                for row in (self.tbl_contents[0])
-            )
-            print(f"Saved file: {self.file_path}")
-
-    def ـclean_headers(self, headers: List[str]) -> list:
+    def _clean_headers(self, headers: List[str]) -> List[str]:
         """Cleans a list of headers
 
+        Args:
+            headers (List[str]): The headers to be cleaned
+
         Returns:
-            list: Cleaned column names
+            List[str]: Cleaned column names
         """
         new_headers = []
 
         for h in headers:
             h = text_process(h)
-            if h.startswith("NameCountry/Region"):
+            if "country" in h.lower():
                 new_headers.extend(["URL", "University", "Country"])
 
             if THECrawler.FIELDS.get(h):
@@ -153,7 +108,19 @@ class THECrawler(THEConfig):
 
         return new_headers
 
-    def _tbl_merger(self, on_cols: List[str]) -> List[List[str]]:
+    def _tbl_merger(
+        self, on_cols: List[str]
+    ) -> Tuple[List[str], List[List[str]]]:
+        """Merges to tables using a specified list of columns.
+
+        Args:
+            on_cols (List[str]): The columns on which the function joins
+            the two tables.
+
+        Returns:
+            Tuple[List[str], List[List[str]]]: Merged table headers and
+            contents
+        """
         if self.tbl_headers[0] == self.tbl_headers[1]:
             return (self.tbl_headers[0], self.tbl_contents[0])
 
@@ -178,4 +145,7 @@ class THECrawler(THEConfig):
                 ]
             )
 
-        return (self.tbl_headers[0], self.tbl_contents[0])
+        self.tbl_headers = self.tbl_headers[0]
+        self.tbl_contents = self.tbl_contents[0]
+
+        return (self.tbl_headers, self.tbl_contents)
