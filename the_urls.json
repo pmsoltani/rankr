@@ -1,782 +1,782 @@
 [
   {
-    "year": 2020,
     "ranking_system": "the",
     "ranking_type": "university ranking",
+    "year": 2020,
     "field": "All",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2020/world-ranking#!/page/0/length/-1/sort_by/scores_overall/sort_order/desc/cols",
     "crawl": true
   },
   {
-    "year": 2019,
     "ranking_system": "the",
     "ranking_type": "university ranking",
+    "year": 2019,
     "field": "All",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2019/world-ranking#!/page/0/length/-1/sort_by/scores_overall/sort_order/desc/cols",
     "crawl": true
   },
   {
-    "year": 2018,
     "ranking_system": "the",
     "ranking_type": "university ranking",
+    "year": 2018,
     "field": "All",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2018/world-ranking#!/page/0/length/-1/sort_by/scores_overall/sort_order/desc/cols",
     "crawl": true
   },
   {
-    "year": 2017,
     "ranking_system": "the",
     "ranking_type": "university ranking",
+    "year": 2017,
     "field": "All",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2017/world-ranking#!/page/0/length/-1/sort_by/scores_overall/sort_order/desc/cols",
     "crawl": true
   },
   {
-    "year": 2016,
     "ranking_system": "the",
     "ranking_type": "university ranking",
+    "year": 2016,
     "field": "All",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2016/world-ranking#!/page/0/length/-1/sort_by/scores_overall/sort_order/desc/cols",
     "crawl": true
   },
   {
-    "year": 2015,
     "ranking_system": "the",
     "ranking_type": "university ranking",
+    "year": 2015,
     "field": "All",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2015/world-ranking#!/page/0/length/-1/sort_by/scores_overall/sort_order/desc/cols",
     "crawl": true
   },
   {
-    "year": 2014,
     "ranking_system": "the",
     "ranking_type": "university ranking",
+    "year": 2014,
     "field": "All",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2014/world-ranking#!/page/0/length/-1/sort_by/scores_overall/sort_order/desc/cols",
     "crawl": true
   },
   {
-    "year": 2013,
     "ranking_system": "the",
     "ranking_type": "university ranking",
+    "year": 2013,
     "field": "All",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2013/world-ranking#!/page/0/length/-1/sort_by/scores_overall/sort_order/desc/cols",
     "crawl": true
   },
   {
-    "year": 2012,
     "ranking_system": "the",
     "ranking_type": "university ranking",
+    "year": 2012,
     "field": "All",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2012/world-ranking#!/page/0/length/-1/sort_by/scores_overall/sort_order/desc/cols",
     "crawl": true
   },
   {
-    "year": 2011,
     "ranking_system": "the",
     "ranking_type": "university ranking",
+    "year": 2011,
     "field": "All",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2011/world-ranking#!/page/0/length/-1/sort_by/scores_overall/sort_order/desc/cols",
     "crawl": true
   },
   {
-    "year": 2011,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2011,
     "field": "Clinical, pre-clinical & health",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2011/subject-ranking/clinical-pre-clinical-health#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2011,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2011,
     "field": "Life sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2011/subject-ranking/life-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2011,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2011,
     "field": "Physical sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2011/subject-ranking/physical-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2011,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2011,
     "field": "Social sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2011/subject-ranking/social-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2011,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2011,
     "field": "Engineering & technology",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2011/subject-ranking/engineering-and-IT#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2011,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2011,
     "field": "Arts & humanities",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2011/subject-ranking/arts-and-humanities#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2012,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2012,
     "field": "Clinical, pre-clinical & health",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2012/subject-ranking/clinical-pre-clinical-health#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2012,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2012,
     "field": "Life sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2012/subject-ranking/life-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2012,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2012,
     "field": "Physical sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2012/subject-ranking/physical-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2012,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2012,
     "field": "Social sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2012/subject-ranking/social-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2012,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2012,
     "field": "Engineering & technology",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2012/subject-ranking/engineering-and-IT#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2012,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2012,
     "field": "Arts & humanities",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2012/subject-ranking/arts-and-humanities#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2013,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2013,
     "field": "Clinical, pre-clinical & health",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2013/subject-ranking/clinical-pre-clinical-health#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2013,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2013,
     "field": "Life sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2013/subject-ranking/life-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2013,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2013,
     "field": "Physical sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2013/subject-ranking/physical-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2013,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2013,
     "field": "Social sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2013/subject-ranking/social-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2013,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2013,
     "field": "Engineering & technology",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2013/subject-ranking/engineering-and-IT#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2013,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2013,
     "field": "Arts & humanities",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2013/subject-ranking/arts-and-humanities#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2014,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2014,
     "field": "Clinical, pre-clinical & health",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2014/subject-ranking/clinical-pre-clinical-health#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2014,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2014,
     "field": "Life sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2014/subject-ranking/life-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2014,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2014,
     "field": "Physical sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2014/subject-ranking/physical-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2014,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2014,
     "field": "Social sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2014/subject-ranking/social-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2014,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2014,
     "field": "Engineering & technology",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2014/subject-ranking/engineering-and-IT#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2014,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2014,
     "field": "Arts & humanities",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2014/subject-ranking/arts-and-humanities#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2015,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2015,
     "field": "Clinical, pre-clinical & health",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2015/subject-ranking/clinical-pre-clinical-health#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2015,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2015,
     "field": "Life sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2015/subject-ranking/life-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2015,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2015,
     "field": "Physical sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2015/subject-ranking/physical-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2015,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2015,
     "field": "Social sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2015/subject-ranking/social-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2015,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2015,
     "field": "Engineering & technology",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2015/subject-ranking/engineering-and-IT#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2015,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2015,
     "field": "Arts & humanities",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2015/subject-ranking/arts-and-humanities#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2016,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2016,
     "field": "Clinical, pre-clinical & health",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2016/subject-ranking/clinical-pre-clinical-health#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2016,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2016,
     "field": "Life sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2016/subject-ranking/life-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2016,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2016,
     "field": "Physical sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2016/subject-ranking/physical-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2016,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2016,
     "field": "Social sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2016/subject-ranking/social-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2016,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2016,
     "field": "Engineering & technology",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2016/subject-ranking/engineering-and-IT#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2016,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2016,
     "field": "Arts & humanities",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2016/subject-ranking/arts-and-humanities#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2017,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2017,
     "field": "Clinical, pre-clinical & health",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2017/subject-ranking/clinical-pre-clinical-health#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2017,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2017,
     "field": "Life sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2017/subject-ranking/life-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2017,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2017,
     "field": "Physical sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2017/subject-ranking/physical-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2017,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2017,
     "field": "Social sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2017/subject-ranking/social-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2017,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2017,
     "field": "Engineering & technology",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2017/subject-ranking/engineering-and-IT#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2017,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2017,
     "field": "Arts & humanities",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2017/subject-ranking/arts-and-humanities#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2018,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2018,
     "field": "Clinical, pre-clinical & health",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2018/subject-ranking/clinical-pre-clinical-health#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2018,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2018,
     "field": "Life sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2018/subject-ranking/life-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2018,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2018,
     "field": "Physical sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2018/subject-ranking/physical-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2018,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2018,
     "field": "Social sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2018/subject-ranking/social-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2018,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2018,
     "field": "Engineering & technology",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2018/subject-ranking/engineering-and-IT#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2018,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2018,
     "field": "Arts & humanities",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2018/subject-ranking/arts-and-humanities#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2019,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2019,
     "field": "Clinical, pre-clinical & health",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2019/subject-ranking/clinical-pre-clinical-health#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2019,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2019,
     "field": "Life sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2019/subject-ranking/life-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2019,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2019,
     "field": "Physical sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2019/subject-ranking/physical-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2019,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2019,
     "field": "Social sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2019/subject-ranking/social-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2019,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2019,
     "field": "Engineering & technology",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2019/subject-ranking/engineering-and-IT#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2019,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2019,
     "field": "Arts & humanities",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2019/subject-ranking/arts-and-humanities#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2020,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2020,
     "field": "Clinical, pre-clinical & health",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2020/subject-ranking/clinical-pre-clinical-health#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2020,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2020,
     "field": "Life sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2020/subject-ranking/life-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2020,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2020,
     "field": "Physical sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2020/subject-ranking/physical-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2020,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2020,
     "field": "Social sciences",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2020/subject-ranking/social-sciences#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2020,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2020,
     "field": "Engineering & technology",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2020/subject-ranking/engineering-and-IT#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2020,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2020,
     "field": "Arts & humanities",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2020/subject-ranking/arts-and-humanities#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2018,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2018,
     "field": "Psychology",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2018/subject-ranking/psychology#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2018,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2018,
     "field": "Education",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2018/subject-ranking/education#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2018,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2018,
     "field": "Law",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2018/subject-ranking/law#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2019,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2019,
     "field": "Psychology",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2019/subject-ranking/psychology#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2019,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2019,
     "field": "Education",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2019/subject-ranking/education#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2019,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2019,
     "field": "Law",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2019/subject-ranking/law#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2020,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2020,
     "field": "Psychology",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2020/subject-ranking/psychology#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2020,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2020,
     "field": "Education",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2020/subject-ranking/education#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2020,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2020,
     "field": "Law",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2020/subject-ranking/law#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2017,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2017,
     "field": "Business & economics",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2017/subject-ranking/business-and-economics#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2017,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2017,
     "field": "Computer science",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2017/subject-ranking/computer-science#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2018,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2018,
     "field": "Business & economics",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2018/subject-ranking/business-and-economics#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2018,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2018,
     "field": "Computer science",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2018/subject-ranking/computer-science#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2019,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2019,
     "field": "Business & economics",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2019/subject-ranking/business-and-economics#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2019,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2019,
     "field": "Computer science",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2019/subject-ranking/computer-science#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2020,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2020,
     "field": "Business & economics",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2020/subject-ranking/business-and-economics#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
   },
   {
-    "year": 2020,
     "ranking_system": "the",
     "ranking_type": "subject ranking",
+    "year": 2020,
     "field": "Computer science",
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2020/subject-ranking/computer-science#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
