@@ -1,12 +1,39 @@
 import csv
 import io
 import time
+from pathlib import Path
+from typing import Union
 
 from bs4 import BeautifulSoup
 from requests_html import HTMLSession
 
 
 class CrawlerMixin(object):
+    def __init__(
+        self,
+        year: Union[str, int],
+        ranking_system: str,
+        ranking_type: str,
+        field: str,
+        subject: str,
+        wait: int = 10,
+        tries: int = 5,
+    ):
+        self.ranking_info = {
+            "Ranking System": ranking_system,
+            "Ranking Type": ranking_type,
+            "Year": str(year),
+            "Field": field,
+            "Subject": subject,
+        }
+
+        self.wait = wait
+        self.tries = tries
+
+        self.file_name = "_".join(self.ranking_info.values()) + ".csv"
+        self.file_path = Path(self.DOWNLOAD_DIR) / self.file_name
+        self.file_path.parent.mkdir(parents=True, exist_ok=True)
+
     @classmethod
     def country_name_mapper(cls, country: str) -> str:
         return cls.COUNTRY_NAMES.get(country.lower(), country)
@@ -63,21 +90,14 @@ class CrawlerMixin(object):
 
     def _csv_export(self):
         """Exports a table to a .csv file."""
-        row_extension = {
-            "Ranking System": self.ranking_system,
-            "Ranking Type": self.ranking_type,
-            "Year": self.year,
-            "Field": self.field,
-            "Subject": self.subject,
-        }
         with io.open(
             self.file_path, "w", newline="", encoding="utf-8"
         ) as csv_file:
             writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
-            writer.writerow(self.tbl_headers + list(row_extension))
+            writer.writerow(self.tbl_headers[0] + list(self.ranking_info))
             writer.writerows(
-                row + list(row_extension.values())
-                for row in self.tbl_contents
+                row + list(self.ranking_info.values())
+                for row in self.tbl_contents[0]
                 if row
             )
             print(f"Saved file: {self.file_path}")
