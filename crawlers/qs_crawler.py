@@ -41,19 +41,19 @@ class QSCrawler(QSConfig):
         self.wait = wait
         self.tries = tries
 
-        self.file_name = f"QS_{self.year}_{self.field}_{self.subject}.csv"
+        self.file_name = f"qs_{self.year}_{self.field}_{self.subject}.csv"
         self.file_path = Path(QSCrawler.DOWNLOAD_DIR) / self.file_name
         self.file_path.parent.mkdir(parents=True, exist_ok=True)
 
     def crawl(self):
         for i in range(self.tries):
             try:
-                self.ـget_page()
-                self.ـget_tbl()
+                self._get_page()
+                self._get_tbl()
                 self._tbl_merger(
-                    on_cols=["Rank", "University", "Country", "URL"]
+                    on_cols=["Rank", "Institution", "Country", "URL"]
                 )
-                self.ـcsv_export()
+                self._csv_export()
             except ConnectionError as exc:
                 print(exc, type(exc))
                 print(f"Waiting for {self.wait} seconds.")
@@ -62,7 +62,7 @@ class QSCrawler(QSConfig):
 
             break
 
-    def ـget_page(self) -> BeautifulSoup:
+    def _get_page(self) -> BeautifulSoup:
         """Requests a page for data extraction
 
         Raises:
@@ -90,7 +90,7 @@ class QSCrawler(QSConfig):
         finally:
             session.close()
 
-    def ـget_tbl(self) -> Tuple[List[List[str]], List[List[List[str]]]]:
+    def _get_tbl(self) -> Tuple[List[List[str]], List[List[List[str]]]]:
         """Finds the ranking table within the page and extracts its data
 
         Returns:
@@ -105,7 +105,7 @@ class QSCrawler(QSConfig):
             tbl_headers = [
                 h.text for h in tbl.find("thead").find("tr").find_all("td")
             ]
-            tbl_headers = self.ـclean_headers(tbl_headers)
+            tbl_headers = self._clean_headers(tbl_headers)
             self.tbl_headers.append(tbl_headers)
 
             tbl_contents: List[List[str]] = []
@@ -133,7 +133,7 @@ class QSCrawler(QSConfig):
             raise ConnectionError(f"Error getting page: {self.url}")
         return (self.tbl_headers, self.tbl_contents)
 
-    def ـcsv_export(self):
+    def _csv_export(self):
         """Exports a table to a .csv file."""
         with io.open(
             self.file_path, "w", newline="", encoding="utf-8"
@@ -146,7 +146,7 @@ class QSCrawler(QSConfig):
             )
             print(f"Saved file: {self.file_path}")
 
-    def ـclean_headers(self, headers: List[str]) -> list:
+    def _clean_headers(self, headers: List[str]) -> list:
         """Cleans a list of headers
 
         Returns:
@@ -157,7 +157,7 @@ class QSCrawler(QSConfig):
         for h in headers:
             h = vacuum(h)
             if h.startswith("NameCountry/Region"):
-                new_headers.extend(["URL", "University", "Country"])
+                new_headers.extend(["URL", "Institution", "Country"])
 
             if QSCrawler.FIELDS.get(h):
                 new_headers.append(QSCrawler.FIELDS.get(h))
