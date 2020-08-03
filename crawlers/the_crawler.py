@@ -6,6 +6,7 @@ from typing import List, Tuple
 
 from requests_html import HTMLSession
 from bs4 import BeautifulSoup
+from furl import furl
 
 from config import THEConfig
 
@@ -28,12 +29,16 @@ class THECrawler(THEConfig):
         self,
         url: str,
         year: int,
+        url_paths: Tuple[str] = ("stats", "scores"),
+        use_js: bool = True,
         field: str = "All",
         subject: str = "All",
         wait: int = 10,
         tries: int = 5,
     ):
-        self.url = url
+        self.url = furl(url)
+        self.url_paths = url_paths
+        self.use_js = use_js
         self.year = year
         self.field = field
         self.subject = subject
