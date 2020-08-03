@@ -1,5 +1,7 @@
 [
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "university ranking",
     "year": 2019,
     "field": "All",
     "subject": "All",
@@ -7,6 +9,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "university ranking",
     "year": 2018,
     "field": "All",
     "subject": "All",
@@ -14,6 +18,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "university ranking",
     "year": 2017,
     "field": "All",
     "subject": "All",
@@ -21,6 +27,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "university ranking",
     "year": 2016,
     "field": "All",
     "subject": "All",
@@ -28,6 +36,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "university ranking",
     "year": 2015,
     "field": "All",
     "subject": "All",
@@ -35,6 +45,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "university ranking",
     "year": 2014,
     "field": "All",
     "subject": "All",
@@ -42,6 +54,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "university ranking",
     "year": 2013,
     "field": "All",
     "subject": "All",
@@ -49,6 +63,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "university ranking",
     "year": 2012,
     "field": "All",
     "subject": "All",
@@ -56,6 +72,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "university ranking",
     "year": 2011,
     "field": "All",
     "subject": "All",
@@ -63,6 +81,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "university ranking",
     "year": 2010,
     "field": "All",
     "subject": "All",
@@ -70,6 +90,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "university ranking",
     "year": 2009,
     "field": "All",
     "subject": "All",
@@ -77,6 +99,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "university ranking",
     "year": 2008,
     "field": "All",
     "subject": "All",
@@ -84,6 +108,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "university ranking",
     "year": 2007,
     "field": "All",
     "subject": "All",
@@ -91,6 +117,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "university ranking",
     "year": 2006,
     "field": "All",
     "subject": "All",
@@ -98,6 +126,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "university ranking",
     "year": 2005,
     "field": "All",
     "subject": "All",
@@ -105,6 +135,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "university ranking",
     "year": 2004,
     "field": "All",
     "subject": "All",
@@ -112,6 +144,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Natural Sciences",
     "subject": "Mathematics",
@@ -119,6 +153,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Natural Sciences",
     "subject": "Physics",
@@ -126,6 +162,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Natural Sciences",
     "subject": "Chemistry",
@@ -133,6 +171,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Natural Sciences",
     "subject": "Earth Sciences",
@@ -140,6 +180,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Natural Sciences",
     "subject": "Geography",
@@ -147,6 +189,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Natural Sciences",
     "subject": "Ecology",
@@ -154,6 +198,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Natural Sciences",
     "subject": "Oceanography",
@@ -161,6 +207,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Natural Sciences",
     "subject": "Atmospheric Science",
@@ -169,6 +217,8 @@
   },
 
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Engineering",
     "subject": "Mechanical Engineering",
@@ -176,6 +226,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Engineering",
     "subject": "Electrical & Electronic Engineering",
@@ -183,6 +235,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Engineering",
     "subject": "Automation & Control",
@@ -190,6 +244,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Engineering",
     "subject": "Telecommunication Engineering",
@@ -197,6 +253,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Engineering",
     "subject": "Instruments Science & Technology",
@@ -204,6 +262,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Engineering",
     "subject": "Biomedical Engineering",
@@ -211,6 +271,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Engineering",
     "subject": "Computer Science & Engineering",
@@ -218,6 +280,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Engineering",
     "subject": "Civil Engineering",
@@ -225,6 +289,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Engineering",
     "subject": "Chemical Engineering",
@@ -232,6 +298,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Engineering",
     "subject": "Materials Science & Engineering",
@@ -239,6 +307,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Engineering",
     "subject": "Nanoscience & Nanotechnology",
@@ -246,6 +316,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Engineering",
     "subject": "Energy Science & Engineering",
@@ -253,6 +325,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Engineering",
     "subject": "Environmental Science & Engineering",
@@ -260,6 +334,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Engineering",
     "subject": "Water Resources",
@@ -267,6 +343,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Engineering",
     "subject": "Food Science & Technology",
@@ -274,6 +352,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Engineering",
     "subject": "Biotechnology",
@@ -281,6 +361,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Engineering",
     "subject": "Aerospace Engineering",
@@ -288,6 +370,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Engineering",
     "subject": "Marine-Ocean Engineering",
@@ -295,6 +379,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Engineering",
     "subject": "Transportation Science & Technology",
@@ -302,6 +388,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Engineering",
     "subject": "Remote Sensing",
@@ -309,6 +397,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Engineering",
     "subject": "Mining & Mineral Engineering",
@@ -316,6 +406,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Engineering",
     "subject": "Metallurgical Engineering",
@@ -324,6 +416,8 @@
   },
 
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Life Sciences",
     "subject": "Biological Sciences",
@@ -331,6 +425,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Life Sciences",
     "subject": "Human Biological Sciences",
@@ -338,6 +434,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Life Sciences",
     "subject": "Agricultural Sciences",
@@ -345,6 +443,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Life Sciences",
     "subject": "Veterinary Sciences",
@@ -353,6 +453,8 @@
   },
 
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Medical Sciences",
     "subject": "Clinical Medicine",
@@ -360,6 +462,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Medical Sciences",
     "subject": "Public Health",
@@ -367,6 +471,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Medical Sciences",
     "subject": "Dentistry & Oral Sciences",
@@ -374,6 +480,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Medical Sciences",
     "subject": "Nursing",
@@ -381,6 +489,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Medical Sciences",
     "subject": "Medical Technology",
@@ -388,6 +498,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Medical Sciences",
     "subject": "Pharmacy & Pharmaceutical Sciences",
@@ -396,6 +508,8 @@
   },
 
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Social Sciences",
     "subject": "Economics",
@@ -403,6 +517,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Social Sciences",
     "subject": "Statistics",
@@ -410,6 +526,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Social Sciences",
     "subject": "Law",
@@ -417,6 +535,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Social Sciences",
     "subject": "Political Sciences",
@@ -424,6 +544,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Social Sciences",
     "subject": "Sociology",
@@ -431,6 +553,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Social Sciences",
     "subject": "Education",
@@ -438,6 +562,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Social Sciences",
     "subject": "Communication",
@@ -445,6 +571,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Social Sciences",
     "subject": "Psychology",
@@ -452,6 +580,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Social Sciences",
     "subject": "Business Administration",
@@ -459,6 +589,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Social Sciences",
     "subject": "Finance",
@@ -466,6 +598,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Social Sciences",
     "subject": "Management",
@@ -473,6 +607,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Social Sciences",
     "subject": "Public Administration",
@@ -480,6 +616,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Social Sciences",
     "subject": "Hospitality & Tourism Management",
@@ -487,6 +625,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2020,
     "field": "Social Sciences",
     "subject": "Library & Information Science",
@@ -494,6 +634,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Natural Sciences",
     "subject": "Mathematics",
@@ -501,6 +643,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Natural Sciences",
     "subject": "Physics",
@@ -508,6 +652,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Natural Sciences",
     "subject": "Chemistry",
@@ -515,6 +661,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Natural Sciences",
     "subject": "Earth Sciences",
@@ -522,6 +670,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Natural Sciences",
     "subject": "Geography",
@@ -529,6 +679,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Natural Sciences",
     "subject": "Ecology",
@@ -536,6 +688,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Natural Sciences",
     "subject": "Oceanography",
@@ -543,6 +697,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Natural Sciences",
     "subject": "Atmospheric Science",
@@ -551,6 +707,8 @@
   },
 
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Engineering",
     "subject": "Mechanical Engineering",
@@ -558,6 +716,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Engineering",
     "subject": "Electrical & Electronic Engineering",
@@ -565,6 +725,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Engineering",
     "subject": "Automation & Control",
@@ -572,6 +734,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Engineering",
     "subject": "Telecommunication Engineering",
@@ -579,6 +743,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Engineering",
     "subject": "Instruments Science & Technology",
@@ -586,6 +752,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Engineering",
     "subject": "Biomedical Engineering",
@@ -593,6 +761,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Engineering",
     "subject": "Computer Science & Engineering",
@@ -600,6 +770,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Engineering",
     "subject": "Civil Engineering",
@@ -607,6 +779,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Engineering",
     "subject": "Chemical Engineering",
@@ -614,6 +788,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Engineering",
     "subject": "Materials Science & Engineering",
@@ -621,6 +797,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Engineering",
     "subject": "Nanoscience & Nanotechnology",
@@ -628,6 +806,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Engineering",
     "subject": "Energy Science & Engineering",
@@ -635,6 +815,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Engineering",
     "subject": "Environmental Science & Engineering",
@@ -642,6 +824,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Engineering",
     "subject": "Water Resources",
@@ -649,6 +833,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Engineering",
     "subject": "Food Science & Technology",
@@ -656,6 +842,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Engineering",
     "subject": "Biotechnology",
@@ -663,6 +851,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Engineering",
     "subject": "Aerospace Engineering",
@@ -670,6 +860,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Engineering",
     "subject": "Marine-Ocean Engineering",
@@ -677,6 +869,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Engineering",
     "subject": "Transportation Science & Technology",
@@ -684,6 +878,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Engineering",
     "subject": "Remote Sensing",
@@ -691,6 +887,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Engineering",
     "subject": "Mining & Mineral Engineering",
@@ -698,6 +896,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Engineering",
     "subject": "Metallurgical Engineering",
@@ -706,6 +906,8 @@
   },
 
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Life Sciences",
     "subject": "Biological Sciences",
@@ -713,6 +915,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Life Sciences",
     "subject": "Human Biological Sciences",
@@ -720,6 +924,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Life Sciences",
     "subject": "Agricultural Sciences",
@@ -727,6 +933,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Life Sciences",
     "subject": "Veterinary Sciences",
@@ -735,6 +943,8 @@
   },
 
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Medical Sciences",
     "subject": "Clinical Medicine",
@@ -742,6 +952,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Medical Sciences",
     "subject": "Public Health",
@@ -749,6 +961,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Medical Sciences",
     "subject": "Dentistry & Oral Sciences",
@@ -756,6 +970,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Medical Sciences",
     "subject": "Nursing",
@@ -763,6 +979,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Medical Sciences",
     "subject": "Medical Technology",
@@ -770,6 +988,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Medical Sciences",
     "subject": "Pharmacy & Pharmaceutical Sciences",
@@ -778,6 +998,8 @@
   },
 
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Social Sciences",
     "subject": "Economics",
@@ -785,6 +1007,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Social Sciences",
     "subject": "Statistics",
@@ -792,6 +1016,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Social Sciences",
     "subject": "Law",
@@ -799,6 +1025,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Social Sciences",
     "subject": "Political Sciences",
@@ -806,6 +1034,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Social Sciences",
     "subject": "Sociology",
@@ -813,6 +1043,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Social Sciences",
     "subject": "Education",
@@ -820,6 +1052,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Social Sciences",
     "subject": "Communication",
@@ -827,6 +1061,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Social Sciences",
     "subject": "Psychology",
@@ -834,6 +1070,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Social Sciences",
     "subject": "Business Administration",
@@ -841,6 +1079,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Social Sciences",
     "subject": "Finance",
@@ -848,6 +1088,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Social Sciences",
     "subject": "Management",
@@ -855,6 +1097,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Social Sciences",
     "subject": "Public Administration",
@@ -862,6 +1106,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Social Sciences",
     "subject": "Hospitality & Tourism Management",
@@ -869,6 +1115,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2019,
     "field": "Social Sciences",
     "subject": "Library & Information Science",
@@ -877,6 +1125,8 @@
   },
 
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Natural Sciences",
     "subject": "Mathematics",
@@ -884,6 +1134,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Natural Sciences",
     "subject": "Physics",
@@ -891,6 +1143,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Natural Sciences",
     "subject": "Chemistry",
@@ -898,6 +1152,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Natural Sciences",
     "subject": "Earth Sciences",
@@ -905,6 +1161,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Natural Sciences",
     "subject": "Geography",
@@ -912,6 +1170,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Natural Sciences",
     "subject": "Ecology",
@@ -919,6 +1179,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Natural Sciences",
     "subject": "Oceanography",
@@ -926,6 +1188,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Natural Sciences",
     "subject": "Atmospheric Science",
@@ -934,6 +1198,8 @@
   },
 
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Engineering",
     "subject": "Mechanical Engineering",
@@ -941,6 +1207,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Engineering",
     "subject": "Electrical & Electronic Engineering",
@@ -948,6 +1216,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Engineering",
     "subject": "Automation & Control",
@@ -955,6 +1225,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Engineering",
     "subject": "Telecommunication Engineering",
@@ -962,6 +1234,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Engineering",
     "subject": "Instruments Science & Technology",
@@ -969,6 +1243,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Engineering",
     "subject": "Biomedical Engineering",
@@ -976,6 +1252,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Engineering",
     "subject": "Computer Science & Engineering",
@@ -983,6 +1261,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Engineering",
     "subject": "Civil Engineering",
@@ -990,6 +1270,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Engineering",
     "subject": "Chemical Engineering",
@@ -997,6 +1279,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Engineering",
     "subject": "Materials Science & Engineering",
@@ -1004,6 +1288,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Engineering",
     "subject": "Nanoscience & Nanotechnology",
@@ -1011,6 +1297,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Engineering",
     "subject": "Energy Science & Engineering",
@@ -1018,6 +1306,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Engineering",
     "subject": "Environmental Science & Engineering",
@@ -1025,6 +1315,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Engineering",
     "subject": "Water Resources",
@@ -1032,6 +1324,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Engineering",
     "subject": "Food Science & Technology",
@@ -1039,6 +1333,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Engineering",
     "subject": "Biotechnology",
@@ -1046,6 +1342,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Engineering",
     "subject": "Aerospace Engineering",
@@ -1053,6 +1351,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Engineering",
     "subject": "Marine-Ocean Engineering",
@@ -1060,6 +1360,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Engineering",
     "subject": "Transportation Science & Technology",
@@ -1067,6 +1369,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Engineering",
     "subject": "Remote Sensing",
@@ -1074,6 +1378,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Engineering",
     "subject": "Mining & Mineral Engineering",
@@ -1081,6 +1387,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Engineering",
     "subject": "Metallurgical Engineering",
@@ -1089,6 +1397,8 @@
   },
 
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Life Sciences",
     "subject": "Biological Sciences",
@@ -1096,6 +1406,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Life Sciences",
     "subject": "Human Biological Sciences",
@@ -1103,6 +1415,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Life Sciences",
     "subject": "Agricultural Sciences",
@@ -1110,6 +1424,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Life Sciences",
     "subject": "Veterinary Sciences",
@@ -1118,6 +1434,8 @@
   },
 
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Medical Sciences",
     "subject": "Clinical Medicine",
@@ -1125,6 +1443,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Medical Sciences",
     "subject": "Public Health",
@@ -1132,6 +1452,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Medical Sciences",
     "subject": "Dentistry & Oral Sciences",
@@ -1139,6 +1461,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Medical Sciences",
     "subject": "Nursing",
@@ -1146,6 +1470,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Medical Sciences",
     "subject": "Medical Technology",
@@ -1153,6 +1479,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Medical Sciences",
     "subject": "Pharmacy & Pharmaceutical Sciences",
@@ -1161,6 +1489,8 @@
   },
 
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Social Sciences",
     "subject": "Economics",
@@ -1168,6 +1498,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Social Sciences",
     "subject": "Statistics",
@@ -1175,6 +1507,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Social Sciences",
     "subject": "Law",
@@ -1182,6 +1516,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Social Sciences",
     "subject": "Political Sciences",
@@ -1189,6 +1525,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Social Sciences",
     "subject": "Sociology",
@@ -1196,6 +1534,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Social Sciences",
     "subject": "Education",
@@ -1203,6 +1543,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Social Sciences",
     "subject": "Communication",
@@ -1210,6 +1552,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Social Sciences",
     "subject": "Psychology",
@@ -1217,6 +1561,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Social Sciences",
     "subject": "Business Administration",
@@ -1224,6 +1570,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Social Sciences",
     "subject": "Finance",
@@ -1231,6 +1579,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Social Sciences",
     "subject": "Management",
@@ -1238,6 +1588,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Social Sciences",
     "subject": "Public Administration",
@@ -1245,6 +1597,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Social Sciences",
     "subject": "Hospitality & Tourism Management",
@@ -1252,6 +1606,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2018,
     "field": "Social Sciences",
     "subject": "Library & Information Science",
@@ -1259,6 +1615,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Natural Sciences",
     "subject": "Mathematics",
@@ -1266,6 +1624,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Natural Sciences",
     "subject": "Physics",
@@ -1273,6 +1633,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Natural Sciences",
     "subject": "Chemistry",
@@ -1280,6 +1642,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Natural Sciences",
     "subject": "Earth Sciences",
@@ -1287,6 +1651,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Natural Sciences",
     "subject": "Geography",
@@ -1294,6 +1660,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Natural Sciences",
     "subject": "Ecology",
@@ -1302,6 +1670,8 @@
   },
 
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Engineering",
     "subject": "Mechanical Engineering",
@@ -1309,6 +1679,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Engineering",
     "subject": "Electrical & Electronic Engineering",
@@ -1316,6 +1688,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Engineering",
     "subject": "Automation & Control",
@@ -1323,6 +1697,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Engineering",
     "subject": "Telecommunication Engineering",
@@ -1330,6 +1706,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Engineering",
     "subject": "Instruments Science & Technology",
@@ -1337,6 +1715,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Engineering",
     "subject": "Biomedical Engineering",
@@ -1344,6 +1724,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Engineering",
     "subject": "Computer Science & Engineering",
@@ -1351,6 +1733,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Engineering",
     "subject": "Civil Engineering",
@@ -1358,6 +1742,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Engineering",
     "subject": "Chemical Engineering",
@@ -1365,6 +1751,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Engineering",
     "subject": "Materials Science & Engineering",
@@ -1372,6 +1760,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Engineering",
     "subject": "Nanoscience & Nanotechnology",
@@ -1379,6 +1769,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Engineering",
     "subject": "Energy Science & Engineering",
@@ -1386,6 +1778,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Engineering",
     "subject": "Environmental Science & Engineering",
@@ -1393,6 +1787,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Engineering",
     "subject": "Water Resources",
@@ -1400,6 +1796,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Engineering",
     "subject": "Food Science & Technology",
@@ -1407,6 +1805,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Engineering",
     "subject": "Biotechnology",
@@ -1414,6 +1814,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Engineering",
     "subject": "Aerospace Engineering",
@@ -1421,6 +1823,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Engineering",
     "subject": "Marine-Ocean Engineering",
@@ -1428,6 +1832,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Engineering",
     "subject": "Transportation Science & Technology",
@@ -1435,6 +1841,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Engineering",
     "subject": "Remote Sensing",
@@ -1442,6 +1850,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Engineering",
     "subject": "Mining & Mineral Engineering",
@@ -1449,6 +1859,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Engineering",
     "subject": "Metallurgical Engineering",
@@ -1457,6 +1869,8 @@
   },
 
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Life Sciences",
     "subject": "Biological Sciences",
@@ -1464,6 +1878,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Life Sciences",
     "subject": "Human Biological Sciences",
@@ -1471,6 +1887,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Life Sciences",
     "subject": "Agricultural Sciences",
@@ -1478,6 +1896,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Life Sciences",
     "subject": "Veterinary Sciences",
@@ -1486,6 +1906,8 @@
   },
 
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Medical Sciences",
     "subject": "Clinical Medicine",
@@ -1493,6 +1915,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Medical Sciences",
     "subject": "Public Health",
@@ -1500,6 +1924,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Medical Sciences",
     "subject": "Dentistry & Oral Sciences",
@@ -1507,6 +1933,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Medical Sciences",
     "subject": "Nursing",
@@ -1514,6 +1942,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Medical Sciences",
     "subject": "Medical Technology",
@@ -1521,6 +1951,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Medical Sciences",
     "subject": "Pharmacy & Pharmaceutical Sciences",
@@ -1529,6 +1961,8 @@
   },
 
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Social Sciences",
     "subject": "Economics",
@@ -1536,6 +1970,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Social Sciences",
     "subject": "Statistics",
@@ -1543,6 +1979,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Social Sciences",
     "subject": "Law",
@@ -1550,6 +1988,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Social Sciences",
     "subject": "Political Sciences",
@@ -1557,6 +1997,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Social Sciences",
     "subject": "Sociology",
@@ -1564,6 +2006,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Social Sciences",
     "subject": "Education",
@@ -1571,6 +2015,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Social Sciences",
     "subject": "Communication",
@@ -1578,6 +2024,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Social Sciences",
     "subject": "Psychology",
@@ -1585,6 +2033,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Social Sciences",
     "subject": "Business Administration",
@@ -1592,6 +2042,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Social Sciences",
     "subject": "Finance",
@@ -1599,6 +2051,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Social Sciences",
     "subject": "Management",
@@ -1606,6 +2060,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Social Sciences",
     "subject": "Public Administration",
@@ -1613,6 +2069,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Social Sciences",
     "subject": "Hospitality & Tourism Management",
@@ -1620,6 +2078,8 @@
     "crawl": true
   },
   {
+    "ranking_system": "shanghai",
+    "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Social Sciences",
     "subject": "Library & Information Science",
