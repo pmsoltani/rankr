@@ -10,5 +10,5 @@ def text_process(text: str) -> str:
     Returns:
         str: Clean text
     """
-    parts = re.findall(r"[a-zA-Z0-9_.:/\&]+", text)
+    parts = re.findall(r"[a-zA-Z0-9_.:/\&\(\)]+", text)
     return " ".join(parts)
