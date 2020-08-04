@@ -66,18 +66,20 @@ class QSConfig(CrawlerConfig):
     DOWNLOAD_DIR = CrawlerConfig.MAIN_DIR / "qs"
 
     FIELDS = {
-        "RANK": "Rank",
-        "# RANK": "Rank",
-        "UNIVERSITY": "Institution",
-        "URL": "URL",
-        "LOCATION": "Country",
-        "OVERALL SCORE": "Overall Score",
-        "Academic Reputation": "Academic Reputation",
-        "Employer Reputation": "Employer Reputation",
-        "Faculty Student": "Faculty Student",
-        "International Faculty": "International Faculty",
-        "International Students": "International Students",
-        "Citations per Faculty": "Citations per Faculty",
+        "rank": "Rank",
+        "# rank": "Rank",
+        "university": "Institution",
+        "url": "URL",
+        "location": "Country",
+        "overall score": "Overall Score",
+        "academic reputation": "Academic Reputation",
+        "employer reputation": "Employer Reputation",
+        "faculty student": "Faculty Student",
+        "international faculty": "International Faculty",
+        "international students": "International Students",
+        "citations per faculty": "Citations per Faculty",
+        "h-index citations": "H-index Citations",
+        "citations per paper": "Citations per Paper",
     }
 
 
@@ -90,11 +92,11 @@ class ShanghaiConfig(CrawlerConfig):
     DOWNLOAD_DIR = CrawlerConfig.MAIN_DIR / "shanghai"
 
     FIELDS = {
-        "World Rank": "Rank",
-        "URL": "URL",
-        "National/RegionalRank": "National Rank",
-        "National/Regional Rank": "National Rank",
-        "Total Score": "Total Score",
+        "world rank": "Rank",
+        "url": "URL",
+        "national/regionalrank": "National Rank",
+        "national/regional rank": "National Rank",
+        "total score": "Total Score",
     }
 
 
@@ -107,22 +109,18 @@ class THEConfig(CrawlerConfig):
     DOWNLOAD_DIR = CrawlerConfig.MAIN_DIR / "the"
 
     FIELDS = {
-        "Rank": "Rank",
-        "URL": "URL",
-        "Overall": "Overall",
-        "Teaching": "Teaching",
-        "Research": "Research",
-        "Citations": "Citations",
-        "Industry Income": "Industry Income",
-        "International Outlook": "International Outlook",
-        "No. of FTE Students": "No. of FTE Students",
-        "No. of students per staff": "No. of students per staff",
-        "International Students": "International Students",
-        "Female:Male Ratio": "Female:Male Ratio",
-        "Overall": "Overall",
-        "Teaching": "Teaching",
-        "Research": "Research",
-        "Citations": "Citations",
-        "Industry Income": "Industry Income",
-        "International Outlook": "International Outlook",
+        "rank": "Rank",
+        "name": "Institution",
+        "scores_overall": "Overall",
+        "scores_teaching": "Teaching",
+        "scores_research": "Research",
+        "scores_citations": "Citations",
+        "scores_industry_income": "Industry Income",
+        "scores_international_outlook": "International Outlook",
+        "url": "URL",
+        "location": "Country",
+        "stats_number_students": "No. of FTE Students",
+        "stats_student_staff_ratio": "No. of Students per Staff",
+        "stats_pc_intl_students": "International Students",
+        "stats_female_male_ratio": "Female:Male Ratio",
     }
