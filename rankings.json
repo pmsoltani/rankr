@@ -27,8 +27,8 @@
       "name": "# FTE Students",
       "type": "integer"
     },
-    "No. of students per staff": {
-      "name": "# Students Per Staff",
+    "No. of Students per Staff": {
+      "name": "# Students per Staff",
       "type": "decimal"
     },
     "Internationl Students": {
@@ -64,8 +64,16 @@
       "name": "International Students Score",
       "type": "percent"
     },
-    "Citations Per Faculty": {
-      "name": "Citations Per Faculty Score",
+    "Citations per Faculty": {
+      "name": "Citations per Faculty Score",
+      "type": "percent"
+    },
+    "Citations per Paper": {
+      "name": "Citations per Paper Score",
+      "type": "percent"
+    },
+    "H-index Citations": {
+      "name": "H-index Citations Score",
       "type": "percent"
     }
   }
