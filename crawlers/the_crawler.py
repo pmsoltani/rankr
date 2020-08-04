@@ -1,5 +1,3 @@
-import io
-import csv
 import json
 import re
 from typing import List
@@ -48,14 +46,3 @@ class THECrawler(CrawlerMixin, THEConfig):
 
         self.processed_data = processed_data
         return self.processed_data
-
-    def _csv_export(self):
-        with io.open(
-            self.file_path, "w", newline="", encoding="utf-8"
-        ) as csv_file:
-            dict_writer = csv.DictWriter(
-                csv_file, self.processed_data[0].keys(), quoting=csv.QUOTE_ALL
-            )
-            dict_writer.writeheader()
-            dict_writer.writerows(self.processed_data)
-        print(f"Saved file: {self.file_path}")

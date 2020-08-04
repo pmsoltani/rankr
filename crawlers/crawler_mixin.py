@@ -4,9 +4,6 @@ import time
 from pathlib import Path
 from typing import Union
 
-import requests
-from bs4 import BeautifulSoup
-
 
 class CrawlerMixin(object):
     def __init__(
@@ -51,34 +48,13 @@ class CrawlerMixin(object):
 
             break
 
-    def _get_page(self) -> BeautifulSoup:
-        """Requests a page for data extraction.
-
-        Raises:
-            ConnectionError: If the request is not successful
-
-        Returns:
-            BeautifulSoup: The downloaded page
-        """
-        page = requests.get(self.url, headers=self.headers)
-        if page.status_code != 200:
-            raise ConnectionError(f"Error getting page: {self.url}")
-
-        self.page = BeautifulSoup(page.content, "html.parser")
-
-        print(f"Downloaded page: {self.url}")
-        return self.page
-
     def _csv_export(self):
-        """Exports a table to a .csv file."""
         with io.open(
             self.file_path, "w", newline="", encoding="utf-8"
         ) as csv_file:
-            writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
-            writer.writerow(self.tbl_headers[0] + list(self.ranking_info))
-            writer.writerows(
-                row + list(self.ranking_info.values())
-                for row in self.tbl_contents[0]
-                if row
+            dict_writer = csv.DictWriter(
+                csv_file, self.processed_data[0].keys(), quoting=csv.QUOTE_ALL
             )
-            print(f"Saved file: {self.file_path}")
+            dict_writer.writeheader()
+            dict_writer.writerows(self.processed_data)
+        print(f"Saved file: {self.file_path}")
