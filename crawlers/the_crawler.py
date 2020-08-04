@@ -1,5 +1,10 @@
-from typing import List, Tuple
+import io
+import csv
+import json
+import re
+from typing import List
 
+import requests
 from furl import furl
 
 from config import THEConfig
@@ -8,124 +13,49 @@ from utils import text_process
 
 
 class THECrawler(CrawlerMixin, THEConfig):
-    def __init__(
-        self,
-        url: str,
-        url_paths: List[str] = ["stats", "scores"],
-        use_js: bool = True,
-        merge_on_cols: List[str] = ["Rank", "Institution", "Country", "URL"],
-        **kwargs,
-    ):
-        fragments = [furl(url).fragment.add(p) for p in url_paths]
-        self.urls = [furl(url).copy().set(fragment=str(f)) for f in fragments]
-        self.use_js = use_js
-        self.merge_on_cols = merge_on_cols
-        self.header_group_keyword = "country"
-
+    def __init__(self, url: str, **kwargs):
+        self.urls = [url]
         super().__init__(**kwargs)
 
-    def _get_tbl(self) -> Tuple[List[List[str]], List[List[List[str]]]]:
-        """Finds the ranking table within the page and extracts its data
+    def _get_page(self):
+        page = requests.get(self.urls[0], headers=self.headers)
+        json_url = re.findall(r"(https.*?\.json)", page.text)[0]
 
-        Returns:
-            Tuple[List[List[str]], List[List[List[str]]]]: Table headers
-            and content
-        """
-        self.tbl_headers: List[List[str]] = []
-        self.tbl_contents: List[List[List[str]]] = []
-        for page in self.pages:
-            tbl = page.find("table", attrs={"id": "datatable-1"})
+        self.json_url = json_url.replace("\\", "")
+        return self.json_url
 
-            tbl_headers = [h.text for h in tbl.find("thead").find_all("th")]
-            tbl_headers = self._clean_headers(tbl_headers)
-            self.tbl_headers.append(tbl_headers)
+    def _get_tbl(self):
+        page = requests.get(self.json_url, headers=self.headers)
+        raw_data = json.loads(page.text)
 
-            tbl_contents: List[List[str]] = []
-            for row in tbl.find("tbody").find_all("tr"):
-                values = []
-                for val in row.find_all("td"):
-                    if val["class"] == ["name", "namesearch"]:
-                        url_elem = val.find(
-                            "a", attrs={"class": "ranking-institution-title"}
-                        )
-                        url = furl(THEConfig.BASE_URL) / url_elem["href"]
-                        country_elem = val.find(
-                            "div", attrs={"class", "location"}
-                        )
-                        country = THECrawler.country_name_mapper(
-                            text_process(country_elem.text)
-                        )
+        # processing raw_data
+        processed_data: List[dict] = []
+        for row in raw_data["data"]:
+            values = {}
+            for col in row:
+                if col not in THEConfig.FIELDS:
+                    continue
 
-                        values.append(url.url)
-                        values.append(url_elem.text)
-                        values.append(country)
-                        continue
-                    values.append(val.text)
+                value = row[col] if row[col] else ""
+                if THEConfig.FIELDS[col] == "Country":
+                    value = THECrawler.country_name_mapper(text_process(value))
+                if THEConfig.FIELDS[col] == "URL":
+                    value = furl(THEConfig.BASE_URL).join(value)
 
-                if values:
-                    tbl_contents.append([v.strip() for v in values])
-            self.tbl_contents.append(tbl_contents)
+                values[THEConfig.FIELDS[col]] = value
 
-        if not self.tbl_headers or not self.tbl_contents:
-            raise ConnectionError("Error getting page!")
-        return (self.tbl_headers, self.tbl_contents)
+            processed_data.append({**values, **self.ranking_info})
 
-    def _clean_headers(self, headers: List[str]) -> List[str]:
-        """Cleans a list of headers
+        self.processed_data = processed_data
+        return self.processed_data
 
-        Args:
-            headers (List[str]): The headers to be cleaned
-
-        Returns:
-            List[str]: Cleaned column names
-        """
-        new_headers = []
-
-        for h in headers:
-            h = text_process(h)
-            if self.header_group_keyword in h.lower():
-                new_headers.extend(["URL", "Institution", "Country"])
-
-            if THECrawler.FIELDS.get(h):
-                new_headers.append(THECrawler.FIELDS.get(h))
-
-        return new_headers
-
-    def _tbl_merger(
-        self, on_cols: List[str]
-    ) -> Tuple[List[str], List[List[str]]]:
-        """Merges to tables using a specified list of columns.
-
-        Args:
-            on_cols (List[str]): The columns on which the function joins
-            the two tables.
-
-        Returns:
-            Tuple[List[str], List[List[str]]]: Merged table headers and
-            contents
-        """
-        if self.tbl_headers[0] == self.tbl_headers[1]:
-            return (self.tbl_headers[0], self.tbl_contents[0])
-
-        self.tbl_headers[0].extend(
-            [c for c in self.tbl_headers[1] if c not in on_cols]
-        )
-        on_cols = [self.tbl_headers[1].index(c) for c in on_cols]
-
-        for i, row in enumerate(self.tbl_contents[0]):
-            row_match = True
-            for c in on_cols:
-                if row[c] != self.tbl_contents[1][i][c]:
-                    row_match = False
-                    break
-            if not row_match:
-                continue
-            self.tbl_contents[0][i].extend(
-                [
-                    c
-                    for j, c in enumerate(self.tbl_contents[1][i])
-                    if j not in on_cols
-                ]
+    def _csv_export(self):
+        with io.open(
+            self.file_path, "w", newline="", encoding="utf-8"
+        ) as csv_file:
+            dict_writer = csv.DictWriter(
+                csv_file, self.processed_data[0].keys(), quoting=csv.QUOTE_ALL
             )
-
-        return (self.tbl_headers, self.tbl_contents)
+            dict_writer.writeheader()
+            dict_writer.writerows(self.processed_data)
+        print(f"Saved file: {self.file_path}")
