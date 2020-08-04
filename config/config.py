@@ -66,6 +66,7 @@ class QSConfig(CrawlerConfig):
     DOWNLOAD_DIR = CrawlerConfig.MAIN_DIR / "qs"
 
     FIELDS = {
+        "RANK": "Rank",
         "# RANK": "Rank",
         "UNIVERSITY": "Institution",
         "URL": "URL",
