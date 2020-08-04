@@ -22,6 +22,10 @@
     "N&S": { "name": "N&S Score", "type": "percent" },
     "PUB": { "name": "PUB Score", "type": "percent" },
     "PCP": { "name": "PCP Score", "type": "percent" },
+    "CNCI": { "name": "CNCI Score", "type": "percent" },
+    "IC": { "name": "IC Score", "type": "percent" },
+    "TOP": { "name": "TOP Score", "type": "percent" },
+    "Q1": { "name": "Q1 Score", "type": "percent" },
 
     "No. of FTE Students": {
       "name": "# FTE Students",
