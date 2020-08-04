@@ -97,6 +97,16 @@ class ShanghaiConfig(CrawlerConfig):
         "national/regionalrank": "National Rank",
         "national/regional rank": "National Rank",
         "total score": "Total Score",
+        "alumni": "Alumni",
+        "award": "Award",
+        "hici": "HiCi",
+        "n&s": "N&S",
+        "pub": "PUP",
+        "pcp": "PCP",
+        "cnci": "CNCI",
+        "ic": "IC",
+        "top": "TOP",
+        "q1": "Q1",
     }
 
 
