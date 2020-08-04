@@ -43,8 +43,6 @@ class CrawlerMixin(object):
             try:
                 self._get_page()
                 self._get_tbl()
-                if len(self.urls) > 1:
-                    self._tbl_merger(on_cols=self.merge_on_cols)
                 self._csv_export()
             except ConnectionError:
                 print(f"Waiting for {self.wait} seconds.")
