@@ -4,8 +4,8 @@ import time
 from pathlib import Path
 from typing import Union
 
+import requests
 from bs4 import BeautifulSoup
-from requests_html import HTMLSession
 
 
 class CrawlerMixin(object):
@@ -56,37 +56,20 @@ class CrawlerMixin(object):
     def _get_page(self) -> BeautifulSoup:
         """Requests a page for data extraction.
 
-        Uses browser rendering if necessary.
-
         Raises:
             ConnectionError: If the request is not successful
 
         Returns:
-            BeautifulSoup: Soup
+            BeautifulSoup: The downloaded page
         """
-        session = HTMLSession()
-        self.pages = []
-        try:
-            for url in self.urls:
-                page = session.get(url, headers=self.headers)
-                if page.status_code != 200:
-                    raise ConnectionError(f"Error getting page: {url}")
-                if self.use_js:
-                    page.html.render()
-                    self.pages.append(
-                        BeautifulSoup(page.html.html, "html.parser")
-                    )
-                else:
-                    self.pages.append(
-                        BeautifulSoup(page.content, "html.parser")
-                    )
+        page = requests.get(self.url, headers=self.headers)
+        if page.status_code != 200:
+            raise ConnectionError(f"Error getting page: {self.url}")
 
-                print(f"Downloaded page: {url}")
-            return self.pages
-        except Exception:
-            pass
-        finally:
-            session.close()
+        self.page = BeautifulSoup(page.content, "html.parser")
+
+        print(f"Downloaded page: {self.url}")
+        return self.page
 
     def _csv_export(self):
         """Exports a table to a .csv file."""
