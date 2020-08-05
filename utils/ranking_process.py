@@ -21,7 +21,13 @@ def ranking_process(db: Session, file_path: str):
         inst_url = row["URL"]
         inst_acronym = re.search(r"\((.*?)\)$", row["Institution"])
         if inst_acronym:
+            # institution acronym:
+            # "universiti malaya (um)" -> "um"
             inst_acronym = inst_acronym.group(1).lower()
+            # institution name without acronym:
+            # "universiti malaya (um)" -> "universiti malaya"
+            inst_bare_name = re.search(r"^(.*?)\(", row["Institution"])
+            inst_bare_name = inst_bare_name.group(1).strip().lower()
 
         link: Link = db.query(Link).filter(
             Link.link == inst_url, Link.type == link_type
@@ -51,7 +57,12 @@ def ranking_process(db: Session, file_path: str):
                         if acro and acro.institution.country == inst_country:
                             inst = acro.institution
                         else:
-                            print("NOT FOUND:", inst_name)
+                            inst: Institution = db.query(Institution).filter(
+                                func.lower(Institution.name) == inst_bare_name,
+                                Institution.country == inst_country,
+                            ).first()
+                            if not inst:
+                                print("NOT FOUND:", inst_name)
 
         if inst:
             ranking_metrics = metrics_process(row)
