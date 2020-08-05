@@ -45,8 +45,10 @@ class DBConfig(object):
     COUNTRY_NAMES = read_json_config(_country_names_path)
 
     @classmethod
-    def country_name_mapper(cls, country):
-        return cls.COUNTRY_NAMES.get(country.strip().lower(), country)
+    def country_name_mapper(cls, country: str) -> str:
+        return cls.COUNTRY_NAMES.get(
+            country.strip().replace("-", " ").lower(), country
+        )
 
 
 class CrawlerConfig(object):
@@ -58,6 +60,12 @@ class CrawlerConfig(object):
     CRAWLER_ENGINE = env.list("CRAWLER_ENGINE", ["qs", "shanghai", "the"])
     _country_names_path = env("COUNTRY_NAMES", "country_names.json")
     COUNTRY_NAMES = read_json_config(_country_names_path)
+
+    @classmethod
+    def country_name_mapper(cls, country: str) -> str:
+        return cls.COUNTRY_NAMES.get(
+            country.strip().replace("-", " ").lower(), country
+        )
 
 
 class QSConfig(CrawlerConfig):

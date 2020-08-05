@@ -31,10 +31,6 @@ class CrawlerMixin(object):
         self.file_path = Path(self.DOWNLOAD_DIR) / self.file_name
         self.file_path.parent.mkdir(parents=True, exist_ok=True)
 
-    @classmethod
-    def country_name_mapper(cls, country: str) -> str:
-        return cls.COUNTRY_NAMES.get(country.strip().lower(), country)
-
     def crawl(self):
         for i in range(self.tries):
             try:
