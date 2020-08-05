@@ -12,11 +12,11 @@ from utils import text_process
 
 class THECrawler(CrawlerMixin, THEConfig):
     def __init__(self, url: str, **kwargs):
-        self.urls = [url]
+        self.url = url
         super().__init__(**kwargs)
 
     def _get_page(self):
-        page = requests.get(self.urls[0], headers=self.headers)
+        page = requests.get(self.url, headers=self.headers)
         json_url = re.findall(r"(https.*?\.json)", page.text)[0]
 
         self.json_url = json_url.replace("\\", "")
