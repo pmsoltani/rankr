@@ -33,7 +33,7 @@ class CrawlerMixin(object):
 
     @classmethod
     def country_name_mapper(cls, country: str) -> str:
-        return cls.COUNTRY_NAMES.get(country.lower(), country)
+        return cls.COUNTRY_NAMES.get(country.strip().lower(), country)
 
     def crawl(self):
         for i in range(self.tries):
