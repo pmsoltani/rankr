@@ -66,7 +66,7 @@ try:
             institution.types = [Type(**i) for i in type]
 
         db.add(institution)
-        pbar.update(1)
+        pbar.update()
     pbar.close()
 
     print("Committing results to the database...")
