@@ -32,7 +32,7 @@ def ranking_process(db: Session, file_path: str):
         link: Link = db.query(Link).filter(
             Link.link == inst_url, Link.type == link_type
         ).first()
-        if link and link.institution.country == inst_country:
+        if link and link.institution.country.country == inst_country:
             inst = link.institution
         elif inst_name in DBConfig.MATCHES:
             inst: Institution = db.query(Institution).filter(
@@ -40,28 +40,32 @@ def ranking_process(db: Session, file_path: str):
             ).first()
         else:
             inst: Institution = db.query(Institution).filter(
-                func.lower(Institution.name) == inst_name,
-                Institution.country == inst_country,
+                func.lower(Institution.name) == inst_name
             ).first()
-            if not inst:
+            if not inst or not inst.country.country == inst_country:
                 alias: Alias = db.query(Alias).filter(
                     func.lower(Alias.alias) == inst_name
                 ).first()
-                if alias and alias.institution.country == inst_country:
+                if alias and alias.institution.country.country == inst_country:
                     inst = alias.institution
                 else:
                     if inst_acronym:
                         acro: Acronym = db.query(Acronym).filter(
                             func.lower(Acronym.acronym) == inst_acronym
                         ).first()
-                        if acro and acro.institution.country == inst_country:
+                        if (
+                            acro
+                            and acro.institution.country.country == inst_country
+                        ):
                             inst = acro.institution
                         else:
                             inst: Institution = db.query(Institution).filter(
                                 func.lower(Institution.name) == inst_bare_name,
-                                Institution.country == inst_country,
                             ).first()
-                            if not inst:
+                            if (
+                                not inst
+                                or not inst.country.country == inst_country
+                            ):
                                 print("NOT FOUND:", inst_name)
 
         if inst:
