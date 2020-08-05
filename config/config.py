@@ -13,8 +13,8 @@ APP_ENV = env("APP_ENV", "development")
 
 
 def read_json_config(path: Path) -> List[dict]:
-    with io.open(path, "r", encoding="utf-8") as urls_file:
-        return json.loads(urls_file.read())
+    with io.open(path, "r", encoding="utf-8") as json_file:
+        return json.loads(json_file.read())
 
 
 class DBConfig(object):
@@ -35,16 +35,11 @@ class DBConfig(object):
     )
     GRID_DATABASE_DIR = Path.cwd().joinpath(*GRID_DATABASE_DIR)
 
-    RANKINGS: dict
     _rankings_file_path = env.path("RANKINGS_FILE_PATH", "rankings.json")
-    with io.open(_rankings_file_path, "r", encoding="utf-8") as json_file:
-        RANKINGS = json.loads(json_file.read())
+    RANKINGS: dict = read_json_config(_rankings_file_path)
 
-    MATCHES: dict = {}
     _matches_file_path = env.path("MATCHES_FILE_PATH", "matches.json")
-    if _matches_file_path:
-        with io.open(_matches_file_path, "r", encoding="utf-8") as json_file:
-            MATCHES = json.loads(json_file.read())
+    MATCHES: dict = read_json_config(_matches_file_path)
 
 
 class CrawlerConfig(object):
