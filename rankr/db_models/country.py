@@ -25,9 +25,7 @@ class Country(Base):
 
     def __init__(self, **kwargs):
         kwargs = {k: v for k, v in kwargs.items() if k in self.__table__.c}
-        kwargs["country"] = DBConfig.COUNTRY_NAMES.get(
-            kwargs["country"].strip().lower(), kwargs["country"]
-        )
+        kwargs["country"] = DBConfig.country_name_mapper(kwargs["country"])
         super().__init__(**kwargs)
 
     def __repr__(self) -> str:

@@ -44,6 +44,10 @@ class DBConfig(object):
     _country_names_path = env("COUNTRY_NAMES", "country_names.json")
     COUNTRY_NAMES = read_json_config(_country_names_path)
 
+    @classmethod
+    def country_name_mapper(cls, country):
+        return cls.COUNTRY_NAMES.get(country.strip().lower(), country)
+
 
 class CrawlerConfig(object):
     DATA_DIR = env("DATA_DIR", "data")
