@@ -101,7 +101,7 @@ class ShanghaiConfig(CrawlerConfig):
         "award": "Award",
         "hici": "HiCi",
         "n&s": "N&S",
-        "pub": "PUP",
+        "pub": "PUB",
         "pcp": "PCP",
         "cnci": "CNCI",
         "ic": "IC",
