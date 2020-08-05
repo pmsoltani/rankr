@@ -5,7 +5,7 @@
     "year": 2021,
     "field": "All",
     "subject": "All",
-    "url": "https://www.topuniversities.com/university-rankings/world-university-rankings/2021#indicator-tab",
+    "url": "https://www.topuniversities.com/university-rankings/world-university-rankings/2021",
     "crawl": true
   },
   {
@@ -14,7 +14,7 @@
     "year": 2020,
     "field": "All",
     "subject": "All",
-    "url": "https://www.topuniversities.com/university-rankings/world-university-rankings/2020#indicator-tab",
+    "url": "https://www.topuniversities.com/university-rankings/world-university-rankings/2020",
     "crawl": true
   },
   {
@@ -23,7 +23,7 @@
     "year": 2019,
     "field": "All",
     "subject": "All",
-    "url": "https://www.topuniversities.com/university-rankings/world-university-rankings/2019#indicator-tab",
+    "url": "https://www.topuniversities.com/university-rankings/world-university-rankings/2019",
     "crawl": true
   },
   {
@@ -32,7 +32,7 @@
     "year": 2018,
     "field": "All",
     "subject": "All",
-    "url": "https://www.topuniversities.com/university-rankings/world-university-rankings/2018#indicator-tab",
+    "url": "https://www.topuniversities.com/university-rankings/world-university-rankings/2018",
     "crawl": true
   },
   {
@@ -1950,6 +1950,1309 @@
     "field": "Social Sciences & Management",
     "subject": "Social Sciences & Management",
     "url": "https://www.topuniversities.com/university-rankings/university-subject-rankings/2017/social-sciences-management",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "university ranking",
+    "year": 2013,
+    "field": "All",
+    "subject": "All",
+    "url": "https://web.archive.org/web/20130816125811/http://www.topuniversities.com/university-rankings/world-university-rankings/2012",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "university ranking",
+    "year": 2014,
+    "field": "All",
+    "subject": "All",
+    "url": "https://web.archive.org/web/20141006225424/http://www.topuniversities.com/university-rankings/world-university-rankings/2013",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "university ranking",
+    "year": 2015,
+    "field": "All",
+    "subject": "All",
+    "url": "https://web.archive.org/web/20141007204915/http://www.topuniversities.com/university-rankings/world-university-rankings/2014",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "university ranking",
+    "year": 2016,
+    "field": "All",
+    "subject": "All",
+    "url": "https://web.archive.org/web/20151025235551/http://www.topuniversities.com/university-rankings/world-university-rankings/2015",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "university ranking",
+    "year": 2017,
+    "field": "All",
+    "subject": "All",
+    "url": "https://web.archive.org/web/20161214030716/http://www.topuniversities.com/university-rankings/world-university-rankings/2016",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Arts & Humanities",
+    "subject": "Philosophy",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/philosophy",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Arts & Humanities",
+    "subject": "Modern Languages",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/modern-languages",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Arts & Humanities",
+    "subject": "Geography",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/geography",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Arts & Humanities",
+    "subject": "History",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/history-and-archaeology",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Arts & Humanities",
+    "subject": "Linguistics",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/linguistics",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Arts & Humanities",
+    "subject": "English Language & Literature",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/english-language-and-literature",
+    "crawl": true
+  },
+
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Life Sciences & Medicine",
+    "subject": "Medicine",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/medicine",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Life Sciences & Medicine",
+    "subject": "Biological Sciences",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/biological-sciences",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Life Sciences & Medicine",
+    "subject": "Psychology",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/psychology",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Life Sciences & Medicine",
+    "subject": "Pharmacy & Pharmacology",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/pharmacy",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Life Sciences & Medicine",
+    "subject": "Agriculture & Forestry",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/agriculture-forestry",
+    "crawl": true
+  },
+
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Social Sciences",
+    "subject": "Statistics & Operational Research",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/statistics-and-operational-research",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Social Sciences",
+    "subject": "Sociology",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/sociology",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Social Sciences",
+    "subject": "Politics & International Studies",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/politics",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Social Sciences",
+    "subject": "Law",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/law-and-legal-studies",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Social Sciences",
+    "subject": "Economics & Econometrics",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/economics-and-econometrics",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Social Sciences",
+    "subject": "Accounting & Finance",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/accounting",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Social Sciences",
+    "subject": "Communication & Media Studies",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/communication-and-media-studies",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Social Sciences",
+    "subject": "Education",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/education-and-training",
+    "crawl": true
+  },
+
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Engineering & Technology",
+    "subject": "Computer Science & Information Systems",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/computer-science-and-information-systems",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Engineering & Technology",
+    "subject": "Chemical Engineering",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/engineering-chemical",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Engineering & Technology",
+    "subject": "CiviI & Structural Engineering",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/engineering-civil-and-structural",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Engineering & Technology",
+    "subject": "Electrical & Electronic Engineering",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/engineering-electrical-and-electronic",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Engineering & Technology",
+    "subject": "Mechanical, Aeronautical & Manufacturing Engineering",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/engineering-mechanical",
+    "crawl": true
+  },
+
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Natural Sciences",
+    "subject": "Physics & Astronomy",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/physics",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Natural Sciences",
+    "subject": "Mathematics",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/mathematics",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Natural Sciences",
+    "subject": "Environmental Sciences",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/environmental-studies",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Natural Sciences",
+    "subject": "Earth & Marine Sciences",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/earth-and-marine-sciences",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Natural Sciences",
+    "subject": "Chemistry",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/chemistry",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2013,
+    "field": "Natural Sciences",
+    "subject": "Materials Sciences",
+    "url": "https://web.archive.org/web/20130816103252/http://www.topuniversities.com/university-rankings/university-subject-rankings/2013/materials-sciences",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Arts & Humanities",
+    "subject": "Philosophy",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/philosophy",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Arts & Humanities",
+    "subject": "Modern Languages",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/modern-languages",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Arts & Humanities",
+    "subject": "History",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/history-archaeology",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Arts & Humanities",
+    "subject": "Linguistics",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/linguistics",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Arts & Humanities",
+    "subject": "English Language & Literature",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/english-language-literature",
+    "crawl": true
+  },
+
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Life Sciences & Medicine",
+    "subject": "Medicine",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/medicine",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Life Sciences & Medicine",
+    "subject": "Biological Sciences",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/biological-sciences",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Life Sciences & Medicine",
+    "subject": "Psychology",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/psychology",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Life Sciences & Medicine",
+    "subject": "Pharmacy & Pharmacology",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/pharmacy",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Life Sciences & Medicine",
+    "subject": "Agriculture & Forestry",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/agriculture-forestry",
+    "crawl": true
+  },
+
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Social Sciences",
+    "subject": "Statistics & Operational Research",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/statistics-operational-research",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Social Sciences",
+    "subject": "Sociology",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/sociology",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Social Sciences",
+    "subject": "Politics & International Studies",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/politics",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Social Sciences",
+    "subject": "Law",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/law-legal-studies",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Social Sciences",
+    "subject": "Economics & Econometrics",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/economics-econometrics",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Social Sciences",
+    "subject": "Accounting & Finance",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/accounting",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Social Sciences",
+    "subject": "Communication & Media Studies",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/communication-media-studies",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Social Sciences",
+    "subject": "Education",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/education-training",
+    "crawl": true
+  },
+
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Engineering & Technology",
+    "subject": "Computer Science & Information Systems",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/computer-science-information-systems",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Engineering & Technology",
+    "subject": "Chemical Engineering",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/engineering-chemical",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Engineering & Technology",
+    "subject": "CiviI & Structural Engineering",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/engineering-civil-structural",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Engineering & Technology",
+    "subject": "Electrical & Electronic Engineering",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/engineering-electrical-electronic",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Engineering & Technology",
+    "subject": "Mechanical, Aeronautical & Manufacturing Engineering",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/engineering-mechanical",
+    "crawl": true
+  },
+
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Natural Sciences",
+    "subject": "Physics & Astronomy",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/physics",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Natural Sciences",
+    "subject": "Mathematics",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/mathematics",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Natural Sciences",
+    "subject": "Environmental Sciences",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/environmental-studies",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Natural Sciences",
+    "subject": "Earth & Marine Sciences",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/earth-marine-sciences",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Natural Sciences",
+    "subject": "Chemistry",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/chemistry",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Natural Sciences",
+    "subject": "Materials Sciences",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/materials-sciences",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2014,
+    "field": "Natural Sciences",
+    "subject": "Geography",
+    "url": "https://web.archive.org/web/20141006083707/http://www.topuniversities.com/university-rankings/university-subject-rankings/2014/geography",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Arts & Humanities",
+    "subject": "Art & Design",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/art-design",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Arts & Humanities",
+    "subject": "English Language & Literature",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/english-language-literature",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Arts & Humanities",
+    "subject": "History",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/history-archaeology",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Arts & Humanities",
+    "subject": "Linguistics",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/linguistics",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Arts & Humanities",
+    "subject": "Modern Languages",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/modern-languages",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Arts & Humanities",
+    "subject": "Philosophy",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/philosophy",
+    "crawl": true
+  },
+
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Engineering & Technology",
+    "subject": "Architecture",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/architecture",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Engineering & Technology",
+    "subject": "Chemical Engineering",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/engineering-chemical",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Engineering & Technology",
+    "subject": "CiviI & Structural Engineering",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/engineering-civil-structural",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Engineering & Technology",
+    "subject": "Computer Science",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/computer-science-information-systems",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Engineering & Technology",
+    "subject": "Electrical & Electronic Engineering",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/engineering-electrical-electronic",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Engineering & Technology",
+    "subject": "Mechanical, Aeronautical & Manufacturing Engineering",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/engineering-mechanical",
+    "crawl": true
+  },
+
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Life Sciences & Medicine",
+    "subject": "Agriculture & Forestry",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/agriculture-forestry",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Life Sciences & Medicine",
+    "subject": "Biological Sciences",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/biological-sciences",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Life Sciences & Medicine",
+    "subject": "Dentistry",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/dentistry",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Life Sciences & Medicine",
+    "subject": "Medicine",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/medicine",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Life Sciences & Medicine",
+    "subject": "Pharmacy & Pharmacology",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/pharmacy-pharmacology",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Life Sciences & Medicine",
+    "subject": "Psychology",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/psychology",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Life Sciences & Medicine",
+    "subject": "Veterinary Science",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/veterinary-science",
+    "crawl": true
+  },
+
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Natural Sciences",
+    "subject": "Physics & Astronomy",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/physics",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Natural Sciences",
+    "subject": "Mathematics",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/mathematics",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Natural Sciences",
+    "subject": "Environmental Sciences",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/environmental-studies",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Natural Sciences",
+    "subject": "Earth & Marine Sciences",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/earth-marine-sciences",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Natural Sciences",
+    "subject": "Chemistry",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/chemistry",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Natural Sciences",
+    "subject": "Materials Sciences",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/materials-sciences",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Natural Sciences",
+    "subject": "Geography",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/geography",
+    "crawl": true
+  },
+
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Social Sciences",
+    "subject": "Accounting & Finance",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/accounting-finance",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Social Sciences",
+    "subject": "Business & Management",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/business-management-studies",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Social Sciences",
+    "subject": "Communication & Media Studies",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/communication-media-studies",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Social Sciences",
+    "subject": "Development Studies",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/development-studies",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Social Sciences",
+    "subject": "Economics & Econometrics",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/economics-econometrics",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Social Sciences",
+    "subject": "Education",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/education-training",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Social Sciences",
+    "subject": "Law",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/law-legal-studies",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Social Sciences",
+    "subject": "Politics & International Studies",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/politics",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Social Sciences",
+    "subject": "Sociology",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/sociology",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2015,
+    "field": "Social Sciences",
+    "subject": "Statistics",
+    "url": "https://web.archive.org/web/20151025212618/http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/statistics-operational-research",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Arts & Humanities",
+    "subject": "Archaeology",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/archaeology",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Arts & Humanities",
+    "subject": "Architecture",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/architecture",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Arts & Humanities",
+    "subject": "Art & Design",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/art-design",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Arts & Humanities",
+    "subject": "English Language & Literature",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/english-language-literature",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Arts & Humanities",
+    "subject": "History",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/history-archaeology",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Arts & Humanities",
+    "subject": "Linguistics",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/linguistics",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Arts & Humanities",
+    "subject": "Modern Languages",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/modern-languages",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Arts & Humanities",
+    "subject": "Performing Arts",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/performing-arts",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Arts & Humanities",
+    "subject": "Philosophy",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/philosophy",
+    "crawl": true
+  },
+
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Engineering & Technology",
+    "subject": "Chemical Engineering",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/engineering-chemical",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Engineering & Technology",
+    "subject": "CiviI & Structural Engineering",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/engineering-civil-structural",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Engineering & Technology",
+    "subject": "Computer Science",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/computer-science-information-systems",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Engineering & Technology",
+    "subject": "Electrical Engineering",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/engineering-electrical-electronic",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Engineering & Technology",
+    "subject": "Mechanical, Aeronautical & Manufacturing Engineering",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/engineering-mechanical",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Engineering & Technology",
+    "subject": "Mineral & Mining Engineering",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/engineering-mining",
+    "crawl": true
+  },
+
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Life Sciences & Medicine",
+    "subject": "Agriculture & Forestry",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/agriculture-forestry",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Life Sciences & Medicine",
+    "subject": "Biological Sciences",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/biological-sciences",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Life Sciences & Medicine",
+    "subject": "Dentistry",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/dentistry",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Life Sciences & Medicine",
+    "subject": "Medicine",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/medicine",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Life Sciences & Medicine",
+    "subject": "Nursing",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/nursing",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Life Sciences & Medicine",
+    "subject": "Pharmacy & Pharmacology",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/pharmacy-pharmacology",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Life Sciences & Medicine",
+    "subject": "Psychology",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/psychology",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Life Sciences & Medicine",
+    "subject": "Veterinary Science",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/veterinary-science",
+    "crawl": true
+  },
+
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Natural Sciences",
+    "subject": "Physics & Astronomy",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/physics-astronomy",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Natural Sciences",
+    "subject": "Mathematics",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/mathematics",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Natural Sciences",
+    "subject": "Environmental Sciences",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/environmental-studies",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Natural Sciences",
+    "subject": "Earth & Marine Sciences",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/earth-marine-sciences",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Natural Sciences",
+    "subject": "Chemistry",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/chemistry",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Natural Sciences",
+    "subject": "Materials Sciences",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/materials-sciences",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Natural Sciences",
+    "subject": "Geography",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/geography",
+    "crawl": true
+  },
+
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Social Sciences & Management",
+    "subject": "Accounting & Finance",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/accounting-finance",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Social Sciences & Management",
+    "subject": "Anthropology",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/anthropology",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Social Sciences & Management",
+    "subject": "Business & Management",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/business-management-studies",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Social Sciences & Management",
+    "subject": "Sociology",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/sociology",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Social Sciences & Management",
+    "subject": "Communication",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/communication-media-studies",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Social Sciences & Management",
+    "subject": "Politics",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/politics",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Social Sciences & Management",
+    "subject": "Education",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/education-training",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Social Sciences & Management",
+    "subject": "Development Studies",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/development-studies",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Social Sciences & Management",
+    "subject": "Statistics",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/statistics-operational-research",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Social Sciences & Management",
+    "subject": "Economics",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/economics-econometrics",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Social Sciences & Management",
+    "subject": "Law",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/law-legal-studies",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "subject ranking",
+    "year": 2016,
+    "field": "Social Sciences & Management",
+    "subject": "Social Policy",
+    "url": "https://web.archive.org/web/20161118212120/http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/social-policy",
     "crawl": true
   }
 ]
