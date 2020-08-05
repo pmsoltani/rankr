@@ -1,38 +1,24 @@
 from typing import List
 
 from sqlalchemy.orm import Session
-from sqlalchemy_utils import create_database, database_exists
 
 from config import DBConfig
 from rankr.db_models import (
     Acronym,
     Alias,
-    Base,
-    engine,
     SessionLocal,
     Institution,
     Link,
-    # Ranking,
     Type,
 )
 from utils import get_row, nullify, whole_csv
 
-
-if not database_exists(engine.url):
-    encoding = "utf8mb4" if DBConfig.DIALECT == "mysql" else "utf8"
-    create_database(engine.url, encoding=encoding)
-
-Base.metadata.create_all(engine)
-db: Session
-
-
-# institutions
 try:
     institution_attrs = [
         whole_csv(DBConfig.GRID_DATABASE_DIR / f"{attr}.csv", "grid_id")
         for attr in ["addresses", "acronyms", "aliases", "links", "types"]
     ]
-    db = SessionLocal()
+    db: Session = SessionLocal()
     rows = get_row(DBConfig.GRID_DATABASE_DIR / "institutes.csv")
     institutions_list: List[Institution] = []
     for row in rows:
