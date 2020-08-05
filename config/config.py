@@ -1,3 +1,4 @@
+import io
 import json
 from pathlib import Path
 from typing import List
@@ -12,7 +13,7 @@ APP_ENV = env("APP_ENV", "development")
 
 
 def read_json_config(path: Path) -> List[dict]:
-    with open(path, "r") as urls_file:
+    with io.open(path, "r", encoding="utf-8") as urls_file:
         return json.loads(urls_file.read())
 
 
@@ -36,13 +37,13 @@ class DBConfig(object):
 
     RANKINGS: dict
     _rankings_file_path = env.path("RANKINGS_FILE_PATH", "rankings.json")
-    with open(_rankings_file_path, "r") as json_file:
+    with io.open(_rankings_file_path, "r", encoding="utf-8") as json_file:
         RANKINGS = json.loads(json_file.read())
 
     MATCHES: dict = {}
     _matches_file_path = env.path("MATCHES_FILE_PATH", "matches.json")
     if _matches_file_path:
-        with open(_matches_file_path, "r") as json_file:
+        with io.open(_matches_file_path, "r", encoding="utf-8") as json_file:
             MATCHES = json.loads(json_file.read())
 
 
