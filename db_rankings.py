@@ -12,11 +12,10 @@ for system in ranking_systems:
     if not dir_path.exists():
         continue
 
-    files: List[Path] = sorted(list(dir_path.iterdir()))
+    files: List[Path] = sorted(
+        [f for f in dir_path.iterdir() if f.suffix == ".csv"]
+    )
     for cnt, file in enumerate(files, start=1):
-        if file.suffix != ".csv":
-            continue
-
         print(f"Processing file ({cnt}/{len(files)}): {file.stem}")
         try:
             db = SessionLocal()
