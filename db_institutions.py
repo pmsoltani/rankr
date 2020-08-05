@@ -11,11 +11,11 @@ from rankr.db_models import (
     Link,
     Type,
 )
-from utils import get_row, nullify, whole_csv
+from utils import get_csv, get_row, nullify
 
 try:
     institution_attrs = [
-        whole_csv(DBConfig.GRID_DATABASE_DIR / f"{attr}.csv", "grid_id")
+        get_csv(DBConfig.GRID_DATABASE_DIR / f"{attr}.csv", "grid_id")
         for attr in ["addresses", "acronyms", "aliases", "links", "types"]
     ]
     db: Session = SessionLocal()

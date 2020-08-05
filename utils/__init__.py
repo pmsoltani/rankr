@@ -4,4 +4,4 @@ from utils.nullify import nullify  # noqa
 from utils.ranking_process import ranking_process  # noqa
 from utils.text_process import text_process  # noqa
 from utils.value_process import value_process  # noqa
-from utils.whole_csv import whole_csv  # noqa
+from utils.get_csv import get_csv  # noqa

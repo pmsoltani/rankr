@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Dict, List
 
 
-def whole_csv(
+def get_csv(
     file_path: Path, key: str, encoding: str = "utf-8", delimiter: str = ","
 ) -> Dict[str, List[Dict[str, str]]]:
     output: Dict[str, List[Dict[str, str]]] = {}
