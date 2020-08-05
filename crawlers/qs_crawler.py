@@ -13,12 +13,14 @@ from utils import text_process
 
 class QSCrawler(CrawlerMixin, QSConfig):
     def __init__(self, url: str, **kwargs):
-        self.urls = [url]
+        self.url = url
         super().__init__(**kwargs)
 
     def _get_page(self):
-        page = requests.get(self.urls[0], headers=self.headers)
+        page = requests.get(self.url, headers=self.headers)
         link = page.headers["link"]
+        if 'web.archive.org'in self.url:
+            link = page.headers["X-Archive-Orig-Link"]
         node_number = re.findall(r".*?node/(.*?)>.*?", link)[0]
 
         json_url = (
@@ -64,10 +66,10 @@ class QSCrawler(CrawlerMixin, QSConfig):
                     values["URL"] = furl(QSConfig.BASE_URL).join(
                         value.find("a")["href"]
                     )
-                    values[columns[col]] = value.text
+                    values[columns[col]] = value.text.strip()
                     continue
 
-                values[columns[col]] = value.text
+                values[columns[col]] = value.text.strip()
 
             processed_data.append({**values, **self.ranking_info})
 
