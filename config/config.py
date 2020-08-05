@@ -41,6 +41,9 @@ class DBConfig(object):
     _matches_file_path = env.path("MATCHES_FILE_PATH", "matches.json")
     MATCHES: dict = read_json_config(_matches_file_path)
 
+    _country_names_path = env("COUNTRY_NAMES", "country_names.json")
+    COUNTRY_NAMES = read_json_config(_country_names_path)
+
 
 class CrawlerConfig(object):
     DATA_DIR = env("DATA_DIR", "data")
