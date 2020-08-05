@@ -19,7 +19,7 @@ class QSCrawler(CrawlerMixin, QSConfig):
     def _get_page(self):
         page = requests.get(self.url, headers=self.headers)
         link = page.headers["link"]
-        if 'web.archive.org'in self.url:
+        if "web.archive.org" in self.url:
             link = page.headers["X-Archive-Orig-Link"]
         node_number = re.findall(r".*?node/(.*?)>.*?", link)[0]
 
