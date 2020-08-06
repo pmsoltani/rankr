@@ -28,6 +28,8 @@ class CrawlerMixin(object):
         self.tries = tries
 
         self.file_name = "_".join(self.ranking_info.values()) + ".csv"
+        if "candidates" in self.url.lower():
+            self.file_name = self.file_name.replace(".csv", "_candidates.csv")
         self.file_path = Path(self.DOWNLOAD_DIR) / self.file_name
         self.file_path.parent.mkdir(parents=True, exist_ok=True)
 

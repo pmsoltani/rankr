@@ -43,6 +43,8 @@ class ShanghaiCrawler(CrawlerMixin, ShanghaiConfig):
 
         tbl = self.page.find("table", attrs={"id": "UniversityRanking"})
         tbl_headers = self._clean_headers([h.text for h in tbl.find_all("th")])
+        if not tbl.find_all("tr")[1].find("a"):
+            tbl_headers = [h for h in tbl_headers if h != "URL"]
 
         for row in tbl.find_all("tr"):
             values = []
@@ -61,6 +63,8 @@ class ShanghaiCrawler(CrawlerMixin, ShanghaiConfig):
 
             if values:
                 values = dict(zip(tbl_headers, [v.strip() for v in values]))
+                values["URL"] = values.get("URL") or None
+                values["Total Score"] = values.get("Total Score") or None
                 self.processed_data.append({**values, **self.ranking_info})
 
         if not tbl_headers or not self.processed_data:
