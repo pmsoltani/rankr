@@ -20,10 +20,28 @@
   {
     "ranking_system": "shanghai",
     "ranking_type": "university ranking",
+    "year": 2018,
+    "field": "All",
+    "subject": "All",
+    "url": "http://www.shanghairanking.com/ARWU2018Candidates.html",
+    "crawl": true
+  },
+  {
+    "ranking_system": "shanghai",
+    "ranking_type": "university ranking",
     "year": 2017,
     "field": "All",
     "subject": "All",
     "url": "http://www.shanghairanking.com/ARWU2017.html",
+    "crawl": true
+  },
+  {
+    "ranking_system": "shanghai",
+    "ranking_type": "university ranking",
+    "year": 2017,
+    "field": "All",
+    "subject": "All",
+    "url": "http://www.shanghairanking.com/ARWU2018Candidates.html",
     "crawl": true
   },
   {
