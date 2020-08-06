@@ -13,7 +13,7 @@ for system in ranking_systems:
         continue
 
     files: List[Path] = sorted(
-        [f for f in dir_path.iterdir() if f.suffix == ".csv"]
+        [f for f in dir_path.iterdir() if f.suffix == ".csv"], reverse=True
     )
     for cnt, file in enumerate(files, start=1):
         print(f"Processing file ({cnt}/{len(files)}): {file.stem}")

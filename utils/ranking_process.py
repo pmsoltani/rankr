@@ -71,7 +71,8 @@ def ranking_process(db: Session, file_path: str):
         if inst:
             ranking_metrics = metrics_process(row)
 
-            if link_type not in [link.type.name for link in inst.links]:
+            inst_link_types = [link.type.name for link in inst.links]
+            if link_type not in inst_link_types and inst_url:
                 inst.links.append(Link(type=link_type, link=inst_url))
             inst.rankings.extend(ranking_metrics)
             institutions_list.append(inst)
