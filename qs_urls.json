@@ -37,6 +37,51 @@
   },
   {
     "ranking_system": "qs",
+    "ranking_type": "university ranking",
+    "year": 2017,
+    "field": "All",
+    "subject": "All",
+    "url": "https://web.archive.org/web/20161214030716/http://www.topuniversities.com/university-rankings/world-university-rankings/2016",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "university ranking",
+    "year": 2016,
+    "field": "All",
+    "subject": "All",
+    "url": "https://web.archive.org/web/20151025235551/http://www.topuniversities.com/university-rankings/world-university-rankings/2015",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "university ranking",
+    "year": 2015,
+    "field": "All",
+    "subject": "All",
+    "url": "https://web.archive.org/web/20141007204915/http://www.topuniversities.com/university-rankings/world-university-rankings/2014",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "university ranking",
+    "year": 2014,
+    "field": "All",
+    "subject": "All",
+    "url": "https://web.archive.org/web/20141006225424/http://www.topuniversities.com/university-rankings/world-university-rankings/2013",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
+    "ranking_type": "university ranking",
+    "year": 2013,
+    "field": "All",
+    "subject": "All",
+    "url": "https://web.archive.org/web/20130816125811/http://www.topuniversities.com/university-rankings/world-university-rankings/2012",
+    "crawl": true
+  },
+  {
+    "ranking_system": "qs",
     "ranking_type": "subject ranking",
     "year": 2017,
     "field": "Arts & Humanities",
@@ -1950,51 +1995,6 @@
     "field": "Social Sciences & Management",
     "subject": "Social Sciences & Management",
     "url": "https://www.topuniversities.com/university-rankings/university-subject-rankings/2017/social-sciences-management",
-    "crawl": true
-  },
-  {
-    "ranking_system": "qs",
-    "ranking_type": "university ranking",
-    "year": 2013,
-    "field": "All",
-    "subject": "All",
-    "url": "https://web.archive.org/web/20130816125811/http://www.topuniversities.com/university-rankings/world-university-rankings/2012",
-    "crawl": true
-  },
-  {
-    "ranking_system": "qs",
-    "ranking_type": "university ranking",
-    "year": 2014,
-    "field": "All",
-    "subject": "All",
-    "url": "https://web.archive.org/web/20141006225424/http://www.topuniversities.com/university-rankings/world-university-rankings/2013",
-    "crawl": true
-  },
-  {
-    "ranking_system": "qs",
-    "ranking_type": "university ranking",
-    "year": 2015,
-    "field": "All",
-    "subject": "All",
-    "url": "https://web.archive.org/web/20141007204915/http://www.topuniversities.com/university-rankings/world-university-rankings/2014",
-    "crawl": true
-  },
-  {
-    "ranking_system": "qs",
-    "ranking_type": "university ranking",
-    "year": 2016,
-    "field": "All",
-    "subject": "All",
-    "url": "https://web.archive.org/web/20151025235551/http://www.topuniversities.com/university-rankings/world-university-rankings/2015",
-    "crawl": true
-  },
-  {
-    "ranking_system": "qs",
-    "ranking_type": "university ranking",
-    "year": 2017,
-    "field": "All",
-    "subject": "All",
-    "url": "https://web.archive.org/web/20161214030716/http://www.topuniversities.com/university-rankings/world-university-rankings/2016",
     "crawl": true
   },
   {
