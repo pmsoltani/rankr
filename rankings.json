@@ -3,9 +3,10 @@
   "ranking_types": ["university ranking", "subject ranking"],
   "non_metrics": [
     "url",
-    "university",
     "institution",
     "country",
+    "ranking system",
+    "ranking type",
     "year",
     "field",
     "subject"
@@ -21,13 +22,17 @@
     "N&S": { "name": "N&S Score", "type": "percent" },
     "PUB": { "name": "PUB Score", "type": "percent" },
     "PCP": { "name": "PCP Score", "type": "percent" },
+    "CNCI": { "name": "CNCI Score", "type": "percent" },
+    "IC": { "name": "IC Score", "type": "percent" },
+    "TOP": { "name": "TOP Score", "type": "percent" },
+    "Q1": { "name": "Q1 Score", "type": "percent" },
 
     "No. of FTE Students": {
       "name": "# FTE Students",
       "type": "integer"
     },
-    "No. of students per staff": {
-      "name": "# Students Per Staff",
+    "No. of Students per Staff": {
+      "name": "# Students per Staff",
       "type": "decimal"
     },
     "Internationl Students": {
@@ -63,8 +68,16 @@
       "name": "International Students Score",
       "type": "percent"
     },
-    "Citations Per Faculty": {
-      "name": "Citations Per Faculty Score",
+    "Citations per Faculty": {
+      "name": "Citations per Faculty Score",
+      "type": "percent"
+    },
+    "Citations per Paper": {
+      "name": "Citations per Paper Score",
+      "type": "percent"
+    },
+    "H-index Citations": {
+      "name": "H-index Citations Score",
       "type": "percent"
     }
   }

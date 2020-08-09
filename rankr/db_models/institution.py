@@ -1,6 +1,6 @@
 from typing import List, TYPE_CHECKING
 
-from sqlalchemy import Column
+from sqlalchemy import Column, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.types import Integer, String
 
@@ -9,6 +9,7 @@ from rankr.db_models.base import Base
 if TYPE_CHECKING:
     from rankr.db_models.acronym import Acronym
     from rankr.db_models.alias import Alias
+    from rankr.db_models.country import Country
     from rankr.db_models.link import Link
     from rankr.db_models.ranking import Ranking
     from rankr.db_models.type import Type
@@ -26,8 +27,7 @@ class Institution(Base):
     lng: str = Column(String(63))
     city: str = Column(String(63))
     state: str = Column(String(63))
-    country: str = Column(String(63))
-    country_code: str = Column(String(2))
+    country_id: int = Column(Integer, ForeignKey("country.id"))
 
     # Relationships
     acronyms: List["Acronym"] = relationship(
@@ -36,6 +36,7 @@ class Institution(Base):
     aliases: List["Alias"] = relationship(
         "Alias", back_populates="institution", cascade="all, delete-orphan"
     )
+    country: "Country" = relationship("Country", back_populates="institutions")
     links: List["Link"] = relationship(
         "Link", back_populates="institution", cascade="all, delete-orphan"
     )

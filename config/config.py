@@ -1,3 +1,4 @@
+import io
 import json
 from pathlib import Path
 from typing import List
@@ -11,7 +12,15 @@ env.read_env()
 APP_ENV = env("APP_ENV", "development")
 
 
+def read_json_config(path: Path) -> List[dict]:
+    with io.open(path, "r", encoding="utf-8") as json_file:
+        return json.loads(json_file.read())
+
+
 class DBConfig(object):
+    DATA_DIR = env("DATA_DIR", "data")
+    MAIN_DIR = Path.cwd() / DATA_DIR
+
     DIALECT = env("DIALECT")
     with env.prefixed(f"{DIALECT.upper()}_"):
         _DRIVER = env("DRIVER")
@@ -26,103 +35,113 @@ class DBConfig(object):
     )
     GRID_DATABASE_DIR = Path.cwd().joinpath(*GRID_DATABASE_DIR)
 
-    RANKINGS: dict
     _rankings_file_path = env.path("RANKINGS_FILE_PATH", "rankings.json")
-    with open(_rankings_file_path, "r") as json_file:
-        RANKINGS = json.loads(json_file.read())
+    RANKINGS: dict = read_json_config(_rankings_file_path)
 
-    MATCHES: dict = {}
     _matches_file_path = env.path("MATCHES_FILE_PATH", "matches.json")
-    if _matches_file_path:
-        with open(_matches_file_path, "r") as json_file:
-            MATCHES = json.loads(json_file.read())
+    MATCHES: dict = read_json_config(_matches_file_path)
+
+    _country_names_path = env("COUNTRY_NAMES", "country_names.json")
+    COUNTRY_NAMES = read_json_config(_country_names_path)
+
+    @classmethod
+    def country_name_mapper(cls, country: str) -> str:
+        return cls.COUNTRY_NAMES.get(
+            country.strip().replace("-", " ").lower(), country
+        )
 
 
-class BaseConfig(object):
+class CrawlerConfig(object):
     DATA_DIR = env("DATA_DIR", "data")
     MAIN_DIR = Path.cwd() / DATA_DIR
 
     USER_AGENT = env("USER_AGENT")
 
-    CRAWLER_ENGINE = env.list("CRAWLER_ENGINE", ["QS", "Shanghai", "THE"])
+    CRAWLER_ENGINE = env.list("CRAWLER_ENGINE", ["qs", "shanghai", "the"])
+    _country_names_path = env("COUNTRY_NAMES", "country_names.json")
+    COUNTRY_NAMES = read_json_config(_country_names_path)
 
     @classmethod
-    def get_urls(cls, path: Path) -> List[dict]:
-        with open(path, "r") as urls_file:
-            return json.loads(urls_file.read())
+    def country_name_mapper(cls, country: str) -> str:
+        return cls.COUNTRY_NAMES.get(
+            country.strip().replace("-", " ").lower(), country
+        )
 
 
-class QSConfig(BaseConfig):
-    headers = {"User-Agent": BaseConfig.USER_AGENT}
+class QSConfig(CrawlerConfig):
+    headers = {"User-Agent": CrawlerConfig.USER_AGENT}
     BASE_URL = env("QS_BASE")
     _raw_urls = env("QS_URLS_FILE", "qs_urls.json")
-    URLS = BaseConfig.get_urls(Path.cwd() / _raw_urls)
+    URLS = read_json_config(Path.cwd() / _raw_urls)
 
-    DOWNLOAD_DIR = BaseConfig.MAIN_DIR / "QS"
+    DOWNLOAD_DIR = CrawlerConfig.MAIN_DIR / "qs"
 
     FIELDS = {
-        "# RANK": "Rank",
-        "UNIVERSITY": "University",
-        "URL": "URL",
-        "LOCATION": "Country",
-        "OVERALL SCORE": "Overall Score",
-        "Academic Reputation": "Academic Reputation",
-        "Employer Reputation": "Employer Reputation",
-        "Faculty Student": "Faculty Student",
-        "International Faculty": "International Faculty",
-        "International Students": "International Students",
-        "Citations per Faculty": "Citations per Faculty",
+        "rank": "Rank",
+        "# rank": "Rank",
+        "university": "Institution",
+        "url": "URL",
+        "location": "Country",
+        "overall score": "Overall Score",
+        "academic reputation": "Academic Reputation",
+        "employer reputation": "Employer Reputation",
+        "faculty student": "Faculty Student",
+        "international faculty": "International Faculty",
+        "international students": "International Students",
+        "citations per faculty": "Citations per Faculty",
+        "h-index citations": "H-index Citations",
+        "citations per paper": "Citations per Paper",
     }
 
 
-class ShanghaiConfig(BaseConfig):
-    headers = {"User-Agent": BaseConfig.USER_AGENT}
+class ShanghaiConfig(CrawlerConfig):
+    headers = {"User-Agent": CrawlerConfig.USER_AGENT}
     BASE_URL = env("SHANGHAI_BASE")
     _raw_urls = env("SHANGHAI_URLS_FILE", "shanghai_urls.json")
-    URLS = BaseConfig.get_urls(Path.cwd() / _raw_urls)
+    URLS = read_json_config(Path.cwd() / _raw_urls)
 
-    DOWNLOAD_DIR = BaseConfig.MAIN_DIR / "Shanghai"
+    DOWNLOAD_DIR = CrawlerConfig.MAIN_DIR / "shanghai"
 
     FIELDS = {
-        "World Rank": "Rank",
-        "URL": "URL",
-        "Institution*": "University",
-        "Institution": "University",
-        "Country/Region": "Country",
-        "Country /Region": "Country",
-        "Country / Region": "Country",
-        "By location": "Country",
-        "National/RegionalRank": "National Rank",
-        "National/Regional Rank": "National Rank",
-        "Total Score": "Total Score",
+        "world rank": "Rank",
+        "url": "URL",
+        "national/regionalrank": "National Rank",
+        "national/regional rank": "National Rank",
+        "total score": "Total Score",
+        "alumni": "Alumni",
+        "award": "Award",
+        "hici": "HiCi",
+        "n&s": "N&S",
+        "pub": "PUB",
+        "pcp": "PCP",
+        "cnci": "CNCI",
+        "ic": "IC",
+        "top": "TOP",
+        "q1": "Q1",
     }
 
 
-class THEConfig(BaseConfig):
-    headers = {"User-Agent": BaseConfig.USER_AGENT}
+class THEConfig(CrawlerConfig):
+    headers = {"User-Agent": CrawlerConfig.USER_AGENT}
     BASE_URL = env("THE_BASE")
     _raw_urls = env("THE_URLS_FILE", "the_urls.json")
-    URLS = BaseConfig.get_urls(Path.cwd() / _raw_urls)
+    URLS = read_json_config(Path.cwd() / _raw_urls)
 
-    DOWNLOAD_DIR = BaseConfig.MAIN_DIR / "THE"
+    DOWNLOAD_DIR = CrawlerConfig.MAIN_DIR / "the"
 
     FIELDS = {
-        "Rank": "Rank",
-        "URL": "URL",
-        "Overall": "Overall",
-        "Teaching": "Teaching",
-        "Research": "Research",
-        "Citations": "Citations",
-        "Industry Income": "Industry Income",
-        "International Outlook": "International Outlook",
-        "No. of FTE Students": "No. of FTE Students",
-        "No. of students per staff": "No. of students per staff",
-        "International Students": "International Students",
-        "Female:Male Ratio": "Female:Male Ratio",
-        "Overall": "Overall",
-        "Teaching": "Teaching",
-        "Research": "Research",
-        "Citations": "Citations",
-        "Industry Income": "Industry Income",
-        "International Outlook": "International Outlook",
+        "rank": "Rank",
+        "name": "Institution",
+        "scores_overall": "Overall",
+        "scores_teaching": "Teaching",
+        "scores_research": "Research",
+        "scores_citations": "Citations",
+        "scores_industry_income": "Industry Income",
+        "scores_international_outlook": "International Outlook",
+        "url": "URL",
+        "location": "Country",
+        "stats_number_students": "No. of FTE Students",
+        "stats_student_staff_ratio": "No. of Students per Staff",
+        "stats_pc_intl_students": "International Students",
+        "stats_female_male_ratio": "Female:Male Ratio",
     }

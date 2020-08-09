@@ -9,14 +9,13 @@ def nullify(
     tuple), it will be changed (in-place) to None. This is so that the
     database receiving the values could stay clean.
 
-    Parameters:
+    Args:
         data (dict): the dictionary to be processed for its null values
         null_types (tuple): a tuple of values that resemble null
 
     Returns:
         None
     """
-
     for key in data:
         if data[key] in null_types:
             data[key] = None
