@@ -10,6 +10,7 @@ if TYPE_CHECKING:
     from rankr.db_models.acronym import Acronym
     from rankr.db_models.alias import Alias
     from rankr.db_models.country import Country
+    from rankr.db_models.label import Label
     from rankr.db_models.link import Link
     from rankr.db_models.ranking import Ranking
     from rankr.db_models.type import Type
@@ -37,6 +38,9 @@ class Institution(Base):
         "Alias", back_populates="institution", cascade="all, delete-orphan"
     )
     country: "Country" = relationship("Country", back_populates="institutions")
+    labels: List["Label"] = relationship(
+        "Label", back_populates="institution", cascade="all, delete-orphan"
+    )
     links: List["Link"] = relationship(
         "Link", back_populates="institution", cascade="all, delete-orphan"
     )
