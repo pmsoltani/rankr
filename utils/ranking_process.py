@@ -14,8 +14,7 @@ def ranking_process(db: Session, file_path: str):
     institutions_list = []
     for row in rows:
         nullify(row)
-        ranking_system = row["Ranking System"]
-        link_type = f"{ranking_system}_profile"
+        link_type = row["Ranking System"]
         inst_name = row["Institution"].lower()
         inst_country = row["Country"]
         inst_url = row["URL"]
