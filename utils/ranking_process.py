@@ -3,10 +3,11 @@ from typing import Dict, List, Tuple
 
 from sqlalchemy import func
 from sqlalchemy.orm import Session
+from tqdm import tqdm
 
 from config import DBConfig
 from rankr.db_models import Acronym, Alias, Country, Institution, Link
-from utils import get_row, metrics_process, nullify
+from utils import csv_size, get_row, metrics_process, nullify
 
 
 def ranking_process(
@@ -16,7 +17,11 @@ def ranking_process(
     not_mached_list = []
 
     rows = get_row(file_path)
+    row_count = csv_size(file_path)
+
+    pbar = tqdm(total=row_count)
     for row in rows:
+        pbar.update()
         nullify(row)
         link_type = row["Ranking System"]
         inst_name = row["Institution"].lower()
@@ -120,5 +125,7 @@ def ranking_process(
             inst.links.append(Link(type=link_type, link=inst_url))
         inst.rankings.extend(ranking_metrics)
         institutions_list.append(inst)
+
+    pbar.close()
 
     return (institutions_list, not_mached_list)
