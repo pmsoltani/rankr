@@ -7,14 +7,18 @@ from tqdm import tqdm
 
 from config import DBConfig
 from rankr.db_models import Acronym, Alias, Country, Institution, Link
-from utils import csv_size, get_row, metrics_process, nullify
+from utils import csv_size, fuzzy_matcher, get_row, metrics_process, nullify
 
 
 def ranking_process(
-    db: Session, file_path: str
+    db: Session, file_path: str, soup: dict
 ) -> Tuple[List[Institution], List[Dict[str, str]]]:
     institutions_list = []
     not_mached_list = []
+
+    # useful queries:
+    q1 = db.query(Institution)
+    q2 = q1.join(Institution.country)
 
     rows = get_row(file_path)
     row_count = csv_size(file_path)
@@ -28,7 +32,7 @@ def ranking_process(
         inst_country = row["Country"]
         if inst_country == "Hong Kong":
             # The GRID database lists institutions in 'Hong Kong' as Chinese
-            inst_country == "China"
+            inst_country = "China"
         inst_url = row["URL"]
         inst_acronym = re.search(r"\((.*?)\)$", inst_name)
         inst_bare_name = ""
@@ -41,63 +45,56 @@ def ranking_process(
             inst_bare_name = re.search(r"^(.*?)\(", inst_name)
             inst_bare_name = inst_bare_name.group(1).strip().lower()
 
-        inst = None
-
         # checking link with institution links
-        link: Link = db.query(Link).filter(
+        inst: Institution = q1.join(Institution.links).filter(
             Link.link == inst_url, Link.type == link_type
         ).first()
-        if link:
-            inst = link.institution
 
         # checking grid_id in manual matches
-        if not inst:
-            if DBConfig.MATCHES.get(inst_name):
-                inst: Institution = db.query(Institution).filter(
-                    Institution.grid_id == DBConfig.MATCHES[inst_name]
-                ).first()
+        if not inst and DBConfig.MATCHES.get(inst_name):
+            inst: Institution = q1.filter(
+                Institution.grid_id == DBConfig.MATCHES[inst_name]
+            ).first()
 
         # checking name with institution name
         if not inst:
-            inst: Institution = db.query(Institution).join(
-                Institution.country
-            ).filter(
+            inst: Institution = q2.filter(
                 func.lower(Institution.name) == inst_name,
                 Country.country == inst_country,
             ).first()
 
+        if not inst:
+            inst_grid_id = fuzzy_matcher(inst_name, inst_country, soup)
+            if inst_grid_id:
+                inst: Institution = q1.filter(
+                    Institution.grid_id == inst_grid_id
+                ).first()
+                print(inst.name, "|", inst_name)
+
         # checking name with institution acronyms
         if not inst:
-            inst: Institution = db.query(Institution).join(
-                Institution.country
-            ).join(Institution.acronyms).filter(
+            inst: Institution = q2.join(Institution.acronyms).filter(
                 func.lower(Acronym.acronym) == inst_name,
                 Country.country == inst_country,
             ).first()
 
         # checking name with institution aliases
         if not inst:
-            inst: Institution = db.query(Institution).join(
-                Institution.country
-            ).join(Institution.aliases).filter(
+            inst: Institution = q2.join(Institution.aliases).filter(
                 func.lower(Alias.alias) == inst_name,
                 Country.country == inst_country,
             ).first()
 
         # checking acronyms with institution acronyms
         if not inst and inst_acronym:
-            inst: Institution = db.query(Institution).join(
-                Institution.country
-            ).join(Institution.acronyms).filter(
+            inst: Institution = q2.join(Institution.acronyms).filter(
                 func.lower(Acronym.acronym) == inst_acronym,
                 Country.country == inst_country,
             ).first()
 
         # checking bare name with institution name
         if not inst and inst_bare_name:
-            inst: Institution = db.query(Institution).join(
-                Institution.country
-            ).filter(
+            inst: Institution = q2.filter(
                 func.lower(Institution.name) == inst_bare_name,
                 Country.country == inst_country,
             ).first()
@@ -106,15 +103,8 @@ def ranking_process(
         if not inst or inst in institutions_list:
             not_mached_list.append(
                 {
-                    "Institution": inst_name,
-                    "Country": inst_country,
+                    **row,
                     "Problem": "Not Matched" if not inst else "Double Matched",
-                    "URL": inst_url,
-                    "Ranking System": row["Ranking System"],
-                    "Ranking Type": row["Ranking Type"],
-                    "Year": row["Year"],
-                    "Field": row["Field"],
-                    "Subject": row["Subject"],
                 }
             )
             continue
