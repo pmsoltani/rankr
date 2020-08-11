@@ -12,8 +12,8 @@ def fuzzy_matcher(
         scorer=fuzz.token_set_ratio,
         score_cutoff=score_cutoff,
     )
-    if inst_grid_id:
-        return soup[inst_country][inst_grid_id[0]]
 
-    # not a good enough match found
-    return None
+    try:
+        return soup[inst_country][inst_grid_id[0]]
+    except TypeError:  # not a good enough match found
+        return None
