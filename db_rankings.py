@@ -32,12 +32,13 @@ for system in ranking_systems:
         try:
             db = SessionLocal()
             size = csv_size(file)
-            institutions_list, not_mached_list = ranking_process(db, file, soup)
+            institutions_list, not_mached_list, fuzz_list = ranking_process(
+                db, file, soup
+            )
             if len(institutions_list) + len(not_mached_list) != size:
                 raise ValueError("Some institutions may have been lost!")
             not_mached.extend(not_mached_list)
             if institutions_list:
-                pass
                 db.add_all(institutions_list)
                 db.commit()
         except ValueError as exc:
@@ -48,3 +49,7 @@ for system in ranking_systems:
 if not_mached:
     csv_export(DBConfig.MAIN_DIR / "not_mached.csv", not_mached)
     print(f"Saved the list of {len(not_mached)} not matched institutions.")
+
+if fuzz_list:
+    csv_export(DBConfig.MAIN_DIR / "fuzz_list.csv", fuzz_list)
+    print(f"Saved the list of {len(fuzz_list)} fuzzy-matched institutions.")

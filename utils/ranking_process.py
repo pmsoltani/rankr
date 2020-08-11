@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from tqdm import tqdm
 
 from config import DBConfig
-from rankr.db_models import Acronym, Alias, Country, Institution, Link
+from rankr.db_models import Country, Institution, Link
 from utils import csv_size, fuzzy_matcher, get_row, metrics_process, nullify
 
 
@@ -15,6 +15,7 @@ def ranking_process(
 ) -> Tuple[List[Institution], List[Dict[str, str]]]:
     institutions_list = []
     not_mached_list = []
+    fuzz_list = []
 
     # useful queries:
     q1 = db.query(Institution)
@@ -30,9 +31,6 @@ def ranking_process(
         link_type = row["Ranking System"]
         inst_name = row["Institution"].lower()
         inst_country = row["Country"]
-        if inst_country == "Hong Kong":
-            # The GRID database lists institutions in 'Hong Kong' as Chinese
-            inst_country = "China"
         inst_url = row["URL"]
         inst_acronym = re.search(r"\((.*?)\)$", inst_name)
         inst_bare_name = ""
@@ -44,6 +42,16 @@ def ranking_process(
             # "universiti malaya (um)" -> "universiti malaya"
             inst_bare_name = re.search(r"^(.*?)\(", inst_name)
             inst_bare_name = inst_bare_name.group(1).strip().lower()
+        inst_info = {
+            "Raw": inst_name,
+            "Country": inst_country,
+            "URL": inst_url,
+            "Ranking System": row["Ranking System"],
+            "Ranking Type": row["Ranking Type"],
+            "Year": row["Year"],
+            "Field": row["Field"],
+            "Subject": row["Subject"],
+        }
 
         # checking link with institution links
         inst: Institution = q1.join(Institution.links).filter(
@@ -63,48 +71,23 @@ def ranking_process(
                 Country.country == inst_country,
             ).first()
 
+        # fuzzy-mataching of strings
         if not inst:
             inst_grid_id = fuzzy_matcher(inst_name, inst_country, soup)
             if inst_grid_id:
                 inst: Institution = q1.filter(
                     Institution.grid_id == inst_grid_id
                 ).first()
-                print(inst.name, "|", inst_name)
-
-        # checking name with institution acronyms
-        if not inst:
-            inst: Institution = q2.join(Institution.acronyms).filter(
-                func.lower(Acronym.acronym) == inst_name,
-                Country.country == inst_country,
-            ).first()
-
-        # checking name with institution aliases
-        if not inst:
-            inst: Institution = q2.join(Institution.aliases).filter(
-                func.lower(Alias.alias) == inst_name,
-                Country.country == inst_country,
-            ).first()
-
-        # checking acronyms with institution acronyms
-        if not inst and inst_acronym:
-            inst: Institution = q2.join(Institution.acronyms).filter(
-                func.lower(Acronym.acronym) == inst_acronym,
-                Country.country == inst_country,
-            ).first()
-
-        # checking bare name with institution name
-        if not inst and inst_bare_name:
-            inst: Institution = q2.filter(
-                func.lower(Institution.name) == inst_bare_name,
-                Country.country == inst_country,
-            ).first()
+                fuzz_list.append(
+                    {"Fuzzy": inst.name, "GRID ID": inst_grid_id, **inst_info}
+                )
 
         # could not match, or matched before (with another institution)
         if not inst or inst in institutions_list:
             not_mached_list.append(
                 {
-                    **row,
                     "Problem": "Not Matched" if not inst else "Double Matched",
+                    **inst_info,
                 }
             )
             continue
@@ -118,4 +101,4 @@ def ranking_process(
 
     pbar.close()
 
-    return (institutions_list, not_mached_list)
+    return (institutions_list, not_mached_list, fuzz_list)
