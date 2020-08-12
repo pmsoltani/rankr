@@ -1,5 +1,7 @@
 {
-  "Argentina": { "universidad de palermo (up)": "grid.441624.1" },
+  "Argentina": {
+    "universidad de palermo (up)": "grid.441624.1"
+  },
   "Australia": {
     "central queensland university (cquniversity australia)": "grid.1023.0",
     "the university of new south wales (unsw sydney)": "grid.1005.4",
@@ -9,7 +11,9 @@
   "Austria": {
     "wu (vienna university of economics and business)": "grid.15788.33"
   },
-  "Belgium": { "université catholique de louvain (uclouvain)": "grid.7942.8" },
+  "Belgium": {
+    "université catholique de louvain (uclouvain)": "grid.7942.8"
+  },
   "Brazil": {
     "pontifical catholic university of rio de janeiro (puc-rio)": "grid.4839.6",
     "federal university of ceará (ufc)": "grid.8395.7",
@@ -53,7 +57,9 @@
   "Ecuador": {
     "universidad técnica federico santa maría (usm)": "grid.472425.2"
   },
-  "Estonia": { "tallinn university of technology (taltech)": "grid.6988.f" },
+  "Estonia": {
+    "tallinn university of technology (taltech)": "grid.6988.f"
+  },
   "Ethiopia": {
     "samara national research university (samara university)": "grid.459905.4"
   },
@@ -73,7 +79,9 @@
     "université de technologie de compiègne (utc)": "grid.6227.1",
     "ecole polytechnique": "grid.10877.39"
   },
-  "Germany": { "technische universität berlin (tu berlin)": "grid.6734.6" },
+  "Germany": {
+    "technische universität berlin (tu berlin)": "grid.6734.6"
+  },
   "India": {
     "indian institute of technology kharagpur (iit-kgp)": "grid.429017.9",
     "symbiosis international (deemed university)": "grid.444681.b",
@@ -88,8 +96,12 @@
     "institut teknologi sepuluh nopember (its)": "grid.444380.f",
     "universitas indonesia": "grid.9581.5"
   },
-  "Iran": { "shahid beheshti university (sbu)": "grid.412502.0" },
-  "Italy": { "university of bari": "grid.7644.1" },
+  "Iran": {
+    "shahid beheshti university (sbu)": "grid.412502.0"
+  },
+  "Italy": {
+    "university of bari": "grid.7644.1"
+  },
   "Japan": {
     "tokyo medical and dental university (tmdu)": "grid.265073.5",
     "kyushu institute of technology (kyutech)": "grid.258806.1",
@@ -98,7 +110,9 @@
     "tokyo institute of technology (tokyo tech)": "grid.32197.3e",
     "the university of tokyo": "grid.26999.3d"
   },
-  "Macao": { "macao institute for tourism studies (iftm)": "grid.445016.2" },
+  "Macao": {
+    "macao institute for tourism studies (iftm)": "grid.445016.2"
+  },
   "Malaysia": {
     "multimedia university (mmu)": "grid.411865.f",
     "universiti kebangsaan malaysia (ukm)": "grid.412113.4",
@@ -112,8 +126,12 @@
     "universidad de guadalajara (udg)": "grid.412890.6",
     "universidad panamericana (up)": "grid.412242.3"
   },
-  "Panama": { "universidad tecnológica de panamá (utp)": "grid.441509.d" },
-  "Philippines": { "university of the philippines": "grid.443239.b" },
+  "Panama": {
+    "universidad tecnológica de panamá (utp)": "grid.441509.d"
+  },
+  "Philippines": {
+    "university of the philippines": "grid.443239.b"
+  },
   "Poland": {
     "cracow university of technology (politechnika krakowska)": "grid.22555.35",
     "warsaw university of life sciences – sggw (wuls-sggw)": "grid.13276.31",
@@ -156,7 +174,9 @@
     "national taiwan university (ntu)": "grid.19188.39",
     "taipei medical university (tmu)": "grid.412896.0"
   },
-  "Turkey": { "izmir institute of technology (iztech)": "grid.419609.3" },
+  "Turkey": {
+    "izmir institute of technology (iztech)": "grid.419609.3"
+  },
   "Ukraine": {
     "tchaikovsky national academy of music (kiev conservatory)": "grid.445747.1"
   },
@@ -181,7 +201,9 @@
     "universidad católica del uruguay (ucu)": "grid.442041.7",
     "universidad de montevideo (um)": "grid.442043.5"
   },
-  "Venezuela": { "universidad simón bolívar (usb)": "grid.412358.9" },
+  "Venezuela": {
+    "universidad simón bolívar (usb)": "grid.412358.9"
+  },
   "Viet Nam": {
     "vietnam national university (ho chi minh city)": "grid.444808.4",
     "viet nam national university ho chi minh city (vnu-hcm)": "grid.444808.4"
