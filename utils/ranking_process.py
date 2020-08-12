@@ -59,9 +59,9 @@ def ranking_process(
         ).first()
 
         # checking grid_id in manual matches
-        if not inst and DBConfig.MATCHES.get(inst_name):
+        if not inst and DBConfig.MATCHES.get(inst_country).get(inst_name):
             inst: Institution = q1.filter(
-                Institution.grid_id == DBConfig.MATCHES[inst_name]
+                Institution.grid_id == DBConfig.MATCHES[inst_country][inst_name]
             ).first()
 
         # checking name with institution name
