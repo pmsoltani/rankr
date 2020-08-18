@@ -49,9 +49,12 @@ class DBConfig(object):
 
     @classmethod
     def country_name_mapper(cls, country: str) -> str:
-        return cls.COUNTRY_NAMES.get(
-            country.strip().replace("-", " ").lower(), country
-        )
+        try:
+            return cls.COUNTRY_NAMES.get(
+                country.strip().replace("-", " ").lower(), country
+            )
+        except AttributeError:  # country is None
+            return country
 
 
 class CrawlerConfig(object):
