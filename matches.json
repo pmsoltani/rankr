@@ -18,6 +18,8 @@
     "université catholique de louvain (uclouvain)": "grid.7942.8"
   },
   "Brazil": {
+    "university of sao paulo": "grid.11899.38",
+    "federal university of sao paulo": "grid.411249.b",
     "pontifical catholic university of rio de janeiro (puc-rio)": "grid.4839.6",
     "federal university of ceará (ufc)": "grid.8395.7",
     "universidade estadual de campinas (unicamp)": "grid.411087.b",
@@ -38,9 +40,12 @@
   },
   "China": {
     "china medical university (shenyang)": "grid.412449.e",
+    "china university of geosciences beijing": "grid.162107.3",
     "china university of geosciences (beijing)": "grid.162107.3",
+    "china university of geosciences, wuhan": "grid.503241.1",
     "china university of geosciences (wuhan)": "grid.503241.1",
     "china university of petroleum (huadong)": "grid.497420.c",
+    "the university of hong kong": "grid.194645.b",
     "northeastern university (shenyang)": "grid.412252.2",
     "soochow university (china)": "grid.263761.7",
     "beihang university (former buaa)": "grid.64939.31",
@@ -53,6 +58,10 @@
   "Colombia": {
     "university of los andes (colombia)": "grid.7247.6",
     "industrial university of santander (uis)": "grid.411595.d"
+  },
+  "Costa Rica": {
+    "universidad de costa rica": "grid.412889.e",
+    "universidad nacional costa rica": "grid.10729.3d"
   },
   "Czechia": {
     "czech university of life sciences prague (culs)": "grid.15866.3c"
@@ -83,7 +92,11 @@
     "ecole polytechnique": "grid.10877.39"
   },
   "Germany": {
-    "technische universität berlin (tu berlin)": "grid.6734.6"
+    "hamburg university of technology": "grid.6884.2",
+    "university of hamburg": "grid.9026.d",
+    "technische universität berlin (tu berlin)": "grid.6734.6",
+    "university of munich": "grid.5252.0",
+    "technical university munich": "grid.6936.a"
   },
   "India": {
     "indian institute of technology kharagpur (iit-kgp)": "grid.429017.9",
@@ -103,7 +116,9 @@
     "shahid beheshti university (sbu)": "grid.412502.0"
   },
   "Italy": {
-    "university of bari": "grid.7644.1"
+    "university of bari": "grid.7644.1",
+    "university of milan": "grid.4708.b",
+    "university of milan - bicocca": "grid.7563.7"
   },
   "Japan": {
     "tokyo medical and dental university (tmdu)": "grid.265073.5",
@@ -121,6 +136,7 @@
     "universiti kebangsaan malaysia (ukm)": "grid.412113.4",
     "universiti malaya (um)": "grid.10347.31",
     "universiti putra malaysia (upm)": "grid.11142.37",
+    "universiti utara malaysia": "grid.462999.9",
     "universiti teknologi petronas (utp)": "grid.444487.f"
   },
   "Mexico": {
@@ -184,9 +200,14 @@
     "tchaikovsky national academy of music (kiev conservatory)": "grid.445747.1"
   },
   "United Kingdom": {
-    "the university of edinburgh": "grid.4305.2"
+    "university of manchester institute of science and technology": "grid.5379.8",
+    "queen's university belfast": "grid.4777.3",
+    "the university of edinburgh": "grid.4305.2",
+    "the university of manchester": "grid.5379.8"
   },
   "United States": {
+    "the new school": "grid.264933.9",
+    "city university of new york city college": "grid.254250.4",
     "northeastern university (boston)": "grid.261112.7",
     "university at albany (state university of new york)": "grid.265850.c",
     "ohio university (main campus)": "grid.20627.31",
