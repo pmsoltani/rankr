@@ -1,3 +1,4 @@
+import re
 from typing import Optional
 
 from fuzzywuzzy import fuzz, process
@@ -9,8 +10,10 @@ def fuzzy_matcher(
     if not inst_country:
         return None
 
+    inst_name = re.sub(r"^the\s", "", inst_name.lower(), count=1)
+
     inst_grid_id = process.extractOne(
-        query=inst_name.lower(),
+        query=inst_name,
         choices=soup[inst_country].keys(),
         scorer=fuzz.token_set_ratio,
         score_cutoff=score_cutoff,
