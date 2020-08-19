@@ -2,7 +2,16 @@
   "": {
     "university of dar es salaam": "grid.8193.3"
   },
+  "Algeria": {
+    "ferhat abbas sétif university 1": "grid.411305.2",
+    "m'hamed bougara university of boumerdès": "grid.442417.0",
+    "university of science and technology of oran mohamed-boudiaf": "grid.442511.7",
+    "university of tlemcen": "grid.12319.38"
+  },
   "Argentina": {
+    "universidad nacional de tucumà¡n": "grid.108162.c",
+    "national university of cordoba": "grid.10692.3c",
+    "national university of the south": "grid.412236.0",
     "universidad de palermo (up)": "grid.441624.1"
   },
   "Australia": {
@@ -12,62 +21,116 @@
     "the university of sydney": "grid.1013.3"
   },
   "Austria": {
+    "karl-franzens-universitaet graz": "grid.5110.5",
+    "medical university of innsbruck": "grid.5361.1",
+    "university of natural resources and applied life sciences vienna": "grid.5173.0",
     "wu (vienna university of economics and business)": "grid.15788.33"
   },
+  "Bahrain": {
+    "applied science university of bahrain": "grid.449049.4"
+  },
+  "Bangladesh": {
+    "chittagong university of engineering and technology": "grid.442957.9"
+  },
   "Belgium": {
-    "université catholique de louvain (uclouvain)": "grid.7942.8"
+    "universite libre de bruxelles": "grid.4989.c",
+    "university libre bruxelles": "grid.4989.c",
+    "university of liege": "grid.4861.b",
+    "université catholique de louvain (uclouvain)": "grid.7942.8",
+    "vrije university brussel": "grid.8767.e"
+  },
+  "Bolivia": {
+    "universidad católica boliviana": "grid.440533.5"
   },
   "Brazil": {
-    "university of sao paulo": "grid.11899.38",
+    "federal rural university of the semi-arid region": "grid.412393.e",
+    "federal university of ceara": "grid.8395.7",
+    "federal university of ceará (ufc)": "grid.8395.7",
+    "federal university of parana": "grid.20736.30",
+    "federal university of sao carlos": "grid.411247.5",
     "federal university of sao paulo": "grid.411249.b",
     "pontifical catholic university of rio de janeiro (puc-rio)": "grid.4839.6",
-    "federal university of ceará (ufc)": "grid.8395.7",
+    "são paulo state university (unesp)": "grid.410543.7",
+    "unisinos university": "grid.412302.6",
     "universidade estadual de campinas (unicamp)": "grid.411087.b",
+    "universidade federal de ciências da saúde de porto alegre - ufcspa (federal university of health sciences of porto alegre)": "grid.412344.4",
     "universidade federal do ceará (ufc)": "grid.8395.7",
-    "universidade federal de ciências da saúde de porto alegre - ufcspa (federal university of health sciences of porto alegre)": "grid.412344.4"
+    "university of fortaleza (unifor)": "grid.412275.7",
+    "university of sao paulo": "grid.11899.38"
+  },
+  "Brunei": {
+    "universiti teknologi brunei": "grid.454314.3"
   },
   "Canada": {
-    "western university (the university of western ontario)": "grid.39381.30",
-    "university of victoria (uvic)": "grid.143640.4"
+    "university of victoria (uvic)": "grid.143640.4",
+    "western university (the university of western ontario)": "grid.39381.30"
   },
   "Chile": {
-    "university of santiago, chile (usach)": "grid.412179.8",
     "andrés bello university (unab)": "grid.412848.3",
+    "pontifical catholic university of valparaíso": "grid.8170.e",
     "pontificia universidad católica de chile (uc)": "grid.7870.8",
+    "universidad de chile": "grid.443909.3",
     "universidad de santiago de chile (usach)": "grid.412179.8",
     "universidad de valparaíso (uv)": "grid.412185.b",
-    "universidad de chile": "grid.443909.3"
+    "universidad del bio-bio": "grid.440633.6",
+    "universidad técnica federico santa maría (usm)": "grid.12148.3e",
+    "university of concepcion": "grid.5380.e",
+    "university of desarrollo": "grid.412187.9",
+    "university of santiago, chile (usach)": "grid.412179.8"
   },
   "China": {
-    "china medical university (shenyang)": "grid.412449.e",
-    "china university of geosciences beijing": "grid.162107.3",
-    "china university of geosciences (beijing)": "grid.162107.3",
-    "china university of geosciences, wuhan": "grid.503241.1",
-    "china university of geosciences (wuhan)": "grid.503241.1",
-    "china university of petroleum (huadong)": "grid.497420.c",
-    "the university of hong kong": "grid.194645.b",
-    "northeastern university (shenyang)": "grid.412252.2",
-    "soochow university (china)": "grid.263761.7",
+    "army medical university": "grid.410570.7",
     "beihang university (former buaa)": "grid.64939.31",
+    "capital university of medical sciences": "grid.24696.3f",
+    "china medical university (shenyang)": "grid.412449.e",
+    "china university of geosciences (beijing)": "grid.162107.3",
+    "china university of geosciences (wuhan)": "grid.503241.1",
+    "china university of geosciences beijing": "grid.162107.3",
+    "china university of geosciences wuhan": "grid.503241.1",
+    "china university of geosciences, beijing": "grid.162107.3",
+    "china university of geosciences, wuhan": "grid.503241.1",
+    "china university of mining and technology - xuzhou": "grid.411510.0",
+    "china university of petroleum (huadong)": "grid.497420.c",
     "jinan university (china)": "grid.258164.c",
-    "northwest university (china)": "grid.412262.1",
-    "the chinese university of hong kong (cuhk)": "grid.10784.3a",
+    "lingnan university, hong kong": "grid.411382.d",
+    "military medical university of the air force": "grid.233520.5",
+    "nanjing tech university": "grid.412022.7",
+    "naval medical university": "grid.73113.37",
     "northeastern university (china)": "grid.412252.2",
-    "northeastern university(china)": "grid.412252.2"
+    "northeastern university (shenyang)": "grid.412252.2",
+    "northeastern university(china)": "grid.412252.2",
+    "northwest university (china)": "grid.412262.1",
+    "peking union medical college": "grid.506261.6",
+    "soochow university (china)": "grid.263761.7",
+    "the chinese university of hong kong": "grid.10784.3a",
+    "the chinese university of hong kong (cuhk)": "grid.10784.3a",
+    "the university of hong kong": "grid.194645.b'"
   },
   "Colombia": {
+    "del rosario university": "grid.412191.e",
+    "industrial university of santander (uis)": "grid.411595.d",
+    "pontifical bolivarian university (upb) – medellín": "grid.412249.8",
+    "universidad católica de colombia": "grid.442151.7",
     "university of los andes (colombia)": "grid.7247.6",
-    "industrial university of santander (uis)": "grid.411595.d"
+    "university of the andes, colombia": "grid.7247.6",
+    "university of the north, colombia": "grid.412188.6"
   },
   "Costa Rica": {
     "universidad de costa rica": "grid.412889.e",
     "universidad nacional costa rica": "grid.10729.3d"
   },
   "Czechia": {
-    "czech university of life sciences prague (culs)": "grid.15866.3c"
+    "academy of sciences of the czech republic": "grid.418095.1",
+    "czech university of life sciences prague (culs)": "grid.15866.3c",
+    "mendel university in brno": "grid.7112.5",
+    "vsb - technical university of ostrava": "grid.440850.d"
   },
   "Ecuador": {
+    "universidad de las fuerzas armadas espe (ex - escuela politécnica del ejército)": "grid.442254.1",
     "universidad técnica federico santa maría (usm)": "grid.472425.2"
+  },
+  "Egypt": {
+    "benha university": "grid.411660.4"
   },
   "Estonia": {
     "tallinn university of technology (taltech)": "grid.6988.f"
@@ -76,163 +139,467 @@
     "samara national research university (samara university)": "grid.459905.4"
   },
   "Finland": {
+    "abo akad university": "grid.13797.3b",
+    "abo akademi university": "grid.13797.3b",
+    "lappeenranta-lahti university of technology lut": "grid.12332.31",
     "sibelius academy, university of the arts helsinki (uniarts helsinki)": "grid.445610.2",
+    "university of jyvaskyla": "grid.9681.6",
     "university of tampere": "grid.502801.e"
   },
   "France": {
+    "agroparistech": "grid.417885.7",
+    "blaise pascal university": "grid.494717.8",
+    "centralesupelec": "grid.494567.d",
+    "college of france": "grid.410533.0",
+    "ecole des hautes etudes en sciences sociales": "grid.17673.34",
+    "ecole des ponts paristech": "grid.424447.5",
+    "ecole national superieure mines - paris": "grid.58140.38",
+    "ecole normale super cachan": "grid.6390.c",
+    "ecole normale superieure - lyon": "grid.15140.31",
+    "ecole normale superieure - paris": "grid.5607.4",
+    "ecole normale supérieure, paris": "grid.5607.4",
+    "ecole polytechnique": "grid.10877.39",
+    "escp business school - paris": "grid.462233.2",
+    "espci paristech": "grid.15736.36",
+    "espci, paristech": "grid.15736.36",
     "joseph fourier university (grenoble 1)": "grid.9621.c",
+    "lille 1 university – science and technology": "grid.503422.2",
+    "national institute of applied sciences of lyon (insa lyon)": "grid.15399.37",
+    "normandy university": "grid.460771.3",
     "paris dauphine university (paris 9)": "grid.11024.36",
+    "paris descartes university": "grid.508487.6",
     "paul sabatier university (toulouse 3)": "grid.15781.3a",
+    "paul valéry university montpellier": "grid.440910.8",
+    "pierre and marie  curie university - paris 6": "grid.503320.7",
+    "pierre and marie curie university - paris 6": "grid.503320.7",
+    "telecom paris": "grid.463717.0",
+    "télécom paris": "grid.463717.0",
+    "university of bordeaux 1": "grid.412041.2",
+    "university of cergy-pontoise": "grid.507676.5",
+    "university of côte d’azur": "grid.460782.f",
+    "university of nice sophia antipolis": "grid.460782.f",
+    "university of orleans": "grid.112485.b",
     "university of paris dauphine (paris 9)": "grid.11024.36",
+    "university of paris descartes (paris 5)": "grid.508487.6",
     "university of paris sud (paris 11)": "grid.5842.b",
     "university of paris-sud (paris 11)": "grid.5842.b",
     "university of provence (aix-marseille 1)": "grid.5399.6",
-    "national institute of applied sciences of lyon (insa lyon)": "grid.15399.37",
+    "university of toulouse 1": "grid.11417.32",
+    "university of versailles": "grid.12832.3a",
+    "university of versailles saint-quentin-en-yvelines": "grid.12832.3a",
+    "university paris 2 panthéon-assas": "grid.33831.3a",
+    "université de caen basse-normandie": "grid.412043.0",
+    "université de cergy-pontoise": "grid.507676.5",
+    "université de paris": "grid.508487.6",
+    "université de provence": "grid.5399.6",
     "université de technologie de compiègne (utc)": "grid.6227.1",
-    "ecole polytechnique": "grid.10877.39"
+    "université de tours": "grid.12366.30",
+    "université grenoble alpes": "grid.450307.5",
+    "université paris descartes": "grid.508487.6",
+    "université paris-dauphine, université psl": "grid.11024.36",
+    "université paul sabatier toulouse iii": "grid.15781.3a",
+    "université pierre et marie curie (upmc)": "grid.503320.7",
+    "université pierre mendès france - grenoble 2": "grid.11906.3f",
+    "université sorbonne nouvelle paris 3": "grid.17689.31"
   },
   "Germany": {
+    "albert-ludwigs-universitaet freiburg": "grid.5963.9",
+    "dresden university of technology": "grid.4488.0",
+    "ebs business school": "grid.448648.2",
+    "fachhochschule aachen": "grid.434081.a",
+    "freie universitaet berlin": "grid.14095.39",
     "hamburg university of technology": "grid.6884.2",
-    "university of hamburg": "grid.9026.d",
+    "otto von guericke university of magdeburg": "grid.5807.a",
+    "technical university darmstadt": "grid.6546.1",
+    "technical university munich": "grid.6936.a",
+    "technical university of braunschweig": "grid.6738.a",
+    "technical university of darmstadt": "grid.6546.1",
+    "technical university of dortmund": "grid.5675.1",
     "technische universität berlin (tu berlin)": "grid.6734.6",
+    "university duesseldorf": "grid.411327.2",
+    "university of bielefeld": "grid.7491.b",
+    "university of bochum": "grid.5570.7",
+    "university of dortmund": "grid.5675.1",
+    "university of frankfurt": "grid.7839.5",
+    "university of duesseldorf": "grid.411327.2",
+    "university of goettingen": "grid.7450.6",
+    "university of halle-wittenberg": "grid.9018.0",
+    "university of hamburg": "grid.9026.d",
+    "university of heidelberg": "grid.7700.0",
+    "university of jena": "grid.9613.d",
+    "university of kiel": "grid.9764.c",
+    "university of leipzig": "grid.9647.c",
+    "university of luebeck": "grid.4562.5",
+    "university of magdeburg": "grid.5807.a",
+    "university of muenster": "grid.5949.1",
     "university of munich": "grid.5252.0",
-    "technical university munich": "grid.6936.a"
+    "university of tuebingen": "grid.10392.39",
+    "university of wuerzburg": "grid.8379.5"
+  },
+  "Hungary": {
+    "eotvos lorand university": "grid.5591.8",
+    "szent istvan university": "grid.129553.9",
+    "university of pécs": "grid.9679.1"
   },
   "India": {
+    "g.b. pant university of agriculture & technology, pantnagar": "grid.440691.e",
+    "indian institute of management (iim)": "grid.464588.3",
+    "indian institute of management (iim) - bangalore": "grid.417952.c",
     "indian institute of technology kharagpur (iit-kgp)": "grid.429017.9",
-    "symbiosis international (deemed university)": "grid.444681.b",
+    "indian institutes of science education and research (iisers)": "grid.417960.d",
+    "international institute of information technology - hyderabad (iiit-h)": "grid.419361.8",
+    "jss academy of higher education and research": "grid.411962.9",
+    "manipal academy of higher education, manipal, karnataka, india": "grid.411639.8",
     "sanjay gandhi post graduate institute of medical sciences, lucknow (sgpgi)": "grid.263138.d",
     "shanmugha arts science technology & research academy (sastra)": "grid.412423.2",
-    "international institute of information technology - hyderabad (iiit-h)": "grid.419361.8",
-    "indian institute of management (iim)": "grid.464588.3"
+    "symbiosis international (deemed university)": "grid.444681.b"
   },
   "Indonesia": {
     "bandung institute of technology (itb)": "grid.434933.a",
     "bina nusantara university (binus)": "grid.440753.1",
     "institut teknologi sepuluh nopember (its)": "grid.444380.f",
-    "universitas indonesia": "grid.9581.5"
+    "universitas indonesia": "grid.9581.5",
+    "universitas muhammadiyah surakarta": "grid.444490.9"
   },
   "Iran": {
     "shahid beheshti university (sbu)": "grid.412502.0"
   },
+  "Iraq": {
+    "mustansiriyah university": "grid.411309.e"
+  },
+  "Ireland": {
+    "dublin institute of technology": "grid.497880.a",
+    "rcsi university of medicine and health sciences": "grid.4912.e"
+  },
   "Italy": {
+    "alma mater studiorum - university of bologna": "grid.6292.f",
+    "institute for advanced study of pavia (iuss)": "grid.30420.35",
+    "international school for advanced studies of trieste": "grid.5970.b",
+    "polytechnic institute of milan": "grid.4643.5",
+    "sant'anna - scuola universitaria superiore pisa": "grid.263145.7",
+    "sant’anna school of advanced studies – pisa": "grid.263145.7",
+    "universita' degli studi di ferrara": "grid.8484.0",
+    "universita' degli studi di napoli \"l'orientale\"": "grid.449881.8",
+    "universita' politecnica delle marche": "grid.7010.6",
     "university of bari": "grid.7644.1",
     "university of milan": "grid.4708.b",
-    "university of milan - bicocca": "grid.7563.7"
+    "university of milan - bicocca": "grid.7563.7",
+    "university of milan-bicocca": "grid.7563.7",
+    "university of rome iii": "grid.8509.4"
   },
   "Japan": {
-    "tokyo medical and dental university (tmdu)": "grid.265073.5",
+    "himeji institute of technology": "grid.266453.0",
+    "jichi medical school": "grid.410804.9",
+    "kochi university": "grid.278276.e",
     "kyushu institute of technology (kyutech)": "grid.258806.1",
-    "toyohashi university of technology (tut)": "grid.412804.b",
     "nagoya institute of technology (nit)": "grid.47716.33",
+    "shibaura institute of technology tokyo": "grid.419152.a",
+    "the university of tokyo": "grid.26999.3d",
     "tokyo institute of technology (tokyo tech)": "grid.32197.3e",
-    "the university of tokyo": "grid.26999.3d"
+    "tokyo medical and dental university (tmdu)": "grid.265073.5",
+    "toyohashi university of technology (tut)": "grid.412804.b"
+  },
+  "Kazakhstan": {
+    "karaganda state university named after academician e.a.buketov": "grid.443550.3",
+    "kazakh national agrarian university kaznau": "grid.171588.2",
+    "njsc kimep university": "grid.443466.7",
+    "saken seifullin kazakh agrotechnical university": "grid.443527.3"
+  },
+  "Kuwait": {
+    "gulf university for science and technology": "grid.448933.1"
+  },
+  "Latvia": {
+    "latvia university of life sciences and technologies": "grid.22657.34",
+    "riga stradins university": "grid.17330.36"
+  },
+  "Lebanon": {
+    "saint joseph university of beirut (usj)": "grid.42271.32",
+    "université saint-joseph de beyrouth": "grid.42271.32"
   },
   "Macao": {
     "macao institute for tourism studies (iftm)": "grid.445016.2"
   },
   "Malaysia": {
     "multimedia university (mmu)": "grid.411865.f",
+    "universiti kebangsaan malaysia": "grid.412113.4",
     "universiti kebangsaan malaysia (ukm)": "grid.412113.4",
     "universiti malaya (um)": "grid.10347.31",
     "universiti putra malaysia (upm)": "grid.11142.37",
+    "universiti teknologi petronas (utp)": "grid.444487.f",
     "universiti utara malaysia": "grid.462999.9",
-    "universiti teknologi petronas (utp)": "grid.444487.f"
+    "university putra malaysia": "grid.11142.37"
   },
   "Mexico": {
+    "autonomous university of san luis potosi": "grid.412862.b",
+    "autonomous university of the state of mexico": "grid.412872.a",
+    "el colegio de méxico, a.c.": "grid.462201.3",
+    "michoacán university of san nicolás of hidalgo": "grid.412205.0",
+    "national polytechnic university (ipn)": "grid.418275.d",
+    "universidad autonoma de yucatan": "grid.412864.d",
+    "universidad autónoma de chapingo": "grid.34684.3d",
     "universidad autónoma del estado de méxico (uaemex)": "grid.412872.a",
     "universidad autónoma metropolitana (uam)": "grid.7220.7",
     "universidad de guadalajara (udg)": "grid.412890.6",
     "universidad panamericana (up)": "grid.412242.3"
   },
+  "Morocco": {
+    "al akhawayn university ifrane": "grid.442822.a",
+    "mohammed v university of rabat": "grid.31143.34",
+    "university of marrakech cadi ayyad": "grid.411840.8",
+    "université mohammed v de rabat": "grid.31143.34"
+  },
+  "Netherlands": {
+    "university of maastricht": "grid.5012.6",
+    "university of wageningen": "grid.4818.5",
+    "vu university amsterdam": "grid.12380.38"
+  },
+  "Nigeria": {
+    "university of nigeria nsukka": "grid.10757.34"
+  },
+  "Norway": {
+    "university of tromso": "grid.10919.30"
+  },
+  "Pakistan": {
+    "international islamic university, islamabad": "grid.411727.6",
+    "national university of sciences and technology (nust) islamabad": "grid.412117.0",
+    "pmas arid agriculture university rawalpindi": "grid.440552.2",
+    "the university of lahore": "grid.440564.7",
+    "university of lahore": "grid.440564.7",
+    "university of veterinary and animal sciences, lahore": "grid.412967.f"
+  },
   "Panama": {
+    "universidad de panamá - up": "grid.10984.34",
     "universidad tecnológica de panamá (utp)": "grid.441509.d"
+  },
+  "Paraguay": {
+    "universidad nacional de la asunción": "grid.412213.7"
+  },
+  "Peru": {
+    "universidad del pacífico": "grid.441818.0"
   },
   "Philippines": {
     "university of the philippines": "grid.443239.b"
   },
   "Poland": {
     "cracow university of technology (politechnika krakowska)": "grid.22555.35",
+    "gdansk university of technology": "grid.6868.0",
+    "nicolaus copernicus university in toruń": "grid.5374.5",
+    "university of lodz": "grid.10789.37",
+    "university of silesia in katowice": "grid.11866.38",
+    "university of wroclaw": "grid.8505.8",
     "warsaw university of life sciences – sggw (wuls-sggw)": "grid.13276.31",
     "wroclaw university of science and technology (wrust)": "grid.7005.2",
-    "university of lodz": "grid.10789.37"
+    "wroclaw university of technology": "grid.7005.2"
+  },
+  "Portugal": {
+    "new university of lisbon": "grid.10772.33",
+    "nova university of lisbon": "grid.10772.33"
+  },
+  "Romania": {
+    "babes-bolyai university": "grid.7399.4",
+    "babeş-bolyai university": "grid.7399.4",
+    "iuliu haţieganu university of medicine and pharmacy cluj-napoca": "grid.411040.0",
+    "the \"gheorghe asachi\" technical university of iasi": "grid.6899.e",
+    "universitatea de vest din timisoara /  west university of timisoara": "grid.14004.31"
   },
   "Russia": {
-    "moscow institute of physics and technology (mipt)": "grid.18763.3b",
-    "national university of science and technology (misis)": "grid.35043.31",
-    "national research university of electronic technology (miet)": "grid.436529.f",
-    "st petersburg electrotechnical university (leti)": "grid.9905.5",
+    "belgorod state national research university": "grid.445984.0",
     "hse university (national research university higher school of economics)": "grid.410682.9",
+    "kazan (volga region) federal university": "grid.77268.3c",
+    "kazan national research technological university": "grid.448715.b",
+    "mirea - russian technological university": "grid.466477.0",
     "moscow institute of physics and technology (mipt / moscow phystech)": "grid.18763.3b",
+    "moscow institute of physics and technology (mipt)": "grid.18763.3b",
     "moscow state institute of international relations (mgimo university)": "grid.446171.1",
     "national research nuclear university mephi (moscow engineering physics institute)": "grid.183446.c",
+    "national research saratov state university": "grid.446088.6",
+    "national research tomsk polytechnic university": "grid.27736.37",
+    "national research university of electronic technology (miet)": "grid.436529.f",
+    "national university of science and technology (misis)": "grid.35043.31",
+    "perm state national research university": "grid.77611.36",
+    "saint petersburg electrotechnical university etu-leti": "grid.9905.5",
+    "saint petersburg state university": "grid.15447.33",
+    "samara national research university (samara university)": "grid.79011.3e",
+    "siberian federal university, sibfu": "grid.412592.9",
     "south ural state university (national research university)": "grid.440724.1",
-    "saint petersburg state university": "grid.15447.33"
+    "st petersburg electrotechnical university (leti)": "grid.9905.5"
   },
   "Saudi Arabia": {
-    "imam abdulrahman bin faisal university (iau) (formerly university of dammam)": "grid.411975.f"
+    "imam abdulrahman bin faisal university (iau) (formerly university of dammam)": "grid.411975.f",
+    "imam mohammad ibn saud islamic university": "grid.440750.2"
+  },
+  "Serbia": {
+    "university of niš": "grid.11374.30"
   },
   "Singapore": {
-    "nanyang technological university, singapore (ntu)": "grid.59025.3b",
-    "insead (singapore)": "grid.469459.3"
+    "insead (singapore)": "grid.469459.3",
+    "nanyang technological university, singapore (ntu)": "grid.59025.3b"
+  },
+  "Slovakia": {
+    "comenius university in bratislava": "grid.7634.6",
+    "pavol jozef šafárik university in košice": "grid.11175.33",
+    "slovak university of agriculture in nitra": "grid.15227.33",
+    "technical university of kosice": "grid.6903.c"
   },
   "South Korea": {
+    "chung-ang university (cau)": "grid.254224.7",
     "pohang university of science and technology (postech)": "grid.49100.3c",
-    "yonsei university (seoul campus)": "grid.15444.30",
     "seoul national university of science and technology (seoultech)": "grid.412485.e",
-    "chung-ang university (cau)": "grid.254224.7"
+    "the catholic university of korea": "grid.411947.e",
+    "yonsei university (seoul campus)": "grid.15444.30"
   },
   "Spain": {
+    "esade ramon llull university": "grid.434161.5",
+    "miguel hernandez university of elche": "grid.26811.3c",
+    "miguel hernández university of elche": "grid.26811.3c",
     "universidad carlos iii de madrid (uc3m)": "grid.7840.b",
-    "universitat internacional de catalunya (uic)": "grid.410675.1"
+    "universitat internacional de catalunya (uic)": "grid.410675.1",
+    "university of cadiz": "grid.7759.c",
+    "university of cordoba": "grid.411901.c",
+    "university of jaen": "grid.21507.31",
+    "university of pompeu fabra": "grid.5612.0",
+    "university of rovira i virgili": "grid.410367.7"
+  },
+  "Sweden": {
+    "linkoping university": "grid.5640.7",
+    "lulea university": "grid.6926.b",
+    "lulea university of technology": "grid.6926.b",
+    "orebro university": "grid.15895.30",
+    "umea university": "grid.12650.30"
+  },
+  "Switzerland": {
+    "university of italian speaking switzerland": "grid.29078.34",
+    "university of neuchatel": "grid.10711.36"
   },
   "Taiwan": {
+    "asia university": "grid.252470.6",
+    "asia university, taiwan": "grid.252470.6",
     "china medical university (taichung)": "grid.254145.3",
-    "national taiwan university of science and technology (taiwan tech)": "grid.45907.3f",
     "national cheng kung university (ncku)": "grid.64523.36",
     "national taiwan university (ntu)": "grid.19188.39",
+    "national taiwan university of science and technology (taiwan tech)": "grid.45907.3f",
     "taipei medical university (tmu)": "grid.412896.0"
   },
+  "Tunisia": {
+    "universite de tunis el manar": "grid.12574.35",
+    "university of manouba": "grid.424444.6",
+    "university of tunis el manar": "grid.12574.35"
+  },
   "Turkey": {
-    "izmir institute of technology (iztech)": "grid.419609.3"
+    "bogazici university": "grid.11220.30",
+    "bogaziçi üniversitesi": "grid.11220.30",
+    "cankaya university": "grid.411919.5",
+    "dokuz eylul university": "grid.21200.31",
+    "eastern mediterranean university": "grid.461270.6",
+    "izmir institute of technology (iztech)": "grid.419609.3",
+    "ondokuz mayis university": "grid.411049.9",
+    "sabanci university": "grid.5334.1",
+    "tokat gaziosmanpaşa university": "grid.411550.4",
+    "yildiz technical university": "grid.38575.3c"
   },
   "Ukraine": {
-    "tchaikovsky national academy of music (kiev conservatory)": "grid.445747.1"
+    "national technical university of ukraine \"igor sikorsky kyiv polytechnic institute\"": "grid.440544.5",
+    "national technical university of ukraine – igor sikorsky kyiv polytechnic institute": "grid.440544.5",
+    "tchaikovsky national academy of music (kiev conservatory)": "grid.445747.1",
+    "v. n. karazin kharkiv national university": "grid.18999.30",
+    "v.n. karazin kharkiv national university": "grid.18999.30",
+    "vasyl` stus donetsk national university": "grid.438846.5"
+  },
+  "United Arab Emirates": {
+    "khalifa university of science, technology and research": "grid.440568.b"
   },
   "United Kingdom": {
-    "university of manchester institute of science and technology": "grid.5379.8",
+    "kingston university, london": "grid.15538.3a",
+    "london school of hygiene and tropical medicine": "grid.8991.9",
+    "queen margaret university , edinburgh": "grid.104846.f",
+    "queen mary, u. of london": "grid.4868.2",
     "queen's university belfast": "grid.4777.3",
+    "royal holloway, u. of london": "grid.4970.a",
+    "royal veterinary college , university of london": "grid.20931.39",
+    "soas university of london": "grid.22631.34",
+    "swansea univ": "grid.4827.9",
+    "the imperial college of science, technology and medicine": "grid.7445.2",
     "the university of edinburgh": "grid.4305.2",
-    "the university of manchester": "grid.5379.8"
+    "the university of manchester": "grid.5379.8",
+    "university of durham": "grid.8250.f",
+    "university of manchester institute of science and technology": "grid.5379.8"
   },
   "United States": {
-    "the new school": "grid.264933.9",
-    "city university of new york city college": "grid.254250.4",
-    "northeastern university (boston)": "grid.261112.7",
-    "university at albany (state university of new york)": "grid.265850.c",
-    "ohio university (main campus)": "grid.20627.31",
-    "ohio state university (main campus)": "grid.261331.4",
-    "university of virginia (main campus)": "grid.27755.32",
-    "penn state (main campus)": "grid.29857.31",
     "arizona state university (tempe)": "grid.215654.1",
-    "university of south florida (tampa)": "grid.170693.a",
-    "university of new mexico (main campus)": "grid.266832.b",
-    "new mexico state university (main campus)": "grid.24805.3b",
     "california institute of technology (caltech)": "grid.20861.3d",
-    "university of illinois at chicago (uic)": "grid.185648.6",
-    "universidad de puerto rico": "grid.267033.3",
+    "city university of new york city college": "grid.254250.4",
+    "colorado state university, fort collins": "grid.47894.36",
+    "cuny graduate school and university center": "grid.253482.a",
+    "cuny hunter college": "grid.257167.0",
+    "georgia health sciences university": "grid.410427.4",
+    "indiana university-purdue university at indianapolis": "grid.257413.6",
+    "louisiana state university - baton rouge": "grid.64337.35",
+    "mayo medical school": "grid.66875.3a",
+    "medical college of georgia": "grid.410427.4",
+    "montana state university - bozeman": "grid.41891.35",
+    "new mexico state university (main campus)": "grid.24805.3b",
+    "north carolina state university - raleigh": "grid.40803.3f",
+    "north dakota state university-main campus": "grid.261055.5",
+    "northeastern university (boston)": "grid.261112.7",
+    "ohio state university (main campus)": "grid.261331.4",
+    "ohio university (main campus)": "grid.20627.31",
+    "oregon health and science university": "grid.5288.7",
+    "penn state (main campus)": "grid.29857.31",
+    "pennsylvania state university - university park": "grid.29857.31",
     "purdue university": "grid.411031.6",
-    "the university of georgia": "grid.213876.9"
+    "rutgers university–new brunswick": "grid.430387.b",
+    "rutgers, the state university of new jersey - new brunswick": "grid.430387.b",
+    "state university of new york at stony brook": "grid.36425.36",
+    "state university of new york health science center at brooklyn": "grid.262863.b",
+    "stony brook university, state university of new york": "grid.36425.36",
+    "texas a&m university - college station": "grid.264756.4",
+    "the new school": "grid.264933.9",
+    "the ohio state university - columbus": "grid.261331.4",
+    "the university of connecticut - storrs": "grid.63054.34",
+    "the university of georgia": "grid.213876.9",
+    "the university of montana - missoula": "grid.253613.0",
+    "the university of new mexico - albuquerque": "grid.266832.b",
+    "the university of texas m. d. anderson cancer center": "grid.240145.6",
+    "the university of texas southwestern medical center at dallas": "grid.267313.2",
+    "uniformed services university of the health sciences - usa": "grid.265436.0",
+    "universidad de puerto rico": "grid.267033.3",
+    "university at albany (state university of new york)": "grid.265850.c",
+    "university at buffalo, the state university of new york": "grid.273335.3",
+    "university of colorado at boulder": "grid.266190.a",
+    "university of colorado at denver": "grid.241116.1",
+    "university of colorado health science center": "grid.430503.1",
+    "university of hawaiʻi at mānoa": "grid.410445.0",
+    "university of illinois at chicago (uic)": "grid.185648.6",
+    "university of kansas - lawrence": "grid.266515.3",
+    "university of maryland center for environmental science": "grid.291951.7",
+    "university of massachusetts": "grid.266684.8",
+    "university of massachusetts medical school - worcester": "grid.168645.8",
+    "university of montana - missoula": "grid.253613.0",
+    "university of montana missoula": "grid.253613.0",
+    "university of new hampshire - durham": "grid.167436.1",
+    "university of new mexico (main campus)": "grid.266832.b",
+    "university of oklahoma - norman": "grid.266900.b",
+    "university of pittsburgh, pittsburgh campus": "grid.21925.3d",
+    "university of pittsburgh-pittsburgh campus": "grid.21925.3d",
+    "university of south carolina - columbia": "grid.254567.7",
+    "university of south carolina-columbia": "grid.254567.7",
+    "university of south florida (tampa)": "grid.170693.a",
+    "university of virginia (main campus)": "grid.27755.32",
+    "washington state university - pullman": "grid.30064.31"
   },
   "Uruguay": {
     "universidad católica del uruguay (ucu)": "grid.442041.7",
-    "universidad de montevideo (um)": "grid.442043.5"
+    "universidad de la república (udelar)": "grid.11630.35",
+    "universidad de montevideo (um)": "grid.442043.5",
+    "university of the republic - uruguay": "grid.11630.35"
   },
   "Venezuela": {
+    "universidad católica andres bello": "grid.442089.3",
+    "universidad de los andes - (ula) mérida": "grid.267525.1",
     "universidad simón bolívar (usb)": "grid.412358.9"
   },
-  "Viet Nam": {
-    "vietnam national university (ho chi minh city)": "grid.444808.4",
-    "viet nam national university ho chi minh city (vnu-hcm)": "grid.444808.4"
+  "Vietnam": {
+    "viet nam national university ho chi minh city (vnu-hcm)": "grid.444808.4",
+    "vietnam national university (ho chi minh city)": "grid.444808.4"
   }
 }
