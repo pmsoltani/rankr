@@ -34,7 +34,7 @@ class THECrawler(CrawlerMixin, THEConfig):
                 if col not in THEConfig.FIELDS:
                     continue
 
-                value = row[col] if row[col] else ""
+                value = row[col].strip() if row[col] else ""
                 if THEConfig.FIELDS[col] == "Country":
                     value = THECrawler.country_name_mapper(text_process(value))
                 if THEConfig.FIELDS[col] == "URL":

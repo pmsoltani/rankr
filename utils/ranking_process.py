@@ -29,7 +29,7 @@ def ranking_process(
         pbar.update()
         nullify(row)
         link_type = row["Ranking System"]
-        inst_name = row["Institution"].lower()
+        inst_name = row["Institution"].strip().lower()
         inst_country = DBConfig.country_name_mapper(row["Country"])
         inst_url = row["URL"]
         inst_acronym = re.search(r"\((.*?)\)$", inst_name)
