@@ -1,7 +1,7 @@
 import io
 import json
 from pathlib import Path
-from typing import List
+from typing import Callable
 
 from environs import Env
 
@@ -12,9 +12,9 @@ env.read_env()
 APP_ENV = env("APP_ENV", "development")
 
 
-def read_json_config(path: Path) -> List[dict]:
+def read_json_config(path: Path, object_hook: Callable = None):
     with io.open(path, "r", encoding="utf-8") as json_file:
-        return json.loads(json_file.read())
+        return json.loads(json_file.read(), object_hook=object_hook)
 
 
 class DBConfig(object):
@@ -39,16 +39,22 @@ class DBConfig(object):
     RANKINGS: dict = read_json_config(_rankings_file_path)
 
     _matches_file_path = env.path("MATCHES_FILE_PATH", "matches.json")
-    MATCHES: dict = read_json_config(_matches_file_path)
+    MATCHES: dict = read_json_config(
+        _matches_file_path,
+        lambda d: {(None if not k else k): v for k, v in d.items()},
+    )
 
     _country_names_path = env("COUNTRY_NAMES", "country_names.json")
     COUNTRY_NAMES = read_json_config(_country_names_path)
 
     @classmethod
     def country_name_mapper(cls, country: str) -> str:
-        return cls.COUNTRY_NAMES.get(
-            country.strip().replace("-", " ").lower(), country
-        )
+        try:
+            return cls.COUNTRY_NAMES.get(
+                country.strip().replace("-", " ").lower(), country
+            )
+        except AttributeError:  # country is None
+            return country
 
 
 class CrawlerConfig(object):

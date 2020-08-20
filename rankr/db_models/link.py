@@ -9,9 +9,7 @@ from rankr.db_models.base import Base
 from rankr.db_models.institution import Institution
 
 
-link_types = ["homepage"]
-for ranking_system in DBConfig.RANKINGS["ranking_systems"]:
-    link_types.append(f"{ranking_system}_profile")
+link_types = ["homepage"] + DBConfig.RANKINGS["ranking_systems"]
 LinkTypeEnum = enum.Enum("LinkTypeEnum", {type: type for type in link_types},)
 
 

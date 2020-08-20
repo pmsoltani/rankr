@@ -9,6 +9,7 @@ from rankr.db_models import (
     Alias,
     Country,
     Institution,
+    Label,
     Link,
     Type,
     SessionLocal,
@@ -29,6 +30,9 @@ try:
 finally:
     db.close()
 
+
+attrs = ["addresses", "acronyms", "aliases", "labels", "links", "types"]
+
 # processing institutions
 try:
     print("Processing institutions ...")
@@ -36,34 +40,44 @@ try:
 
     institution_attrs = [
         get_csv(DBConfig.GRID_DATABASE_DIR / f"{attr}.csv", "grid_id")
-        for attr in ["addresses", "acronyms", "aliases", "links", "types"]
+        for attr in attrs
     ]
     countries = {c.country: c for c in db.query(Country).all()}
     rows = get_row(DBConfig.GRID_DATABASE_DIR / "institutes.csv")
     row_count = csv_size(DBConfig.GRID_DATABASE_DIR / "institutes.csv")
 
     pbar = tqdm(total=row_count)
-    for row in tqdm(rows):
+    for row in rows:
         nullify(row)
-        address, acronym, alias, link, type = [
+        address, acronym, alias, label, link, type = [
             attr.get(row["grid_id"]) for attr in institution_attrs
         ]
+
+        soup = [row["name"]]
 
         if address:
             country = DBConfig.country_name_mapper(address[0].pop("country"))
             institution = Institution(**{**row, **address[0]})
             institution.country = countries[country]
+            soup.append(country)
         else:
             institution = Institution(**row)
 
         if acronym:
             institution.acronyms = [Acronym(**i) for i in acronym]
+            soup.extend(i["acronym"] for i in acronym)
         if alias:
             institution.aliases = [Alias(**i) for i in alias]
+            soup.extend(i["alias"] for i in alias)
+        if label:
+            institution.labels = [Label(**i) for i in label]
+            soup.extend(i["label"] for i in label)
         if link:
             institution.links = [Link(**i) for i in link]
         if type:
             institution.types = [Type(**i) for i in type]
+
+        institution.soup = " | ".join(i for i in soup)
 
         db.add(institution)
         pbar.update()
