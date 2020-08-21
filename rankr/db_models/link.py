@@ -9,7 +9,7 @@ from rankr.db_models.base import Base
 from rankr.db_models.institution import Institution
 
 
-link_types = ["homepage"] + DBConfig.RANKINGS["ranking_systems"]
+link_types = ["homepage"] + list(DBConfig.RANKINGS["metrics"])
 LinkTypeEnum = enum.Enum("LinkTypeEnum", {type: type for type in link_types},)
 
 

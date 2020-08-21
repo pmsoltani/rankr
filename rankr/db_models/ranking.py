@@ -11,20 +11,21 @@ from rankr.db_models.institution import Institution
 
 RankingSystemEnum = enum.Enum(
     "RankingSystemEnum",
-    {system: system for system in DBConfig.RANKINGS["ranking_systems"]},
+    {system: system for system in DBConfig.RANKINGS["metrics"]},
 )
 RankingTypeEnum = enum.Enum(
     "RankingTypeEnum",
     {type: type for type in DBConfig.RANKINGS["ranking_types"]},
 )
-MetricEnum = enum.Enum(
-    "MetricEnum",
-    {m["name"]: m["name"] for m in DBConfig.RANKINGS["metrics"].values()},
-)
-ValueTypeEnum = enum.Enum(
-    "ValueTypeEnum",
-    {m["type"]: m["type"] for m in DBConfig.RANKINGS["metrics"].values()},
-)
+names = []
+types = []
+for metrics in DBConfig.RANKINGS["metrics"].values():
+    for metric_info in metrics.values():
+        names.append(metric_info["name"])
+        types.append(metric_info["type"])
+
+MetricEnum = enum.Enum("MetricEnum", {name: name for name in names})
+ValueTypeEnum = enum.Enum("ValueTypeEnum", {type: type for type in types})
 
 
 class Ranking(Base):
