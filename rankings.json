@@ -35,8 +35,8 @@
       "name": "# Students per Staff",
       "type": "decimal"
     },
-    "Internationl Students": {
-      "name": "% Internationl Students",
+    "International Students": {
+      "name": "% International Students",
       "type": "percent"
     },
     "Female:Male Ratio": { "name": "% Female Students", "type": "percent" },
