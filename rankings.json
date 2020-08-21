@@ -1,5 +1,4 @@
 {
-  "ranking_systems": ["qs", "shanghai", "the"],
   "ranking_types": ["university ranking", "subject ranking"],
   "non_metrics": [
     "url",
