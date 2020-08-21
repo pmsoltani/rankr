@@ -9,10 +9,9 @@ from rankr.db_models.base import Base
 from rankr.db_models.institution import Institution
 
 
-# TODO: use list of metrics
 RankingSystemEnum = enum.Enum(
     "RankingSystemEnum",
-    {system: system for system in DBConfig.RANKINGS["ranking_systems"]},
+    {system: system for system in DBConfig.RANKINGS["metrics"]},
 )
 RankingTypeEnum = enum.Enum(
     "RankingTypeEnum",
@@ -20,7 +19,7 @@ RankingTypeEnum = enum.Enum(
 )
 names = []
 types = []
-for  metrics in DBConfig.RANKINGS["metrics"].values():
+for metrics in DBConfig.RANKINGS["metrics"].values():
     for metric_info in metrics.values():
         names.append(metric_info["name"])
         types.append(metric_info["type"])

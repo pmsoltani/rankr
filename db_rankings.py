@@ -5,12 +5,11 @@ from config import DBConfig
 from rankr.db_models import Institution, SessionLocal
 from utils import csv_export, csv_size, ranking_process
 
-ranking_systems = DBConfig.RANKINGS["ranking_systems"]
 
 db = SessionLocal()
-ili: List[Institution] = db.query(Institution).all()
+all_institutions: List[Institution] = db.query(Institution).all()
 soup = {}
-for inst in ili:
+for inst in all_institutions:
     try:
         soup[inst.country.country][inst.soup] = inst.grid_id
     except KeyError:
@@ -20,8 +19,8 @@ db.close()
 
 not_mached = []
 fuzz = []
-for system in ranking_systems:
-    dir_path: Path = DBConfig.MAIN_DIR / system
+for ranking_system in list(DBConfig.RANKINGS["metrics"]):
+    dir_path: Path = DBConfig.MAIN_DIR / ranking_system
     if not dir_path.exists():
         continue
 
