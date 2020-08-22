@@ -24,3 +24,7 @@ It should be noted that the metadata from the GRID database is preferred in case
 - [ ] Create a web server and an API.
 - [ ] Design and develop a dashboard.
 - [ ] Finish the documentation.
+
+## Contributions
+
+All contributions (suggestions, PRs, ...) are welcome.
