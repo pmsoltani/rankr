@@ -1,0 +1,10 @@
+{
+  "entity_types": {
+    "world": "geo",
+    "region": "geo",
+    "sub_region": "geo",
+    "country": "geo",
+    "country_code": "geo",
+    "institution": "i"
+  }
+}
