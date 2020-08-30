@@ -24,6 +24,7 @@ class RankingRowSchema(BaseModel):
     def _get_ranking_row_data(cls, input_values: dict) -> dict:
         institution: Institution = input_values["institution"]
         return {
+            **input_values,
             "rank": input_values["value"],
             "institution": institution.name,
             "grid_id": institution.grid_id,
