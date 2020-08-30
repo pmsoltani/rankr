@@ -30,4 +30,4 @@ class Link(Base):
         super().__init__(**kwargs)
 
     def __repr__(self):
-        return f"{self.type}: {self.link}"
+        return f"{self.type.name}: {self.link}"
