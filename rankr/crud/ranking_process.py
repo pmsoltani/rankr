@@ -6,8 +6,9 @@ from sqlalchemy.orm import Session
 from tqdm import tqdm
 
 from config import DBConfig
+from rankr.crud.metrics_process import metrics_process
 from rankr.db_models import Country, Institution, Link
-from utils import csv_size, fuzzy_matcher, get_row, metrics_process, nullify
+from utils import csv_size, fuzzy_matcher, get_row, nullify
 
 
 def ranking_process(
