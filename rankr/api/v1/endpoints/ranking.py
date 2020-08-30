@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 from rankr.crud import get_ranking_systems, get_ranking_table
 from rankr.api import deps
-from rankr.schemas import RankingRowSchema
+from rankr.schemas import RankingSchema
 from rankr.enums import RankingSystemEnum
 
 
@@ -21,7 +21,7 @@ async def ranking_systems(db: Session = Depends(deps.get_db)):
 
 @router.get(
     "/{ranking_system}/{year}",
-    response_model=Dict[RankingSystemEnum, List[RankingRowSchema]],
+    response_model=Dict[RankingSystemEnum, List[RankingSchema]],
 )
 def ranking(
     *,
