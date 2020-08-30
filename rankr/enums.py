@@ -1,11 +1,11 @@
 import enum
 
-from config import DBConfig
+from config import APPConfig, DBConfig
 
 
 # The Enums below are used to regulate & restrict the types of different things:
 # institution types: Education, Company, ...
-institution_types = DBConfig.RANKINGS["institution_types"]
+institution_types = APPConfig.ENTITIES["institution_types"]
 InstTypeEnum = enum.Enum("InstTypeEnum", {t: t for t in institution_types})
 
 # institution link types: homepage, qs, ...

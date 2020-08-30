@@ -6,5 +6,15 @@
     "country": "geo",
     "country_code": "geo",
     "institution": "i"
-  }
+  },
+  "institution_types": [
+    "Archive",
+    "Company",
+    "Education",
+    "Facility",
+    "Government",
+    "Healthcare",
+    "Nonprofit",
+    "Other"
+  ]
 }
