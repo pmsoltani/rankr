@@ -9,12 +9,21 @@ from environs import Env
 env = Env()
 env.read_env()
 
-APP_ENV = env("APP_ENV", "development")
-
 
 def read_json_config(path: Path, object_hook: Callable = None):
     with io.open(path, "r", encoding="utf-8") as json_file:
         return json.loads(json_file.read(), object_hook=object_hook)
+
+
+class APPConfig(object):
+    APP_ENV = env("APP_ENV", "development")
+    APP_NAME = env("APP_NAME",)
+    API_V1_STR = env("API_V1_STR", "")
+    APP_HOST = env("APP_HOST")
+    APP_PORT = env.int("APP_PORT")
+    APP_TLD = f"http://{APP_HOST}:{APP_PORT}"
+    _entities_file_path = env.path("ENTITIES_FILE_PATH", "entities.json")
+    ENTITIES = read_json_config(_entities_file_path)
 
 
 class DBConfig(object):
