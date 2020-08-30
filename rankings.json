@@ -1,4 +1,14 @@
 {
+  "institution_types": [
+    "Archive",
+    "Company",
+    "Education",
+    "Facility",
+    "Government",
+    "Healthcare",
+    "Nonprofit",
+    "Other"
+  ],
   "ranking_types": ["university ranking", "subject ranking"],
   "non_metrics": [
     "url",

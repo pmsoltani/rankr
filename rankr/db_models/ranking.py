@@ -1,31 +1,15 @@
-import enum
-
 from sqlalchemy import Column, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.types import DECIMAL, Enum, Integer, String
 
-from config import DBConfig
 from rankr.db_models.base import Base
 from rankr.db_models.institution import Institution
-
-
-RankingSystemEnum = enum.Enum(
-    "RankingSystemEnum",
-    {system: system for system in DBConfig.RANKINGS["metrics"]},
+from rankr.enums import (
+    MetricEnum,
+    RankingSystemEnum,
+    RankingTypeEnum,
+    ValueTypeEnum,
 )
-RankingTypeEnum = enum.Enum(
-    "RankingTypeEnum",
-    {type: type for type in DBConfig.RANKINGS["ranking_types"]},
-)
-names = []
-types = []
-for metrics in DBConfig.RANKINGS["metrics"].values():
-    for metric_info in metrics.values():
-        names.append(metric_info["name"])
-        types.append(metric_info["type"])
-
-MetricEnum = enum.Enum("MetricEnum", {name: name for name in names})
-ValueTypeEnum = enum.Enum("ValueTypeEnum", {type: type for type in types})
 
 
 class Ranking(Base):

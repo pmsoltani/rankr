@@ -1,22 +1,10 @@
-import enum
-
 from sqlalchemy import Column, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.types import Enum, Integer
 
 from rankr.db_models.base import Base
 from rankr.db_models.institution import Institution
-
-
-class InstTypeEnum(enum.Enum):
-    Archive = 1
-    Company = 2
-    Education = 3
-    Facility = 4
-    Government = 5
-    Healthcare = 6
-    Nonprofit = 7
-    Other = 8
+from rankr.enums import InstTypeEnum
 
 
 class Type(Base):
