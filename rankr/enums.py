@@ -34,3 +34,12 @@ MetricEnum = enum.Enum("MetricEnum", {t: t for t in metric_types})
 
 # metric value types: integer, decimal, ...
 ValueTypeEnum = enum.Enum("ValueTypeEnum", {t: t for t in metric_value_types})
+
+# compare entity types (for comparing an institution with different entities)
+entities = APPConfig.ENTITIES["entity_types"]
+EntityTypeEnum = enum.Enum("EntityTypeEnum", {t: t for t in entities})
+
+# different paths for different entity_types: i, geo
+EntityTypePathEnum = enum.Enum(
+    "EntityTypePathEnum", {t: t for t in entities.values()}
+)
