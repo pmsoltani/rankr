@@ -61,7 +61,7 @@ thumbs.db
 .env.production.local
 *.mwb.bak
 .vscode/
-
+playground.py
 
 # config
 instance/*
