@@ -16,6 +16,8 @@ def read_json_config(path: Path, object_hook: Callable = None):
 
 
 class APPConfig(object):
+    GRID_ID_PATTERN = r"grid\.[0-9]{4,6}\.[0-9a-f]{1,2}"
+
     APP_ENV = env("APP_ENV", "development")
     APP_NAME = env("APP_NAME",)
     API_V1_STR = env("API_V1_STR", "")
