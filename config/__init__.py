@@ -1,3 +1,4 @@
+from config.config import APPConfig  # noqa
 from config.config import CrawlerConfig  # noqa
 from config.config import DBConfig  # noqa
 from config.config import QSConfig  # noqa

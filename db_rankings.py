@@ -2,8 +2,9 @@ from pathlib import Path
 from typing import List
 
 from config import DBConfig
+from rankr.crud import ranking_process
 from rankr.db_models import Institution, SessionLocal
-from utils import csv_export, csv_size, ranking_process
+from utils import csv_export, csv_size
 
 
 db = SessionLocal()

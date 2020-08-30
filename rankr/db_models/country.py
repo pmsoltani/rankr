@@ -27,4 +27,4 @@ class Country(Base):
         super().__init__(**kwargs)
 
     def __repr__(self) -> str:
-        return f"{self.domain}: {self.name}"
+        return f"{self.country_code}: {self.country}"

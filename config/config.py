@@ -1,7 +1,8 @@
 import io
+import csv
 import json
 from pathlib import Path
-from typing import Callable
+from typing import Callable, Dict
 
 from environs import Env
 
@@ -9,12 +10,32 @@ from environs import Env
 env = Env()
 env.read_env()
 
-APP_ENV = env("APP_ENV", "development")
-
 
 def read_json_config(path: Path, object_hook: Callable = None):
     with io.open(path, "r", encoding="utf-8") as json_file:
         return json.loads(json_file.read(), object_hook=object_hook)
+
+
+class APPConfig(object):
+    DATA_DIR = env("DATA_DIR", "data")
+    MAIN_DIR = Path.cwd() / DATA_DIR
+
+    GRID_ID_PATTERN = r"grid\.[0-9]{4,6}\.[0-9a-f]{1,2}"
+
+    APP_ENV = env("APP_ENV", "development")
+    APP_NAME = env("APP_NAME",)
+    API_V1_STR = env("API_V1_STR", "")
+    APP_HOST = env("APP_HOST")
+    APP_PORT = env.int("APP_PORT")
+    APP_TLD = f"http://{APP_HOST}:{APP_PORT}"
+    _entities_file_path = env.path("ENTITIES_FILE_PATH", "entities.json")
+    ENTITIES = read_json_config(_entities_file_path)
+    _countries_file = env("COUNTRIES_FILE_PATH", "countries.csv")
+    with io.open(MAIN_DIR / _countries_file, encoding="utf-8") as csv_file:
+        reader = csv.DictReader(csv_file)
+        COUNTRIES: Dict[str, str] = {}
+        for row in reader:
+            COUNTRIES[row["country_code"]] = row["country"]
 
 
 class DBConfig(object):

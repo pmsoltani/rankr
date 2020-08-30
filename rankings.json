@@ -10,6 +10,12 @@
     "field",
     "subject"
   ],
+  "stat_metrics": [
+    "# FTE Students",
+    "# Students per Staff",
+    "% International Students",
+    "% Female Students"
+  ],
   "metrics": {
     "qs": {
       "Rank": { "name": "Rank", "type": "integer" },
