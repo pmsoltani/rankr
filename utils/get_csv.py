@@ -12,9 +12,6 @@ def get_csv(
         reader = csv.DictReader(csv_file, delimiter=delimiter)
         for row in reader:
             value = row.pop(key)
-            if value in output:
-                output[value].append(dict(row))
-            else:
-                output[value] = [dict(row)]
+            output.setdefault(value, []).append(dict(row))
 
     return output
