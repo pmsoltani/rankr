@@ -1,3 +1,5 @@
+"""SQLAlchemy models to interact with database tables"""
+
 from rankr.db_models.acronym import Acronym  # noqa
 from rankr.db_models.alias import Alias  # noqa
 from rankr.db_models.base import Base, engine, SessionLocal  # noqa
