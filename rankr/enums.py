@@ -32,6 +32,11 @@ for metrics in DBConfig.RANKINGS["metrics"].values():
 # metric types: Rank, Overall Score, ...
 MetricEnum = enum.Enum("MetricEnum", {t: t for t in metric_types})
 
+# statistic metric types: # FTE Students, % International Students, ...
+StatMetricEnum = enum.Enum(
+    "StatMetricEnum", {t: t for t in DBConfig.RANKINGS["stat_metrics"]}
+)
+
 # metric value types: integer, decimal, ...
 ValueTypeEnum = enum.Enum("ValueTypeEnum", {t: t for t in metric_value_types})
 
