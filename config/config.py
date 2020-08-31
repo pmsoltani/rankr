@@ -2,7 +2,7 @@ import csv
 import io
 import json
 from pathlib import Path
-from typing import Callable, Dict
+from typing import Callable, Dict, Iterator, List
 
 from environs import Env
 
@@ -19,20 +19,20 @@ def read_json_config(path: Path, object_hook: Callable = None):
 
 
 class APPConfig(object):
-    DATA_DIR = env("DATA_DIR", "data")
-    MAIN_DIR = Path.cwd() / DATA_DIR
+    DATA_DIR: str = env("DATA_DIR", "data")
+    MAIN_DIR: Path = Path.cwd() / DATA_DIR
 
     GRID_ID_PATTERN = r"grid\.[0-9]{4,6}\.[0-9a-f]{1,2}"
 
-    APP_ENV = env("APP_ENV", "development")
-    APP_NAME = env("APP_NAME",)
-    API_V1_STR = env("API_V1_STR", "")
-    APP_HOST = env("APP_HOST")
-    APP_PORT = env.int("APP_PORT")
+    APP_ENV: str = env("APP_ENV", "development")
+    APP_NAME: str = env("APP_NAME",)
+    API_V1_STR: str = env("API_V1_STR", "")
+    APP_HOST: str = env("APP_HOST")
+    APP_PORT: int = env.int("APP_PORT")
     APP_TLD = f"http://{APP_HOST}:{APP_PORT}"
     _entities_file_path = env.path("ENTITIES_FILE_PATH", "entities.json")
     ENTITIES = read_json_config(_entities_file_path)
-    _countries_file = env("COUNTRIES_FILE_PATH", "countries.csv")
+    _countries_file: str = env("COUNTRIES_FILE_PATH", "countries.csv")
     with io.open(MAIN_DIR / _countries_file, encoding="utf-8") as csv_file:
         reader = csv.DictReader(csv_file)
         COUNTRIES: Dict[str, str] = {}
@@ -41,34 +41,34 @@ class APPConfig(object):
 
 
 class DBConfig(object):
-    DATA_DIR = env("DATA_DIR", "data")
-    MAIN_DIR = Path.cwd() / DATA_DIR
+    DATA_DIR: str = env("DATA_DIR", "data")
+    MAIN_DIR: Path = Path.cwd() / DATA_DIR
 
-    DIALECT = env("DIALECT")
+    DIALECT: str = env("DIALECT")
     with env.prefixed(f"{DIALECT.upper()}_"):
-        _DRIVER = env("DRIVER")
-        _USER = env("USER")
-        _PASS = env("PASS")
-        _HOST = env("HOST")
-        _PORT = env("PORT")
-        _NAME = env("NAME")
+        _DRIVER: str = env("DRIVER")
+        _USER: str = env("USER")
+        _PASS: str = env("PASS")
+        _HOST: str = env("HOST")
+        _PORT: str = env("PORT")
+        _NAME: str = env("NAME")
     DB_URI = f"{DIALECT}+{_DRIVER}://{_USER}:{_PASS}@{_HOST}:{_PORT}/{_NAME}"
-    GRID_DATABASE_DIR = env.list(
+    _grid_database_dir: List[str] = env.list(
         "GRID_DATABASE_DIR", ["data", "grid", "full_tables"]
     )
-    GRID_DATABASE_DIR = Path.cwd().joinpath(*GRID_DATABASE_DIR)
+    GRID_DATABASE_DIR: Path = Path.cwd().joinpath(*_grid_database_dir)
 
-    _rankings_file_path = env.path("RANKINGS_FILE_PATH", "rankings.json")
+    _rankings_file_path: Path = env.path("RANKINGS_FILE_PATH", "rankings.json")
     RANKINGS: dict = read_json_config(_rankings_file_path)
 
-    _matches_file_path = env.path("MATCHES_FILE_PATH", "matches.json")
+    _matches_file_path: Path = env.path("MATCHES_FILE_PATH", "matches.json")
     MATCHES: dict = read_json_config(
         _matches_file_path,
         lambda d: {(None if not k else k): v for k, v in d.items()},
     )
 
-    _country_names_path = env("COUNTRY_NAMES", "country_names.json")
-    COUNTRY_NAMES = read_json_config(_country_names_path)
+    _country_names_path: Path = env.path("COUNTRY_NAMES", "country_names.json")
+    COUNTRY_NAMES: dict = read_json_config(_country_names_path)
 
     @classmethod
     def country_name_mapper(cls, country: str) -> str:
@@ -81,13 +81,13 @@ class DBConfig(object):
 
 
 class CrawlerConfig(object):
-    DATA_DIR = env("DATA_DIR", "data")
-    MAIN_DIR = Path.cwd() / DATA_DIR
+    DATA_DIR: str = env("DATA_DIR", "data")
+    MAIN_DIR: Path = Path.cwd() / DATA_DIR
 
-    USER_AGENT = env("USER_AGENT")
+    USER_AGENT: str = env("USER_AGENT")
 
     CRAWLER_ENGINE = env.list("CRAWLER_ENGINE", ["qs", "shanghai", "the"])
-    _country_names_path = env("COUNTRY_NAMES", "country_names.json")
+    _country_names_path: Path = env.path("COUNTRY_NAMES", "country_names.json")
     COUNTRY_NAMES = read_json_config(_country_names_path)
 
     @classmethod
@@ -98,14 +98,14 @@ class CrawlerConfig(object):
 
 
 class QSConfig(CrawlerConfig):
-    headers = {"User-Agent": CrawlerConfig.USER_AGENT}
-    BASE_URL = env("QS_BASE")
-    _raw_urls = env("QS_URLS_FILE", "qs_urls.json")
-    URLS = read_json_config(Path.cwd() / _raw_urls)
+    headers: Dict[str, str] = {"User-Agent": CrawlerConfig.USER_AGENT}
+    BASE_URL: str = env("QS_BASE")
+    _raw_urls: str = env("QS_URLS_FILE", "qs_urls.json")
+    URLS: List[dict] = read_json_config(Path.cwd() / _raw_urls)
 
-    DOWNLOAD_DIR = CrawlerConfig.MAIN_DIR / "qs"
+    DOWNLOAD_DIR: Path = CrawlerConfig.MAIN_DIR / "qs"
 
-    FIELDS = {
+    FIELDS: Dict[str, str] = {
         "rank": "Rank",
         "# rank": "Rank",
         "university": "Institution",
@@ -124,14 +124,14 @@ class QSConfig(CrawlerConfig):
 
 
 class ShanghaiConfig(CrawlerConfig):
-    headers = {"User-Agent": CrawlerConfig.USER_AGENT}
-    BASE_URL = env("SHANGHAI_BASE")
-    _raw_urls = env("SHANGHAI_URLS_FILE", "shanghai_urls.json")
-    URLS = read_json_config(Path.cwd() / _raw_urls)
+    headers: Dict[str, str] = {"User-Agent": CrawlerConfig.USER_AGENT}
+    BASE_URL: str = env("SHANGHAI_BASE")
+    _raw_urls: str = env("SHANGHAI_URLS_FILE", "shanghai_urls.json")
+    URLS: List[dict] = read_json_config(Path.cwd() / _raw_urls)
 
-    DOWNLOAD_DIR = CrawlerConfig.MAIN_DIR / "shanghai"
+    DOWNLOAD_DIR: Path = CrawlerConfig.MAIN_DIR / "shanghai"
 
-    FIELDS = {
+    FIELDS: Dict[str, str] = {
         "world rank": "Rank",
         "url": "URL",
         "national/regionalrank": "National Rank",
@@ -151,14 +151,14 @@ class ShanghaiConfig(CrawlerConfig):
 
 
 class THEConfig(CrawlerConfig):
-    headers = {"User-Agent": CrawlerConfig.USER_AGENT}
-    BASE_URL = env("THE_BASE")
-    _raw_urls = env("THE_URLS_FILE", "the_urls.json")
-    URLS = read_json_config(Path.cwd() / _raw_urls)
+    headers: Dict[str, str] = {"User-Agent": CrawlerConfig.USER_AGENT}
+    BASE_URL: str = env("THE_BASE")
+    _raw_urls: str = env("THE_URLS_FILE", "the_urls.json")
+    URLS: List[dict] = read_json_config(Path.cwd() / _raw_urls)
 
-    DOWNLOAD_DIR = CrawlerConfig.MAIN_DIR / "the"
+    DOWNLOAD_DIR: Path = CrawlerConfig.MAIN_DIR / "the"
 
-    FIELDS = {
+    FIELDS: Dict[str, str] = {
         "rank": "Rank",
         "name": "Institution",
         "scores_overall": "Overall",
@@ -177,9 +177,9 @@ class THEConfig(CrawlerConfig):
 
 
 class WikipediaConfig(CrawlerConfig):
-    headers = {"User-Agent": CrawlerConfig.USER_AGENT}
-    BASE_URL = env("WIKIPEDIA_BASE")
-    _raw_urls = DBConfig.GRID_DATABASE_DIR / "institutes.csv"
-    URLS = get_row(_raw_urls)
+    headers: Dict[str, str] = {"User-Agent": CrawlerConfig.USER_AGENT}
+    BASE_URL: str = env("WIKIPEDIA_BASE")
+    _raw_urls: Path = DBConfig.GRID_DATABASE_DIR / "institutes.csv"
+    URLS: Iterator[Dict[str, str]] = get_row(_raw_urls)
 
-    DOWNLOAD_DIR = CrawlerConfig.MAIN_DIR / "wikipedia"
+    DOWNLOAD_DIR: Path = CrawlerConfig.MAIN_DIR / "wikipedia"
