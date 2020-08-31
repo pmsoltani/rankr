@@ -1,10 +1,11 @@
 import csv
 import io
 from pathlib import Path
+from typing import Union
 
 
 def csv_size(
-    file_path: Path, encoding: str = "utf-8", delimiter: str = ","
+    file_path: Union[Path, str], encoding: str = "utf-8", delimiter: str = ","
 ) -> int:
     """Returns the number of rows in a .csv file
 

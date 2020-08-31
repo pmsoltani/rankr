@@ -12,10 +12,10 @@ class Country(Base):
     __tablename__ = "country"
 
     id: int = Column(Integer, primary_key=True, autoincrement=True)
-    country = Column(String(63), nullable=False, unique=True)
-    country_code = Column(String(2), nullable=False, unique=True)
-    region = Column(String(15), nullable=False)
-    sub_region = Column(String(63))
+    country: str = Column(String(63), nullable=False, unique=True)
+    country_code: str = Column(String(2), nullable=False, unique=True)
+    region: str = Column(String(15), nullable=False)
+    sub_region: str = Column(String(63))
 
     # Relationships
     institutions: List[Institution] = relationship(
@@ -27,4 +27,4 @@ class Country(Base):
         super().__init__(**kwargs)
 
     def __repr__(self) -> str:
-        return f"{self.domain}: {self.name}"
+        return f"{self.country_code}: {self.country}"

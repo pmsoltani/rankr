@@ -1,19 +1,34 @@
-from config import CrawlerConfig, QSConfig, ShanghaiConfig, THEConfig
-from crawlers import QSCrawler, ShanghaiCrawler, THECrawler
+from typing import Any, Tuple
+from config import (
+    CrawlerConfig,
+    QSConfig,
+    ShanghaiConfig,
+    THEConfig,
+    WikipediaConfig,
+)
+from crawlers import QSCrawler, ShanghaiCrawler, THECrawler, WikipediaCrawler
 
 
-def engine_select(engine: str):
+def engine_select(engine: str) -> Tuple[Any, Any]:
     if engine == "qs":
         return (QSConfig, QSCrawler)
     if engine == "shanghai":
         return (ShanghaiConfig, ShanghaiCrawler)
     if engine == "the":
         return (THEConfig, THECrawler)
+    if engine == "wikipedia":
+        return (WikipediaConfig, WikipediaCrawler)
+    raise ValueError
 
 
 if __name__ == "__main__":
     for engine in CrawlerConfig.CRAWLER_ENGINE:
         config, crawler = engine_select(engine)
+        if engine == "wikipedia":
+            for url in config.URLS:
+                w = crawler(url["grid_id"], url["wikipedia_url"])
+                w.crawl()
+            continue
         for page in config.URLS:
             if not page.get("crawl"):
                 continue

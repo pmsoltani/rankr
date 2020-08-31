@@ -1,11 +1,11 @@
 import csv
 import io
 from pathlib import Path
-from typing import Dict, Iterator
+from typing import Dict, Iterator, Union
 
 
 def get_row(
-    file_path: Path, encoding: str = "utf-8", delimiter: str = ","
+    file_path: Union[Path, str], encoding: str = "utf-8", delimiter: str = ","
 ) -> Iterator[Dict[str, str]]:
     """Yields a row from a .csv file
 

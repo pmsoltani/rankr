@@ -1,33 +1,33 @@
 import json
 import re
-from typing import List
+from typing import Dict, List
 
 import requests
 from furl import furl
 
 from config import THEConfig
-from crawlers import CrawlerMixin
+from crawlers.crawler_mixin import CrawlerMixin
 from utils import text_process
 
 
 class THECrawler(CrawlerMixin, THEConfig):
-    def __init__(self, url: str, **kwargs):
+    def __init__(self, url: str, **kwargs) -> None:
         self.url = url
         super().__init__(**kwargs)
 
-    def _get_page(self):
+    def _get_page(self) -> str:
         page = requests.get(self.url, headers=self.headers)
-        json_url = re.findall(r"(https.*?\.json)", page.text)[0]
+        json_url: str = re.findall(r"(https.*?\.json)", page.text)[0]
 
         self.json_url = json_url.replace("\\", "")
         return self.json_url
 
-    def _get_tbl(self):
+    def _get_tbl(self) -> List[Dict[str, str]]:
         page = requests.get(self.json_url, headers=self.headers)
         raw_data = json.loads(page.text)
 
         # processing raw_data
-        processed_data: List[dict] = []
+        processed_data: List[Dict[str, str]] = []
         for row in raw_data["data"]:
             values = {}
             for col in row:

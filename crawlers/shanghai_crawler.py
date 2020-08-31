@@ -6,14 +6,14 @@ from bs4 import BeautifulSoup
 from furl import furl
 
 from config import ShanghaiConfig
-from crawlers import CrawlerMixin
+from crawlers.crawler_mixin import CrawlerMixin
 from utils import text_process
 
 
 class ShanghaiCrawler(CrawlerMixin, ShanghaiConfig):
-    def __init__(self, url: str, **kwargs):
+    def __init__(self, url: str, **kwargs) -> None:
         self.url = url
-        self.header_group_keyword = "institution"
+        self.header_group_keyword: str = "institution"
 
         super().__init__(**kwargs)
 
@@ -39,7 +39,7 @@ class ShanghaiCrawler(CrawlerMixin, ShanghaiConfig):
         Returns:
             List[Dict[str, str]]: Table data as a list of dictionaries
         """
-        self.processed_data: List[List[str]] = []
+        self.processed_data: List[Dict[str, str]] = []
 
         tbl = self.page.find("table", attrs={"id": "UniversityRanking"})
         tbl_headers = self._clean_headers([h.text for h in tbl.find_all("th")])
@@ -77,15 +77,15 @@ class ShanghaiCrawler(CrawlerMixin, ShanghaiConfig):
         Returns:
             list: Cleaned column names
         """
-        new_headers = []
+        new_headers: List[str] = []
 
         for h in headers:
             h = text_process(h).lower()
             if self.header_group_keyword in h:
                 new_headers.extend(["URL", "Institution", "Country"])
 
-            if ShanghaiConfig.FIELDS.get(h):
-                new_headers.append(ShanghaiConfig.FIELDS.get(h))
+            if h in ShanghaiConfig.FIELDS:
+                new_headers.append(ShanghaiConfig.FIELDS[h])
 
             if h.startswith("score on"):
                 tmp = h.replace("score on", "").strip().split(" ")

@@ -1,16 +1,10 @@
-import enum
-
 from sqlalchemy import Column, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.types import Enum, Integer, String
 
-from config import DBConfig
 from rankr.db_models.base import Base
 from rankr.db_models.institution import Institution
-
-
-link_types = ["homepage"] + list(DBConfig.RANKINGS["metrics"])
-LinkTypeEnum = enum.Enum("LinkTypeEnum", {type: type for type in link_types},)
+from rankr.enums import LinkTypeEnum
 
 
 class Link(Base):
@@ -36,4 +30,4 @@ class Link(Base):
         super().__init__(**kwargs)
 
     def __repr__(self):
-        return f"{self.type}: {self.link}"
+        return f"{self.type.name}: {self.link}"

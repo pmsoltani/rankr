@@ -1,0 +1,20 @@
+{
+  "entity_types": {
+    "world": "geo",
+    "region": "geo",
+    "sub_region": "geo",
+    "country": "geo",
+    "country_code": "geo",
+    "institution": "i"
+  },
+  "institution_types": [
+    "Archive",
+    "Company",
+    "Education",
+    "Facility",
+    "Government",
+    "Healthcare",
+    "Nonprofit",
+    "Other"
+  ]
+}
