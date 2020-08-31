@@ -20,12 +20,12 @@ def value_process(
 
     # Dealing with ranges (e.g. Rank = "800-1000" -> "900", Rank = "47" -> "47")
     range_pattern = r"(\d+\.*\d*)[-־᠆‐‑‒–—―⁻₋−⸺⸻﹘﹣－:]*(\d+\.*\d*)*"
-    val = re.search(range_pattern, val)
+    matches: Optional[re.Match[str]] = re.search(range_pattern, val)
     try:
-        lower_bound, upper_bound = val.groups()
+        lower_bound, upper_bound = matches.groups()
         if upper_bound:
-            val = (Decimal(lower_bound) + Decimal(upper_bound)) / 2
-            val = str(int(val)) if value_type == "integer" else str(val)
+            total = (Decimal(lower_bound) + Decimal(upper_bound)) / 2
+            val = str(int(total)) if value_type == "integer" else str(val)
             return val
         return lower_bound
     except AttributeError:
