@@ -7,7 +7,7 @@ from rankr.enums import RankingSystemEnum, RankingTypeEnum
 from utils import group_by
 
 
-def get_ranking_systems(db: Session):
+def get_ranking_systems(db: Session) -> Dict[RankingSystemEnum, List[int]]:
     query = (Ranking.ranking_system, Ranking.year)
     ranking_systems = db.query(*query).group_by(*query).order_by(*query).all()
     result = {}

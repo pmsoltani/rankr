@@ -1,5 +1,6 @@
 import re
-from typing import Dict, List, Tuple
+from pathlib import Path
+from typing import Dict, List, Tuple, Union
 
 from sqlalchemy import func
 from sqlalchemy.orm import Session
@@ -12,8 +13,8 @@ from utils import csv_size, fuzzy_matcher, get_row, nullify
 
 
 def ranking_process(
-    db: Session, file_path: str, soup: dict
-) -> Tuple[List[Institution], List[Dict[str, str]]]:
+    db: Session, file_path: Union[Path, str], soup: dict
+) -> Tuple[List[Institution], List[Dict[str, str]], List[Dict[str, str]]]:
     institutions_list = []
     not_mached_list = []
     fuzz_list = []

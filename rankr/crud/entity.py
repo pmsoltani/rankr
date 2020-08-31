@@ -47,7 +47,7 @@ class Entity(object):
 
     @property
     def profile(self) -> "Entity":
-        if self.entity_type == EntityTypeEnum.institution:
+        if self.entity_type == EntityTypeEnum["institution"]:
             self.get_institution_data()
         self.ranks
         self.scores
@@ -57,7 +57,7 @@ class Entity(object):
     @property
     def ranks(self) -> List[Ranking]:
         if not self._ranks:
-            ranks = self._get_metrics(metrics=[MetricEnum.Rank])
+            ranks = self._get_metrics(metrics=[MetricEnum["Rank"]])
             self._ranks = self._aggregate_metrics(ranks)
         return self._ranks
 
@@ -75,14 +75,14 @@ class Entity(object):
             stat_metrics = [MetricEnum[stat.name] for stat in StatMetricEnum]
             stats = self._get_metrics(
                 metrics=stat_metrics,
-                ranking_system=RankingSystemEnum.the,
+                ranking_system=RankingSystemEnum["the"],
                 latest=True,
             )
             self._stats = self._aggregate_metrics(stats)
         return self._stats
 
     def get_institution_data(self) -> None:
-        if self.entity_type != EntityTypeEnum.institution:
+        if self.entity_type != EntityTypeEnum["institution"]:
             return
 
         institution: Institution = (
@@ -148,15 +148,15 @@ class Entity(object):
         filters = (*filters, Ranking.year == year) if year else filters
 
         query = self.db.query(Ranking).filter(*filters)
-        metrics = query.order_by(Ranking.year).all()
-        for metric in metrics:
+        ranking_metrics: List[Ranking] = query.order_by(Ranking.year).all()
+        for metric in ranking_metrics:
             metric.entity = self.entity
             metric.entity_type = self.entity_type
 
-        return metrics
+        return ranking_metrics
 
     def _aggregate_metrics(self, metrics: List[Ranking]) -> List[Ranking]:
-        if self.entity_type == EntityTypeEnum.institution:
+        if self.entity_type == EntityTypeEnum["institution"]:
             return metrics
 
         fields = ["year", "ranking_system", "metric"]
