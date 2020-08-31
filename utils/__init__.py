@@ -1,3 +1,5 @@
+"""Common independent functions used by other modules"""
+
 from utils.csv_export import csv_export  # noqa
 from utils.csv_size import csv_size  # noqa
 from utils.fuzzy_matcher import fuzzy_matcher  # noqa
