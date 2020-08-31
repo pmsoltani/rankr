@@ -2,10 +2,16 @@ import csv
 import io
 import time
 from pathlib import Path
-from typing import Union
+from typing import Callable, Dict, List, Union
 
 
 class CrawlerMixin(object):
+    _get_page: Callable
+    _get_tbl: Callable
+    DOWNLOAD_DIR: Path
+    processed_data: List[Dict[str, str]]
+    url: str
+
     def __init__(
         self,
         year: Union[str, int],
@@ -15,8 +21,8 @@ class CrawlerMixin(object):
         subject: str,
         wait: int = 10,
         tries: int = 5,
-    ):
-        self.ranking_info = {
+    ) -> None:
+        self.ranking_info: Dict[str, str] = {
             "Ranking System": ranking_system,
             "Ranking Type": ranking_type,
             "Year": str(year),
@@ -33,7 +39,7 @@ class CrawlerMixin(object):
         self.file_path = Path(self.DOWNLOAD_DIR) / self.file_name
         self.file_path.parent.mkdir(parents=True, exist_ok=True)
 
-    def crawl(self):
+    def crawl(self) -> None:
         for i in range(self.tries):
             try:
                 self._get_page()
@@ -46,7 +52,7 @@ class CrawlerMixin(object):
 
             break
 
-    def _csv_export(self):
+    def _csv_export(self) -> None:
         with io.open(
             self.file_path, "w", newline="", encoding="utf-8"
         ) as csv_file:
