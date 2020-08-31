@@ -20,6 +20,7 @@ sqlalchemy-utils = "^0.36.8"
 furl = "^2.1.0"
 tqdm = "^4.48.2"
 fuzzywuzzy = {extras = ["speedup"], version = "^0.18.0"}
+typer = {extras = ["all"], version = "^0.3.2"}
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.8.3"
