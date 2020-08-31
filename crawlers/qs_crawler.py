@@ -1,6 +1,6 @@
 import json
 import re
-from typing import List
+from typing import Dict, List
 
 import requests
 from bs4 import BeautifulSoup
@@ -12,11 +12,11 @@ from utils import text_process
 
 
 class QSCrawler(CrawlerMixin, QSConfig):
-    def __init__(self, url: str, **kwargs):
+    def __init__(self, url: str, **kwargs) -> None:
         self.url = url
         super().__init__(**kwargs)
 
-    def _get_page(self):
+    def _get_page(self) -> str:
         page = requests.get(self.url, headers=self.headers)
         link = page.headers["link"]
         if "web.archive.org" in self.url:
@@ -28,10 +28,10 @@ class QSCrawler(CrawlerMixin, QSConfig):
             / "sites/default/files/qs-rankings-data/"
             / f"{node_number}_indicators.txt"
         )
-        self.json_url = json_url
+        self.json_url = json_url.url
         return self.json_url
 
-    def _get_tbl(self):
+    def _get_tbl(self) -> List[Dict[str, str]]:
         page = requests.get(self.json_url, headers=self.headers)
         raw_data = json.loads(page.text)
 
@@ -45,7 +45,7 @@ class QSCrawler(CrawlerMixin, QSConfig):
             columns[col["data"]] = col_name
 
         # processing raw_data
-        processed_data: List[dict] = []
+        processed_data: List[Dict[str, str]] = []
         for row in raw_data["data"]:
             values = {}
             for col in row:
