@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from sqlalchemy import Column, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.types import DECIMAL, Enum, Integer, String
@@ -27,7 +29,7 @@ class Ranking(Base):
     field: str = Column(String(255), nullable=False)
     subject: str = Column(String(255), nullable=False)
     metric: MetricEnum = Column(Enum(MetricEnum), nullable=False, index=True)
-    value: float = Column(DECIMAL(13, 3))
+    value: Decimal = Column(DECIMAL(13, 3))
     value_type: ValueTypeEnum = Column(Enum(ValueTypeEnum), nullable=False)
 
     # Relationships
