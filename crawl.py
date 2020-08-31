@@ -1,3 +1,4 @@
+from typing import Any, Tuple
 from config import (
     CrawlerConfig,
     QSConfig,
@@ -8,7 +9,7 @@ from config import (
 from crawlers import QSCrawler, ShanghaiCrawler, THECrawler, WikipediaCrawler
 
 
-def engine_select(engine: str):
+def engine_select(engine: str) -> Tuple[Any, Any]:
     if engine == "qs":
         return (QSConfig, QSCrawler)
     if engine == "shanghai":
@@ -17,6 +18,7 @@ def engine_select(engine: str):
         return (THEConfig, THECrawler)
     if engine == "wikipedia":
         return (WikipediaConfig, WikipediaCrawler)
+    raise ValueError
 
 
 if __name__ == "__main__":
