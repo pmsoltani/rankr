@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from furl import furl
 
 from config import ShanghaiConfig
-from crawlers import CrawlerMixin
+from crawlers.crawler_mixin import CrawlerMixin
 from utils import text_process
 
 

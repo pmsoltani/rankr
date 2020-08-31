@@ -6,7 +6,7 @@ import requests
 from furl import furl
 
 from config import THEConfig
-from crawlers import CrawlerMixin
+from crawlers.crawler_mixin import CrawlerMixin
 from utils import text_process
 
 

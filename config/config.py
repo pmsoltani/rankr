@@ -1,10 +1,12 @@
-import io
 import csv
+import io
 import json
 from pathlib import Path
 from typing import Callable, Dict
 
 from environs import Env
+
+from utils import get_row
 
 
 env = Env()
@@ -172,3 +174,12 @@ class THEConfig(CrawlerConfig):
         "stats_pc_intl_students": "International Students",
         "stats_female_male_ratio": "Female:Male Ratio",
     }
+
+
+class WikipediaConfig(CrawlerConfig):
+    headers = {"User-Agent": CrawlerConfig.USER_AGENT}
+    BASE_URL = env("WIKIPEDIA_BASE")
+    _raw_urls = DBConfig.GRID_DATABASE_DIR / "institutes.csv"
+    URLS = get_row(_raw_urls)
+
+    DOWNLOAD_DIR = CrawlerConfig.MAIN_DIR / "wikipedia"
