@@ -50,18 +50,18 @@ def get_entity_type(db: Session, entity: str) -> Tuple[EntityTypeEnum, str]:
     entity_type = None
     name = None
     if re.match(APPConfig.GRID_ID_PATTERN, entity):
-        entity_type = EntityTypeEnum.institution
+        entity_type = EntityTypeEnum["institution"]
     if entity.lower() == "world":
-        entity_type = EntityTypeEnum.world
+        entity_type = EntityTypeEnum["world"]
         name = entity.title()
     if entity in geo_data["regions"]:
-        entity_type = EntityTypeEnum.region
+        entity_type = EntityTypeEnum["region"]
     if entity in geo_data["sub_regions"]:
-        entity_type = EntityTypeEnum.sub_region
+        entity_type = EntityTypeEnum["sub_region"]
     if entity in geo_data["countries"]:
-        entity_type = EntityTypeEnum.country
+        entity_type = EntityTypeEnum["country"]
     if entity in geo_data["country_codes"]:
-        entity_type = EntityTypeEnum.country_code
+        entity_type = EntityTypeEnum["country_code"]
         name = APPConfig.COUNTRIES[entity]
 
     if not entity_type:
