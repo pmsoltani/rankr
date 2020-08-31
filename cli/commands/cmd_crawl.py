@@ -30,8 +30,8 @@ def engine_check(values: List[str]) -> List[str]:
     for cnt, value in enumerate(values):
         if value.lower() not in CrawlerConfig.SUPPORTED_ENGINES:
             raise typer.BadParameter(
-                f" Only {CrawlerConfig.SUPPORTED_ENGINES} are supported. "
-                + f"Got '{value}'."
+                f"Wrong engine value '{value}'. "
+                + f"Only {CrawlerConfig.SUPPORTED_ENGINES} are supported."
             )
     return [v.lower() for v in values]
 
