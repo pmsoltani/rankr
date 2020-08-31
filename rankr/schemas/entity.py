@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from pydantic import BaseModel, constr, HttpUrl
+from pydantic import BaseModel, Field, HttpUrl
 
 from rankr.schemas.ranking import RankingSchema
 from rankr.enums import EntityTypeEnum
@@ -17,7 +17,7 @@ class EntitySchema(BaseModel):
     lng: Optional[str] = None
     city: Optional[str] = None
     country: Optional[str] = None
-    country_code: Optional[constr(min_length=2, max_length=2)] = None
+    country_code: Optional[str] = Field(None, min_length=2, max_length=2)
     ranks: List[RankingSchema]
     scores: List[RankingSchema]
     stats: List[RankingSchema]

@@ -37,7 +37,7 @@ class RankingSchema(BaseModel):
         if institution:
             result["entity"] = result.get("entity") or institution.grid_id
             result["entity_type"] = (
-                result.get("entity_type") or EntityTypeEnum.institution
+                result.get("entity_type") or EntityTypeEnum["institution"]
             )
             result["name"] = institution.name
             result["country"] = institution.country.country
