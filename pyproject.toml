@@ -5,6 +5,9 @@ description = "Scripts for crawling academic ranking websites"
 authors = ["Pooria Soltani <pooria.ms@gmail.com>"]
 license = "MIT"
 
+[tool.poetry.scripts]
+rankr = "cli.cli:cli"
+
 [tool.poetry.dependencies]
 python = "^3.7"
 requests = "^2.24.0"
