@@ -20,7 +20,7 @@ from utils import csv_size, get_csv, get_row, nullify
 
 def db_grid():
     try:
-        typer.secho("Processing countries...", fg="green")
+        typer.secho("Processing countries...", fg="cyan")
         db: Session = SessionLocal()
         rows = get_row(DBConfig.MAIN_DIR / "countries.csv")
         countries_list: List[Country] = []
@@ -36,7 +36,7 @@ def db_grid():
     attrs = ["addresses", "acronyms", "aliases", "labels", "links", "types"]
 
     try:
-        typer.secho("Processing institutions...", fg="green")
+        typer.secho("Processing institutions...", fg="cyan")
         db: Session = SessionLocal()
 
         institution_attrs = [
@@ -88,7 +88,7 @@ def db_grid():
 
         typer.secho(
             "Committing results to the DB. This can take several minutes.",
-            fg="green",
+            fg="cyan",
         )
         db.commit()
     finally:

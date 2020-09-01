@@ -8,7 +8,7 @@ from rankr.db_models import Base, engine
 def db_init(force: bool = False):
     if force and database_exists(engine.url):
         drop_database(engine.url)
-        typer.secho("Dropped the database!", fg="green")
+        typer.secho("Dropped the database!", fg="cyan")
 
     try:
         if not database_exists(engine.url):

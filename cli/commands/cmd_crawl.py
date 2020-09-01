@@ -39,7 +39,7 @@ def engine_check(values: List[str]) -> List[str]:
 @cli.command()
 def crawl(engines: List[str] = typer.Argument(..., callback=engine_check)):
     for engine in engines:
-        typer.secho(f"Processing {engine} urls.", fg="green")
+        typer.secho(f"Processing {engine} urls.", fg="cyan")
         config, crawler = engine_select(engine)
         if engine == "wikipedia":
             for url in config.URLS:
@@ -59,3 +59,5 @@ def crawl(engines: List[str] = typer.Argument(..., callback=engine_check)):
                 subject=page["subject"],
             )
             p.crawl()
+
+    typer.secho("All done!", fg="green")

@@ -33,7 +33,7 @@ def db_rankings():
         )
         for cnt, file in enumerate(files, start=1):
             typer.secho(
-                f"Processing file ({cnt}/{len(files)}): {file.stem}", fg="green"
+                f"Processing file ({cnt}/{len(files)}): {file.stem}", fg="cyan"
             )
             try:
                 db = SessionLocal()
@@ -62,3 +62,5 @@ def db_rankings():
     if fuzz:
         csv_export(DBConfig.MAIN_DIR / "fuzz.csv", fuzz)
         typer.echo(f"Saved the list of {len(fuzz)} fuzzy-matched institutions.")
+
+    typer.secho("All done!", fg="green")
