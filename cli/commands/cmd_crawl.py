@@ -1,6 +1,7 @@
-from typing import Any, List, Tuple
+from typing import Any, Dict, List, Tuple
 
 import typer
+from sqlalchemy.orm.session import Session
 from typer.colors import CYAN, GREEN
 
 from config import (
@@ -11,6 +12,7 @@ from config import (
     WikipediaConfig,
 )
 from crawlers import QSCrawler, ShanghaiCrawler, THECrawler, WikipediaCrawler
+from rankr.db_models import Institution, SessionLocal
 
 
 def engine_select(engine: str) -> Tuple[Any, Any]:
@@ -25,11 +27,8 @@ def engine_select(engine: str) -> Tuple[Any, Any]:
     raise ValueError
 
 
-cli = typer.Typer()
-
-
 def engine_check(values: List[str]) -> List[str]:
-    for cnt, value in enumerate(values):
+    for value in values:
         if value.lower() not in CrawlerConfig.SUPPORTED_ENGINES:
             raise typer.BadParameter(
                 f"Wrong engine value '{value}'. "
@@ -38,13 +37,25 @@ def engine_check(values: List[str]) -> List[str]:
     return [v.lower() for v in values]
 
 
-@cli.command()
+def get_wikipedia_urls() -> List[Dict[str, str]]:
+    try:
+        db: Session = SessionLocal()
+        query = (Institution.grid_id, Institution.wikipedia_url)
+        institutions = (
+            db.query(*query).join(Institution.rankings).group_by(*query).all()
+        )
+    finally:
+        db.close()
+    return [institution._asdict() for institution in institutions]
+
+
 def crawl(engines: List[str] = typer.Argument(..., callback=engine_check)):
     for engine in engines:
         typer.secho(f"Processing {engine} urls.", fg=CYAN)
         config, crawler = engine_select(engine)
         if engine == "wikipedia":
-            for url in config.URLS:
+            urls = get_wikipedia_urls() or config.URLS
+            for url in urls:
                 w = crawler(url["grid_id"], url["wikipedia_url"])
                 w.crawl()
             continue
