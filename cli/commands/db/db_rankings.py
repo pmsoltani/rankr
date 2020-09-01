@@ -1,5 +1,8 @@
 from pathlib import Path
 from typing import List
+from sqlalchemy.orm.session import Session
+
+import typer
 
 from config import DBConfig
 from rankr.crud import ranking_process
@@ -7,51 +10,55 @@ from rankr.db_models import Institution, SessionLocal
 from utils import csv_export, csv_size
 
 
-db = SessionLocal()
-all_institutions: List[Institution] = db.query(Institution).all()
-soup = {}
-for inst in all_institutions:
-    try:
-        soup[inst.country.country][inst.soup] = inst.grid_id
-    except KeyError:
-        soup[inst.country.country] = {inst.soup: inst.grid_id}
-db.close()
-
-
-not_mached = []
-fuzz = []
-for ranking_system in list(DBConfig.RANKINGS["metrics"]):
-    dir_path: Path = DBConfig.MAIN_DIR / ranking_system
-    if not dir_path.exists():
-        continue
-
-    files: List[Path] = sorted(
-        [f for f in dir_path.iterdir() if f.suffix == ".csv"], reverse=True
-    )
-    for cnt, file in enumerate(files, start=1):
-        print(f"Processing file ({cnt}/{len(files)}): {file.stem}")
+def db_rankings():
+    db: Session = SessionLocal()
+    all_institutions: List[Institution] = db.query(Institution).all()
+    soup = {}
+    for inst in all_institutions:
         try:
-            db = SessionLocal()
-            size = csv_size(file)
-            institutions_list, not_mached_list, fuzz_list = ranking_process(
-                db, file, soup
+            soup[inst.country.country][inst.soup] = inst.grid_id
+        except KeyError:
+            soup[inst.country.country] = {inst.soup: inst.grid_id}
+    db.close()
+
+    not_mached = []
+    fuzz = []
+    for ranking_system in list(DBConfig.RANKINGS["metrics"]):
+        dir_path: Path = DBConfig.MAIN_DIR / ranking_system
+        if not dir_path.exists():
+            continue
+
+        files: List[Path] = sorted(
+            [f for f in dir_path.iterdir() if f.suffix == ".csv"], reverse=True
+        )
+        for cnt, file in enumerate(files, start=1):
+            typer.secho(
+                f"Processing file ({cnt}/{len(files)}): {file.stem}", fg="green"
             )
-            if len(institutions_list) + len(not_mached_list) != size:
-                raise ValueError("Some institutions may have been lost!")
-            not_mached.extend(not_mached_list)
-            fuzz.extend(fuzz_list)
-            if institutions_list:
+            try:
+                db = SessionLocal()
+                size = csv_size(file)
+                institutions_list, not_mached_list, fuzz_list = ranking_process(
+                    db, file, soup
+                )
+                if len(institutions_list) + len(not_mached_list) != size:
+                    raise ValueError("Some institutions may have been lost!")
+                not_mached.extend(not_mached_list)
+                fuzz.extend(fuzz_list)
+
                 db.add_all(institutions_list)
                 db.commit()
-        except ValueError as exc:
-            print(exc)
-        finally:
-            db.close()
+            except ValueError as exc:
+                typer.secho(str(exc), fg="red")
+            finally:
+                db.close()
 
-if not_mached:
-    csv_export(DBConfig.MAIN_DIR / "not_mached.csv", not_mached)
-    print(f"Saved the list of {len(not_mached)} not matched institutions.")
+    if not_mached:
+        csv_export(DBConfig.MAIN_DIR / "not_mached.csv", not_mached)
+        typer.echo(
+            f"Saved the list of {len(not_mached)} not matched institutions."
+        )
 
-if fuzz:
-    csv_export(DBConfig.MAIN_DIR / "fuzz.csv", fuzz)
-    print(f"Saved the list of {len(fuzz)} fuzzy-matched institutions.")
+    if fuzz:
+        csv_export(DBConfig.MAIN_DIR / "fuzz.csv", fuzz)
+        typer.echo(f"Saved the list of {len(fuzz)} fuzzy-matched institutions.")
