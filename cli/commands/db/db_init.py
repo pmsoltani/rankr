@@ -5,7 +5,7 @@ from config import DBConfig
 from rankr.db_models import Base, engine
 
 
-def init(force: bool = False):
+def db_init(force: bool = False):
     if force and database_exists(engine.url):
         drop_database(engine.url)
         typer.secho("Dropped the database!", fg="green")
