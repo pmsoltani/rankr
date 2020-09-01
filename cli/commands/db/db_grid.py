@@ -19,7 +19,6 @@ from utils import csv_size, get_csv, get_row, nullify
 
 
 def db_grid():
-    # processing countries
     try:
         typer.secho("Processing countries...", fg="green")
         db: Session = SessionLocal()
@@ -36,7 +35,6 @@ def db_grid():
 
     attrs = ["addresses", "acronyms", "aliases", "labels", "links", "types"]
 
-    # processing institutions
     try:
         typer.secho("Processing institutions...", fg="green")
         db: Session = SessionLocal()
