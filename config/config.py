@@ -2,7 +2,7 @@ import csv
 import io
 import json
 from pathlib import Path
-from typing import Callable, Dict, Iterator, List
+from typing import Callable, Dict, Iterator, List, Union
 
 from environs import Env
 
@@ -13,8 +13,8 @@ env = Env()
 env.read_env()
 
 
-def read_json_config(path: Path, object_hook: Callable = None):
-    with io.open(path, "r", encoding="utf-8") as json_file:
+def read_json_config(file_path: Union[Path, str], object_hook: Callable = None):
+    with io.open(file_path, "r", encoding="utf-8") as json_file:
         return json.loads(json_file.read(), object_hook=object_hook)
 
 
@@ -86,6 +86,8 @@ class CrawlerConfig(object):
 
     USER_AGENT: str = env("USER_AGENT")
 
+    SUPPORTED_ENGINES: List[str] = list(DBConfig.RANKINGS["metrics"])
+    SUPPORTED_ENGINES += ["wikipedia"]
     CRAWLER_ENGINE = env.list("CRAWLER_ENGINE", ["qs", "shanghai", "the"])
     _country_names_path: Path = env.path("COUNTRY_NAMES", "country_names.json")
     COUNTRY_NAMES = read_json_config(_country_names_path)
