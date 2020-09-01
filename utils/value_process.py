@@ -25,7 +25,7 @@ def value_process(
         lower_bound, upper_bound = matches.groups()
         if upper_bound:
             total = (Decimal(lower_bound) + Decimal(upper_bound)) / 2
-            val = str(int(total)) if value_type == "integer" else str(val)
+            val = str(int(total)) if value_type == "integer" else str(total)
             return val
         return lower_bound
     except AttributeError:
