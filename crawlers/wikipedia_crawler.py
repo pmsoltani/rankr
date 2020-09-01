@@ -79,4 +79,4 @@ class WikipediaCrawler(WikipediaConfig):
             self.file_path.rename(
                 Path(self.DOWNLOAD_DIR) / (self.grid_id + self.file_ext)
             )
-            print(f"Saved file: {self.file_path}")
+            print(f"Saved file: {self.file_path}{self.file_ext}")
