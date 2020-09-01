@@ -3,6 +3,7 @@ from typing import List
 import typer
 from sqlalchemy.orm import Session
 from tqdm import tqdm
+from typer.colors import CYAN
 
 from config import DBConfig
 from rankr.db_models import (
@@ -20,7 +21,7 @@ from utils import csv_size, get_csv, get_row, nullify
 
 def db_grid():
     try:
-        typer.secho("Processing countries...", fg="cyan")
+        typer.secho("Processing countries...", fg=CYAN)
         db: Session = SessionLocal()
         rows = get_row(DBConfig.MAIN_DIR / "countries.csv")
         countries_list: List[Country] = []
@@ -36,7 +37,7 @@ def db_grid():
     attrs = ["addresses", "acronyms", "aliases", "labels", "links", "types"]
 
     try:
-        typer.secho("Processing institutions...", fg="cyan")
+        typer.secho("Processing institutions...", fg=CYAN)
         db: Session = SessionLocal()
 
         institution_attrs = [
@@ -88,7 +89,7 @@ def db_grid():
 
         typer.secho(
             "Committing results to the DB. This can take several minutes.",
-            fg="cyan",
+            fg=CYAN,
         )
         db.commit()
     finally:

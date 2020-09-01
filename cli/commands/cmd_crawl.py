@@ -1,6 +1,8 @@
-import typer
-
 from typing import Any, List, Tuple
+
+import typer
+from typer.colors import CYAN, GREEN
+
 from config import (
     CrawlerConfig,
     QSConfig,
@@ -39,7 +41,7 @@ def engine_check(values: List[str]) -> List[str]:
 @cli.command()
 def crawl(engines: List[str] = typer.Argument(..., callback=engine_check)):
     for engine in engines:
-        typer.secho(f"Processing {engine} urls.", fg="cyan")
+        typer.secho(f"Processing {engine} urls.", fg=CYAN)
         config, crawler = engine_select(engine)
         if engine == "wikipedia":
             for url in config.URLS:
@@ -60,4 +62,4 @@ def crawl(engines: List[str] = typer.Argument(..., callback=engine_check)):
             )
             p.crawl()
 
-    typer.secho("All done!", fg="green")
+    typer.secho("All done!", fg=GREEN)

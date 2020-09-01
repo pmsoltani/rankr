@@ -3,6 +3,7 @@ from typing import List
 from sqlalchemy.orm.session import Session
 
 import typer
+from typer.colors import CYAN, GREEN, RED
 
 from config import DBConfig
 from rankr.crud import ranking_process
@@ -33,7 +34,7 @@ def db_rankings():
         )
         for cnt, file in enumerate(files, start=1):
             typer.secho(
-                f"Processing file ({cnt}/{len(files)}): {file.stem}", fg="cyan"
+                f"Processing file ({cnt}/{len(files)}): {file.stem}", fg=CYAN
             )
             try:
                 db = SessionLocal()
@@ -49,7 +50,7 @@ def db_rankings():
                 db.add_all(institutions_list)
                 db.commit()
             except ValueError as exc:
-                typer.secho(str(exc), fg="red")
+                typer.secho(str(exc), fg=RED)
             finally:
                 db.close()
 
@@ -63,4 +64,4 @@ def db_rankings():
         csv_export(DBConfig.MAIN_DIR / "fuzz.csv", fuzz)
         typer.echo(f"Saved the list of {len(fuzz)} fuzzy-matched institutions.")
 
-    typer.secho("All done!", fg="green")
+    typer.secho("All done!", fg=GREEN)
