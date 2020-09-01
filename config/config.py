@@ -86,7 +86,8 @@ class CrawlerConfig(object):
 
     USER_AGENT: str = env("USER_AGENT")
 
-    SUPPORTED_ENGINES: List[str] = ["qs", "shanghai", "the", "wikipedia"]
+    SUPPORTED_ENGINES: List[str] = list(DBConfig.RANKINGS["metrics"])
+    SUPPORTED_ENGINES += ["wikipedia"]
     CRAWLER_ENGINE = env.list("CRAWLER_ENGINE", ["qs", "shanghai", "the"])
     _country_names_path: Path = env.path("COUNTRY_NAMES", "country_names.json")
     COUNTRY_NAMES = read_json_config(_country_names_path)
