@@ -7,6 +7,8 @@ from rankr.enums import EntityTypeEnum
 
 
 class EntitySchema(BaseModel):
+    """For returning an institution/geo entity to the client."""
+
     entity: str
     entity_type: EntityTypeEnum
     url: HttpUrl
