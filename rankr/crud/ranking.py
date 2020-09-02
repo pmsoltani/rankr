@@ -8,6 +8,14 @@ from utils import group_by
 
 
 def get_ranking_systems(db: Session) -> Dict[RankingSystemEnum, List[int]]:
+    """Retrieves the available ranking systems and their years.
+
+    Args:
+        db (Session): SQLAlchemy session instant to connect to the DB
+
+    Returns:
+        Dict[RankingSystemEnum, List[int]]: Available ranking systems
+    """
     query = (Ranking.ranking_system, Ranking.year)
     ranking_systems = db.query(*query).group_by(*query).order_by(*query).all()
     result = {}
@@ -25,6 +33,22 @@ def get_ranking_table(
     field: str = "All",
     subject: str = "All",
 ) -> Dict[RankingSystemEnum, List[Ranking]]:
+    """[summary]
+
+    Args:
+        db (Session): SQLAlchemy session instant to connect to the DB
+        year (int): The ranking year of publication
+        ranking_system (Optional[RankingSystemEnum], optional): The
+        ranking system. Defaults to None.
+        ranking_type (RankingTypeEnum, optional): The ranking type.
+        Defaults to RankingTypeEnum["university ranking"].
+        field (str, optional): The ranking field. Defaults to "All".
+        subject (str, optional): The ranking subject. Defaults to "All".
+
+    Returns:
+        Dict[RankingSystemEnum, List[Ranking]]: The ranking table
+        results, grouped by ranking systems
+    """
     filters = (
         Ranking.ranking_type == ranking_type,
         Ranking.year == year,
