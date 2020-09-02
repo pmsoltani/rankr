@@ -1,4 +1,3 @@
-import re
 from pathlib import Path
 from typing import Dict, List, Tuple, Union
 
@@ -34,16 +33,7 @@ def ranking_process(
         inst_name = row["Institution"].strip().lower()
         inst_country = DBConfig.country_name_mapper(row["Country"])
         inst_url = row["URL"]
-        inst_acronym = re.search(r"\((.*?)\)$", inst_name)
-        inst_bare_name = ""
-        if inst_acronym:
-            # institution acronym:
-            # "universiti malaya (um)" -> "um"
-            inst_acronym = inst_acronym.group(1).lower()
-            # institution name without acronym:
-            # "universiti malaya (um)" -> "universiti malaya"
-            inst_bare_name = re.search(r"^(.*?)\(", inst_name)
-            inst_bare_name = inst_bare_name.group(1).strip().lower()
+
         inst_info = {
             "Raw": inst_name,
             "Country": inst_country,
@@ -86,7 +76,7 @@ def ranking_process(
                     {"Fuzzy": inst.name, "GRID ID": inst_grid_id, **inst_info}
                 )
 
-        # could not match, or matched before (with another institution)
+        # could not match, or was matched before (with another institution)
         if not inst or inst in institutions_list:
             not_mached_list.append(
                 {
@@ -98,7 +88,7 @@ def ranking_process(
 
         ranking_metrics = metrics_process(row)
         inst_link_types = [link.type.name for link in inst.links]
-        if link_type not in inst_link_types and inst_url:
+        if (link_type not in inst_link_types) and inst_url:
             inst.links.append(Link(type=link_type, link=inst_url))
         inst.rankings.extend(ranking_metrics)
         institutions_list.append(inst)
