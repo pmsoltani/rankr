@@ -44,6 +44,6 @@ class Ranking(Base):
     def __repr__(self):
         return (
             f"{self.ranking_system.name} ({self.year}) | "
-            + f"F: {self.field}, S: {self.subject}, "
+            + f"{self.field} ({self.subject}) -> "
             + f"{self.metric.name}: {self.value}"
         )
