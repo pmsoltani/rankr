@@ -13,11 +13,11 @@ from utils import csv_size, fuzzy_matcher, get_row, nullify
 
 
 def ranking_process(
-    db: Session, file_path: Union[Path, str], soup: dict
+    db: Session, file_path: Union[Path, str], soup: Dict[str, Dict[str, str]]
 ) -> Tuple[List[Institution], List[Dict[str, str]], List[Dict[str, str]]]:
-    institutions_list = []
-    not_mached_list = []
-    fuzz_list = []
+    institutions_list: List[Institution] = []
+    not_mached_list: List[Dict[str, str]] = []
+    fuzz_list: List[Dict[str, str]] = []
 
     # useful queries:
     q1 = db.query(Institution)
