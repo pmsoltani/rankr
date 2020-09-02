@@ -7,15 +7,17 @@ from typing import Union
 def csv_size(
     file_path: Union[Path, str], encoding: str = "utf-8", delimiter: str = ","
 ) -> int:
-    """Returns the number of rows in a .csv file
+    """Returns the number of rows in a .csv file.
 
     This function uses python's generators, so it's both fast and
     efficient.
 
     Args:
-        file_path (Path): the path to the .csv file
-        encoding (str): encoding to be used when reading the .csv file
-        delimiter (str): the delimiter used in the .csv file
+        file_path (Path): The path to the .csv file
+        encoding (str, optional): The encoding to be used when reading
+        the .csv file. Defaults to "utf-8".
+        delimiter (str, optional): The delimiter used in the .csv file.
+        Defaults to ",".
 
     Returns:
         int: The number of rows in the .csv file
