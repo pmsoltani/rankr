@@ -14,6 +14,24 @@ from utils import csv_size, fuzzy_matcher, get_row, nullify
 def ranking_process(
     db: Session, file_path: Union[Path, str], soup: Dict[str, Dict[str, str]]
 ) -> Tuple[List[Institution], List[Dict[str, str]], List[Dict[str, str]]]:
+    """Matches institutions with their GRID database counterparts.
+
+    The functuin reads a .csv file row-by-row and for each row, tries
+    to match the institution to a GRID ID, using various criteria. If
+    that happens with success, the function will then assigns different
+    metrics in the ranking to that institution object.
+
+    Args:
+        db (Session): SQLAlchemy session instant to connect to the DB
+        file_path (Union[Path, str]): The path to the ranking .csv file
+        soup (Dict[str, Dict[str, str]]): A set of choices for matching
+        institutions
+
+    Returns:
+        Tuple[List[Institution], List[Dict[str, str]], List[Dict[str, str]]]:
+        Three lists: matched institution, not-matched institutions, and
+        institutions that were matched using the fuzzywuzzy library.
+    """
     institutions_list: List[Institution] = []
     not_mached_list: List[Dict[str, str]] = []
     fuzz_list: List[Dict[str, str]] = []
