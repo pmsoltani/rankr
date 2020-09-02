@@ -1,7 +1,7 @@
-from config.config import APPConfig
 from typing import List, Tuple
 from fastapi import APIRouter, Depends, HTTPException, Query
 
+from config import APPConfig
 from rankr.api import deps
 from rankr.crud.entity import Entity
 from rankr.enums import EntityTypeEnum, EntityTypePathEnum
