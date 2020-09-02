@@ -13,6 +13,7 @@ router = APIRouter()
 
 @router.get("/i/{entity}", response_model=EntitySchema)
 async def get_institution_entity(commons: dict = Depends(deps.resolve_entity)):
+    """Returns the profile for an institution."""
     try:
         if commons["entity_type"] != EntityTypeEnum["institution"]:
             raise HTTPException(status_code=404)
@@ -26,6 +27,7 @@ async def get_institution_entity(commons: dict = Depends(deps.resolve_entity)):
 async def get_geo_entity(
     commons: dict = Depends(deps.resolve_entity), remove_nulls: bool = True
 ):
+    """Returns the profile for a geo entity."""
     try:
         if commons["entity_type"] == EntityTypeEnum["institution"]:
             raise HTTPException(status_code=404)
@@ -45,6 +47,7 @@ async def entity_compare(
     entities: List[str] = Query(str),
     remove_nulls: bool = True,
 ):
+    """Compares the profiles of the specified entities."""
     entity_type = commons["entity_type"].name
     if APPConfig.ENTITIES["entity_types"][entity_type] != entity_type_path.name:
         raise HTTPException(status_code=404)
