@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 
 from config import appc
 from rankr.api import deps
-from rankr.crud.entity import Entity
+from rankr.crud import Entity
 from rankr.enums import EntityTypeEnum, EntityTypePathEnum
 from rankr.schemas import EntitySchema
 
