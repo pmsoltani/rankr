@@ -1,102 +1,32 @@
-from typing import List
+from contextlib import closing
 
 import typer
 from sqlalchemy.orm import Session
-from tqdm import tqdm
-from typer.colors import CYAN
+from typer.colors import CYAN, RED
 
-from config import dbc
-from rankr.db_models import (
-    Acronym,
-    Alias,
-    Country,
-    Institution,
-    Label,
-    Link,
-    Type,
-    SessionLocal,
-)
-from utils import csv_size, get_csv, get_row, nullify
+from rankr.crud import country_process, institution_process
+from rankr.db_models import Country, SessionLocal
 
 
 def db_grid():
     """Populates the database with country & GRID data."""
     try:
-        # TODO: Make this a separate function, as it can be re-used.
+        db: Session
         typer.secho("Processing countries...", fg=CYAN)
-        db: Session = SessionLocal()
-        rows = get_row(dbc.COUNTRIES_FILE)
-        countries_list: List[Country] = []
-        for row in rows:
-            nullify(row)
-            countries_list.append(Country(**row))
+        with closing(SessionLocal()) as db:
+            db.add_all(country_process())
+            db.commit()
 
-        db.add_all(countries_list)
-        db.commit()
-    # TODO: Handle exceptions (e.g. the database is already populated).
-    finally:
-        db.close()
-
-    attrs = ["addresses", "acronyms", "aliases", "labels", "links", "types"]
-
-    try:
         typer.secho("Processing institutions...", fg=CYAN)
-        db: Session = SessionLocal()
-
-        # Group the GRID data tables by grid_id for better access.
-        institution_attrs = [
-            get_csv(dbc.GRID_DATABASE_DIR / f"{attr}.csv", "grid_id")
-            for attr in attrs
-        ]
-        countries = {c.country: c for c in db.query(Country).all()}
-        rows = get_row(dbc.GRID_DATABASE_DIR / "institutes.csv")
-        row_count = csv_size(dbc.GRID_DATABASE_DIR / "institutes.csv")
-
-        pbar = tqdm(total=row_count)
-        for row in rows:
-            nullify(row)
-            # Get all the data related to the current institution.
-            address, acronym, alias, label, link, type = [
-                attr.get(row["grid_id"]) for attr in institution_attrs
-            ]
-
-            # Create 'soup' variable for fuzzy matching of institutions.
-            soup = [row["name"]]
-
-            if address:
-                country = dbc.country_name_mapper(address[0].pop("country"))
-                institution = Institution(**{**row, **address[0]})
-                institution.country = countries[country]
-                soup.append(country)
-            else:
-                institution = Institution(**row)
-
-            if acronym:
-                institution.acronyms = [Acronym(**i) for i in acronym]
-                soup.extend(i["acronym"] for i in acronym)
-            if alias:
-                institution.aliases = [Alias(**i) for i in alias]
-                soup.extend(i["alias"] for i in alias)
-            if label:
-                institution.labels = [Label(**i) for i in label]
-                soup.extend(i["label"] for i in label)
-            if link:
-                institution.links = [Link(**i) for i in link]
-            if type:
-                institution.types = [Type(**i) for i in type]
-
-            institution.soup = " | ".join(i for i in soup)
-
-            db.add(institution)
-            pbar.update()
-        pbar.close()
-
-        typer.secho(
-            "Committing results to the DB. This can take several minutes.",
-            fg=CYAN,
-        )
-        db.commit()
-    # TODO: Handle exceptions (e.g. the database is already populated).
-    finally:
-        del institution_attrs  # Free-up memory (~ 10^5 institutions).
-        db.close()
+        with closing(SessionLocal()) as db:
+            countries = {c.country: c for c in db.query(Country).all()}
+            db.add_all(institution_process(countries=countries))
+            typer.secho(
+                "Committing results to the DB. This can take several minutes.",
+                fg=CYAN,
+            )
+            db.commit()
+    except Exception as exc:
+        typer.secho("Error populating the database:", fg=RED)
+        typer.secho(str(exc), fg=CYAN)
+        raise typer.Abort()
