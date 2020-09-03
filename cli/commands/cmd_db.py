@@ -29,6 +29,6 @@ def reset(
     """
     if not confirm:
         raise typer.Abort()
-    ctx.invoke(db_init.db_init, force=True)
+    ctx.invoke(db_init.db_init, drop=True)
     ctx.invoke(db_grid.db_grid)
     ctx.invoke(db_rankings.db_rankings)
