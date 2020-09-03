@@ -8,7 +8,7 @@ from typer.colors import CYAN, GREEN, RED
 from config import dbc
 from rankr.crud import ranking_process
 from rankr.db_models import Institution, SessionLocal
-from utils import csv_export, csv_size
+from utils import csv_export
 
 
 def db_rankings(commit: bool = typer.Option(True)):
@@ -41,18 +41,16 @@ def db_rankings(commit: bool = typer.Option(True)):
             )
             try:
                 db = SessionLocal()
-                size = csv_size(file)
                 institutions_list, not_mached_list, fuzz_list = ranking_process(
-                    db, file, soup
+                    db=db, file_path=file, soup=soup
                 )
-                # TODO: Remove the following unnecessary if-block.
-                if len(institutions_list) + len(not_mached_list) != size:
-                    raise ValueError("Some institutions may have been lost!")
+
                 not_mached.extend(not_mached_list)
                 fuzz.extend(fuzz_list)
 
-                db.add_all(institutions_list)
-                db.commit()
+                if commit:
+                    db.add_all(institutions_list)
+                    db.commit()
             except ValueError as exc:
                 typer.secho(str(exc), fg=RED)
             finally:
