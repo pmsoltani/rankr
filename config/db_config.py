@@ -17,10 +17,10 @@ class DBConfig(BaseConfig):
     DB_NAME: str = Field(..., env=f"{bc.DIALECT}_NAME")
 
     # TODO: Change to "DB_URL".
-    DB_URI: str = ""
+    DB_URL: str = ""
 
-    @validator("DB_URI")
-    def _db_uri_value(cls, db_uri, values) -> str:
+    @validator("DB_URL")
+    def _db_url_value(cls, db_url, values) -> str:
         return (
             f"{values['DIALECT']}+{values['DB_DRIVER']}://"
             + f"{values['DB_USER']}:{values['DB_PASS']}@"

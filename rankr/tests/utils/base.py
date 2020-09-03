@@ -3,6 +3,6 @@ from sqlalchemy.orm import sessionmaker
 
 from config import dbc
 
-db_uri = dbc.DB_URI + "_test"
-engine = create_engine(db_uri, pool_pre_ping=True)
+db_url = dbc.DB_URL + "_test"
+engine = create_engine(db_url, pool_pre_ping=True)
 TestingSessionLocal = sessionmaker(bind=engine)
