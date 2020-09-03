@@ -27,7 +27,7 @@ def db_rankings(commit: bool = typer.Option(True)):
     fuzz = []
     for ranking_system in list(dbc.RANKINGS["metrics"]):
         # Get the ranking system directory.
-        dir_path: Path = dbc.MAIN_DIR / dbc.DATA_DIR / ranking_system
+        dir_path: Path = dbc.DATA_DIR / ranking_system
         if not dir_path.exists():
             continue
 
