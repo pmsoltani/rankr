@@ -5,13 +5,13 @@ from sqlalchemy.orm.session import Session
 import typer
 from typer.colors import CYAN, GREEN, RED
 
-from config import DBConfig
+from config import dbc
 from rankr.crud import ranking_process
 from rankr.db_models import Institution, SessionLocal
 from utils import csv_export, csv_size
 
 
-def db_rankings():
+def db_rankings(commit: bool = typer.Option(True)):
     """Populates the database with ranking data."""
     db: Session = SessionLocal()
     all_institutions: List[Institution] = db.query(Institution).all()
@@ -25,9 +25,9 @@ def db_rankings():
 
     not_mached = []
     fuzz = []
-    for ranking_system in list(DBConfig.RANKINGS["metrics"]):
+    for ranking_system in list(dbc.RANKINGS["metrics"]):
         # Get the ranking system directory.
-        dir_path: Path = DBConfig.MAIN_DIR / ranking_system
+        dir_path: Path = dbc.MAIN_DIR / dbc.DATA_DIR / ranking_system
         if not dir_path.exists():
             continue
 
@@ -59,13 +59,13 @@ def db_rankings():
                 db.close()
 
     if not_mached:
-        csv_export(DBConfig.MAIN_DIR / "not_mached.csv", not_mached)
+        csv_export(dbc.MAIN_DIR / dbc.DATA_DIR / "not_mached.csv", not_mached)
         typer.echo(
             f"Saved the list of {len(not_mached)} not matched institutions."
         )
 
     if fuzz:
-        csv_export(DBConfig.MAIN_DIR / "fuzz.csv", fuzz)
+        csv_export(dbc.MAIN_DIR / dbc.DATA_DIR / "fuzz.csv", fuzz)
         typer.echo(f"Saved the list of {len(fuzz)} fuzzy-matched institutions.")
 
     typer.secho("All done!", fg=GREEN)

@@ -2,7 +2,7 @@ import typer
 from sqlalchemy_utils import create_database, database_exists, drop_database
 from typer.colors import CYAN, GREEN, RED
 
-from config import DBConfig
+from config import dbc
 from rankr.db_models import Base, engine
 
 
@@ -21,7 +21,7 @@ def db_init(drop: bool = typer.Option(False, help="Drop the database first?")):
         typer.secho("Dropped the database!", fg=CYAN)
 
     try:
-        encoding = "utf8mb4" if DBConfig.DIALECT == "mysql" else "utf8"
+        encoding = "utf8mb4" if dbc.DIALECT == "mysql" else "utf8"
         create_database(engine.url, encoding=encoding)
 
         Base.metadata.create_all(engine)

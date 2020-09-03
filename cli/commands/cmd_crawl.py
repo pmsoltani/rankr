@@ -4,13 +4,7 @@ import typer
 from sqlalchemy.orm.session import Session
 from typer.colors import CYAN, GREEN
 
-from config import (
-    CrawlerConfig,
-    QSConfig,
-    ShanghaiConfig,
-    THEConfig,
-    WikipediaConfig,
-)
+from config import crwc, qsc, shac, thec, wikic
 from crawlers import QSCrawler, ShanghaiCrawler, THECrawler, WikipediaCrawler
 from rankr.db_models import Institution, SessionLocal
 
@@ -28,26 +22,26 @@ def engine_select(engine: str) -> Tuple[Any, Any]:
         Tuple[Any, Any]: The engines' Crawler & Config classes
     """
     if engine == "qs":
-        return (QSConfig, QSCrawler)
+        return (qsc, QSCrawler)
     if engine == "shanghai":
-        return (ShanghaiConfig, ShanghaiCrawler)
+        return (shac, ShanghaiCrawler)
     if engine == "the":
-        return (THEConfig, THECrawler)
+        return (thec, THECrawler)
     if engine == "wikipedia":
-        return (WikipediaConfig, WikipediaCrawler)
+        return (wikic, WikipediaCrawler)
     raise typer.BadParameter(
         f"Wrong engine value '{engine}'. "
-        + f"Only {CrawlerConfig.SUPPORTED_ENGINES} are supported."
+        + f"Only {crwc.SUPPORTED_ENGINES} are supported."
     )
 
 
 def engine_check(values: List[str]) -> List[str]:
     # TODO: Remove unnecessary function.
     for value in values:
-        if value.lower() not in CrawlerConfig.SUPPORTED_ENGINES:
+        if value.lower() not in crwc.SUPPORTED_ENGINES:
             raise typer.BadParameter(
                 f"Wrong engine value '{value}'. "
-                + f"Only {CrawlerConfig.SUPPORTED_ENGINES} are supported."
+                + f"Only {crwc.SUPPORTED_ENGINES} are supported."
             )
     return [v.lower() for v in values]
 
