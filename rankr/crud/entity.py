@@ -82,9 +82,6 @@ class Entity(object):
         return self._stats
 
     def get_institution_data(self) -> None:
-        if self.entity_type != EntityTypeEnum["institution"]:
-            return
-
         institution: Institution = (
             self.db.query(Institution)
             .filter(Institution.id.in_(self.get_ids()))
@@ -126,9 +123,6 @@ class Entity(object):
         year: Optional[int] = None,
         latest: bool = False,
     ) -> List[Ranking]:
-        if not isinstance(metrics, list):
-            metrics = [metrics]
-
         filters = (
             Ranking.institution_id.in_(self.get_ids()),
             Ranking.ranking_type == ranking_type,
