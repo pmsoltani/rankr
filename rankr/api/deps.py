@@ -4,7 +4,7 @@ from typing import Any, Dict, Generator, List, Tuple
 from fastapi import Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from config import APPConfig
+from config import appc
 from rankr.db_models import Country, Institution, SessionLocal
 from rankr.enums import EntityTypeEnum
 
@@ -64,7 +64,7 @@ def get_entity_type(db: Session, entity: str) -> Tuple[EntityTypeEnum, str]:
 
     entity_type = None
     name = None
-    if re.match(APPConfig.GRID_ID_PATTERN, entity):
+    if re.match(appc.GRID_ID_PATTERN, entity):
         entity_type = EntityTypeEnum["institution"]
     if entity.lower() == "world":
         entity_type = EntityTypeEnum["world"]
@@ -77,7 +77,7 @@ def get_entity_type(db: Session, entity: str) -> Tuple[EntityTypeEnum, str]:
         entity_type = EntityTypeEnum["country"]
     if entity in geo_data["country_codes"]:
         entity_type = EntityTypeEnum["country_code"]
-        name = APPConfig.COUNTRIES[entity]
+        name = appc.COUNTRIES[entity]
 
     if not entity_type:
         raise HTTPException(

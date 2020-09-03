@@ -1,7 +1,7 @@
 from typing import List, Tuple
 from fastapi import APIRouter, Depends, HTTPException, Query
 
-from config import APPConfig
+from config import appc
 from rankr.api import deps
 from rankr.crud.entity import Entity
 from rankr.enums import EntityTypeEnum, EntityTypePathEnum
@@ -49,7 +49,7 @@ async def entity_compare(
 ):
     """Compares the profiles of the specified entities."""
     entity_type = commons["entity_type"].name
-    if APPConfig.ENTITIES["entity_types"][entity_type] != entity_type_path.name:
+    if appc.ENTITIES["entity_types"][entity_type] != entity_type_path.name:
         raise HTTPException(status_code=404)
 
     institution = Entity(**commons).profile
