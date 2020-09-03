@@ -25,7 +25,7 @@ def db_grid():
         # TODO: Make this a separate function, as it can be re-used.
         typer.secho("Processing countries...", fg=CYAN)
         db: Session = SessionLocal()
-        rows = get_row(dbc.MAIN_DIR / "countries.csv")
+        rows = get_row(dbc.COUNTRIES_FILE)
         countries_list: List[Country] = []
         for row in rows:
             nullify(row)

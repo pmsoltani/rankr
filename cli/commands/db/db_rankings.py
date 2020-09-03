@@ -59,13 +59,13 @@ def db_rankings(commit: bool = typer.Option(True)):
                 db.close()
 
     if not_mached:
-        csv_export(dbc.MAIN_DIR / dbc.DATA_DIR / "not_mached.csv", not_mached)
+        csv_export(dbc.DATA_DIR / "not_mached.csv", not_mached)
         typer.echo(
             f"Saved the list of {len(not_mached)} not matched institutions."
         )
 
     if fuzz:
-        csv_export(dbc.MAIN_DIR / dbc.DATA_DIR / "fuzz.csv", fuzz)
+        csv_export(dbc.DATA_DIR / "fuzz.csv", fuzz)
         typer.echo(f"Saved the list of {len(fuzz)} fuzzy-matched institutions.")
 
     typer.secho("All done!", fg=GREEN)

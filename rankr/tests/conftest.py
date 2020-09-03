@@ -42,7 +42,7 @@ def data(db: Session):
     db.query(Institution).delete()
     db.query(Country).delete()
 
-    countries = fill_countries(dbc.MAIN_DIR / "countries.csv")
+    countries = fill_countries(dbc.COUNTRIES_FILE)
     institutions = fake_institutions(10)
     db.add_all(countries)
     db.commit()
