@@ -7,17 +7,17 @@ import requests
 from bs4 import BeautifulSoup
 from furl import furl
 
-from config import WikipediaConfig
+from config import wikic
 
 
-class WikipediaCrawler(WikipediaConfig):
+class WikipediaCrawler(object):
     def __init__(
         self, grid_id: str, url: str, wait: int = 10, tries: int = 5,
     ) -> None:
         self.grid_id = grid_id
         self.url = furl(url).set(scheme="https").url
 
-        self.file_path = Path(self.DOWNLOAD_DIR) / self.grid_id
+        self.file_path = Path(wikic.DOWNLOAD_DIR) / self.grid_id
         self.file_path.parent.mkdir(parents=True, exist_ok=True)
 
         self.wait = wait
@@ -46,7 +46,7 @@ class WikipediaCrawler(WikipediaConfig):
         Returns:
             BeautifulSoup: The downloaded logo page
         """
-        wiki_page = requests.get(self.url, headers=self.headers)
+        wiki_page = requests.get(self.url, headers=wikic.HEADERS)
         if wiki_page.status_code != 200:
             raise ConnectionError(f"Error getting page: {self.url}")
 
@@ -58,8 +58,8 @@ class WikipediaCrawler(WikipediaConfig):
         if not logo_page_elem:
             return None
 
-        logo_page_url = furl(self.BASE_URL) / logo_page_elem[0]["href"]
-        logo_page = requests.get(logo_page_url, headers=self.headers)
+        logo_page_url = furl(wikic.BASE_URL) / logo_page_elem[0]["href"]
+        logo_page = requests.get(logo_page_url, headers=wikic.HEADERS)
         self.page = BeautifulSoup(logo_page.content, "html.parser")
         return self.page
 
@@ -81,7 +81,7 @@ class WikipediaCrawler(WikipediaConfig):
         if file_ext not in [".png", ".svg"]:
             return None
 
-        logo = requests.get(logo_url, headers=self.headers, stream=True)
+        logo = requests.get(logo_url, headers=wikic.HEADERS, stream=True)
         if logo.status_code != 200:
             raise ConnectionError(f"Error getting page: {logo_url}")
 
@@ -95,6 +95,6 @@ class WikipediaCrawler(WikipediaConfig):
             self.logo.raw.decode_content = True
             shutil.copyfileobj(self.logo.raw, img_file)
             self.file_path.rename(
-                Path(self.DOWNLOAD_DIR) / (self.grid_id + self.file_ext)
+                Path(wikic.DOWNLOAD_DIR) / (self.grid_id + self.file_ext)
             )
             print(f"Saved file: {self.file_path}{self.file_ext}")

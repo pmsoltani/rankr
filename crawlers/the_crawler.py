@@ -5,14 +5,15 @@ from typing import Dict, List
 import requests
 from furl import furl
 
-from config import THEConfig
+from config import thec
 from crawlers.crawler_mixin import CrawlerMixin
 from utils import text_process
 
 
-class THECrawler(CrawlerMixin, THEConfig):
+class THECrawler(CrawlerMixin):
     def __init__(self, url: str, **kwargs) -> None:
         self.url = url
+        self.download_dir = thec.DOWNLOAD_DIR
         super().__init__(**kwargs)
 
     def _get_page(self) -> str:
@@ -30,7 +31,7 @@ class THECrawler(CrawlerMixin, THEConfig):
         Returns:
             str: The url for the ranking table data
         """
-        page = requests.get(self.url, headers=self.headers)
+        page = requests.get(self.url, headers=thec.HEADERS)
         json_url: str = re.findall(r"(https.*?\.json)", page.text)[0]
 
         self.json_url = json_url.replace("\\", "")
@@ -42,7 +43,7 @@ class THECrawler(CrawlerMixin, THEConfig):
         Returns:
             List[Dict[str, str]]: Processed ranking data to be exported
         """
-        page = requests.get(self.json_url, headers=self.headers)
+        page = requests.get(self.json_url, headers=thec.HEADERS)
         raw_data = json.loads(page.text)
 
         # processing raw_data
@@ -50,16 +51,16 @@ class THECrawler(CrawlerMixin, THEConfig):
         for row in raw_data["data"]:
             values = {}
             for col in row:
-                if col not in THEConfig.FIELDS:
+                if col not in thec.FIELDS:
                     continue
 
                 value = row[col].strip() if row[col] else ""
-                if THEConfig.FIELDS[col] == "Country":
-                    value = THECrawler.country_name_mapper(text_process(value))
-                if THEConfig.FIELDS[col] == "URL":
-                    value = furl(THEConfig.BASE_URL).join(value)
+                if thec.FIELDS[col] == "Country":
+                    value = thec.country_name_mapper(text_process(value))
+                if thec.FIELDS[col] == "URL":
+                    value = furl(thec.BASE_URL).join(value)
 
-                values[THEConfig.FIELDS[col]] = value
+                values[thec.FIELDS[col]] = value
 
             processed_data.append({**values, **self.ranking_info})
 

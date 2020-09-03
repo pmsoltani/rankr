@@ -10,7 +10,7 @@ class CrawlerMixin(object):
 
     _get_page: Callable
     _get_tbl: Callable
-    DOWNLOAD_DIR: Path
+    download_dir: Path
     processed_data: List[Dict[str, str]]
     url: str
 
@@ -42,7 +42,7 @@ class CrawlerMixin(object):
             # In 2017 & 2018, Shanghai ranking separated their results
             # into two tables with slightly different structures.
             self.file_name = self.file_name.replace(".csv", "_candidates.csv")
-        self.file_path = Path(self.DOWNLOAD_DIR) / self.file_name
+        self.file_path = Path(self.download_dir) / self.file_name
         self.file_path.parent.mkdir(parents=True, exist_ok=True)
 
     def crawl(self) -> None:

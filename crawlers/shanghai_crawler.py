@@ -5,14 +5,15 @@ import requests
 from bs4 import BeautifulSoup
 from furl import furl
 
-from config import ShanghaiConfig
+from config import shac
 from crawlers.crawler_mixin import CrawlerMixin
 from utils import text_process
 
 
-class ShanghaiCrawler(CrawlerMixin, ShanghaiConfig):
+class ShanghaiCrawler(CrawlerMixin):
     def __init__(self, url: str, **kwargs) -> None:
         self.url = url
+        self.download_dir = shac.DOWNLOAD_DIR
         self.header_group_keyword: str = "institution"
 
         super().__init__(**kwargs)
@@ -26,7 +27,7 @@ class ShanghaiCrawler(CrawlerMixin, ShanghaiConfig):
         Returns:
             BeautifulSoup: The downloaded page
         """
-        page = requests.get(self.url, headers=self.headers)
+        page = requests.get(self.url, headers=shac.HEADERS)
         if page.status_code != 200:
             raise ConnectionError(f"Error getting page: {self.url}")
 
@@ -54,13 +55,11 @@ class ShanghaiCrawler(CrawlerMixin, ShanghaiConfig):
                 if val.find("img"):
                     # Get country name from the country flag images.
                     country = Path(val.find("img")["src"]).stem
-                    country = ShanghaiCrawler.country_name_mapper(
-                        text_process(country)
-                    )
+                    country = shac.country_name_mapper(text_process(country))
                     values.append(country)
                     continue
                 if val.find("a") and val.text:
-                    url = furl(ShanghaiConfig.BASE_URL) / val.find("a")["href"]
+                    url = furl(shac.BASE_URL) / val.find("a")["href"]
                     values.append(url.url)
                 values.append(val.text)
 
@@ -92,12 +91,12 @@ class ShanghaiCrawler(CrawlerMixin, ShanghaiConfig):
             if self.header_group_keyword in h:
                 new_headers.extend(["URL", "Institution", "Country"])
 
-            if h in ShanghaiConfig.FIELDS:
-                new_headers.append(ShanghaiConfig.FIELDS[h])
+            if h in shac.FIELDS:
+                new_headers.append(shac.FIELDS[h])
 
             if h.startswith("score on"):
                 tmp = h.replace("score on", "").strip().split(" ")
-                tmp = [ShanghaiConfig.FIELDS[t] for t in tmp if t.strip()]
+                tmp = [shac.FIELDS[t] for t in tmp if t.strip()]
                 new_headers.extend(tmp)
 
         return new_headers
