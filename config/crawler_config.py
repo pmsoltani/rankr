@@ -29,7 +29,7 @@ class QSConfig(CrawlerConfig):
 
     @validator("DOWNLOAD_DIR")
     def _download_dir_value(cls, download_dir, values) -> Path:
-        return values["MAIN_DIR"] / values["DATA_DIR"] / "qs"
+        return values["DATA_DIR"] / "qs"
 
     FIELDS: Dict[str, str] = {
         "rank": "Rank",
@@ -59,7 +59,7 @@ class ShanghaiConfig(CrawlerConfig):
 
     @validator("DOWNLOAD_DIR")
     def _download_dir_value(cls, download_dir, values) -> Path:
-        return values["MAIN_DIR"] / values["DATA_DIR"] / "shanghai"
+        return values["DATA_DIR"] / "shanghai"
 
     FIELDS: Dict[str, str] = {
         "world rank": "Rank",
@@ -90,7 +90,7 @@ class THEConfig(CrawlerConfig):
 
     @validator("DOWNLOAD_DIR")
     def _download_dir_value(cls, download_dir, values) -> Path:
-        return values["MAIN_DIR"] / values["DATA_DIR"] / "the"
+        return values["DATA_DIR"] / "the"
 
     FIELDS: Dict[str, str] = {
         "rank": "Rank",
@@ -115,7 +115,7 @@ class WikipediaConfig(CrawlerConfig):
 
     @validator("DOWNLOAD_DIR")
     def _download_dir_value(cls, download_dir, values) -> Path:
-        return values["MAIN_DIR"] / values["DATA_DIR"] / "wikipedia"
+        return values["DATA_DIR"] / "wikipedia"
 
 
 crwc = CrawlerConfig()
