@@ -15,8 +15,6 @@ class DBConfig(BaseConfig):
     DB_HOST: str = Field(..., env=f"{bc.DIALECT}_HOST")
     DB_PORT: int = Field(..., env=f"{bc.DIALECT}_PORT")
     DB_NAME: str = Field(..., env=f"{bc.DIALECT}_NAME")
-
-    # TODO: Change to "DB_URL".
     DB_URL: str = ""
 
     @validator("DB_URL")
