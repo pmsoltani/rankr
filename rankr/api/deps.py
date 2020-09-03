@@ -7,6 +7,10 @@ from sqlalchemy.orm import Session
 from config import appc
 from rankr.db_models import Country, Institution, SessionLocal
 from rankr.enums import EntityTypeEnum
+from utils import get_csv
+
+
+country_code_mapper = get_csv(appc.COUNTRIES_FILE, "country_code")
 
 
 def get_db() -> Generator[Session, None, None]:
@@ -77,7 +81,7 @@ def get_entity_type(db: Session, entity: str) -> Tuple[EntityTypeEnum, str]:
         entity_type = EntityTypeEnum["country"]
     if entity in geo_data["country_codes"]:
         entity_type = EntityTypeEnum["country_code"]
-        name = appc.COUNTRIES[entity]
+        name = country_code_mapper[entity][0]["country"]
 
     if not entity_type:
         raise HTTPException(
