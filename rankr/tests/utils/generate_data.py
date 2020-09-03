@@ -22,6 +22,7 @@ from utils import get_row, nullify
 
 
 def fill_countries(file_path: Union[Path, str]) -> List[Country]:
+    """Creates a list of Country objects from a .csv file."""
     rows = get_row(file_path)
     countries_list: List[Country] = []
     for row in rows:
@@ -31,6 +32,7 @@ def fill_countries(file_path: Union[Path, str]) -> List[Country]:
 
 
 def fake_institutions(n: int = 1):
+    """Creates a list of n fake institution objects for testing purposes."""
     institutions: List[Institution] = []
     alphabet = "abcdefghijklmnopqrstuvwxyz"
     for i in range(n):
@@ -71,6 +73,7 @@ def fake_ranking(
     ranking_system: Union[RankingSystemEnum, str] = None,
     year: Optional[int] = None,
 ) -> Ranking:
+    """Creates a fake Ranking object for testing purposes."""
     if not ranking_system:
         ranking_system = choice(list(RankingSystemEnum))
     ranking_type = RankingTypeEnum["university ranking"]
@@ -105,6 +108,7 @@ def fake_ranking(
 
 
 def fake_rankings() -> List[Ranking]:
+    """Creates a list of fake Ranking objects."""
     rankings: List[Ranking] = [
         fake_ranking("rank", year=2015),
         fake_ranking("rank", ranking_system="shanghai"),
