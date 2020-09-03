@@ -85,9 +85,6 @@ class Entity(object):
 
     def get_institution_data(self) -> None:
         """Attaches institutional data to the entity"""
-        if self.entity_type != EntityTypeEnum["institution"]:
-            return
-
         institution: Institution = (
             self.db.query(Institution)
             .filter(Institution.id.in_(self.get_ids()))
@@ -150,9 +147,6 @@ class Entity(object):
         Returns:
             List[Ranking]: A list of Ranking objects
         """
-        if not isinstance(metrics, list):
-            metrics = [metrics]
-
         # building the query
         filters = (
             Ranking.institution_id.in_(self.get_ids()),
