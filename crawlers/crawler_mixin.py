@@ -1,8 +1,8 @@
-import csv
-import io
 import time
 from pathlib import Path
 from typing import Callable, Dict, List, Union
+
+from utils import csv_export
 
 
 class CrawlerMixin(object):
@@ -52,6 +52,7 @@ class CrawlerMixin(object):
                 self._get_page()
                 self._get_tbl()
                 self._csv_export()
+                print(f"Saved file: {self.file_path}")
             except ConnectionError:
                 print(f"Waiting for {self.wait} seconds.")
                 time.sleep(self.wait)
@@ -59,15 +60,5 @@ class CrawlerMixin(object):
 
             break
 
-    def _csv_export(self) -> None:
-        """Saves the results of a ranking table into a .csv file."""
-        # TODO: Move this function to the 'utils' directory
-        with io.open(
-            self.file_path, "w", newline="", encoding="utf-8"
-        ) as csv_file:
-            dict_writer = csv.DictWriter(
-                csv_file, self.processed_data[0].keys(), quoting=csv.QUOTE_ALL
-            )
-            dict_writer.writeheader()
-            dict_writer.writerows(self.processed_data)
-        print(f"Saved file: {self.file_path}")
+    def _csv_export(self):
+        return csv_export(file_path=self.file_path, data=self.processed_data)
