@@ -6,8 +6,17 @@ from config import DBConfig
 from rankr.db_models import Base, engine
 
 
-def db_init(force: bool = False):
-    if force and database_exists(engine.url):
+def db_init(drop: bool = typer.Option(False, help="Drop the database first?")):
+    """Creates the database and its tables.
+
+    Args:
+        drop (bool, optional): Drops the database before creating it.
+        Defaults to False.
+
+    Raises:
+        typer.Abort: If there is a problem with creating the database
+    """
+    if drop and database_exists(engine.url):
         drop_database(engine.url)
         typer.secho("Dropped the database!", fg=CYAN)
 

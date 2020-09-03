@@ -1,15 +1,15 @@
-from typing import List
+from typing import Dict, List
 
 from config import DBConfig
 from rankr.db_models import Ranking
-from utils.value_process import value_process
+from utils import value_process
 
 
 metric_types = DBConfig.RANKINGS["metrics"]
 non_metric_cols = DBConfig.RANKINGS["non_metrics"]
 
 
-def metrics_process(row: dict) -> List[Ranking]:
+def metrics_process(row: Dict[str, str]) -> List[Ranking]:
     """Converts a .csv row into a list of Ranking objects.
 
     Args:

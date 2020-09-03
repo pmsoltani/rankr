@@ -24,6 +24,7 @@ class WikipediaCrawler(WikipediaConfig):
         self.tries = tries
 
     def crawl(self) -> None:
+        """Provides a high-level interface for the class."""
         for i in range(self.tries):
             try:
                 self._get_page()
@@ -37,6 +38,14 @@ class WikipediaCrawler(WikipediaConfig):
             break
 
     def _get_page(self) -> Optional[BeautifulSoup]:
+        """Retrieves the page containing the institution logo.
+
+        Raises:
+            ConnectionError: If the request is not successful
+
+        Returns:
+            BeautifulSoup: The downloaded logo page
+        """
         wiki_page = requests.get(self.url, headers=self.headers)
         if wiki_page.status_code != 200:
             raise ConnectionError(f"Error getting page: {self.url}")
@@ -55,6 +64,14 @@ class WikipediaCrawler(WikipediaConfig):
         return self.page
 
     def _get_logo(self) -> Optional[requests.Response]:
+        """[summary]
+
+        Raises:
+            ConnectionError: If the request is not successful
+
+        Returns:
+            Optional[requests.Response]: The stream of logo file
+        """
         logo_elem = self.page.find("div", attrs={"id": "file"})
         if not logo_elem:
             return None
@@ -66,13 +83,14 @@ class WikipediaCrawler(WikipediaConfig):
 
         logo = requests.get(logo_url, headers=self.headers, stream=True)
         if logo.status_code != 200:
-            raise requests.HTTPError("Error downloading the image!")
+            raise ConnectionError(f"Error getting page: {logo_url}")
 
         self.logo = logo
         self.file_ext = file_ext
         return self.logo
 
     def _export_logo(self) -> None:
+        """Exports the logo to a file."""
         with open(self.file_path, "wb") as img_file:
             self.logo.raw.decode_content = True
             shutil.copyfileobj(self.logo.raw, img_file)

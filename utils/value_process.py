@@ -6,6 +6,23 @@ from typing import Optional
 def value_process(
     val: Optional[str], value_type: str = "integer"
 ) -> Optional[str]:
+    """Cleans and processes raw values to be stored in the database.
+
+    Rank and score values from ranking tables can take many different
+    shapes. Examples include values like: "250-300", " =9", "+1001",
+    "800+", "1,532", "5%", "8 : 92", ...
+
+    These will need to be converted into simple numeric forms, which is
+    the purpose of this function.
+
+    Args:
+        val (Optional[str]): The string to be processed
+        value_type (str, optional): The type of the final value.
+        Defaults to "integer".
+
+    Returns:
+        Optional[str]: [description]
+    """
     if val is None:
         return None
 
@@ -23,10 +40,10 @@ def value_process(
     matches: Optional[re.Match[str]] = re.search(range_pattern, val)
     try:
         lower_bound, upper_bound = matches.groups()
-        if upper_bound:
+        if upper_bound:  # e.g. Rank = "800-1000"
             total = (Decimal(lower_bound) + Decimal(upper_bound)) / 2
             val = str(int(total)) if value_type == "integer" else str(total)
             return val
-        return lower_bound
+        return lower_bound  # e.g. Rank = "47"
     except AttributeError:
         return None

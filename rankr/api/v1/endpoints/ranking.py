@@ -3,10 +3,10 @@ from typing import Dict, List
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from rankr.crud import get_ranking_systems, get_ranking_table
 from rankr.api import deps
-from rankr.schemas import RankingSchema
+from rankr.crud import get_ranking_systems, get_ranking_table
 from rankr.enums import RankingSystemEnum
+from rankr.schemas import RankingSchema
 
 
 router = APIRouter()

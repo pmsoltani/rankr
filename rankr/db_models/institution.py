@@ -57,4 +57,6 @@ class Institution(Base):
         super().__init__(**kwargs)
 
     def __repr__(self):
-        return f"{self.id} - {self.grid_id}: {self.name}"
+        if self.id:
+            return f"{self.id} - {self.grid_id}: {self.name}"
+        return f"{self.grid_id}: {self.name}"

@@ -18,6 +18,15 @@ def reset(
         confirmation_prompt=True,
     ),
 ):
+    """Executes all "db" commands in sequence.
+
+    Args:
+        ctx (typer.Context): The command context
+        confirm (bool): User's confirmation for destructive operation
+
+    Raises:
+        typer.Abort: If the user does not confirm the operation
+    """
     if not confirm:
         raise typer.Abort()
     ctx.invoke(db_init.db_init, force=True)

@@ -1,9 +1,29 @@
 [tool.poetry]
 name = "rankr"
 version = "0.1.0"
-description = "Scripts for crawling academic ranking websites"
+description = "A platform for aggregating different academic rankings."
 authors = ["Pooria Soltani <pooria.ms@gmail.com>"]
 license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/pmsoltani/rankr"
+repository = "https://github.com/pmsoltani/rankr"
+documentation = "https://github.com/pmsoltani/rankr"
+
+keywords = ["university-ranking", "ranking-systems", "grid"]
+
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Environment :: Web Environment",
+  "Intended Audience :: Education",
+  "Intended Audience :: Information Technology",
+  "Intended Audience :: Science/Research",
+  "Framework :: FastAPI",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3.7",
+  "Topic :: Education",
+  "Typing :: Typed"
+]
 
 [tool.poetry.scripts]
 rankr = "cli.cli:cli"

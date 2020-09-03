@@ -10,6 +10,7 @@ from rankr.enums import EntityTypeEnum
 
 
 def get_db() -> Generator[Session, None, None]:
+    """Yields a SQLAlchemy session for the CRUD operations."""
     try:
         db: Session = SessionLocal()
         yield db
@@ -18,6 +19,7 @@ def get_db() -> Generator[Session, None, None]:
 
 
 def get_geo_data(db: Session) -> Dict[str, List[str]]:
+    """Retrieves all countries with ranked institutions."""
     countries_list: List[Country] = (
         db.query(Country)
         .join(Country.institutions)
@@ -44,6 +46,19 @@ geo_data: Dict[str, List[str]] = {}
 
 
 def get_entity_type(db: Session, entity: str) -> Tuple[EntityTypeEnum, str]:
+    """Decides the type of the entity
+
+    Args:
+        db (Session): SQLAlchemy session instant to connect to the DB
+        entity (str): The input entity from the client
+
+    Raises:
+        HTTPException: If the type of the entity cannot be decided
+
+    Returns:
+        Tuple[EntityTypeEnum, str]: Type of the entity and its name (if
+        entity type is "country_code" or "world")
+    """
     global geo_data
     geo_data = geo_data or get_geo_data(db=db)
 
@@ -75,6 +90,7 @@ def get_entity_type(db: Session, entity: str) -> Tuple[EntityTypeEnum, str]:
 async def resolve_entity(
     *, db: Session = Depends(get_db), entity: str
 ) -> Dict[str, Any]:
+    """Dependency for some of the routes"""
     entity_type = get_entity_type(db=db, entity=entity)
     return {
         "db": db,

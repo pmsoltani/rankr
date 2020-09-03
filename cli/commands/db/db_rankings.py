@@ -12,9 +12,10 @@ from utils import csv_export, csv_size
 
 
 def db_rankings():
+    """Populates the database with ranking data."""
     db: Session = SessionLocal()
     all_institutions: List[Institution] = db.query(Institution).all()
-    soup = {}
+    soup = {}  # Group soup by country for better performance.
     for inst in all_institutions:
         try:
             soup[inst.country.country][inst.soup] = inst.grid_id
@@ -25,10 +26,12 @@ def db_rankings():
     not_mached = []
     fuzz = []
     for ranking_system in list(DBConfig.RANKINGS["metrics"]):
+        # Get the ranking system directory.
         dir_path: Path = DBConfig.MAIN_DIR / ranking_system
         if not dir_path.exists():
             continue
 
+        # Get all .csv files in the directory.
         files: List[Path] = sorted(
             [f for f in dir_path.iterdir() if f.suffix == ".csv"], reverse=True
         )
@@ -42,6 +45,7 @@ def db_rankings():
                 institutions_list, not_mached_list, fuzz_list = ranking_process(
                     db, file, soup
                 )
+                # TODO: Remove the following unnecessary if-block.
                 if len(institutions_list) + len(not_mached_list) != size:
                     raise ValueError("Some institutions may have been lost!")
                 not_mached.extend(not_mached_list)
