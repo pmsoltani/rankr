@@ -1,12 +1,12 @@
 from typing import Dict, List
 
-from config import DBConfig
+from config import dbc
 from rankr.db_models import Ranking
 from utils import value_process
 
 
-metric_types = DBConfig.RANKINGS["metrics"]
-non_metric_cols = DBConfig.RANKINGS["non_metrics"]
+metric_types = dbc.RANKINGS["metrics"]
+non_metric_cols = dbc.RANKINGS["non_metrics"]
 
 
 def metrics_process(row: Dict[str, str]) -> List[Ranking]:

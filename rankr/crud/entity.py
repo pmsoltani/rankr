@@ -4,7 +4,7 @@ from fastapi import HTTPException
 from furl import furl
 from sqlalchemy.orm import Session
 
-from config import APPConfig
+from config import appc
 from rankr.db_models import Institution, Ranking, Country
 from rankr.enums import (
     EntityTypeEnum,
@@ -34,8 +34,8 @@ class Entity(object):
         self.name = name
         self.ids: List[int] = []
 
-        route_path = APPConfig.ENTITIES["entity_types"][self.entity_type.name]
-        self.url = (furl(APPConfig.APP_TLD) / [route_path, self.entity]).url
+        route_path = appc.ENTITIES["entity_types"][self.entity_type.name]
+        self.url = (furl(appc.APP_TLD) / [route_path, self.entity]).url
 
         msg = f"'{self.entity}' of type '{self.entity_type.name}'"
         self.entity_404 = {

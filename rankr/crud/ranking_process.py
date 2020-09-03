@@ -5,7 +5,7 @@ from sqlalchemy import func
 from sqlalchemy.orm import Session
 from tqdm import tqdm
 
-from config import DBConfig
+from config import dbc
 from rankr.crud.metrics_process import metrics_process
 from rankr.db_models import Country, Institution, Link
 from utils import csv_size, fuzzy_matcher, get_row, nullify
@@ -49,7 +49,7 @@ def ranking_process(
         nullify(row)
         link_type = row["Ranking System"]
         inst_name = row["Institution"].strip().lower()
-        inst_country = DBConfig.country_name_mapper(row["Country"])
+        inst_country = dbc.country_name_mapper(row["Country"])
         inst_url = row["URL"]
 
         inst_info = {
@@ -69,8 +69,8 @@ def ranking_process(
         ).first()
 
         # checking grid_id in manual matches
-        if not inst and inst_country in DBConfig.MATCHES:
-            match = DBConfig.MATCHES[inst_country].get(inst_name)
+        if not inst and inst_country in dbc.MATCHES:
+            match = dbc.MATCHES[inst_country].get(inst_name)
             if match:
                 inst: Institution = q1.filter(
                     Institution.grid_id == match
