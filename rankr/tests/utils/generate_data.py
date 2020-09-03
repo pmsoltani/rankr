@@ -2,7 +2,16 @@ from pathlib import Path
 from random import choice, choices, randrange
 from typing import List, Optional, Union
 
-from rankr.db_models import Institution, Country, Ranking
+from rankr.db_models import (
+    Acronym,
+    Alias,
+    Country,
+    Institution,
+    Label,
+    Link,
+    Ranking,
+    Type,
+)
 from rankr.enums import (
     MetricEnum,
     RankingSystemEnum,
@@ -31,16 +40,29 @@ def fake_institutions(n: int = 1):
         name_1 = "".join(choices(alphabet, k=randrange(5, 8)))
         name_2 = choice(["institution", "university"])
         name = f"{name_1} {name_2}".title()
-        institutions.append(
-            Institution(
-                **{
-                    "country_id": randrange(1, 50),
-                    "grid_id": grid_id,
-                    "name": name,
-                    "established": randrange(1800, 2020),
-                }
-            )
+
+        acronym = Acronym(acronym=name_1[0] + name_2[1])
+        alias = Alias(alias=f"{name_2} of {name_2}")
+        label = Label(iso639="en", label=name)
+        link = Link(link=f"http://{name_1}-{name_2}.com", type="homepage")
+        inst_type = Type(type="Education")
+
+        institution = Institution(
+            **{
+                "country_id": randrange(1, 50),
+                "grid_id": grid_id,
+                "name": name,
+                "established": randrange(1800, 2020),
+            }
         )
+        institution.acronyms = [acronym]
+        institution.aliases = [alias]
+        institution.labels = [label]
+        institution.links = [link]
+        institution.types = [inst_type]
+
+        institutions.append(institution)
+
     return institutions
 
 
