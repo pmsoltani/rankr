@@ -1,9 +1,10 @@
+from contextlib import closing
 from pathlib import Path
 from typing import List
 from sqlalchemy.orm.session import Session
 
 import typer
-from typer.colors import CYAN, GREEN, RED
+from typer.colors import CYAN, GREEN
 
 from config import dbc
 from rankr.crud import ranking_process
@@ -11,17 +12,19 @@ from rankr.db_models import Institution, SessionLocal
 from utils import csv_export
 
 
-def db_rankings(commit: bool = typer.Option(True)):
+def db_rankings(
+    commit: bool = typer.Option(True, help="Commit the results to the DB?")
+):
     """Populates the database with ranking data."""
-    db: Session = SessionLocal()
-    all_institutions: List[Institution] = db.query(Institution).all()
-    soup = {}  # Group soup by country for better performance.
-    for inst in all_institutions:
-        try:
-            soup[inst.country.country][inst.soup] = inst.grid_id
-        except KeyError:
-            soup[inst.country.country] = {inst.soup: inst.grid_id}
-    db.close()
+    db: Session
+    with closing(SessionLocal()) as db:
+        all_institutions: List[Institution] = db.query(Institution).all()
+        soup = {}  # Group soup by country for better performance.
+        for inst in all_institutions:
+            try:
+                soup[inst.country.country][inst.soup] = inst.grid_id
+            except KeyError:
+                soup[inst.country.country] = {inst.soup: inst.grid_id}
 
     not_mached = []
     fuzz = []
@@ -39,31 +42,21 @@ def db_rankings(commit: bool = typer.Option(True)):
             typer.secho(
                 f"Processing file ({cnt}/{len(files)}): {file.stem}", fg=CYAN
             )
-            try:
-                db = SessionLocal()
+            with closing(SessionLocal()) as db:
                 institutions_list, not_mached_list, fuzz_list = ranking_process(
                     db=db, file_path=file, soup=soup
                 )
-
                 not_mached.extend(not_mached_list)
                 fuzz.extend(fuzz_list)
-
                 if commit:
                     db.add_all(institutions_list)
                     db.commit()
-            except ValueError as exc:
-                typer.secho(str(exc), fg=RED)
-            finally:
-                db.close()
 
     if not_mached:
         csv_export(dbc.DATA_DIR / "not_mached.csv", not_mached)
-        typer.echo(
-            f"Saved the list of {len(not_mached)} not matched institutions."
-        )
-
+        typer.echo("Saved the list of not matched institutions.")
     if fuzz:
         csv_export(dbc.DATA_DIR / "fuzz.csv", fuzz)
-        typer.echo(f"Saved the list of {len(fuzz)} fuzzy-matched institutions.")
+        typer.echo("Saved the list of fuzzy-matched institutions.")
 
     typer.secho("All done!", fg=GREEN)
