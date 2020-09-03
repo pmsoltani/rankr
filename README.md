@@ -43,10 +43,7 @@ This will also install the new **rankr CLI**.
 
 ### Important notice
 
-Please note that the project is still in a pre-alpha stage and it's not ready for production. As of now, the instructions above will fail for at least two reasons:
-
-1. To populate the database, a `countries.csv` file is needed which is not currently included in the repository.
-2. There is a small bug in the GRID database (release 2020-06-29): The line `62833` of the file `addresses.csv` inside the `grid/full_tables` directory has an additional space character at the end of the country name: "Bonaire, Saint Eustatius and Saba ". Hopefully, this will be corrected in the database's next release. Until then the file must be manually corrected. (See the [TODO](#todo) section).
+Please note that the project is still in a pre-alpha stage and it's not ready for production. As of now, the instructions above will fail because of a small bug in the GRID database (release 2020-06-29): The line `62833` of the file `addresses.csv` inside the `grid/full_tables` directory has an additional space character at the end of the country name: "Bonaire, Saint Eustatius and Saba ". Hopefully, this will be corrected in the database's next release. Until then the file must be manually corrected. (See the [TODO](#todo) section).
 
 ## The `.env` file
 
@@ -56,15 +53,6 @@ For obvious security reasons, the project's environment variables file (the `.en
 APP_NAME=rankr
 APP_HOST=0.0.0.0
 APP_PORT=8000
-
-CRAWLER_ENGINE=qs,shanghai,the
-
-DATA_DIR=data
-
-QS_BASE=https://www.topuniversities.com/
-SHANGHAI_BASE=http://www.shanghairanking.com/
-THE_BASE=https://www.timeshighereducation.com/
-WIKIPEDIA_BASE=https://en.wikipedia.org/
 
 USER_AGENT=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36
 
@@ -80,12 +68,12 @@ MYSQL_PASS=your_mysql_root_password
 
 ## TODO
 
-- [*] Create a web server and an API.
+- [x] Create a web server and an API.
 - [ ] Design and develop a dashboard.
-- [*] Finish the documentation.
-- [ ] Make `countries.csv` a public file.
+- [x] Finish the documentation.
+- [x] Make `countries.csv` a public file.
 - [ ] Report the country name problem of the `addresses.csv` file to the GRID database maintainers.
-- [ ] Update the `config.py` module to reflect the recent changes (i.e., the new rankr CLI).
+- [x] Update the `config.py` module to reflect the recent changes (i.e., the new rankr CLI).
 - [ ] Add more functionalities to the CLI (e.g., starting the webserver and running the tests).
 
 ## Contributions
