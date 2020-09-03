@@ -7,19 +7,23 @@ from pydantic import BaseSettings, Field, validator
 
 
 class BaseConfig(BaseSettings):
-    DATA_DIR: str = "data"
-    MAIN_DIR: Path = Path.cwd()
+    ROOT_DIR: Path = Path.cwd()
+    DATA_DIR: Path = ROOT_DIR / "data"
+    MAIN_DIR: Path = ROOT_DIR / "essentials"
 
-    ENTITIES_FILE: Path = MAIN_DIR / "entities.json"
-    RANKINGS_FILE: Path = MAIN_DIR / "rankings.json"
-    MATCHES_FILE: Path = MAIN_DIR / "matches.json"
+    COUNTRIES_FILE: Path = MAIN_DIR / "countries.csv"
+
     COUNTRY_NAMES_FILE: Path = MAIN_DIR / "country_names.json"
+    ENTITIES_FILE: Path = MAIN_DIR / "entities.json"
+    MATCHES_FILE: Path = MAIN_DIR / "matches.json"
+    RANKINGS_FILE: Path = MAIN_DIR / "rankings.json"
 
     QS_URLS_FILE: Path = MAIN_DIR / "qs_urls.json"
     SHANGHAI_URLS_FILE: Path = MAIN_DIR / "shanghai_urls.json"
     THE_URLS_FILE: Path = MAIN_DIR / "the_urls.json"
 
-    GRID_DATABASE_DIR: Path = MAIN_DIR / DATA_DIR / "grid" / "full_tables"
+    GRID_DATABASE_DIR: Path = DATA_DIR / "grid" / "full_tables"
+
     DIALECT: str = Field(..., env="DIALECT")
 
     COUNTRY_NAMES: dict = {}
