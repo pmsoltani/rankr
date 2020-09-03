@@ -5,7 +5,7 @@ from fastapi.testclient import TestClient
 from sqlalchemy.orm.session import Session
 from sqlalchemy_utils import create_database
 
-from config import DBConfig
+from config import dbc
 from main import app
 from rankr.api import deps
 from rankr.db_models import Base, Country, Institution, Ranking
@@ -25,7 +25,7 @@ app.dependency_overrides[deps.get_db] = override_get_db
 @pytest.fixture(scope="session")
 def db() -> Generator:
     try:
-        encoding = "utf8mb4" if DBConfig.DIALECT == "mysql" else "utf8"
+        encoding = "utf8mb4" if dbc.DIALECT == "mysql" else "utf8"
         create_database(engine.url, encoding=encoding)
     except Exception:
         pass
@@ -42,7 +42,7 @@ def data(db: Session):
     db.query(Institution).delete()
     db.query(Country).delete()
 
-    countries = fill_countries(DBConfig.MAIN_DIR / "countries.csv")
+    countries = fill_countries(dbc.MAIN_DIR / "countries.csv")
     institutions = fake_institutions(10)
     db.add_all(countries)
     db.commit()

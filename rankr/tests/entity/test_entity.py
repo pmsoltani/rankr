@@ -2,7 +2,7 @@ import re
 from decimal import Decimal
 from typing import List
 
-from config import APPConfig
+from config import appc
 from rankr.db_models import Country, Institution, Ranking
 from rankr.tests.utils import override_get_db
 
@@ -12,7 +12,7 @@ class TestEntity(object):
         db = next(override_get_db())
         institution: Institution = db.query(Institution).first()
         grid_id = institution.grid_id
-        assert re.match(APPConfig.GRID_ID_PATTERN, grid_id)
+        assert re.match(appc.GRID_ID_PATTERN, grid_id)
         response = client.get(f"/i/{grid_id}")
         assert response.status_code == 200
         assert response.json()["name"] == institution.name
@@ -23,7 +23,7 @@ class TestEntity(object):
 
     def test_grid_id_not_found(self, client):
         bad_grid_id = "grid.000000.ff"
-        assert re.match(APPConfig.GRID_ID_PATTERN, bad_grid_id)
+        assert re.match(appc.GRID_ID_PATTERN, bad_grid_id)
         response = client.get(f"/i/{bad_grid_id}")
         assert response.status_code == 404
 
@@ -37,7 +37,7 @@ class TestEntity(object):
         db = next(override_get_db())
         institution: Institution = db.query(Institution).first()
         grid_id = institution.grid_id
-        assert re.match(APPConfig.GRID_ID_PATTERN, grid_id)
+        assert re.match(appc.GRID_ID_PATTERN, grid_id)
         response = client.get(f"/geo/{grid_id}")
         assert response.status_code == 404
 
