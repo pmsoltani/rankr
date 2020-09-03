@@ -1,7 +1,3 @@
-from config.config import APPConfig  # noqa
-from config.config import CrawlerConfig  # noqa
-from config.config import DBConfig  # noqa
-from config.config import QSConfig  # noqa
-from config.config import ShanghaiConfig  # noqa
-from config.config import THEConfig  # noqa
-from config.config import WikipediaConfig  # noqa
+from config.app_config import appc  # noqa
+from config.crawler_config import crwc, qsc, shac, thec, wikic  # noqa
+from config.db_config import dbc  # noqa

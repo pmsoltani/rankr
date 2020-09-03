@@ -4,7 +4,7 @@ from fastapi import HTTPException
 from furl import furl
 from sqlalchemy.orm import Session
 
-from config import APPConfig
+from config import appc
 from rankr.db_models import Institution, Ranking, Country
 from rankr.enums import (
     EntityTypeEnum,
@@ -17,6 +17,8 @@ from utils import group_by
 
 
 class Entity(object):
+    """For representing an entity, whether an institution or a geo entity"""
+
     def __init__(
         self,
         db: Session,
@@ -30,10 +32,10 @@ class Entity(object):
         self.entity_type = entity_type
         self.remove_nulls = remove_nulls
         self.name = name
-        self.ids = []
+        self.ids: List[int] = []
 
-        path = APPConfig.ENTITIES["entity_types"][self.entity_type.name]
-        self.url = (furl(APPConfig.APP_TLD) / [path, self.entity]).url
+        route_path = appc.ENTITIES["entity_types"][self.entity_type.name]
+        self.url = (furl(appc.APP_TLD) / [route_path, self.entity]).url
 
         msg = f"'{self.entity}' of type '{self.entity_type.name}'"
         self.entity_404 = {
@@ -82,9 +84,7 @@ class Entity(object):
         return self._stats
 
     def get_institution_data(self) -> None:
-        if self.entity_type != EntityTypeEnum["institution"]:
-            return
-
+        """Attaches institutional data to the entity"""
         institution: Institution = (
             self.db.query(Institution)
             .filter(Institution.id.in_(self.get_ids()))
@@ -97,6 +97,7 @@ class Entity(object):
         self.country_code = institution.country.country_code
 
     def get_ids(self) -> List[int]:
+        """Retrieves the institution ID(s) for an entity"""
         if self.ids:
             return self.ids
 
@@ -126,9 +127,27 @@ class Entity(object):
         year: Optional[int] = None,
         latest: bool = False,
     ) -> List[Ranking]:
-        if not isinstance(metrics, list):
-            metrics = [metrics]
+        """Retrieves ranking metrics for the institutions of the entity.
 
+        Args:
+            metrics (List[MetricEnum]): The list of desired metrics
+            ranking_system (Optional[RankingSystemEnum], optional): The
+            ranking system to query on. If not specified, will query
+            all ranking systems. Defaults to None.
+            ranking_type (RankingTypeEnum, optional): The ranking type.
+            Defaults to RankingTypeEnum["university ranking"].
+            field (str, optional): The ranking field. Defaults to "All".
+            subject (str, optional): The ranking subject. Defaults to
+            "All".
+            year (Optional[int], optional): The ranking year. If not
+            specified, will query all years. Defaults to None.
+            latest (bool, optional): If True, will return the results
+            for the latest year. Defaults to False.
+
+        Returns:
+            List[Ranking]: A list of Ranking objects
+        """
+        # building the query
         filters = (
             Ranking.institution_id.in_(self.get_ids()),
             Ranking.ranking_type == ranking_type,
@@ -146,16 +165,31 @@ class Entity(object):
                 .limit(1)
             )
         filters = (*filters, Ranking.year == year) if year else filters
-
         query = self.db.query(Ranking).filter(*filters)
+
         ranking_metrics: List[Ranking] = query.order_by(Ranking.year).all()
         for metric in ranking_metrics:
+            # enrich the Ranking objects with entity data
             metric.entity = self.entity
             metric.entity_type = self.entity_type
 
         return ranking_metrics
 
     def _aggregate_metrics(self, metrics: List[Ranking]) -> List[Ranking]:
+        """Aggregates the metric values for different institutions.
+
+        The function attempts to group a list of rankings by year,
+        ranking system, and metric type. In each group, it will then
+        calculates the mean value and assigns the result to a new
+        Ranking object, which is in turn appended to the results list.
+
+        Args:
+            metrics (List[Ranking]): The list of ranking metrics to be
+            aggregated
+
+        Returns:
+            List[Ranking]: The list of aggregated metrics
+        """
         if self.entity_type == EntityTypeEnum["institution"]:
             return metrics
 
@@ -180,7 +214,12 @@ class Entity(object):
 
         return result
 
-    def _create_metric(self, **kwargs):
+    def _create_metric(self, **kwargs) -> Ranking:
+        """Creates a Ranking object using the specified kwargs.
+
+        Returns:
+            Ranking: The Ranking object
+        """
         metric = Ranking(**{**self.__dict__, **kwargs})
         metric.entity = self.entity
         metric.entity_type = self.entity_type

@@ -2,11 +2,13 @@ from typing import List, Optional
 
 from pydantic import BaseModel, Field, HttpUrl
 
-from rankr.schemas.ranking import RankingSchema
 from rankr.enums import EntityTypeEnum
+from rankr.schemas.ranking import RankingSchema
 
 
 class EntitySchema(BaseModel):
+    """For returning an institution/geo entity to the client."""
+
     entity: str
     entity_type: EntityTypeEnum
     url: HttpUrl

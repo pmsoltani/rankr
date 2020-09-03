@@ -4,40 +4,50 @@ import typer
 from sqlalchemy.orm.session import Session
 from typer.colors import CYAN, GREEN
 
-from config import (
-    CrawlerConfig,
-    QSConfig,
-    ShanghaiConfig,
-    THEConfig,
-    WikipediaConfig,
-)
+from config import crwc, qsc, shac, thec, wikic
 from crawlers import QSCrawler, ShanghaiCrawler, THECrawler, WikipediaCrawler
 from rankr.db_models import Institution, SessionLocal
 
 
 def engine_select(engine: str) -> Tuple[Any, Any]:
+    """Returns the Crawler & the Config classes for the selected engine.
+
+    Args:
+        engine (str): The specified engine
+
+    Raises:
+        ValueError: If engine is not supported
+
+    Returns:
+        Tuple[Any, Any]: The engines' Crawler & Config classes
+    """
     if engine == "qs":
-        return (QSConfig, QSCrawler)
+        return (qsc, QSCrawler)
     if engine == "shanghai":
-        return (ShanghaiConfig, ShanghaiCrawler)
+        return (shac, ShanghaiCrawler)
     if engine == "the":
-        return (THEConfig, THECrawler)
+        return (thec, THECrawler)
     if engine == "wikipedia":
-        return (WikipediaConfig, WikipediaCrawler)
-    raise ValueError
+        return (wikic, WikipediaCrawler)
+    raise typer.BadParameter(
+        f"Wrong engine value '{engine}'. "
+        + f"Only {crwc.SUPPORTED_ENGINES} are supported."
+    )
 
 
 def engine_check(values: List[str]) -> List[str]:
+    # TODO: Remove unnecessary function.
     for value in values:
-        if value.lower() not in CrawlerConfig.SUPPORTED_ENGINES:
+        if value.lower() not in crwc.SUPPORTED_ENGINES:
             raise typer.BadParameter(
                 f"Wrong engine value '{value}'. "
-                + f"Only {CrawlerConfig.SUPPORTED_ENGINES} are supported."
+                + f"Only {crwc.SUPPORTED_ENGINES} are supported."
             )
     return [v.lower() for v in values]
 
 
 def get_wikipedia_urls() -> List[Dict[str, str]]:
+    """Retrieves the list of Wikipedia URLS for ranked institutions."""
     try:
         db: Session = SessionLocal()
         query = (Institution.grid_id, Institution.wikipedia_url)
@@ -50,10 +60,17 @@ def get_wikipedia_urls() -> List[Dict[str, str]]:
 
 
 def crawl(engines: List[str] = typer.Argument(..., callback=engine_check)):
+    """Crawls the target website using the selected engines.
+
+    Args:
+        engines (List[str]): The selected engines used for crawling
+    """
+    # TODO: Improve the command's structure if possible.
     for engine in engines:
         typer.secho(f"Processing {engine} urls.", fg=CYAN)
         config, crawler = engine_select(engine)
         if engine == "wikipedia":
+            # The WikipediaCrawler class works a little different.
             urls = get_wikipedia_urls() or config.URLS
             for url in urls:
                 w = crawler(url["grid_id"], url["wikipedia_url"])

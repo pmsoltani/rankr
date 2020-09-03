@@ -68,4 +68,3 @@ instance/*
 
 # output & data
 data/
-*.csv

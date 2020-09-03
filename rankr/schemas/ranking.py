@@ -14,6 +14,8 @@ from rankr.enums import (
 
 
 class RankingSchema(BaseModel):
+    """For returning a ranking value to the client."""
+
     ranking_system: RankingSystemEnum
     ranking_type: RankingTypeEnum
     year: int
@@ -35,6 +37,7 @@ class RankingSchema(BaseModel):
         result = {**input_values}
         institution: Optional[Institution] = result.get("institution")
         if institution:
+            # enrich the schema with the institution data
             result["entity"] = result.get("entity") or institution.grid_id
             result["entity_type"] = (
                 result.get("entity_type") or EntityTypeEnum["institution"]
