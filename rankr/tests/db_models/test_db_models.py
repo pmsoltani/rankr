@@ -40,7 +40,7 @@ class TestDBModels(object):
         assert (
             str(r)
             == f"{r.ranking_system.name} ({r.year}) | "
-            + f"F: {r.field}, S: {r.subject}, "
+            + f"{r.field} ({r.subject}) -> "
             + f"{r.metric.name}: {r.value}"
         )
 
