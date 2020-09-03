@@ -20,7 +20,9 @@ from utils import csv_size, get_csv, get_row, nullify
 
 
 def db_grid():
+    """Populates the database with country & GRID data."""
     try:
+        # TODO: Make this a separate function, as it can be re-used.
         typer.secho("Processing countries...", fg=CYAN)
         db: Session = SessionLocal()
         rows = get_row(DBConfig.MAIN_DIR / "countries.csv")
@@ -31,6 +33,7 @@ def db_grid():
 
         db.add_all(countries_list)
         db.commit()
+    # TODO: Handle exceptions (e.g. the database is already populated).
     finally:
         db.close()
 
@@ -40,6 +43,7 @@ def db_grid():
         typer.secho("Processing institutions...", fg=CYAN)
         db: Session = SessionLocal()
 
+        # Group the GRID data tables by grid_id for better access.
         institution_attrs = [
             get_csv(DBConfig.GRID_DATABASE_DIR / f"{attr}.csv", "grid_id")
             for attr in attrs
@@ -51,10 +55,12 @@ def db_grid():
         pbar = tqdm(total=row_count)
         for row in rows:
             nullify(row)
+            # Get all the data related to the current institution.
             address, acronym, alias, label, link, type = [
                 attr.get(row["grid_id"]) for attr in institution_attrs
             ]
 
+            # Create 'soup' variable for fuzzy matching of institutions.
             soup = [row["name"]]
 
             if address:
@@ -92,6 +98,7 @@ def db_grid():
             fg=CYAN,
         )
         db.commit()
+    # TODO: Handle exceptions (e.g. the database is already populated).
     finally:
-        del institution_attrs
+        del institution_attrs  # Free-up memory (~ 10^5 institutions).
         db.close()
