@@ -74,7 +74,7 @@ MYSQL_PASS=your_mysql_root_password
 - [x] Make `countries.csv` a public file.
 - [ ] Report the country name problem of the `addresses.csv` file to the GRID database maintainers.
 - [x] Update the `config.py` module to reflect the recent changes (i.e., the new rankr CLI).
-- [ ] Add more functionalities to the CLI (e.g., starting the webserver and running the tests).
+- [x] Add more functionalities to the CLI (e.g., starting the webserver and running the tests).
 
 ## Contributions
 
