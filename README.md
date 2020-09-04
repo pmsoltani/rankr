@@ -2,7 +2,7 @@
 
 **rankr** is a platform for aggregating the results of different academic rankings.
 
-## What does it do!
+## What does it do?
 
 rankr crawls university ranking tables and stores the results in `.csv` files, after some pre-processing. At the moment, it supports [QS](https://www.topuniversities.com/), [Shanghai (ARWU)](http://www.shanghairanking.com), and [Times Higher Education (THE)](https://www.timeshighereducation.com) for both their **world university rankings** and **subject rankings**.
 
