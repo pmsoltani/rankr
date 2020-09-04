@@ -1,7 +1,7 @@
 import re
 from typing import Any, Dict, Generator, List, Tuple
 
-from fastapi import Depends, HTTPException
+from fastapi import Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 from config import appc
@@ -92,7 +92,7 @@ def get_entity_type(db: Session, entity: str) -> Tuple[EntityTypeEnum, str]:
 
 
 async def resolve_entity(
-    *, db: Session = Depends(get_db), entity: str
+    *, db: Session = Depends(get_db), entity: str,
 ) -> Dict[str, Any]:
     """Dependency for some of the routes"""
     entity_type = get_entity_type(db=db, entity=entity)
@@ -102,3 +102,21 @@ async def resolve_entity(
         "entity_type": entity_type[0],
         "name": entity_type[1],
     }
+
+
+async def check_entities(
+    *, entity: str, entities: List[str] = Query(str)
+) -> List[str]:
+    if entity in entities:
+        raise HTTPException(
+            status_code=400, detail="Cannot compare an entity with itself!"
+        )
+    if 4 < len(entities):
+        raise HTTPException(
+            status_code=400, detail="Select at most 4 entities!"
+        )
+    if len(set(entities)) != len(entities):
+        raise HTTPException(
+            status_code=400, detail="Selected entities have duplicates!"
+        )
+    return entities

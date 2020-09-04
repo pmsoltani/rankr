@@ -78,9 +78,8 @@ class QSCrawler(CrawlerMixin):
                 if col not in columns:
                     continue
 
-                if not row[col]:
-                    # None values make BeautifulSoup raise exception.
-                    row[col] = ""
+                # None values make BeautifulSoup raise exception.
+                row[col] = "" if not row[col] else row[col]
                 value = BeautifulSoup(row[col], "html.parser")
                 if columns[col] == "Country":
                     country = qsc.country_name_mapper(text_process(value.text))

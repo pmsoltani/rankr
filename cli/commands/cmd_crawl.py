@@ -1,3 +1,4 @@
+from contextlib import closing
 from typing import Any, Dict, List, Tuple
 
 import typer
@@ -21,51 +22,50 @@ def engine_select(engine: str) -> Tuple[Any, Any]:
     Returns:
         Tuple[Any, Any]: The engines' Crawler & Config classes
     """
-    if engine == "qs":
-        return (qsc, QSCrawler)
-    if engine == "shanghai":
-        return (shac, ShanghaiCrawler)
-    if engine == "the":
-        return (thec, THECrawler)
-    if engine == "wikipedia":
-        return (wikic, WikipediaCrawler)
+    crawler_configs = [qsc, shac, thec, wikic]
+    crawler_classes = [QSCrawler, ShanghaiCrawler, THECrawler, WikipediaCrawler]
+    engines = zip(crwc.SUPPORTED_ENGINES, zip(crawler_configs, crawler_classes))
+    for e in engines:
+        if e[0] == engine:
+            return e[1]
     raise typer.BadParameter(
         f"Wrong engine value '{engine}'. "
         + f"Only {crwc.SUPPORTED_ENGINES} are supported."
     )
 
 
-def engine_check(values: List[str]) -> List[str]:
-    # TODO: Remove unnecessary function.
-    for value in values:
-        if value.lower() not in crwc.SUPPORTED_ENGINES:
-            raise typer.BadParameter(
-                f"Wrong engine value '{value}'. "
-                + f"Only {crwc.SUPPORTED_ENGINES} are supported."
-            )
-    return [v.lower() for v in values]
+def engine_check(value: str) -> List[str]:
+    value = value.lower()
+    if value == "all":
+        return crwc.SUPPORTED_ENGINES
+    if value == "rankings":
+        return crwc.SUPPORTED_ENGINES[:-1]
+    return [value]
 
 
 def get_wikipedia_urls() -> List[Dict[str, str]]:
     """Retrieves the list of Wikipedia URLS for ranked institutions."""
-    try:
-        db: Session = SessionLocal()
+    db: Session
+    with closing(SessionLocal()) as db:
         query = (Institution.grid_id, Institution.wikipedia_url)
         institutions = (
             db.query(*query).join(Institution.rankings).group_by(*query).all()
         )
-    finally:
-        db.close()
     return [institution._asdict() for institution in institutions]
 
 
-def crawl(engines: List[str] = typer.Argument(..., callback=engine_check)):
+def crawl(engines: str = typer.Argument(..., callback=engine_check)):
     """Crawls the target website using the selected engines.
+
+    Engine values: qs, shanghai, the
+
+    Special engine value: all = [qs, shanghai, the, wikipedia]
+
+    Special engine value: rankings = [qs, shanghai, the]
 
     Args:
         engines (List[str]): The selected engines used for crawling
     """
-    # TODO: Improve the command's structure if possible.
     for engine in engines:
         typer.secho(f"Processing {engine} urls.", fg=CYAN)
         config, crawler = engine_select(engine)

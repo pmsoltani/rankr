@@ -5,6 +5,8 @@
   "Algeria": {
     "ferhat abbas sétif university 1": "grid.411305.2",
     "m'hamed bougara university of boumerdès": "grid.442417.0",
+    "blida 1 university": "grid.32139.3a",
+    "university of oran 1": "grid.440479.a",
     "university of science and technology of oran mohamed-boudiaf": "grid.442511.7",
     "university of tlemcen": "grid.12319.38"
   },
@@ -46,7 +48,9 @@
     "federal rural university of the semi-arid region": "grid.412393.e",
     "federal university of ceara": "grid.8395.7",
     "federal university of ceará (ufc)": "grid.8395.7",
+    "federal university of juiz de fora (ufjf)": "grid.411198.4",
     "federal university of parana": "grid.20736.30",
+    "federal university of paraí­ba (ufpb)": "grid.411216.1",
     "federal university of sao carlos": "grid.411247.5",
     "federal university of sao paulo": "grid.411249.b",
     "pontifical catholic university of rio de janeiro (puc-rio)": "grid.4839.6",
@@ -162,7 +166,9 @@
     "escp business school - paris": "grid.462233.2",
     "espci paristech": "grid.15736.36",
     "espci, paristech": "grid.15736.36",
+    "federal university of toulouse midi-pyrénées": "grid.11417.32",
     "joseph fourier university (grenoble 1)": "grid.9621.c",
+    "l’institut agro": "grid.424765.6",
     "lille 1 university – science and technology": "grid.503422.2",
     "national institute of applied sciences of lyon (insa lyon)": "grid.15399.37",
     "normandy university": "grid.460771.3",
@@ -248,7 +254,9 @@
     "indian institute of technology kharagpur (iit-kgp)": "grid.429017.9",
     "indian institutes of science education and research (iisers)": "grid.417960.d",
     "international institute of information technology - hyderabad (iiit-h)": "grid.419361.8",
+    "jamia hamdard university": "grid.411816.b",
     "jss academy of higher education and research": "grid.411962.9",
+    "kl university": "grid.449504.8",
     "manipal academy of higher education, manipal, karnataka, india": "grid.411639.8",
     "sanjay gandhi post graduate institute of medical sciences, lucknow (sgpgi)": "grid.263138.d",
     "shanmugha arts science technology & research academy (sastra)": "grid.412423.2",
@@ -285,7 +293,8 @@
     "university of milan": "grid.4708.b",
     "university of milan - bicocca": "grid.7563.7",
     "university of milan-bicocca": "grid.7563.7",
-    "university of rome iii": "grid.8509.4"
+    "university of rome iii": "grid.8509.4",
+    "university of tuscia": "grid.12597.38"
   },
   "Japan": {
     "himeji institute of technology": "grid.266453.0",
@@ -388,6 +397,7 @@
     "university of silesia in katowice": "grid.11866.38",
     "university of wroclaw": "grid.8505.8",
     "warsaw university of life sciences – sggw (wuls-sggw)": "grid.13276.31",
+    "wrocław university of environmental and life sciences": "grid.411200.6",
     "wroclaw university of science and technology (wrust)": "grid.7005.2",
     "wroclaw university of technology": "grid.7005.2"
   },
@@ -398,6 +408,7 @@
   "Romania": {
     "babes-bolyai university": "grid.7399.4",
     "babeş-bolyai university": "grid.7399.4",
+    "george emil palade university of medicine, pharmacy, science, and technology of targu mures": "grid.10414.30",
     "iuliu haţieganu university of medicine and pharmacy cluj-napoca": "grid.411040.0",
     "the \"gheorghe asachi\" technical university of iasi": "grid.6899.e",
     "universitatea de vest din timisoara /  west university of timisoara": "grid.14004.31"
@@ -406,7 +417,8 @@
     "belgorod state national research university": "grid.445984.0",
     "hse university (national research university higher school of economics)": "grid.410682.9",
     "kazan (volga region) federal university": "grid.77268.3c",
-    "kazan national research technological university": "grid.448715.b",
+    "kazan national research technical university": "grid.448715.b",
+    "kazan national research technological university": "grid.77914.3c",
     "mirea - russian technological university": "grid.466477.0",
     "moscow institute of physics and technology (mipt / moscow phystech)": "grid.18763.3b",
     "moscow institute of physics and technology (mipt)": "grid.18763.3b",
@@ -422,7 +434,8 @@
     "samara national research university (samara university)": "grid.79011.3e",
     "siberian federal university, sibfu": "grid.412592.9",
     "south ural state university (national research university)": "grid.440724.1",
-    "st petersburg electrotechnical university (leti)": "grid.9905.5"
+    "st petersburg electrotechnical university (leti)": "grid.9905.5",
+    "tomsk state university of control systems and radioelectronics": "grid.440738.c"
   },
   "Saudi Arabia": {
     "imam abdulrahman bin faisal university (iau) (formerly university of dammam)": "grid.411975.f",
@@ -452,7 +465,9 @@
     "esade ramon llull university": "grid.434161.5",
     "miguel hernandez university of elche": "grid.26811.3c",
     "miguel hernández university of elche": "grid.26811.3c",
+    "public university of navarre": "grid.410476.0",
     "universidad carlos iii de madrid (uc3m)": "grid.7840.b",
+    "universitat internacional de catalunya": "grid.410675.1",
     "universitat internacional de catalunya (uic)": "grid.410675.1",
     "university of cadiz": "grid.7759.c",
     "university of cordoba": "grid.411901.c",
@@ -486,13 +501,16 @@
     "university of tunis el manar": "grid.12574.35"
   },
   "Turkey": {
+    "bezmiâlem vakif university": "grid.411675.0",
     "bogazici university": "grid.11220.30",
     "bogaziçi üniversitesi": "grid.11220.30",
+    "bolu abant izzet baysal university": "grid.411082.e",
     "cankaya university": "grid.411919.5",
     "dokuz eylul university": "grid.21200.31",
     "eastern mediterranean university": "grid.461270.6",
     "izmir institute of technology (iztech)": "grid.419609.3",
     "ondokuz mayis university": "grid.411049.9",
+    "ozyegin university": "grid.28009.33",
     "sabanci university": "grid.5334.1",
     "tokat gaziosmanpaşa university": "grid.411550.4",
     "yildiz technical university": "grid.38575.3c"
