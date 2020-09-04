@@ -121,7 +121,7 @@ class TestEntity(object):
         response = client.get(f"/geo/{country_code}/compare?entities={grid_id}")
         assert response.status_code == 200
         assert response.json()[0]["entity"] == country_code
-        assert response.json()[1][0]["entity"] == grid_id
+        assert response.json()[1]["entity"] == grid_id
 
     def test_entity_compare_institution_on_geo_route(self, client):
         db = next(override_get_db())
@@ -132,3 +132,44 @@ class TestEntity(object):
 
         response = client.get(f"/geo/{grid_id}/compare?entities={country_code}")
         assert response.status_code == 404
+
+    def test_entity_compare_with_duplicate_entities_route(self, client):
+        db = next(override_get_db())
+        institution: Institution = db.query(Institution).first()
+        grid_id = institution.grid_id
+        country: Country = db.query(Country).join(Country.institutions).first()
+        country_code = country.country_code
+
+        response = client.get(
+            f"/i/{grid_id}/compare",
+            params={"entities": [country_code, country_code]},
+        )
+        assert response.status_code == 400
+        assert response.json()["detail"] == "Selected entities have duplicates!"
+
+    def test_entity_compare_with_itself_entities_route(self, client):
+        db = next(override_get_db())
+        institution: Institution = db.query(Institution).first()
+        grid_id = institution.grid_id
+
+        response = client.get(
+            f"/i/{grid_id}/compare", params={"entities": [grid_id]}
+        )
+        assert response.status_code == 400
+        assert (
+            response.json()["detail"] == "Cannot compare an entity with itself!"
+        )
+
+    def test_entity_compare_with_too_many_entities_route(self, client):
+        db = next(override_get_db())
+        institution: Institution = db.query(Institution).first()
+        grid_id = institution.grid_id
+        countries: Country = db.query(Country).join(Country.institutions).all()
+        country_codes = [c.country_code for c in countries]
+        country_codes = set(country_codes)
+
+        response = client.get(
+            f"/i/{grid_id}/compare", params={"entities": country_codes}
+        )
+        assert response.status_code == 400
+        assert response.json()["detail"] == "Select at most 4 entities!"

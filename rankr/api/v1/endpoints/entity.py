@@ -1,5 +1,5 @@
-from typing import List, Tuple
-from fastapi import APIRouter, Depends, HTTPException, Query
+from typing import List
+from fastapi import APIRouter, Depends, HTTPException
 
 from config import appc
 from rankr.api import deps
@@ -38,13 +38,12 @@ async def get_geo_entity(
 
 
 @router.get(
-    "/{entity_type_path}/{entity}/compare",
-    response_model=Tuple[EntitySchema, List[EntitySchema]],
+    "/{entity_type_path}/{entity}/compare", response_model=List[EntitySchema]
 )
 async def entity_compare(
     entity_type_path: EntityTypePathEnum,
     commons: dict = Depends(deps.resolve_entity),
-    entities: List[str] = Query(str),
+    entities: List[str] = Depends(deps.check_entities),
     remove_nulls: bool = True,
 ):
     """Compares the profiles of the specified entities."""
@@ -52,8 +51,7 @@ async def entity_compare(
     if appc.ENTITIES["entity_types"][entity_type] != entity_type_path.name:
         raise HTTPException(status_code=404)
 
-    institution = Entity(**commons).profile
-    entities_list: List[Entity] = []
+    entities_list: List[Entity] = [Entity(**commons).profile]
     for entity in entities:
         entity_type = deps.get_entity_type(db=commons["db"], entity=entity)
         entities_list.append(
@@ -66,4 +64,4 @@ async def entity_compare(
             ).profile
         )
 
-    return (institution, entities_list)
+    return entities_list
