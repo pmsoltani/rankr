@@ -1,9 +1,15 @@
+import enum
 import io
 import json
 from pathlib import Path
 from typing import Callable, Union
 
 from pydantic import BaseSettings, Field, validator
+
+
+class DialectEnum(str, enum.Enum):
+    mysql = "mysql"
+    postgresql = "postgresql"
 
 
 class BaseConfig(BaseSettings):
@@ -24,7 +30,7 @@ class BaseConfig(BaseSettings):
 
     GRID_DATABASE_DIR: Path = DATA_DIR / "grid" / "full_tables"
 
-    DIALECT: str = Field(..., env="DIALECT")
+    DIALECT: DialectEnum = Field(..., env="DIALECT")
 
     COUNTRY_NAMES: dict = {}
 
