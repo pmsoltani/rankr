@@ -1,0 +1,48 @@
+version: "3.7"
+
+services:
+  postgres:
+    image: "postgres:12-alpine"
+    env_file: ".env"
+    environment:
+      POSTGRES_DB: ${POSTGRESQL_NAME}
+      POSTGRES_USER: ${POSTGRESQL_USER}
+      POSTGRES_PASSWORD: ${POSTGRESQL_PASS}
+      PGDATA: /var/lib/postgresql/data/rankr/
+    volumes:
+      - "postgres:/var/lib/postgresql/data/"
+    ports:
+      - "${POSTGRESQL_PORT}:${POSTGRESQL_PORT}"
+
+  adminer:
+    image: "michalhosna/adminer:latest"
+    env_file: ".env"
+    init: true
+    command: php -S ${ADMINER_HOST}:${ADMINER_PORT} -t /var/adminer
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - "${ADMINER_PORT}:${ADMINER_PORT}"
+
+  backend:
+    env_file: ".env"
+    depends_on:
+      - postgres
+    build:
+      context: ./backend
+      dockerfile: backend.dockerfile
+      args:
+        INSTALL_PATH: ${INSTALL_PATH}
+        POETRY_VERSION: ${POETRY_VERSION}
+    command: sh -c "
+      if [ ${APP_ENV} == 'development' ] ; then rankr start --reload ;
+      else rankr start ; fi"
+    restart: on-failure
+    volumes:
+      - "./backend/data:${INSTALL_PATH}/data"
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+
+volumes:
+  postgres:

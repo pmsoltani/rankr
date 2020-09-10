@@ -1,6 +1,5 @@
 from typing import Dict
 from pydantic import Field, validator
-from pydantic.types import SecretStr
 
 from config.base_config import BaseConfig
 
@@ -11,7 +10,7 @@ bc = BaseConfig()
 class DBConfig(BaseConfig):
     DB_DRIVER: str = Field(..., env=f"{bc.DIALECT}_DRIVER")
     DB_USER: str = Field(..., env=f"{bc.DIALECT}_USER")
-    DB_PASS: SecretStr = Field(..., env=f"{bc.DIALECT}_PASS")
+    DB_PASS: str = Field(..., env=f"{bc.DIALECT}_PASS")
     DB_HOST: str = Field(..., env=f"{bc.DIALECT}_HOST")
     DB_PORT: int = Field(..., env=f"{bc.DIALECT}_PORT")
     DB_NAME: str = Field(..., env=f"{bc.DIALECT}_NAME")
