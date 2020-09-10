@@ -1,14 +1,20 @@
-import io
-import json
+import enum
 from pathlib import Path
 from typing import Callable, Union
+from utils.get_json import get_json
 
 from pydantic import BaseSettings, Field, validator
+
+
+class DialectEnum(str, enum.Enum):
+    mysql = "mysql"
+    postgresql = "postgresql"
 
 
 class BaseConfig(BaseSettings):
     ROOT_DIR: Path = Path.cwd()
     DATA_DIR: Path = ROOT_DIR / "data"
+    RESPONSES_DIR: Path = DATA_DIR / "responses"
     MAIN_DIR: Path = ROOT_DIR / "essentials"
 
     COUNTRIES_FILE: Path = MAIN_DIR / "countries.csv"
@@ -24,7 +30,7 @@ class BaseConfig(BaseSettings):
 
     GRID_DATABASE_DIR: Path = DATA_DIR / "grid" / "full_tables"
 
-    DIALECT: str = Field(..., env="DIALECT")
+    DIALECT: DialectEnum = Field(..., env="DIALECT")
 
     COUNTRY_NAMES: dict = {}
 
@@ -40,8 +46,7 @@ class BaseConfig(BaseSettings):
     def read_json(
         cls, file_path: Union[Path, str], object_hook: Callable = None
     ):
-        with io.open(file_path, "r", encoding="utf-8") as json_file:
-            return json.loads(json_file.read(), object_hook=object_hook)
+        return get_json(file_path=file_path, object_hook=object_hook)
 
     def country_name_mapper(self, country: str) -> str:
         try:

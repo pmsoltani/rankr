@@ -25,13 +25,15 @@ async def get_institution_entity(commons: dict = Depends(deps.resolve_entity)):
 
 @router.get("/geo/{entity}", response_model=EntitySchema)
 async def get_geo_entity(
-    commons: dict = Depends(deps.resolve_entity), remove_nulls: bool = True
+    commons: dict = Depends(deps.resolve_entity),
+    remove_nulls: bool = True,
+    fresh: bool = False,
 ):
     """Returns the profile for a geo entity."""
     try:
         if commons["entity_type"] == EntityTypeEnum["institution"]:
             raise HTTPException(status_code=404)
-        geo_entity = Entity(**commons, remove_nulls=remove_nulls)
+        geo_entity = Entity(**commons, remove_nulls=remove_nulls, fresh=fresh)
         return geo_entity.profile
     except Exception:
         raise
@@ -45,6 +47,7 @@ async def entity_compare(
     commons: dict = Depends(deps.resolve_entity),
     entities: List[str] = Depends(deps.check_entities),
     remove_nulls: bool = True,
+    fresh: bool = False,
 ):
     """Compares the profiles of the specified entities."""
     entity_type = commons["entity_type"].name
@@ -61,6 +64,7 @@ async def entity_compare(
                 entity_type=entity_type[0],
                 name=entity_type[1],
                 remove_nulls=remove_nulls,
+                fresh=fresh,
             ).profile
         )
 

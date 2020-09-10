@@ -13,7 +13,8 @@ from rankr.enums import (
     RankingTypeEnum,
     StatMetricEnum,
 )
-from utils import group_by
+from rankr.schemas.entity import EntitySchema
+from utils import get_json, group_by, str_export
 
 
 class Entity(object):
@@ -26,11 +27,13 @@ class Entity(object):
         entity_type: EntityTypeEnum,
         name: Optional[str] = None,
         remove_nulls: bool = True,
+        fresh: bool = False,
     ) -> None:
         self.db = db
         self.entity = entity
         self.entity_type = entity_type
         self.remove_nulls = remove_nulls
+        self.fresh = fresh
         self.name = name
         self.ids: List[int] = []
 
@@ -43,17 +46,29 @@ class Entity(object):
             "detail": f"Entity {msg} not found.",
         }
 
+        self.json_file_path = appc.RESPONSES_DIR / f"{self.entity}.json"
+        self.json_file_path.parent.mkdir(parents=True, exist_ok=True)
+
         self._ranks: List[Ranking] = []
         self._scores: List[Ranking] = []
         self._stats: List[Ranking] = []
 
     @property
     def profile(self) -> "Entity":
-        if self.entity_type == EntityTypeEnum["institution"]:
-            self.get_institution_data()
+        if not self.fresh and self.json_file_path.exists():
+            return get_json(self.json_file_path)
+
         self.ranks
         self.scores
         self.stats
+        if self.entity_type == EntityTypeEnum["institution"]:
+            self.get_institution_data()
+        if self.entity_type != EntityTypeEnum["institution"]:
+            data = {k: v for k, v in self.__dict__.items()}
+            for attr in ["ranks", "scores", "stats"]:
+                data[attr] = data.pop(f"_{attr}")
+
+            str_export(self.json_file_path, EntitySchema(**data).json())
         return self
 
     @property

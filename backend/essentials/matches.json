@@ -26,6 +26,7 @@
     "karl-franzens-universitaet graz": "grid.5110.5",
     "medical university of innsbruck": "grid.5361.1",
     "university of natural resources and applied life sciences vienna": "grid.5173.0",
+    "university of natural resources and life sciences, vienna": "grid.5173.0",
     "wu (vienna university of economics and business)": "grid.15788.33"
   },
   "Bahrain": {
@@ -66,6 +67,7 @@
     "universiti teknologi brunei": "grid.454314.3"
   },
   "Canada": {
+    "ontario tech university": "grid.266904.f",
     "university of victoria (uvic)": "grid.143640.4",
     "western university (the university of western ontario)": "grid.39381.30"
   },
@@ -182,6 +184,7 @@
     "télécom paris": "grid.463717.0",
     "university of bordeaux 1": "grid.412041.2",
     "university of cergy-pontoise": "grid.507676.5",
+    "university of côte d'azur": "grid.460782.f",
     "university of côte d’azur": "grid.460782.f",
     "university of nice sophia antipolis": "grid.460782.f",
     "university of orleans": "grid.112485.b",
@@ -191,6 +194,7 @@
     "university of paris-sud (paris 11)": "grid.5842.b",
     "university of provence (aix-marseille 1)": "grid.5399.6",
     "university of toulouse 1": "grid.11417.32",
+    "university of tours": "grid.12366.30",
     "university of versailles": "grid.12832.3a",
     "university of versailles saint-quentin-en-yvelines": "grid.12832.3a",
     "university paris 2 panthéon-assas": "grid.33831.3a",
@@ -201,6 +205,7 @@
     "université de technologie de compiègne (utc)": "grid.6227.1",
     "université de tours": "grid.12366.30",
     "université grenoble alpes": "grid.450307.5",
+    "université gustave eiffel": "grid.10594.39",
     "université paris descartes": "grid.508487.6",
     "université paris-dauphine, université psl": "grid.11024.36",
     "université paul sabatier toulouse iii": "grid.15781.3a",
@@ -215,6 +220,8 @@
     "fachhochschule aachen": "grid.434081.a",
     "freie universitaet berlin": "grid.14095.39",
     "hamburg university of technology": "grid.6884.2",
+    "heinrich heine university duesseldorf": "grid.411327.2",
+    "leuphana university luneburg": "grid.10211.33",
     "otto von guericke university of magdeburg": "grid.5807.a",
     "technical university darmstadt": "grid.6546.1",
     "technical university munich": "grid.6936.a",
@@ -374,6 +381,7 @@
     "pmas arid agriculture university rawalpindi": "grid.440552.2",
     "the university of lahore": "grid.440564.7",
     "university of lahore": "grid.440564.7",
+    "university of engineering and technology (uet)": "grid.444938.6",
     "university of veterinary and animal sciences, lahore": "grid.412967.f"
   },
   "Panama": {
@@ -467,6 +475,7 @@
     "miguel hernández university of elche": "grid.26811.3c",
     "public university of navarre": "grid.410476.0",
     "universidad carlos iii de madrid (uc3m)": "grid.7840.b",
+    "universidad de cadiz": "grid.7759.c",
     "universitat internacional de catalunya": "grid.410675.1",
     "universitat internacional de catalunya (uic)": "grid.410675.1",
     "university of cadiz": "grid.7759.c",
@@ -552,6 +561,7 @@
     "georgia health sciences university": "grid.410427.4",
     "indiana university-purdue university at indianapolis": "grid.257413.6",
     "louisiana state university - baton rouge": "grid.64337.35",
+    "mayo clinic alix school of medicine": "grid.66875.3a",
     "mayo medical school": "grid.66875.3a",
     "medical college of georgia": "grid.410427.4",
     "montana state university - bozeman": "grid.41891.35",
@@ -571,6 +581,7 @@
     "state university of new york health science center at brooklyn": "grid.262863.b",
     "stony brook university, state university of new york": "grid.36425.36",
     "texas a&m university - college station": "grid.264756.4",
+    "the city college of new york": "grid.254250.4",
     "the new school": "grid.264933.9",
     "the ohio state university - columbus": "grid.261331.4",
     "the university of connecticut - storrs": "grid.63054.34",

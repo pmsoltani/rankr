@@ -98,7 +98,7 @@ def ranking_process(
         if not inst or inst in institutions_list:
             not_mached_list.append(
                 {
-                    "Problem": "Not Matched" if not inst else "Double Matched",
+                    "Problem": "Not Matched" if not inst else f"Double: {inst}",
                     **inst_info,
                 }
             )

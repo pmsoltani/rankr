@@ -2,6 +2,15 @@
   {
     "ranking_system": "shanghai",
     "ranking_type": "university ranking",
+    "year": 2020,
+    "field": "All",
+    "subject": "All",
+    "url": "http://www.shanghairanking.com/ARWU2020.html",
+    "crawl": true
+  },
+  {
+    "ranking_system": "shanghai",
+    "ranking_type": "university ranking",
     "year": 2019,
     "field": "All",
     "subject": "All",
