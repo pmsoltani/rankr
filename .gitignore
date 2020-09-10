@@ -5,3 +5,4 @@
 .DS_Store
 thumbs.db
 .vscode/
+*.code-workspace
