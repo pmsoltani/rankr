@@ -23,23 +23,14 @@ It should be noted that the metadata from the GRID database is preferred in case
 
 - Clone the repo: `git clone https://github.com/pmsoltani/rankr.git`
 - Switch to the repo directory: `cd rankr`
-- Create a virtual environment: `python -m venv .venv`
-- Activate the virtual environment:
-
-  - bash/zsh: `source .venv/bin/activate`
-  - cmd.exe: `.venv\Scripts\activate.bat`
-
-- Install poetry: `pip install poetry`
-- Install the dependencies: `poetry install`
-
-This will also install the new **rankr CLI**.
-
+- Make sure Docker is running.
 - Create a `.env` file in the root directory (More info [here](#the-env-file)).
-- Create a data directory: `mkdir data`
-- Download the GRID database (from the link above) and extract it inside the `data` directory.
-- Crawl the ranking websites: `rankr crawl qs the shanghai`
-- Initialize the database: `rankr db reset --confirm`
-- Fire up the webserver: `python main.py`
+- Create a data directory: `mkdir backend/data`
+- Download the GRID database (from the link above) and extract it inside the new `data` directory.
+- Start the application: `docker-compose up -d`
+- Crawl the ranking tables: `docker-compose exec backend rankr crawl rankings`
+- Initialize the database for the first time: `docker-compose exec backend rankr db reset --confirm`
+- And you're done! Visit the following URL in your browser: [http://0.0.0.0:8000](http://0.0.0.0:8000)
 
 ### Important notice
 
@@ -50,21 +41,43 @@ Please note that the project is still in a pre-alpha stage and it's not ready fo
 For obvious security reasons, the project's environment variables file (the `.env` file) is not included in the repo, but here is a short, working version of it:
 
 ```env
+COMPOSE_PROJECT_NAME=rankr
+INSTALL_PATH=/home/rankr
+APP_ENV=development
+POETRY_VERSION=1.0.10
+
 APP_NAME=rankr
 APP_HOST=0.0.0.0
 APP_PORT=8000
 
 USER_AGENT=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36
 
-DIALECT=mysql
+DIALECT=postgresql
 
-MYSQL_DRIVER=mysqlconnector
-MYSQL_HOST=localhost
-MYSQL_PORT=3306
-MYSQL_NAME=rankr
-MYSQL_USER=root
-MYSQL_PASS=your_mysql_root_password
+POSTGRESQL_DRIVER=psycopg2
+# database host is the docker compose service name
+POSTGRESQL_HOST=postgres
+POSTGRESQL_PORT=5432
+POSTGRESQL_NAME=rankr
+POSTGRESQL_USER=rankr
+POSTGRESQL_PASS=postgres_super_secret_password
+
+ADMINER_HOST=0.0.0.0
+ADMINER_PORT=5050
+ADMINER_DRIVER=pgsql
+ADMINER_SERVER=postgres
+ADMINER_DB=rankr
+ADMINER_USERNAME=rankr
+ADMINER_PASSWORD=postgres_super_secret_password
 ```
+
+## Docker containers
+
+The stack currently has three containers:
+
+1. `postgres`, used to store the data in a persistant manner.
+2. `adminer` (optional), serves as a GUI for managing the database. Can be removed by commenting out/deleteing the `adminer` section of the `docker-compose.yml` file.
+3. `backend`, hosts the API server.
 
 ## TODO
 
@@ -75,6 +88,7 @@ MYSQL_PASS=your_mysql_root_password
 - [ ] Report the country name problem of the `addresses.csv` file to the GRID database maintainers.
 - [x] Update the `config.py` module to reflect the recent changes (i.e., the new rankr CLI).
 - [x] Add more functionalities to the CLI (e.g., starting the webserver and running the tests).
+- [x] Dockerize the app.
 
 ## Contributions
 
