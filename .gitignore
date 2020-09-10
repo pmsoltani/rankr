@@ -1,3 +1,6 @@
+# Environments
+.env
+
 # misc
 .DS_Store
 thumbs.db
