@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from typer.colors import CYAN, RED
 
 from rankr.crud import country_process, institution_process
-from rankr.db_models import Country, SessionLocal
+from rankr import db_models as d
 
 
 def db_grid():
@@ -13,13 +13,13 @@ def db_grid():
     try:
         db: Session
         typer.secho("Processing countries...", fg=CYAN)
-        with closing(SessionLocal()) as db:
+        with closing(d.SessionLocal()) as db:
             db.add_all(country_process())
             db.commit()
 
         typer.secho("Processing institutions...", fg=CYAN)
-        with closing(SessionLocal()) as db:
-            countries = {c.country: c for c in db.query(Country).all()}
+        with closing(d.SessionLocal()) as db:
+            countries = {c.country: c for c in db.query(d.Country).all()}
             db.add_all(institution_process(countries=countries))
             typer.secho(
                 "Committing results to the DB. This can take several minutes.",

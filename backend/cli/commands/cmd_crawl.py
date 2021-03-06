@@ -7,7 +7,7 @@ from typer.colors import CYAN, GREEN
 
 from config import crwc, qsc, shac, thec, wikic
 from crawlers import QSCrawler, ShanghaiCrawler, THECrawler, WikipediaCrawler
-from rankr.db_models import Institution, SessionLocal
+from rankr import db_models as d
 
 
 def engine_select(engine: str) -> Tuple[Any, Any]:
@@ -46,10 +46,10 @@ def engine_check(value: str) -> List[str]:
 def get_wikipedia_urls() -> List[Dict[str, str]]:
     """Retrieves the list of Wikipedia URLS for ranked institutions."""
     db: Session
-    with closing(SessionLocal()) as db:
-        query = (Institution.grid_id, Institution.wikipedia_url)
+    with closing(d.SessionLocal()) as db:
+        query = (d.Institution.grid_id, d.Institution.wikipedia_url)
         institutions = (
-            db.query(*query).join(Institution.rankings).group_by(*query).all()
+            db.query(*query).join(d.Institution.rankings).group_by(*query).all()
         )
     return [institution._asdict() for institution in institutions]
 
