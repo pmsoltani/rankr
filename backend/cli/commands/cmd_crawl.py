@@ -2,7 +2,7 @@ from contextlib import closing
 from typing import Any, Dict, List, Tuple
 
 import typer
-from sqlalchemy.orm.session import Session
+from sqlalchemy.orm import Session
 from typer.colors import CYAN, GREEN
 
 from config import crwc, qsc, shac, thec, wikic

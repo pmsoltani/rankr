@@ -1,9 +1,9 @@
 from contextlib import closing
 from pathlib import Path
 from typing import List
-from sqlalchemy.orm.session import Session
 
 import typer
+from sqlalchemy.orm import Session
 from typer.colors import CYAN, GREEN
 
 from config import dbc

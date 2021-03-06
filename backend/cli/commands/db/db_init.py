@@ -21,8 +21,7 @@ def db_init(drop: bool = typer.Option(False, help="Drop the database first?")):
         typer.secho("Dropped the database!", fg=CYAN)
 
     try:
-        encoding = "utf8mb4" if dbc.DIALECT == "mysql" else "utf8"
-        create_database(engine.url, encoding=encoding)
+        create_database(engine.url, encoding=dbc.DB_ENCODING)
 
         Base.metadata.create_all(engine)
         typer.secho("Successfully created the database!", fg=GREEN)
