@@ -7,6 +7,7 @@ from config.crawler_config import (
     WikipediaConfig,
 )
 from config.db_config import DBConfig
+from config import enums
 
 
 appc = APPConfig()
