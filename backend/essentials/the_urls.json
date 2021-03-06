@@ -790,5 +790,104 @@
     "subject": "All",
     "url": "https://www.timeshighereducation.com/world-university-rankings/2020/subject-ranking/computer-science#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols",
     "crawl": true
+  },
+  {
+    "ranking_system": "the",
+    "ranking_type": "subject ranking",
+    "year": 2021,
+    "field": "Arts & humanities",
+    "subject": "All",
+    "url": "https://www.timeshighereducation.com/world-university-rankings/2021/subject-ranking/arts-and-humanities#!/page/0/length/25/sort_by/rank/sort_order/asc/cols/stats",
+    "crawl": true
+  },
+  {
+    "ranking_system": "the",
+    "ranking_type": "subject ranking",
+    "year": 2021,
+    "field": "Business & economics",
+    "subject": "All",
+    "url": "https://www.timeshighereducation.com/world-university-rankings/2021/subject-ranking/business-and-economics#!/page/0/length/25/sort_by/rank/sort_order/asc/cols/stats",
+    "crawl": true
+  },
+  {
+    "ranking_system": "the",
+    "ranking_type": "subject ranking",
+    "year": 2021,
+    "field": "Clinical, pre-clinical & health",
+    "subject": "All",
+    "url": "https://www.timeshighereducation.com/world-university-rankings/2021/subject-ranking/clinical-pre-clinical-health#!/page/0/length/25/sort_by/rank/sort_order/asc/cols/stats",
+    "crawl": true
+  },
+  {
+    "ranking_system": "the",
+    "ranking_type": "subject ranking",
+    "year": 2021,
+    "field": "Computer science",
+    "subject": "All",
+    "url": "https://www.timeshighereducation.com/world-university-rankings/2021/subject-ranking/computer-science#!/page/0/length/25/sort_by/rank/sort_order/asc/cols/stats",
+    "crawl": true
+  },
+  {
+    "ranking_system": "the",
+    "ranking_type": "subject ranking",
+    "year": 2021,
+    "field": "Education",
+    "subject": "All",
+    "url": "https://www.timeshighereducation.com/world-university-rankings/2021/subject-ranking/education#!/page/0/length/25/sort_by/rank/sort_order/asc/cols/stats",
+    "crawl": true
+  },
+  {
+    "ranking_system": "the",
+    "ranking_type": "subject ranking",
+    "year": 2021,
+    "field": "Engineering & technology",
+    "subject": "All",
+    "url": "https://www.timeshighereducation.com/world-university-rankings/2021/subject-ranking/engineering-and-IT#!/page/0/length/25/sort_by/rank/sort_order/asc/cols/stats",
+    "crawl": true
+  },
+  {
+    "ranking_system": "the",
+    "ranking_type": "subject ranking",
+    "year": 2021,
+    "field": "Law",
+    "subject": "All",
+    "url": "https://www.timeshighereducation.com/world-university-rankings/2021/subject-ranking/law#!/page/0/length/25/sort_by/rank/sort_order/asc/cols/stats",
+    "crawl": true
+  },
+  {
+    "ranking_system": "the",
+    "ranking_type": "subject ranking",
+    "year": 2021,
+    "field": "Life sciences",
+    "subject": "All",
+    "url": "https://www.timeshighereducation.com/world-university-rankings/2021/subject-ranking/life-sciences#!/page/0/length/25/sort_by/rank/sort_order/asc/cols/stats",
+    "crawl": true
+  },
+  {
+    "ranking_system": "the",
+    "ranking_type": "subject ranking",
+    "year": 2021,
+    "field": "Physical sciences",
+    "subject": "All",
+    "url": "https://www.timeshighereducation.com/world-university-rankings/2021/subject-ranking/physical-sciences#!/page/0/length/25/sort_by/rank/sort_order/asc/cols/stats",
+    "crawl": true
+  },
+  {
+    "ranking_system": "the",
+    "ranking_type": "subject ranking",
+    "year": 2021,
+    "field": "Psychology",
+    "subject": "All",
+    "url": "https://www.timeshighereducation.com/world-university-rankings/2021/subject-ranking/psychology#!/page/0/length/25/sort_by/rank/sort_order/asc/cols/stats",
+    "crawl": true
+  },
+  {
+    "ranking_system": "the",
+    "ranking_type": "subject ranking",
+    "year": 2021,
+    "field": "Social sciences",
+    "subject": "All",
+    "url": "https://www.timeshighereducation.com/world-university-rankings/2021/subject-ranking/social-sciences#!/page/0/length/25/sort_by/rank/sort_order/asc/cols/stats",
+    "crawl": true
   }
 ]
