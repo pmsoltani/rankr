@@ -1,26 +1,29 @@
 from pathlib import Path
 from typing import Dict, List
 
-from pydantic import Field, HttpUrl, validator
+from pydantic import HttpUrl, validator
 
 from config.base_config import BaseConfig
-from config.db_config import dbc
+from config.db_config import DBConfig
+
+
+dbc = DBConfig()
 
 
 class CrawlerConfig(BaseConfig):
-    USER_AGENT: str = Field(..., env="USER_AGENT")
+    USER_AGENT: str
     HEADERS: Dict[str, str] = {}
+
+    DOWNLOAD_DIR: Path = Path()
+    SUPPORTED_ENGINES: List[str] = list(dbc.RANKINGS["metrics"]) + ["wikipedia"]
 
     @validator("HEADERS")
     def _headers_value(cls, headers, values) -> Dict[str, str]:
         return {"User-Agent": values["USER_AGENT"]}
 
-    DOWNLOAD_DIR: Path = Path()
-    SUPPORTED_ENGINES: List[str] = list(dbc.RANKINGS["metrics"]) + ["wikipedia"]
-
 
 class QSConfig(CrawlerConfig):
-    BASE_URL: HttpUrl = Field("https://www.topuniversities.com/")
+    BASE_URL: HttpUrl = "https://www.topuniversities.com/"
     URLS: List[dict] = []
 
     @validator("URLS")
@@ -50,7 +53,7 @@ class QSConfig(CrawlerConfig):
 
 
 class ShanghaiConfig(CrawlerConfig):
-    BASE_URL: HttpUrl = Field("http://www.shanghairanking.com/")
+    BASE_URL: HttpUrl = "http://www.shanghairanking.com/"
     URLS: List[dict] = []
 
     @validator("URLS")
@@ -81,7 +84,7 @@ class ShanghaiConfig(CrawlerConfig):
 
 
 class THEConfig(CrawlerConfig):
-    BASE_URL: HttpUrl = Field("https://www.timeshighereducation.com/")
+    BASE_URL: HttpUrl = "https://www.timeshighereducation.com/"
     URLS: List[dict] = []
 
     @validator("URLS")
@@ -111,15 +114,8 @@ class THEConfig(CrawlerConfig):
 
 
 class WikipediaConfig(CrawlerConfig):
-    BASE_URL: HttpUrl = Field("https://en.wikipedia.org/")
+    BASE_URL: HttpUrl = "https://en.wikipedia.org/"
 
     @validator("DOWNLOAD_DIR")
     def _download_dir_value(cls, download_dir, values) -> Path:
         return values["DATA_DIR"] / "wikipedia"
-
-
-crwc = CrawlerConfig()
-qsc = QSConfig()
-shac = ShanghaiConfig()
-thec = THEConfig()
-wikic = WikipediaConfig()
