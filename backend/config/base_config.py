@@ -1,10 +1,11 @@
 import enum
 from pathlib import Path
 from typing import Callable, Union
-from utils.get_json import get_json
+
+from pydantic import Field, validator
 
 from config.meta import ProjectMeta
-from pydantic import Field, validator
+from utils.get_json import get_json
 
 
 class DialectEnum(str, enum.Enum):

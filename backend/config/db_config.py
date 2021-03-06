@@ -1,4 +1,5 @@
-from typing import Dict
+from typing import Dict, Optional
+
 from pydantic import Field, validator
 
 from config.base_config import BaseConfig
@@ -15,6 +16,7 @@ class DBConfig(BaseConfig):
     DB_PORT: int = Field(..., env=f"{bc.DB_DIALECT}_PORT")
     DB_NAME: str = Field(..., env=f"{bc.DB_DIALECT}_NAME")
     DB_URL: str = ""
+    DB_ENCODING: Optional[str]
 
     RANKINGS: dict = {}
     MATCHES: Dict[str, Dict[str, str]] = {}
@@ -26,6 +28,10 @@ class DBConfig(BaseConfig):
             + f"{values['DB_USER']}:{values['DB_PASS']}@"
             + f"{values['DB_HOST']}:{values['DB_PORT']}/{values['DB_NAME']}"
         )
+
+    @validator("DB_ENCODING", always=True)
+    def _db_encoding_value(cls, db_encoding, values) -> str:
+        return "utf8mb4" if values["DB_DIALECT"] == "mysql" else "utf8"
 
     @validator("RANKINGS")
     def _load_rankings(cls, rankings, values) -> dict:

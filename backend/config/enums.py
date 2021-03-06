@@ -1,6 +1,11 @@
 import enum
 
-from config import appc, dbc
+from config.app_config import APPConfig
+from config.db_config import DBConfig
+
+
+appc = APPConfig()
+dbc = DBConfig()
 
 
 # The Enums below are used to regulate & restrict the types of different things:
