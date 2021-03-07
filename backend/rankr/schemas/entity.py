@@ -1,16 +1,16 @@
 from typing import List, Optional
 
-from pydantic import BaseModel, Field, HttpUrl
+from pydantic import BaseModel, Field, HttpUrl, validator
 
-from rankr.enums import EntityTypeEnum
-from rankr.schemas.ranking import RankingSchema
+from config import enums as e
+from rankr.schemas.ranking import RankingBase
 
 
-class EntitySchema(BaseModel):
+class EntityBase(BaseModel):
     """For returning an institution/geo entity to the client."""
 
     entity: str
-    entity_type: EntityTypeEnum
+    entity_type: e.EntityTypeEnum
     url: HttpUrl
     name: str
     wikipedia_url: Optional[HttpUrl] = None
@@ -20,9 +20,10 @@ class EntitySchema(BaseModel):
     city: Optional[str] = None
     country: Optional[str] = None
     country_code: Optional[str] = Field(None, min_length=2, max_length=2)
-    ranks: List[RankingSchema]
-    scores: List[RankingSchema]
-    stats: List[RankingSchema]
+    ranks: List[RankingBase]
+    scores: List[RankingBase]
+    stats: List[RankingBase]
 
-    class Config:
-        orm_mode = True
+    @validator("country", always=True)
+    def _validate_country(cls, country, values: dict) -> Optional[str]:
+        pass
