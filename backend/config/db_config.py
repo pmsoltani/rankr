@@ -18,7 +18,6 @@ class DBConfig(BaseConfig):
     DB_URL: str = ""
     DB_ENCODING: Optional[str]
 
-    RANKINGS: dict = {}
     MATCHES: Dict[str, Dict[str, str]] = {}
 
     @validator("DB_URL")
@@ -32,10 +31,6 @@ class DBConfig(BaseConfig):
     @validator("DB_ENCODING", always=True)
     def _db_encoding_value(cls, db_encoding, values) -> str:
         return "utf8mb4" if values["DB_DIALECT"] == "mysql" else "utf8"
-
-    @validator("RANKINGS")
-    def _load_rankings(cls, rankings, values) -> dict:
-        return cls.read_json(values["RANKINGS_FILE"])
 
     @validator("MATCHES")
     def _load_matches(cls, matches, values) -> Dict[str, Dict[str, str]]:
