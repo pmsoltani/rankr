@@ -27,6 +27,6 @@ def db_grid():
             )
             db.commit()
     except Exception as exc:
-        typer.secho("Error populating the database:", fg=RED)
+        typer.secho("Error populating the database: {type(exc)}", fg=RED)
         typer.secho(str(exc), fg=CYAN)
         raise typer.Abort()

@@ -1,12 +1,11 @@
 import typer
 
-from cli.commands.db import db_grid, db_init, db_rankings
+from cli.commands.db import db_grid, db_init
 
 
 cli = typer.Typer()
 cli.command(name="init")(db_init.db_init)
 cli.command(name="grid")(db_grid.db_grid)
-cli.command(name="rankings")(db_rankings.db_rankings)
 
 
 @cli.command()
@@ -31,4 +30,3 @@ def reset(
         raise typer.Abort()
     ctx.invoke(db_init.db_init, drop=True)
     ctx.invoke(db_grid.db_grid)
-    ctx.invoke(db_rankings.db_rankings)

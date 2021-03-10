@@ -1,9 +1,20 @@
+import subprocess
+
 import typer
-from sqlalchemy_utils import create_database, database_exists, drop_database
+from alembic.config import Config
+from alembic.script import ScriptDirectory
+from sqlalchemy_utils import database_exists, drop_database
 from typer.colors import CYAN, GREEN, RED
 
 from config import dbc
 from rankr import db_models as d
+
+
+config = Config()
+config.set_main_option("script_location", str(dbc.MIGRATIONS_DIR))
+script = ScriptDirectory.from_config(config)
+
+head_revision = script.get_current_head()
 
 
 def db_init(drop: bool = typer.Option(False, help="Drop the database first?")):
@@ -21,11 +32,15 @@ def db_init(drop: bool = typer.Option(False, help="Drop the database first?")):
         typer.secho("Dropped the database!", fg=CYAN)
 
     try:
-        create_database(d.engine.url, encoding=dbc.DB_ENCODING)
-
-        d.Base.metadata.create_all(d.engine)
-        typer.secho("Successfully created the database!", fg=GREEN)
-    except Exception as exc:
-        typer.secho("Error creating the database:", fg=RED)
+        if not head_revision:
+            # There are no migration revisions present
+            subprocess.check_call(
+                args="alembic revision --autogenerate -m 'First Migration'",
+                shell=True,
+            )
+        subprocess.check_call(args="alembic upgrade head", shell=True)
+        typer.secho("Successfully migrated the database to its head!", fg=GREEN)
+    except subprocess.CalledProcessError as exc:
+        typer.secho(f"Error migrating the database: {type(exc)}", fg=RED)
         typer.secho(str(exc), fg=CYAN)
         raise typer.Abort()

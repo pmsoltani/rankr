@@ -6,7 +6,7 @@ import typer
 from sqlalchemy.orm import Session
 from typer.colors import CYAN, GREEN
 
-from config import dbc
+from config import crwc, dbc
 from rankr.crud import ranking_process
 from rankr import db_models as d
 from utils import csv_export
@@ -28,7 +28,7 @@ def db_rankings(
 
     not_mached = []
     fuzz = []
-    for ranking_system in list(dbc.RANKINGS["metrics"]):
+    for ranking_system in list(crwc.RANKINGS["metrics"]):
         # Get the ranking system directory.
         dir_path: Path = dbc.DATA_DIR / ranking_system
         if not dir_path.exists():
