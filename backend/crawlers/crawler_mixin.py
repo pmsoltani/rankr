@@ -27,11 +27,11 @@ class CrawlerMixin(object):
         # self.ranking_info is mainly used to enrich ranking tables with
         # additional metadata
         self.ranking_info: Dict[str, str] = {
-            "Ranking System": ranking_system,
-            "Ranking Type": ranking_type,
-            "Year": str(year),
-            "Field": field,
-            "Subject": subject,
+            "ranking_system": ranking_system,
+            "ranking_type": ranking_type,
+            "year": str(year),
+            "field": field,
+            "subject": subject,
         }
 
         self.wait = wait
