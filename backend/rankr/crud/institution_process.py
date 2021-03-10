@@ -3,19 +3,11 @@ from typing import Dict, List
 from tqdm import tqdm
 
 from config import dbc
-from rankr.db_models import (
-    Acronym,
-    Alias,
-    Country,
-    Institution,
-    Label,
-    Link,
-    Type,
-)
+from rankr import db_models as d
 from utils import csv_size, get_csv, get_row, nullify
 
 
-def institution_process(countries: Dict[str, Country]) -> List[Institution]:
+def institution_process(countries: Dict[str, d.Country]) -> List[d.Institution]:
     rows = get_row(dbc.GRID_DATABASE_DIR / "institutes.csv")
     row_count = csv_size(dbc.GRID_DATABASE_DIR / "institutes.csv")
 
@@ -26,7 +18,7 @@ def institution_process(countries: Dict[str, Country]) -> List[Institution]:
         for attr in attrs
     ]
 
-    institutions_list: List[Institution] = []
+    institutions_list: List[d.Institution] = []
     pbar = tqdm(total=row_count)
     for row in rows:
         nullify(row)
@@ -40,25 +32,25 @@ def institution_process(countries: Dict[str, Country]) -> List[Institution]:
 
         if address:
             country = dbc.country_name_mapper(address[0].pop("country"))
-            institution = Institution(**{**row, **address[0]})
+            institution = d.Institution(**{**row, **address[0]})
             institution.country = countries[country]
             soup.append(country)
         else:
-            institution = Institution(**row)
+            institution = d.Institution(**row)
 
         if acronym:
-            institution.acronyms = [Acronym(**i) for i in acronym]
+            institution.acronyms = [d.Acronym(**i) for i in acronym]
             soup.extend(i["acronym"] for i in acronym)
         if alias:
-            institution.aliases = [Alias(**i) for i in alias]
+            institution.aliases = [d.Alias(**i) for i in alias]
             soup.extend(i["alias"] for i in alias)
         if label:
-            institution.labels = [Label(**i) for i in label]
+            institution.labels = [d.Label(**i) for i in label]
             soup.extend(i["label"] for i in label)
         if link:
-            institution.links = [Link(**i) for i in link]
+            institution.links = [d.Link(**i) for i in link]
         if type:
-            institution.types = [Type(**i) for i in type]
+            institution.types = [d.Type(**i) for i in type]
 
         institution.soup = " | ".join(i for i in soup)
         institutions_list.append(institution)
