@@ -2,7 +2,7 @@
 
 from rankr.db_models.acronym import Acronym
 from rankr.db_models.alias import Alias
-from rankr.db_models.base import Base, engine, SessionLocal
+from rankr.db_models.base import Base, engine, SessionLocal, validate_database
 from rankr.db_models.country import Country
 from rankr.db_models.institution import Institution
 from rankr.db_models.label import Label
