@@ -5,7 +5,7 @@ from pydantic import HttpUrl, Field, validator
 
 from config.base_config import BaseConfig
 from config.db_config import DBConfig
-from utils import get_csv
+from utils import get_row
 
 
 dbc = DBConfig()
@@ -33,7 +33,7 @@ class CrawlerConfig(BaseConfig):
 
     @validator("COUNTRIES")
     def _load_countries(cls, countries):
-        return get_csv(dbc.COUNTRIES_FILE, "country")
+        return {row["country"]: row for row in get_row(dbc.COUNTRIES_FILE)}
 
     @validator("RANKINGS")
     def _load_rankings(cls, rankings, values) -> dict:
