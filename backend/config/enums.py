@@ -1,11 +1,11 @@
 import enum
 
 from config.app_config import APPConfig
-from config.db_config import DBConfig
+from config.crawler_config import CrawlerConfig
 
 
 appc = APPConfig()
-dbc = DBConfig()
+crwc = CrawlerConfig()
 
 
 # The Enums below are used to regulate & restrict the types of different things:
@@ -14,22 +14,22 @@ institution_types = appc.ENTITIES["institution_types"]
 InstTypeEnum = enum.Enum("InstTypeEnum", {t: t for t in institution_types})
 
 # institution link types: homepage, qs, ...
-link_types = ["homepage"] + list(dbc.RANKINGS["metrics"])
+link_types = ["homepage"] + list(crwc.RANKINGS["metrics"])
 LinkTypeEnum = enum.Enum("LinkTypeEnum", {t: t for t in link_types},)
 
 # ranking system types: qs, shanghai, ...
 RankingSystemEnum = enum.Enum(
-    "RankingSystemEnum", {t: t for t in dbc.RANKINGS["metrics"]},
+    "RankingSystemEnum", {t: t for t in crwc.RANKINGS["metrics"]},
 )
 
 # ranking types: university ranking, subject ranking
 RankingTypeEnum = enum.Enum(
-    "RankingTypeEnum", {t: t for t in dbc.RANKINGS["ranking_types"]},
+    "RankingTypeEnum", {t: t for t in crwc.RANKINGS["ranking_types"]},
 )
 
 metric_types = []
 metric_value_types = []
-for metrics in dbc.RANKINGS["metrics"].values():
+for metrics in crwc.RANKINGS["metrics"].values():
     for metric_info in metrics.values():
         metric_types.append(metric_info["name"])
         metric_value_types.append(metric_info["type"])
@@ -39,7 +39,7 @@ MetricEnum = enum.Enum("MetricEnum", {t: t for t in metric_types})
 
 # statistic metric types: # FTE Students, % International Students, ...
 StatMetricEnum = enum.Enum(
-    "StatMetricEnum", {t: t for t in dbc.RANKINGS["stat_metrics"]}
+    "StatMetricEnum", {t: t for t in crwc.RANKINGS["stat_metrics"]}
 )
 
 # metric value types: integer, decimal, ...
