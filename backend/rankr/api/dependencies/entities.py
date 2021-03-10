@@ -1,34 +1,25 @@
 import re
-from typing import Any, Dict, Generator, List, Tuple
+from typing import Any, Dict, List, Tuple
 
 from fastapi import Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
-from config import appc
-from rankr.db_models import Country, Institution, SessionLocal
-from rankr.enums import EntityTypeEnum
+from config import appc, enums as e
+from rankr import db_models as d
+from rankr.api.dependencies.database import get_db
 from utils import get_csv
 
 
 country_code_mapper = get_csv(appc.COUNTRIES_FILE, "country_code")
 
 
-def get_db() -> Generator[Session, None, None]:
-    """Yields a SQLAlchemy session for the CRUD operations."""
-    try:
-        db: Session = SessionLocal()
-        yield db
-    finally:
-        db.close()
-
-
 def get_geo_data(db: Session) -> Dict[str, List[str]]:
     """Retrieves all countries with ranked institutions."""
-    countries_list: List[Country] = (
-        db.query(Country)
-        .join(Country.institutions)
-        .join(Institution.rankings)
-        .group_by(Country)
+    countries_list: List[d.Country] = (
+        db.query(d.Country)
+        .join(d.Country.institutions)
+        .join(d.Institution.rankings)
+        .group_by(d.Country)
         .all()
     )
     geo_data = {
@@ -49,7 +40,7 @@ def get_geo_data(db: Session) -> Dict[str, List[str]]:
 geo_data: Dict[str, List[str]] = {}
 
 
-def get_entity_type(db: Session, entity: str) -> Tuple[EntityTypeEnum, str]:
+def get_entity_type(db: Session, entity: str) -> Tuple[e.EntityTypeEnum, str]:
     """Decides the type of the entity
 
     Args:
@@ -69,18 +60,18 @@ def get_entity_type(db: Session, entity: str) -> Tuple[EntityTypeEnum, str]:
     entity_type = None
     name = None
     if re.match(appc.GRID_ID_PATTERN, entity):
-        entity_type = EntityTypeEnum["institution"]
+        entity_type = e.EntityTypeEnum["institution"]
     if entity.lower() == "world":
-        entity_type = EntityTypeEnum["world"]
+        entity_type = e.EntityTypeEnum["world"]
         name = entity.title()
     if entity in geo_data["regions"]:
-        entity_type = EntityTypeEnum["region"]
+        entity_type = e.EntityTypeEnum["region"]
     if entity in geo_data["sub_regions"]:
-        entity_type = EntityTypeEnum["sub_region"]
+        entity_type = e.EntityTypeEnum["sub_region"]
     if entity in geo_data["countries"]:
-        entity_type = EntityTypeEnum["country"]
+        entity_type = e.EntityTypeEnum["country"]
     if entity in geo_data["country_codes"]:
-        entity_type = EntityTypeEnum["country_code"]
+        entity_type = e.EntityTypeEnum["country_code"]
         name = country_code_mapper[entity][0]["country"]
 
     if not entity_type:
