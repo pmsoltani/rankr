@@ -1,5 +1,4 @@
 import json
-import re
 from typing import Dict, List
 
 import requests
@@ -8,7 +7,6 @@ from furl import furl
 
 from config import qsc
 from crawlers.crawler_mixin import CrawlerMixin
-from utils import text_process
 
 
 class QSCrawler(CrawlerMixin):
@@ -38,18 +36,19 @@ class QSCrawler(CrawlerMixin):
         Returns:
             str: The url for the ranking table data
         """
-        page = requests.get(self.url, headers=qsc.HEADERS)
-        link = page.headers["link"]
-        if "web.archive.org" in self.url:
-            link = page.headers["X-Archive-Orig-Link"]
-        node_number = re.findall(r".*?node/(.*?)>.*?", link)[0]
-
-        json_url = (
-            furl(qsc.BASE_URL)
-            / "sites/default/files/qs-rankings-data/"
-            / f"{node_number}_indicators.txt"
+        html_page = requests.get(self.url, headers=qsc.HEADERS)
+        html_soup = BeautifulSoup(html_page.content, "html.parser")
+        link = html_soup.find_all(
+            lambda tag: tag.name == "article"
+            and tag.get("data-history-node-id") is not None
         )
-        self.json_url = json_url.url
+        node = link[0]["data-history-node-id"]
+
+        self.json_url = (
+            furl(qsc.BASE_URL)
+            / "sites/default/files/qs-rankings-data/en"
+            / f"{node}_indicators.txt"
+        ).url
         return self.json_url
 
     def _get_tbl(self) -> List[Dict[str, str]]:
@@ -67,6 +66,9 @@ class QSCrawler(CrawlerMixin):
             col_disp = BeautifulSoup(col["title"], "html.parser").text
             col_name = qsc.FIELDS.get(col_disp.lower(), None)
             if not col_name:  # ignoring irrelevant data
+                if "university" in col_disp.lower():
+                    col_name = qsc.FIELDS.get("university")
+                    columns[col["data"]] = col_name
                 continue
             columns[col["data"]] = col_name
 
@@ -82,7 +84,7 @@ class QSCrawler(CrawlerMixin):
                 row[col] = "" if not row[col] else row[col]
                 value = BeautifulSoup(row[col], "html.parser")
                 if columns[col] == "Country":
-                    country = qsc.country_name_mapper(text_process(value.text))
+                    country = value.text
                     values[columns[col]] = country
                     continue
                 if columns[col] == "Institution":

@@ -5,9 +5,12 @@ import requests
 from bs4 import BeautifulSoup
 from furl import furl
 
-from config import shac
+from config import enums as e, shac
 from crawlers.crawler_mixin import CrawlerMixin
+from rankr import schemas as s
 from utils import text_process
+
+from devtools import debug
 
 
 class ShanghaiCrawler(CrawlerMixin):
@@ -28,8 +31,7 @@ class ShanghaiCrawler(CrawlerMixin):
             BeautifulSoup: The downloaded page
         """
         page = requests.get(self.url, headers=shac.HEADERS)
-        if page.status_code != 200:
-            raise ConnectionError(f"Error getting page: {self.url}")
+        page.raise_for_status()
 
         self.page = BeautifulSoup(page.content, "html.parser")
         return self.page
@@ -47,16 +49,14 @@ class ShanghaiCrawler(CrawlerMixin):
         # Get table headers.
         tbl_headers = self._clean_headers([h.text for h in tbl.find_all("th")])
         if not tbl.find_all("tr")[1].find("a"):
-            tbl_headers = [h for h in tbl_headers if h != "URL"]
+            tbl_headers = [h for h in tbl_headers if h != "url"]
 
         for row in tbl.find_all("tr"):
             values = []
             for val in row.find_all("td"):
                 if val.find("img"):
                     # Get country name from the country flag images.
-                    country = Path(val.find("img")["src"]).stem
-                    country = shac.country_name_mapper(text_process(country))
-                    values.append(country)
+                    values.append(Path(val.find("img")["src"]).stem)
                     continue
                 if val.find("a") and val.text:
                     url = furl(shac.BASE_URL) / val.find("a")["href"]
@@ -64,12 +64,21 @@ class ShanghaiCrawler(CrawlerMixin):
                 values.append(val.text)
 
             if values:
-                values = dict(zip(tbl_headers, [v.strip() for v in values]))
+                values = dict(zip(tbl_headers, values))
+                values["url"] = values.get("url") or None
+                values["total score"] = values.get("total score") or None
+                values = {
+                    k: self._value_to_schema(key=k, value=v)
+                    for k, v in values.items()
+                }
+                debug(values)
+                raise ValueError
                 # Some of the Shanghai ranking tables may not have the
-                # 'URL' or the 'Total Score' fields. If so, we add them:
-                values["URL"] = values.get("URL") or None
-                values["Total Score"] = values.get("Total Score") or None
+                # 'url' or the 'Total Score' fields. If so, we add them:
+
                 self.processed_data.append({**values, **self.ranking_info})
+                debug(self.processed_data)
+                raise ValueError
 
         if not tbl_headers or not self.processed_data:
             raise ConnectionError("Error getting page!")
@@ -89,7 +98,7 @@ class ShanghaiCrawler(CrawlerMixin):
         for h in headers:
             h = text_process(h).lower()
             if self.header_group_keyword in h:
-                new_headers.extend(["URL", "Institution", "Country"])
+                new_headers.extend(["url", "institution", "country"])
 
             if h in shac.FIELDS:
                 new_headers.append(shac.FIELDS[h])
@@ -100,3 +109,22 @@ class ShanghaiCrawler(CrawlerMixin):
                 new_headers.extend(tmp)
 
         return new_headers
+
+    def _value_to_schema(self, key: str, value: str):
+        key = key.lower()
+        print(key, value, self.ranking_info)
+        if key == "url":
+            return s.LinkCreate(link=value, type=e.LinkTypeEnum.shanghai)
+        if key == "country":
+            return s.CountryCreate(country=value)
+        if key == "institution":
+            return value
+
+        metric = shac.RANKINGS["metrics"]["shanghai"][key]["name"]
+        value_type = shac.RANKINGS["metrics"]["shanghai"][key]["type"]
+        return s.RankingCreate(
+            **self.ranking_info,
+            metric=metric,
+            raw_value=value,
+            value_type=value_type,
+        )
