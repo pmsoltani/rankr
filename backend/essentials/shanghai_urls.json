@@ -1,2116 +1,255 @@
 [
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "university ranking",
-    "year": 2020,
-    "field": "All",
-    "subject": "All",
-    "url": "http://www.shanghairanking.com/ARWU2020.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "university ranking",
-    "year": 2019,
-    "field": "All",
-    "subject": "All",
-    "url": "http://www.shanghairanking.com/ARWU2019.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "university ranking",
-    "year": 2018,
-    "field": "All",
-    "subject": "All",
-    "url": "http://www.shanghairanking.com/ARWU2018.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "university ranking",
-    "year": 2018,
-    "field": "All",
-    "subject": "All",
-    "url": "http://www.shanghairanking.com/ARWU2018Candidates.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "university ranking",
-    "year": 2017,
-    "field": "All",
-    "subject": "All",
-    "url": "http://www.shanghairanking.com/ARWU2017.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "university ranking",
-    "year": 2017,
-    "field": "All",
-    "subject": "All",
-    "url": "http://www.shanghairanking.com/ARWU2018Candidates.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "university ranking",
-    "year": 2016,
-    "field": "All",
-    "subject": "All",
-    "url": "http://www.shanghairanking.com/ARWU2016.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "university ranking",
-    "year": 2015,
-    "field": "All",
-    "subject": "All",
-    "url": "http://www.shanghairanking.com/ARWU2015.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "university ranking",
-    "year": 2014,
-    "field": "All",
-    "subject": "All",
-    "url": "http://www.shanghairanking.com/ARWU2014.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "university ranking",
-    "year": 2013,
-    "field": "All",
-    "subject": "All",
-    "url": "http://www.shanghairanking.com/ARWU2013.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "university ranking",
-    "year": 2012,
-    "field": "All",
-    "subject": "All",
-    "url": "http://www.shanghairanking.com/ARWU2012.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "university ranking",
-    "year": 2011,
-    "field": "All",
-    "subject": "All",
-    "url": "http://www.shanghairanking.com/ARWU2011.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "university ranking",
-    "year": 2010,
-    "field": "All",
-    "subject": "All",
-    "url": "http://www.shanghairanking.com/ARWU2010.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "university ranking",
-    "year": 2009,
-    "field": "All",
-    "subject": "All",
-    "url": "http://www.shanghairanking.com/ARWU2009.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "university ranking",
-    "year": 2008,
-    "field": "All",
-    "subject": "All",
-    "url": "http://www.shanghairanking.com/ARWU2008.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "university ranking",
-    "year": 2007,
-    "field": "All",
-    "subject": "All",
-    "url": "http://www.shanghairanking.com/ARWU2007.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "university ranking",
-    "year": 2006,
-    "field": "All",
-    "subject": "All",
-    "url": "http://www.shanghairanking.com/ARWU2006.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "university ranking",
-    "year": 2005,
-    "field": "All",
-    "subject": "All",
-    "url": "http://www.shanghairanking.com/ARWU2005.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "university ranking",
-    "year": 2004,
-    "field": "All",
-    "subject": "All",
-    "url": "http://www.shanghairanking.com/ARWU2004.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Natural Sciences",
-    "subject": "Mathematics",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/mathematics.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Natural Sciences",
-    "subject": "Physics",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/physics.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Natural Sciences",
-    "subject": "Chemistry",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/chemistry.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Natural Sciences",
-    "subject": "Earth Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/earth-sciences.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Natural Sciences",
-    "subject": "Geography",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/geography.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Natural Sciences",
-    "subject": "Ecology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/ecology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Natural Sciences",
-    "subject": "Oceanography",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/oceanography.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Natural Sciences",
-    "subject": "Atmospheric Science",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/atmospheric-science.html",
-    "crawl": true
-  },
+  { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2020, "field": "All", "subject": "All", "url": "http://www.shanghairanking.com/ARWU2020.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2019, "field": "All", "subject": "All", "url": "http://www.shanghairanking.com/ARWU2019.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2018, "field": "All", "subject": "All", "url": "http://www.shanghairanking.com/ARWU2018.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2018, "field": "All", "subject": "All", "url": "http://www.shanghairanking.com/ARWU2018Candidates.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2017, "field": "All", "subject": "All", "url": "http://www.shanghairanking.com/ARWU2017.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2017, "field": "All", "subject": "All", "url": "http://www.shanghairanking.com/ARWU2018Candidates.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2016, "field": "All", "subject": "All", "url": "http://www.shanghairanking.com/ARWU2016.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2015, "field": "All", "subject": "All", "url": "http://www.shanghairanking.com/ARWU2015.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2014, "field": "All", "subject": "All", "url": "http://www.shanghairanking.com/ARWU2014.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2013, "field": "All", "subject": "All", "url": "http://www.shanghairanking.com/ARWU2013.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2012, "field": "All", "subject": "All", "url": "http://www.shanghairanking.com/ARWU2012.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2011, "field": "All", "subject": "All", "url": "http://www.shanghairanking.com/ARWU2011.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2010, "field": "All", "subject": "All", "url": "http://www.shanghairanking.com/ARWU2010.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2009, "field": "All", "subject": "All", "url": "http://www.shanghairanking.com/ARWU2009.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2008, "field": "All", "subject": "All", "url": "http://www.shanghairanking.com/ARWU2008.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2007, "field": "All", "subject": "All", "url": "http://www.shanghairanking.com/ARWU2007.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2006, "field": "All", "subject": "All", "url": "http://www.shanghairanking.com/ARWU2006.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2005, "field": "All", "subject": "All", "url": "http://www.shanghairanking.com/ARWU2005.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2004, "field": "All", "subject": "All", "url": "http://www.shanghairanking.com/ARWU2004.html", "crawl": true },
 
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Engineering",
-    "subject": "Mechanical Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/mechanical-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Engineering",
-    "subject": "Electrical & Electronic Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/electrical-electronic-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Engineering",
-    "subject": "Automation & Control",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/automation-control.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Engineering",
-    "subject": "Telecommunication Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/telecommunication-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Engineering",
-    "subject": "Instruments Science & Technology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/instruments-science-technology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Engineering",
-    "subject": "Biomedical Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/biomedical-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Engineering",
-    "subject": "Computer Science & Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/computer-science-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Engineering",
-    "subject": "Civil Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/civil-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Engineering",
-    "subject": "Chemical Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/chemical-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Engineering",
-    "subject": "Materials Science & Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/materials-science-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Engineering",
-    "subject": "Nanoscience & Nanotechnology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/nanoscience-nanotechnology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Engineering",
-    "subject": "Energy Science & Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/energy-science-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Engineering",
-    "subject": "Environmental Science & Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/environmental-science-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Engineering",
-    "subject": "Water Resources",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/water-resources.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Engineering",
-    "subject": "Food Science & Technology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/food-science-technology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Engineering",
-    "subject": "Biotechnology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/biotechnology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Engineering",
-    "subject": "Aerospace Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/aerospace-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Engineering",
-    "subject": "Marine-Ocean Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/marine-ocean-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Engineering",
-    "subject": "Transportation Science & Technology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/transportation-science-technology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Engineering",
-    "subject": "Remote Sensing",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/remote-sensing.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Engineering",
-    "subject": "Mining & Mineral Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/mining-mineral-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Engineering",
-    "subject": "Metallurgical Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/metallurgical-engineering.html",
-    "crawl": true
-  },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Natural Sciences", "subject": "Mathematics", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/mathematics.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Natural Sciences", "subject": "Physics", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/physics.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Natural Sciences", "subject": "Chemistry", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/chemistry.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Natural Sciences", "subject": "Earth Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/earth-sciences.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Natural Sciences", "subject": "Geography", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/geography.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Natural Sciences", "subject": "Ecology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/ecology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Natural Sciences", "subject": "Oceanography", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/oceanography.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Natural Sciences", "subject": "Atmospheric Science", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/atmospheric-science.html", "crawl": true },
 
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Life Sciences",
-    "subject": "Biological Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/biological-sciences.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Life Sciences",
-    "subject": "Human Biological Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/human-biological-sciences.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Life Sciences",
-    "subject": "Agricultural Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/agricultural-sciences.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Life Sciences",
-    "subject": "Veterinary Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/veterinary-sciences.html",
-    "crawl": true
-  },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Engineering", "subject": "Mechanical Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/mechanical-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Engineering", "subject": "Electrical & Electronic Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/electrical-electronic-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Engineering", "subject": "Automation & Control", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/automation-control.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Engineering", "subject": "Telecommunication Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/telecommunication-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Engineering", "subject": "Instruments Science & Technology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/instruments-science-technology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Engineering", "subject": "Biomedical Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/biomedical-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Engineering", "subject": "Computer Science & Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/computer-science-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Engineering", "subject": "Civil Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/civil-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Engineering", "subject": "Chemical Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/chemical-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Engineering", "subject": "Materials Science & Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/materials-science-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Engineering", "subject": "Nanoscience & Nanotechnology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/nanoscience-nanotechnology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Engineering", "subject": "Energy Science & Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/energy-science-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Engineering", "subject": "Environmental Science & Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/environmental-science-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Engineering", "subject": "Water Resources", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/water-resources.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Engineering", "subject": "Food Science & Technology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/food-science-technology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Engineering", "subject": "Biotechnology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/biotechnology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Engineering", "subject": "Aerospace Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/aerospace-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Engineering", "subject": "Marine-Ocean Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/marine-ocean-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Engineering", "subject": "Transportation Science & Technology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/transportation-science-technology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Engineering", "subject": "Remote Sensing", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/remote-sensing.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Engineering", "subject": "Mining & Mineral Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/mining-mineral-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Engineering", "subject": "Metallurgical Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/metallurgical-engineering.html", "crawl": true },
 
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Medical Sciences",
-    "subject": "Clinical Medicine",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/clinical-medicine.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Medical Sciences",
-    "subject": "Public Health",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/public-health.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Medical Sciences",
-    "subject": "Dentistry & Oral Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/dentistry-oral-sciences.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Medical Sciences",
-    "subject": "Nursing",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/nursing.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Medical Sciences",
-    "subject": "Medical Technology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/medical-technology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Medical Sciences",
-    "subject": "Pharmacy & Pharmaceutical Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/pharmacy-pharmaceutical-sciences.html",
-    "crawl": true
-  },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Life Sciences", "subject": "Biological Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/biological-sciences.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Life Sciences", "subject": "Human Biological Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/human-biological-sciences.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Life Sciences", "subject": "Agricultural Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/agricultural-sciences.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Life Sciences", "subject": "Veterinary Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/veterinary-sciences.html", "crawl": true },
 
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Social Sciences",
-    "subject": "Economics",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/economics.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Social Sciences",
-    "subject": "Statistics",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/statistics.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Social Sciences",
-    "subject": "Law",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/law.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Social Sciences",
-    "subject": "Political Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/political-sciences.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Social Sciences",
-    "subject": "Sociology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/sociology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Social Sciences",
-    "subject": "Education",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/education.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Social Sciences",
-    "subject": "Communication",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/communication.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Social Sciences",
-    "subject": "Psychology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/psychology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Social Sciences",
-    "subject": "Business Administration",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/business-administration.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Social Sciences",
-    "subject": "Finance",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/finance.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Social Sciences",
-    "subject": "Management",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/management.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Social Sciences",
-    "subject": "Public Administration",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/public-administration.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Social Sciences",
-    "subject": "Hospitality & Tourism Management",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/hospitality-tourism-management.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2020,
-    "field": "Social Sciences",
-    "subject": "Library & Information Science",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/library-information-science.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Natural Sciences",
-    "subject": "Mathematics",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/mathematics.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Natural Sciences",
-    "subject": "Physics",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/physics.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Natural Sciences",
-    "subject": "Chemistry",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/chemistry.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Natural Sciences",
-    "subject": "Earth Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/earth-sciences.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Natural Sciences",
-    "subject": "Geography",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/geography.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Natural Sciences",
-    "subject": "Ecology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/ecology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Natural Sciences",
-    "subject": "Oceanography",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/oceanography.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Natural Sciences",
-    "subject": "Atmospheric Science",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/atmospheric-science.html",
-    "crawl": true
-  },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Medical Sciences", "subject": "Clinical Medicine", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/clinical-medicine.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Medical Sciences", "subject": "Public Health", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/public-health.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Medical Sciences", "subject": "Dentistry & Oral Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/dentistry-oral-sciences.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Medical Sciences", "subject": "Nursing", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/nursing.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Medical Sciences", "subject": "Medical Technology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/medical-technology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Medical Sciences", "subject": "Pharmacy & Pharmaceutical Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/pharmacy-pharmaceutical-sciences.html", "crawl": true },
 
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Engineering",
-    "subject": "Mechanical Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/mechanical-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Engineering",
-    "subject": "Electrical & Electronic Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/electrical-electronic-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Engineering",
-    "subject": "Automation & Control",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/automation-control.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Engineering",
-    "subject": "Telecommunication Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/telecommunication-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Engineering",
-    "subject": "Instruments Science & Technology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/instruments-science-technology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Engineering",
-    "subject": "Biomedical Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/biomedical-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Engineering",
-    "subject": "Computer Science & Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/computer-science-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Engineering",
-    "subject": "Civil Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/civil-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Engineering",
-    "subject": "Chemical Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/chemical-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Engineering",
-    "subject": "Materials Science & Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/materials-science-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Engineering",
-    "subject": "Nanoscience & Nanotechnology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/nanoscience-nanotechnology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Engineering",
-    "subject": "Energy Science & Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/energy-science-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Engineering",
-    "subject": "Environmental Science & Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/environmental-science-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Engineering",
-    "subject": "Water Resources",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/water-resources.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Engineering",
-    "subject": "Food Science & Technology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/food-science-technology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Engineering",
-    "subject": "Biotechnology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/biotechnology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Engineering",
-    "subject": "Aerospace Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/aerospace-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Engineering",
-    "subject": "Marine-Ocean Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/marine-ocean-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Engineering",
-    "subject": "Transportation Science & Technology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/transportation-science-technology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Engineering",
-    "subject": "Remote Sensing",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/remote-sensing.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Engineering",
-    "subject": "Mining & Mineral Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/mining-mineral-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Engineering",
-    "subject": "Metallurgical Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/metallurgical-engineering.html",
-    "crawl": true
-  },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Social Sciences", "subject": "Economics", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/economics.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Social Sciences", "subject": "Statistics", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/statistics.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Social Sciences", "subject": "Law", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/law.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Social Sciences", "subject": "Political Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/political-sciences.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Social Sciences", "subject": "Sociology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/sociology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Social Sciences", "subject": "Education", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/education.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Social Sciences", "subject": "Communication", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/communication.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Social Sciences", "subject": "Psychology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/psychology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Social Sciences", "subject": "Business Administration", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/business-administration.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Social Sciences", "subject": "Finance", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/finance.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Social Sciences", "subject": "Management", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/management.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Social Sciences", "subject": "Public Administration", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/public-administration.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Social Sciences", "subject": "Hospitality & Tourism Management", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/hospitality-tourism-management.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2020, "field": "Social Sciences", "subject": "Library & Information Science", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/library-information-science.html", "crawl": true },
 
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Life Sciences",
-    "subject": "Biological Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/biological-sciences.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Life Sciences",
-    "subject": "Human Biological Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/human-biological-sciences.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Life Sciences",
-    "subject": "Agricultural Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/agricultural-sciences.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Life Sciences",
-    "subject": "Veterinary Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/veterinary-sciences.html",
-    "crawl": true
-  },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Natural Sciences", "subject": "Mathematics", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/mathematics.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Natural Sciences", "subject": "Physics", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/physics.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Natural Sciences", "subject": "Chemistry", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/chemistry.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Natural Sciences", "subject": "Earth Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/earth-sciences.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Natural Sciences", "subject": "Geography", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/geography.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Natural Sciences", "subject": "Ecology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/ecology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Natural Sciences", "subject": "Oceanography", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/oceanography.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Natural Sciences", "subject": "Atmospheric Science", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/atmospheric-science.html", "crawl": true },
 
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Medical Sciences",
-    "subject": "Clinical Medicine",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/clinical-medicine.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Medical Sciences",
-    "subject": "Public Health",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/public-health.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Medical Sciences",
-    "subject": "Dentistry & Oral Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/dentistry-oral-sciences.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Medical Sciences",
-    "subject": "Nursing",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/nursing.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Medical Sciences",
-    "subject": "Medical Technology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/medical-technology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Medical Sciences",
-    "subject": "Pharmacy & Pharmaceutical Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/pharmacy-pharmaceutical-sciences.html",
-    "crawl": true
-  },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Engineering", "subject": "Mechanical Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/mechanical-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Engineering", "subject": "Electrical & Electronic Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/electrical-electronic-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Engineering", "subject": "Automation & Control", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/automation-control.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Engineering", "subject": "Telecommunication Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/telecommunication-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Engineering", "subject": "Instruments Science & Technology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/instruments-science-technology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Engineering", "subject": "Biomedical Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/biomedical-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Engineering", "subject": "Computer Science & Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/computer-science-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Engineering", "subject": "Civil Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/civil-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Engineering", "subject": "Chemical Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/chemical-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Engineering", "subject": "Materials Science & Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/materials-science-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Engineering", "subject": "Nanoscience & Nanotechnology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/nanoscience-nanotechnology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Engineering", "subject": "Energy Science & Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/energy-science-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Engineering", "subject": "Environmental Science & Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/environmental-science-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Engineering", "subject": "Water Resources", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/water-resources.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Engineering", "subject": "Food Science & Technology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/food-science-technology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Engineering", "subject": "Biotechnology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/biotechnology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Engineering", "subject": "Aerospace Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/aerospace-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Engineering", "subject": "Marine-Ocean Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/marine-ocean-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Engineering", "subject": "Transportation Science & Technology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/transportation-science-technology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Engineering", "subject": "Remote Sensing", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/remote-sensing.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Engineering", "subject": "Mining & Mineral Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/mining-mineral-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Engineering", "subject": "Metallurgical Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/metallurgical-engineering.html", "crawl": true },
 
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Social Sciences",
-    "subject": "Economics",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/economics.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Social Sciences",
-    "subject": "Statistics",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/statistics.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Social Sciences",
-    "subject": "Law",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/law.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Social Sciences",
-    "subject": "Political Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/political-sciences.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Social Sciences",
-    "subject": "Sociology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/sociology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Social Sciences",
-    "subject": "Education",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/education.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Social Sciences",
-    "subject": "Communication",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/communication.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Social Sciences",
-    "subject": "Psychology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/psychology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Social Sciences",
-    "subject": "Business Administration",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/business-administration.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Social Sciences",
-    "subject": "Finance",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/finance.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Social Sciences",
-    "subject": "Management",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/management.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Social Sciences",
-    "subject": "Public Administration",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/public-administration.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Social Sciences",
-    "subject": "Hospitality & Tourism Management",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/hospitality-tourism-management.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2019,
-    "field": "Social Sciences",
-    "subject": "Library & Information Science",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/library-information-science.html",
-    "crawl": true
-  },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Life Sciences", "subject": "Biological Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/biological-sciences.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Life Sciences", "subject": "Human Biological Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/human-biological-sciences.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Life Sciences", "subject": "Agricultural Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/agricultural-sciences.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Life Sciences", "subject": "Veterinary Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/veterinary-sciences.html", "crawl": true },
 
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Natural Sciences",
-    "subject": "Mathematics",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/mathematics.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Natural Sciences",
-    "subject": "Physics",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/physics.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Natural Sciences",
-    "subject": "Chemistry",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/chemistry.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Natural Sciences",
-    "subject": "Earth Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/earth-sciences.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Natural Sciences",
-    "subject": "Geography",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/geography.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Natural Sciences",
-    "subject": "Ecology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/ecology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Natural Sciences",
-    "subject": "Oceanography",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/oceanography.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Natural Sciences",
-    "subject": "Atmospheric Science",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/atmospheric-science.html",
-    "crawl": true
-  },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Medical Sciences", "subject": "Clinical Medicine", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/clinical-medicine.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Medical Sciences", "subject": "Public Health", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/public-health.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Medical Sciences", "subject": "Dentistry & Oral Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/dentistry-oral-sciences.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Medical Sciences", "subject": "Nursing", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/nursing.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Medical Sciences", "subject": "Medical Technology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/medical-technology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Medical Sciences", "subject": "Pharmacy & Pharmaceutical Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/pharmacy-pharmaceutical-sciences.html", "crawl": true },
 
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Engineering",
-    "subject": "Mechanical Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/mechanical-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Engineering",
-    "subject": "Electrical & Electronic Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/electrical-electronic-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Engineering",
-    "subject": "Automation & Control",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/automation-control.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Engineering",
-    "subject": "Telecommunication Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/telecommunication-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Engineering",
-    "subject": "Instruments Science & Technology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/instruments-science-technology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Engineering",
-    "subject": "Biomedical Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/biomedical-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Engineering",
-    "subject": "Computer Science & Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/computer-science-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Engineering",
-    "subject": "Civil Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/civil-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Engineering",
-    "subject": "Chemical Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/chemical-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Engineering",
-    "subject": "Materials Science & Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/materials-science-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Engineering",
-    "subject": "Nanoscience & Nanotechnology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/nanoscience-nanotechnology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Engineering",
-    "subject": "Energy Science & Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/energy-science-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Engineering",
-    "subject": "Environmental Science & Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/environmental-science-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Engineering",
-    "subject": "Water Resources",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/water-resources.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Engineering",
-    "subject": "Food Science & Technology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/food-science-technology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Engineering",
-    "subject": "Biotechnology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/biotechnology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Engineering",
-    "subject": "Aerospace Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/aerospace-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Engineering",
-    "subject": "Marine-Ocean Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/marine-ocean-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Engineering",
-    "subject": "Transportation Science & Technology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/transportation-science-technology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Engineering",
-    "subject": "Remote Sensing",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/remote-sensing.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Engineering",
-    "subject": "Mining & Mineral Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/mining-mineral-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Engineering",
-    "subject": "Metallurgical Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/metallurgical-engineering.html",
-    "crawl": true
-  },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Social Sciences", "subject": "Economics", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/economics.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Social Sciences", "subject": "Statistics", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/statistics.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Social Sciences", "subject": "Law", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/law.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Social Sciences", "subject": "Political Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/political-sciences.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Social Sciences", "subject": "Sociology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/sociology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Social Sciences", "subject": "Education", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/education.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Social Sciences", "subject": "Communication", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/communication.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Social Sciences", "subject": "Psychology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/psychology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Social Sciences", "subject": "Business Administration", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/business-administration.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Social Sciences", "subject": "Finance", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/finance.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Social Sciences", "subject": "Management", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/management.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Social Sciences", "subject": "Public Administration", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/public-administration.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Social Sciences", "subject": "Hospitality & Tourism Management", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/hospitality-tourism-management.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2019, "field": "Social Sciences", "subject": "Library & Information Science", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2019/library-information-science.html", "crawl": true },
 
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Life Sciences",
-    "subject": "Biological Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/biological-sciences.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Life Sciences",
-    "subject": "Human Biological Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/human-biological-sciences.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Life Sciences",
-    "subject": "Agricultural Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/agricultural-sciences.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Life Sciences",
-    "subject": "Veterinary Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/veterinary-sciences.html",
-    "crawl": true
-  },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Natural Sciences", "subject": "Mathematics", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/mathematics.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Natural Sciences", "subject": "Physics", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/physics.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Natural Sciences", "subject": "Chemistry", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/chemistry.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Natural Sciences", "subject": "Earth Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/earth-sciences.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Natural Sciences", "subject": "Geography", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/geography.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Natural Sciences", "subject": "Ecology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/ecology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Natural Sciences", "subject": "Oceanography", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/oceanography.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Natural Sciences", "subject": "Atmospheric Science", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/atmospheric-science.html", "crawl": true },
 
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Medical Sciences",
-    "subject": "Clinical Medicine",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/clinical-medicine.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Medical Sciences",
-    "subject": "Public Health",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/public-health.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Medical Sciences",
-    "subject": "Dentistry & Oral Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/dentistry-oral-sciences.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Medical Sciences",
-    "subject": "Nursing",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/nursing.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Medical Sciences",
-    "subject": "Medical Technology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/medical-technology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Medical Sciences",
-    "subject": "Pharmacy & Pharmaceutical Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/pharmacy-pharmaceutical-sciences.html",
-    "crawl": true
-  },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Engineering", "subject": "Mechanical Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/mechanical-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Engineering", "subject": "Electrical & Electronic Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/electrical-electronic-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Engineering", "subject": "Automation & Control", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/automation-control.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Engineering", "subject": "Telecommunication Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/telecommunication-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Engineering", "subject": "Instruments Science & Technology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/instruments-science-technology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Engineering", "subject": "Biomedical Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/biomedical-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Engineering", "subject": "Computer Science & Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/computer-science-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Engineering", "subject": "Civil Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/civil-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Engineering", "subject": "Chemical Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/chemical-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Engineering", "subject": "Materials Science & Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/materials-science-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Engineering", "subject": "Nanoscience & Nanotechnology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/nanoscience-nanotechnology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Engineering", "subject": "Energy Science & Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/energy-science-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Engineering", "subject": "Environmental Science & Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/environmental-science-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Engineering", "subject": "Water Resources", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/water-resources.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Engineering", "subject": "Food Science & Technology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/food-science-technology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Engineering", "subject": "Biotechnology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/biotechnology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Engineering", "subject": "Aerospace Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/aerospace-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Engineering", "subject": "Marine-Ocean Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/marine-ocean-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Engineering", "subject": "Transportation Science & Technology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/transportation-science-technology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Engineering", "subject": "Remote Sensing", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/remote-sensing.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Engineering", "subject": "Mining & Mineral Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/mining-mineral-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Engineering", "subject": "Metallurgical Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/metallurgical-engineering.html", "crawl": true },
 
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Social Sciences",
-    "subject": "Economics",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/economics.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Social Sciences",
-    "subject": "Statistics",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/statistics.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Social Sciences",
-    "subject": "Law",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/law.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Social Sciences",
-    "subject": "Political Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/political-sciences.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Social Sciences",
-    "subject": "Sociology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/sociology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Social Sciences",
-    "subject": "Education",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/education.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Social Sciences",
-    "subject": "Communication",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/communication.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Social Sciences",
-    "subject": "Psychology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/psychology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Social Sciences",
-    "subject": "Business Administration",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/business-administration.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Social Sciences",
-    "subject": "Finance",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/finance.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Social Sciences",
-    "subject": "Management",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/management.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Social Sciences",
-    "subject": "Public Administration",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/public-administration.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Social Sciences",
-    "subject": "Hospitality & Tourism Management",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/hospitality-tourism-management.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2018,
-    "field": "Social Sciences",
-    "subject": "Library & Information Science",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/library-information-science.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Natural Sciences",
-    "subject": "Mathematics",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/mathematics.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Natural Sciences",
-    "subject": "Physics",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/physics.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Natural Sciences",
-    "subject": "Chemistry",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/chemistry.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Natural Sciences",
-    "subject": "Earth Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/earth-sciences.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Natural Sciences",
-    "subject": "Geography",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/geography.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Natural Sciences",
-    "subject": "Ecology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/ecology.html",
-    "crawl": true
-  },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Life Sciences", "subject": "Biological Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/biological-sciences.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Life Sciences", "subject": "Human Biological Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/human-biological-sciences.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Life Sciences", "subject": "Agricultural Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/agricultural-sciences.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Life Sciences", "subject": "Veterinary Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/veterinary-sciences.html", "crawl": true },
 
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Engineering",
-    "subject": "Mechanical Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/mechanical-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Engineering",
-    "subject": "Electrical & Electronic Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/electrical-electronic-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Engineering",
-    "subject": "Automation & Control",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/automation-control.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Engineering",
-    "subject": "Telecommunication Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/telecommunication-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Engineering",
-    "subject": "Instruments Science & Technology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/instruments-science-technology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Engineering",
-    "subject": "Biomedical Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/biomedical-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Engineering",
-    "subject": "Computer Science & Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/computer-science-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Engineering",
-    "subject": "Civil Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/civil-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Engineering",
-    "subject": "Chemical Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/chemical-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Engineering",
-    "subject": "Materials Science & Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/materials-science-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Engineering",
-    "subject": "Nanoscience & Nanotechnology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/nanoscience-nanotechnology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Engineering",
-    "subject": "Energy Science & Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/energy-science-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Engineering",
-    "subject": "Environmental Science & Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/environmental-science-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Engineering",
-    "subject": "Water Resources",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/water-resources.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Engineering",
-    "subject": "Food Science & Technology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/food-science-technology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Engineering",
-    "subject": "Biotechnology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/biotechnology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Engineering",
-    "subject": "Aerospace Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/aerospace-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Engineering",
-    "subject": "Marine-Ocean Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/marine-ocean-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Engineering",
-    "subject": "Transportation Science & Technology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/transportation-science-technology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Engineering",
-    "subject": "Remote Sensing",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/remote-sensing.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Engineering",
-    "subject": "Mining & Mineral Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/mining-mineral-engineering.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Engineering",
-    "subject": "Metallurgical Engineering",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/metallurgical-engineering.html",
-    "crawl": true
-  },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Medical Sciences", "subject": "Clinical Medicine", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/clinical-medicine.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Medical Sciences", "subject": "Public Health", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/public-health.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Medical Sciences", "subject": "Dentistry & Oral Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/dentistry-oral-sciences.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Medical Sciences", "subject": "Nursing", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/nursing.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Medical Sciences", "subject": "Medical Technology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/medical-technology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Medical Sciences", "subject": "Pharmacy & Pharmaceutical Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/pharmacy-pharmaceutical-sciences.html", "crawl": true },
 
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Life Sciences",
-    "subject": "Biological Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/biological-sciences.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Life Sciences",
-    "subject": "Human Biological Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/human-biological-sciences.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Life Sciences",
-    "subject": "Agricultural Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/agricultural-sciences.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Life Sciences",
-    "subject": "Veterinary Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/veterinary-sciences.html",
-    "crawl": true
-  },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Social Sciences", "subject": "Economics", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/economics.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Social Sciences", "subject": "Statistics", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/statistics.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Social Sciences", "subject": "Law", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/law.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Social Sciences", "subject": "Political Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/political-sciences.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Social Sciences", "subject": "Sociology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/sociology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Social Sciences", "subject": "Education", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/education.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Social Sciences", "subject": "Communication", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/communication.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Social Sciences", "subject": "Psychology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/psychology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Social Sciences", "subject": "Business Administration", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/business-administration.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Social Sciences", "subject": "Finance", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/finance.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Social Sciences", "subject": "Management", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/management.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Social Sciences", "subject": "Public Administration", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/public-administration.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Social Sciences", "subject": "Hospitality & Tourism Management", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/hospitality-tourism-management.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2018, "field": "Social Sciences", "subject": "Library & Information Science", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2018/library-information-science.html", "crawl": true },
 
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Medical Sciences",
-    "subject": "Clinical Medicine",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/clinical-medicine.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Medical Sciences",
-    "subject": "Public Health",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/public-health.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Medical Sciences",
-    "subject": "Dentistry & Oral Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/dentistry-oral-sciences.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Medical Sciences",
-    "subject": "Nursing",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/nursing.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Medical Sciences",
-    "subject": "Medical Technology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/medical-technology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Medical Sciences",
-    "subject": "Pharmacy & Pharmaceutical Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/pharmacy-pharmaceutical-sciences.html",
-    "crawl": true
-  },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Natural Sciences", "subject": "Mathematics", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/mathematics.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Natural Sciences", "subject": "Physics", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/physics.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Natural Sciences", "subject": "Chemistry", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/chemistry.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Natural Sciences", "subject": "Earth Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/earth-sciences.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Natural Sciences", "subject": "Geography", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/geography.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Natural Sciences", "subject": "Ecology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/ecology.html", "crawl": true },
 
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Social Sciences",
-    "subject": "Economics",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/economics.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Social Sciences",
-    "subject": "Statistics",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/statistics.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Social Sciences",
-    "subject": "Law",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/law.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Social Sciences",
-    "subject": "Political Sciences",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/political-sciences.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Social Sciences",
-    "subject": "Sociology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/sociology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Social Sciences",
-    "subject": "Education",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/education.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Social Sciences",
-    "subject": "Communication",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/communication.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Social Sciences",
-    "subject": "Psychology",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/psychology.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Social Sciences",
-    "subject": "Business Administration",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/business-administration.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Social Sciences",
-    "subject": "Finance",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/finance.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Social Sciences",
-    "subject": "Management",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/management.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Social Sciences",
-    "subject": "Public Administration",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/public-administration.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Social Sciences",
-    "subject": "Hospitality & Tourism Management",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/hospitality-tourism-management.html",
-    "crawl": true
-  },
-  {
-    "ranking_system": "shanghai",
-    "ranking_type": "subject ranking",
-    "year": 2017,
-    "field": "Social Sciences",
-    "subject": "Library & Information Science",
-    "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/library-information-science.html",
-    "crawl": true
-  }
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Engineering", "subject": "Mechanical Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/mechanical-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Engineering", "subject": "Electrical & Electronic Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/electrical-electronic-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Engineering", "subject": "Automation & Control", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/automation-control.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Engineering", "subject": "Telecommunication Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/telecommunication-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Engineering", "subject": "Instruments Science & Technology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/instruments-science-technology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Engineering", "subject": "Biomedical Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/biomedical-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Engineering", "subject": "Computer Science & Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/computer-science-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Engineering", "subject": "Civil Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/civil-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Engineering", "subject": "Chemical Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/chemical-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Engineering", "subject": "Materials Science & Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/materials-science-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Engineering", "subject": "Nanoscience & Nanotechnology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/nanoscience-nanotechnology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Engineering", "subject": "Energy Science & Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/energy-science-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Engineering", "subject": "Environmental Science & Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/environmental-science-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Engineering", "subject": "Water Resources", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/water-resources.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Engineering", "subject": "Food Science & Technology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/food-science-technology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Engineering", "subject": "Biotechnology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/biotechnology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Engineering", "subject": "Aerospace Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/aerospace-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Engineering", "subject": "Marine-Ocean Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/marine-ocean-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Engineering", "subject": "Transportation Science & Technology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/transportation-science-technology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Engineering", "subject": "Remote Sensing", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/remote-sensing.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Engineering", "subject": "Mining & Mineral Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/mining-mineral-engineering.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Engineering", "subject": "Metallurgical Engineering", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/metallurgical-engineering.html", "crawl": true },
+
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Life Sciences", "subject": "Biological Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/biological-sciences.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Life Sciences", "subject": "Human Biological Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/human-biological-sciences.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Life Sciences", "subject": "Agricultural Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/agricultural-sciences.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Life Sciences", "subject": "Veterinary Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/veterinary-sciences.html", "crawl": true },
+
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Medical Sciences", "subject": "Clinical Medicine", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/clinical-medicine.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Medical Sciences", "subject": "Public Health", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/public-health.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Medical Sciences", "subject": "Dentistry & Oral Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/dentistry-oral-sciences.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Medical Sciences", "subject": "Nursing", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/nursing.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Medical Sciences", "subject": "Medical Technology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/medical-technology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Medical Sciences", "subject": "Pharmacy & Pharmaceutical Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/pharmacy-pharmaceutical-sciences.html", "crawl": true },
+
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Social Sciences", "subject": "Economics", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/economics.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Social Sciences", "subject": "Statistics", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/statistics.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Social Sciences", "subject": "Law", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/law.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Social Sciences", "subject": "Political Sciences", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/political-sciences.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Social Sciences", "subject": "Sociology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/sociology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Social Sciences", "subject": "Education", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/education.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Social Sciences", "subject": "Communication", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/communication.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Social Sciences", "subject": "Psychology", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/psychology.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Social Sciences", "subject": "Business Administration", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/business-administration.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Social Sciences", "subject": "Finance", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/finance.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Social Sciences", "subject": "Management", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/management.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Social Sciences", "subject": "Public Administration", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/public-administration.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Social Sciences", "subject": "Hospitality & Tourism Management", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/hospitality-tourism-management.html", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "subject ranking", "year": 2017, "field": "Social Sciences", "subject": "Library & Information Science", "url": "http://www.shanghairanking.com/Shanghairanking-Subject-Rankings-2017/library-information-science.html", "crawl": true  }
 ]
