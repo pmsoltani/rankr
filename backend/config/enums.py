@@ -14,7 +14,7 @@ institution_types = appc.ENTITIES["institution_types"]
 InstTypeEnum = enum.Enum("InstTypeEnum", {t: t for t in institution_types})
 
 # institution link types: homepage, qs, ...
-link_types = ["homepage"] + list(crwc.RANKINGS["metrics"])
+link_types = ["homepage", "wikipedia"] + list(crwc.RANKINGS["metrics"])
 LinkTypeEnum = enum.Enum("LinkTypeEnum", {t: t for t in link_types},)
 
 # ranking system types: qs, shanghai, ...
