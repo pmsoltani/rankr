@@ -10,7 +10,6 @@ class Institution(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     grid_id = Column(String(15), unique=True, nullable=False)
     name = Column(String(255), nullable=False)
-    wikipedia_url = Column(String(255))
     established = Column(Integer)
     lat = Column(String(63))
     lng = Column(String(63))
