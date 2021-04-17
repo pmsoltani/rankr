@@ -36,12 +36,12 @@ class RankingBase(BaseModel):
 
 
 class RankingCreate(RankingBase):
-    pass
+    institution_id: int
 
 
 class RankingOut(RankingBase):
     pass
 
 
-class RankingDB(RankingOut, OrmBase):
+class RankingDB(OrmBase, RankingBase):
     pass

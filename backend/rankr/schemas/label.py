@@ -13,12 +13,12 @@ class LabelBase(BaseModel):
 
 
 class LabelCreate(LabelBase):
-    pass
+    institution_id: int
 
 
 class LabelOut(LabelBase):
     pass
 
 
-class LabelDB(LabelBase, OrmBase):
+class LabelDB(OrmBase, LabelBase):
     pass

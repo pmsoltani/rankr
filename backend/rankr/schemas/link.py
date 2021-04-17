@@ -10,7 +10,7 @@ from rankr.schemas.validators import basic_process
 class LinkBase(BaseModel):
     id: Optional[int]
     institution_id: Optional[int]
-    type: e.LinkTypeEnum
+    type: e.LinkTypeEnum = e.LinkTypeEnum.homepage
     link: AnyHttpUrl
 
     # validators
@@ -18,12 +18,12 @@ class LinkBase(BaseModel):
 
 
 class LinkCreate(LinkBase):
-    pass
+    institution_id: int
 
 
 class LinkOut(LinkBase):
     pass
 
 
-class LinkDB(LinkBase, OrmBase):
+class LinkDB(OrmBase, LinkBase):
     pass

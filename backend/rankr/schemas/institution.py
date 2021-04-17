@@ -11,22 +11,21 @@ class InstitutionBase(BaseModel):
 
     grid_id: str
     name: str
-    wikipedia_url: str
-    established: int
+    established: Optional[int]
     lat: str
     lng: str
     city: str
     state: str
-    soup: str
+    soup: Optional[str]
 
 
 class InstitutionCreate(InstitutionBase):
-    pass
+    country_id: int
 
 
 class InstitutionOut(InstitutionBase):
     pass
 
 
-class InstitutionDB(InstitutionBase, OrmBase):
+class InstitutionDB(OrmBase, InstitutionBase):
     pass

@@ -12,12 +12,12 @@ class AcronymBase(BaseModel):
 
 
 class AcronymCreate(AcronymBase):
-    pass
+    institution_id: int
 
 
 class AcronymOut(AcronymBase):
     pass
 
 
-class AcronymDB(AcronymBase, OrmBase):
+class AcronymDB(OrmBase, AcronymBase):
     pass

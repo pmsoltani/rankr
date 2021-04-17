@@ -2,22 +2,23 @@ from typing import Optional
 
 from pydantic import BaseModel
 
+from config import enums as e
 from rankr.schemas.core import OrmBase
 
 
-class AliasBase(BaseModel):
+class TypeBase(BaseModel):
     id: Optional[int]
     institution_id: Optional[int]
-    alias: Optional[str]
+    type: e.InstTypeEnum
 
 
-class AliasCreate(AliasBase):
+class TypeCreate(TypeBase):
     institution_id: int
 
 
-class AliasOut(AliasBase):
+class TypeOut(TypeBase):
     pass
 
 
-class AliasDB(OrmBase, AliasBase):
+class TypeDB(OrmBase, TypeBase):
     pass
