@@ -7,7 +7,7 @@ from furl import furl
 
 from config import thec
 from crawlers.crawler_mixin import CrawlerMixin
-from utils import text_process
+from rankr import schemas as s
 
 
 class THECrawler(CrawlerMixin):
@@ -56,7 +56,8 @@ class THECrawler(CrawlerMixin):
 
                 value = row[col].strip() if row[col] else ""
                 if thec.FIELDS[col] == "Country":
-                    value = thec.country_name_mapper(text_process(value))
+                    country = s.CountryCreate(country=value)
+                    value = country.country
                 if thec.FIELDS[col] == "URL":
                     value = furl(thec.BASE_URL).join(value)
 

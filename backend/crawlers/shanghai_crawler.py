@@ -56,7 +56,10 @@ class ShanghaiCrawler(CrawlerMixin):
             for val in row.find_all("td"):
                 if val.find("img"):
                     # Get country name from the country flag images.
-                    values.append(Path(val.find("img")["src"]).stem)
+                    country = s.CountryCreate(
+                        country=Path(val.find("img")["src"]).stem
+                    )
+                    values.append(country.country)
                     continue
                 if val.find("a") and val.text:
                     url = furl(shac.BASE_URL) / val.find("a")["href"]

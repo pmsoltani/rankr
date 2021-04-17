@@ -7,6 +7,7 @@ from furl import furl
 
 from config import qsc
 from crawlers.crawler_mixin import CrawlerMixin
+from rankr import schemas as s
 
 
 class QSCrawler(CrawlerMixin):
@@ -84,8 +85,8 @@ class QSCrawler(CrawlerMixin):
                 row[col] = "" if not row[col] else row[col]
                 value = BeautifulSoup(row[col], "html.parser")
                 if columns[col] == "Country":
-                    country = value.text
-                    values[columns[col]] = country
+                    country = s.CountryCreate(country=value.text)
+                    values[columns[col]] = country.country
                     continue
                 if columns[col] == "Institution":
                     values["URL"] = furl(qsc.BASE_URL).join(
