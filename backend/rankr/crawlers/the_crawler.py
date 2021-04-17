@@ -6,8 +6,8 @@ import requests
 from furl import furl
 
 from config import thec
-from crawlers.crawler_mixin import CrawlerMixin
 from rankr import schemas as s
+from rankr.crawlers.crawler_mixin import CrawlerMixin
 
 
 class THECrawler(CrawlerMixin):

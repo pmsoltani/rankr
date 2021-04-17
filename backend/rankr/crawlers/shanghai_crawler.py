@@ -6,8 +6,8 @@ from bs4 import BeautifulSoup
 from furl import furl
 
 from config import enums as e, shac
-from crawlers.crawler_mixin import CrawlerMixin
 from rankr import schemas as s
+from rankr.crawlers.crawler_mixin import CrawlerMixin
 from utils import text_process
 
 from devtools import debug

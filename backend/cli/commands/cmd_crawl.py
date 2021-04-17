@@ -6,8 +6,7 @@ from sqlalchemy.orm import Session
 from typer.colors import CYAN, GREEN
 
 from config import crwc, qsc, shac, thec, wikic
-from crawlers import QSCrawler, ShanghaiCrawler, THECrawler, WikipediaCrawler
-from rankr import db_models as d
+from rankr import crawlers as c, db_models as d
 
 
 def engine_select(engine: str) -> Tuple[Any, Any]:
@@ -23,7 +22,12 @@ def engine_select(engine: str) -> Tuple[Any, Any]:
         Tuple[Any, Any]: The engines' Crawler & Config classes
     """
     crawler_configs = [qsc, shac, thec, wikic]
-    crawler_classes = [QSCrawler, ShanghaiCrawler, THECrawler, WikipediaCrawler]
+    crawler_classes = [
+        c.QSCrawler,
+        c.ShanghaiCrawler,
+        c.THECrawler,
+        c.WikipediaCrawler,
+    ]
     engines = zip(crwc.SUPPORTED_ENGINES, zip(crawler_configs, crawler_classes))
     for e in engines:
         if e[0] == engine:

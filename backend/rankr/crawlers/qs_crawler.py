@@ -6,8 +6,8 @@ from bs4 import BeautifulSoup
 from furl import furl
 
 from config import qsc
-from crawlers.crawler_mixin import CrawlerMixin
 from rankr import schemas as s
+from rankr.crawlers.crawler_mixin import CrawlerMixin
 
 
 class QSCrawler(CrawlerMixin):
