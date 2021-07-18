@@ -1,7 +1,10 @@
 from typing import Dict, List
 
+
 from pydantic import ValidationError
 from tqdm.std import tqdm
+from typer import secho
+from typer.colors import CYAN
 
 from config import crwc
 from rankr import db_models as d, repos as r, schemas as s
@@ -16,6 +19,7 @@ class GRIDCrawler:
         self.institution_repo = institution_repo
 
     def country_process(self) -> List[s.CountryDB]:
+        secho("Processing countries...", fg=CYAN)
         db_countries = self.country_repo.get_countries(limit=None)
         if not db_countries:
             rows = get_row(crwc.COUNTRIES_FILE)
@@ -31,6 +35,7 @@ class GRIDCrawler:
         return db_countries
 
     def institution_process(self):
+        secho("Processing institutions...", fg=CYAN)
         countries = {c.country: c for c in self.country_process()}
         rows = get_row(crwc.GRID_DATABASE_DIR / "institutes.csv")
         total_rows = csv_size(crwc.GRID_DATABASE_DIR / "institutes.csv")
@@ -100,6 +105,10 @@ class GRIDCrawler:
             db_institution.types = types  # type: ignore
             db_institutions.append(db_institution)
 
+        secho(
+            "Committing results to the DB. This can take several minutes.",
+            fg=CYAN,
+        )
         self.institution_repo.create_db_institutions(db_institutions)
 
     def crawl(self):
