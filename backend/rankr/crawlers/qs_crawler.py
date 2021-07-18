@@ -89,8 +89,9 @@ class QSCrawler(CrawlerMixin):
                     values[columns[col]] = country.country
                     continue
                 if columns[col] == "Institution":
+                    url = value.find("a")
                     values["URL"] = furl(qsc.BASE_URL).join(
-                        value.find("a")["href"]
+                        url["href"] if url else None
                     )
                     values[columns[col]] = value.text.strip()
                     continue
