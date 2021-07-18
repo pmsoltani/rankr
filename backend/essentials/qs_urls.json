@@ -1,4 +1,5 @@
 [
+  {"ranking_system": "qs", "ranking_type": "university ranking", "year": 2022, "field": "All", "subject": "All", "url": "https://www.topuniversities.com/university-rankings/world-university-rankings/2022", "crawl": true},
   {"ranking_system": "qs", "ranking_type": "university ranking", "year": 2021, "field": "All", "subject": "All", "url": "https://www.topuniversities.com/university-rankings/world-university-rankings/2021", "crawl": true},
   {"ranking_system": "qs", "ranking_type": "university ranking", "year": 2020, "field": "All", "subject": "All", "url": "https://www.topuniversities.com/university-rankings/world-university-rankings/2020", "crawl": true},
   {"ranking_system": "qs", "ranking_type": "university ranking", "year": 2019, "field": "All", "subject": "All", "url": "https://www.topuniversities.com/university-rankings/world-university-rankings/2019", "crawl": true},
