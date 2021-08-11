@@ -21,7 +21,7 @@ class RankingBase(BaseModel):
     metric: e.MetricEnum
     raw_value: Optional[str]
     value_type: e.ValueTypeEnum
-    value: Union[Decimal, int, None]
+    value: Union[Decimal, int, str, None]
 
     # validators
     _clean_raw_value = validator("raw_value", allow_reuse=True, pre=True)(

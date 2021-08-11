@@ -55,8 +55,8 @@ def value_process(
         lower_bound, upper_bound = matches.groups()
         if upper_bound:  # e.g. Rank = "800-1000"
             total = (Decimal(lower_bound) + Decimal(upper_bound)) / 2
-            value = str(int(total)) if value_type == "integer" else str(total)
-            return value
+            return str(int(total)) if value_type == "integer" else str(total)
+
         return lower_bound  # e.g. Rank = "47"
     except AttributeError:
         return None
