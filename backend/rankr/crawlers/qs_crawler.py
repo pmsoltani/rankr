@@ -84,15 +84,16 @@ class QSCrawler(CrawlerMixin):
                 # None values make BeautifulSoup raise exception.
                 row[col] = "" if not row[col] else row[col]
                 value = BeautifulSoup(row[col], "html.parser")
-                if columns[col] == "Country":
+                if columns[col] == "country":
                     country = s.CountryCreate(country=value.text)
                     values[columns[col]] = country.country
                     continue
-                if columns[col] == "Institution":
-                    url = value.find("a")
-                    values["URL"] = furl(qsc.BASE_URL).join(
-                        url["href"] if url else None
-                    )
+                if columns[col] == "institution":
+                    a_tag = value.find("a")
+                    url = None
+                    if a_tag:
+                        url = furl(qsc.BASE_URL).join(a_tag["href"]).url
+                    values["url"] = url
                     values[columns[col]] = value.text.strip()
                     continue
 

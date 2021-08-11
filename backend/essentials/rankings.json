@@ -4,8 +4,8 @@
     "url",
     "institution",
     "country",
-    "ranking system",
-    "ranking type",
+    "ranking_system",
+    "ranking_type",
     "year",
     "field",
     "subject"
