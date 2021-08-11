@@ -18,7 +18,7 @@ class Ranking(Base):
     field = Column(String(255), nullable=False)
     subject = Column(String(255), nullable=False)
     metric = Column(Enum(e.MetricEnum), nullable=False, index=True)
-    raw_value = Column(String(63), nullable=False)
+    raw_value = Column(String(63))
     value = Column(DECIMAL(13, 3))
     value_type = Column(Enum(e.ValueTypeEnum), nullable=False)
 

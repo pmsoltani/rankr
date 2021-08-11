@@ -20,4 +20,4 @@ class Type(Base):
         super().__init__(**kwargs)
 
     def __repr__(self):
-        return self.type
+        return f"{self.type}"
