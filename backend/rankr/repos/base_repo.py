@@ -52,12 +52,38 @@ class BaseRepo:
             )
         return new_db_objects
 
+    def _get_db_object(self, flt: Iterable = []):
+        return self.db.query(self.db_model).filter(*flt).first()
+
     def _get_object(self, flt: Iterable = []):
-        db_object = self.db.query(self.db_model).filter(*flt).first()
+        db_object = self._get_db_object(flt=flt)
+        return self.schema.from_orm(db_object) if db_object else None
+
+    def _get_db_object_by_relation(self, join, flt: Iterable):
+        return self.db.query(self.db_model).join(join).filter(*flt).first()
+
+    def _get_object_by_relation(self, join, flt: Iterable):
+        db_object = self._get_db_object_by_relation(join=join, flt=flt)
         return self.schema.from_orm(db_object) if db_object else None
 
     def _get_object_by_id(self, object_id: int):
         return self._get_object([self.db_model.id == object_id])
+
+    def _get_db_objects(
+        self,
+        search_query: str = None,
+        flt: Iterable = [],
+        offset: int = 0,
+        limit: Optional[int] = 25,
+    ):
+        flt = [self.search(search_query), *flt]
+        return (
+            self.db.query(self.db_model)
+            .filter(*flt)
+            .offset(offset)
+            .limit(limit or None)
+            .all()
+        )
 
     def _get_objects(
         self,
@@ -66,13 +92,8 @@ class BaseRepo:
         offset: int = 0,
         limit: Optional[int] = 25,
     ):
-        flt = [self.search(search_query), *flt]
-        db_objects = (
-            self.db.query(self.db_model)
-            .filter(*flt)
-            .offset(offset)
-            .limit(limit)
-            .all()
+        db_objects = self._get_db_objects(
+            search_query=search_query, flt=flt, offset=offset, limit=limit
         )
         return [self.schema.from_orm(db_object) for db_object in db_objects]
 
