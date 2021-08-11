@@ -6,7 +6,8 @@ from sqlalchemy.orm import Session
 from typer.colors import CYAN, GREEN
 
 from config import crwc, qsc, shac, thec, wikic
-from rankr import crawlers as c, db_models as d
+from rankr import crawlers as c, db_models as d, repos as r
+from utils import csv_export
 
 
 def engine_select(engine: str) -> Tuple[Any, Any]:
@@ -58,8 +59,11 @@ def get_wikipedia_urls() -> List[Dict[str, str]]:
     return [institution._asdict() for institution in institutions]
 
 
-def crawl(engines: str = typer.Argument(..., callback=engine_check)):
-    """Crawls the target website using the selected engines.
+def crawl(
+    engines: str = typer.Argument(..., callback=engine_check),
+    commit: bool = typer.Option(True, help="Commit the results to the DB?"),
+):
+    """Crawls the ranking websites and commits the results to DB
 
     Engine values: qs, shanghai, the
 
@@ -69,7 +73,10 @@ def crawl(engines: str = typer.Argument(..., callback=engine_check)):
 
     Args:
         engines (List[str]): The selected engines used for crawling
+        commit (bool): Whether or not commit the ranking table to DB
     """
+    all_not_matched = []
+    all_fuzzy_matched = []
     for engine in engines:
         typer.secho(f"Processing {engine} urls.", fg=CYAN)
         config, crawler = engine_select(engine)
@@ -81,17 +88,43 @@ def crawl(engines: str = typer.Argument(..., callback=engine_check)):
                 w.crawl()
             continue
 
-        for page in config.URLS:
-            if not page.get("crawl"):
-                continue
-            p = crawler(
-                url=page["url"],
-                year=page["year"],
-                ranking_system=page["ranking_system"],
-                ranking_type=page["ranking_type"],
-                field=page["field"],
-                subject=page["subject"],
-            )
-            p.crawl()
+        with closing(d.SessionLocal()) as db:
+            institution_repo = r.InstitutionRepo(db)
+            soup = {}  # Group soup by country for better performance.
+            for inst in institution_repo.get_db_institutions(limit=0):
+                try:
+                    soup[inst.country.country][inst.soup] = inst.grid_id
+                except KeyError:
+                    soup[inst.country.country] = {inst.soup: inst.grid_id}
+
+            for page in config.URLS:
+                if not page.get("crawl"):
+                    continue
+
+                p = crawler(
+                    url=page["url"],
+                    year=page["year"],
+                    ranking_system=page["ranking_system"],
+                    ranking_type=page["ranking_type"],
+                    field=page["field"],
+                    subject=page["subject"],
+                )
+                matched, not_matched, fuzzy_matched = p.crawl_and_process(
+                    institution_repo=institution_repo, soup=soup
+                )
+                if commit:
+                    db.add_all(matched)
+                    db.commit()
+                all_fuzzy_matched.extend(fuzzy_matched)
+                all_not_matched.extend(not_matched)
+
+            raise ValueError("THE END!")
+
+    if all_fuzzy_matched:
+        csv_export(crwc.DATA_DIR / "fuzz.csv", all_fuzzy_matched)
+        typer.echo("Saved the list of fuzzy-matched institutions.")
+    if all_not_matched:
+        csv_export(crwc.DATA_DIR / "not_mached.csv", all_not_matched)
+        typer.echo("Saved the list of not matched institutions.")
 
     typer.secho("All done!", fg=GREEN)
