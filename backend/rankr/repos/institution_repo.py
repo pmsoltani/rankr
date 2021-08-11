@@ -48,6 +48,16 @@ class InstitutionRepo(BaseRepo):
     ) -> Optional[s.InstitutionDB]:
         return self._get_object([self.db_model.institution == institution])
 
+    def get_db_institutions(
+        self,
+        search_query: str = None,
+        offset: int = 0,
+        limit: Optional[int] = 25,
+    ) -> List[d.Institution]:
+        return self._get_db_objects(
+            search_query=search_query, offset=offset, limit=limit
+        )
+
     def get_institutions(
         self,
         search_query: str = None,
