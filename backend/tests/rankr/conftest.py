@@ -9,7 +9,7 @@ from config import dbc
 from main import app
 from rankr.api import deps
 from rankr.db_models import Base, Country, Institution, Ranking
-from rankr.tests.utils import (
+from tests.rankr.utils import (
     engine,
     fake_institutions,
     fake_rankings,

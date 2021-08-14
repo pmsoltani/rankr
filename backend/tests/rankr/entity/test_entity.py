@@ -4,7 +4,7 @@ from typing import List
 
 from config import appc
 from rankr.db_models import Country, Institution, Ranking
-from rankr.tests.utils import override_get_db
+from tests.rankr.utils import override_get_db
 
 
 class TestEntity(object):

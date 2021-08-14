@@ -94,5 +94,5 @@ class WikipediaCrawler(object):
         with open(self.file_path, "wb") as img_file:
             self.logo.raw.decode_content = True
             shutil.copyfileobj(self.logo.raw, img_file)
-            self.file_path.rename(self.file_path.with_suffix(self.file_ext))
-            print(f"Saved file: {self.file_path}{self.file_ext}")
+        self.file_path.rename(self.file_path.with_suffix(self.file_ext))
+        print(f"Saved file: {self.file_path}{self.file_ext}")
