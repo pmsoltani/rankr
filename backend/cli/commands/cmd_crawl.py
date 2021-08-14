@@ -101,14 +101,17 @@ def crawl(
                 if not page.get("crawl"):
                     continue
 
-                p = crawler(
-                    url=page["url"],
-                    year=page["year"],
-                    ranking_system=page["ranking_system"],
-                    ranking_type=page["ranking_type"],
-                    field=page["field"],
-                    subject=page["subject"],
-                )
+                ranking_info = {
+                    "ranking_system": page["ranking_system"],
+                    "ranking_type": page["ranking_type"],
+                    "year": page["year"],
+                    "field": page["field"],
+                    "subject": page["subject"],
+                }
+
+                print("Processing:", " ".join(map(str, ranking_info.values())))
+
+                p = crawler(url=page["url"], **ranking_info)
                 matched, not_matched, fuzzy_matched = p.crawl_and_process(
                     institution_repo=institution_repo, soup=soup
                 )
@@ -117,8 +120,6 @@ def crawl(
                     db.commit()
                 all_fuzzy_matched.extend(fuzzy_matched)
                 all_not_matched.extend(not_matched)
-
-            raise ValueError("THE END!")
 
     if all_fuzzy_matched:
         csv_export(crwc.DATA_DIR / "fuzz.csv", all_fuzzy_matched)
