@@ -2,7 +2,7 @@ import time
 from pathlib import Path
 from typing import Callable, Dict, List, Union
 
-import tqdm
+from tqdm import tqdm
 
 from config import crwc
 from rankr import db_models as d, repos as r, schemas as s
