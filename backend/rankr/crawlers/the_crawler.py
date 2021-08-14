@@ -55,11 +55,10 @@ class THECrawler(CrawlerMixin):
                     continue
 
                 value = row[col].strip() if row[col] else ""
-                if thec.FIELDS[col] == "Country":
-                    country = s.CountryCreate(country=value)
-                    value = country.country
-                if thec.FIELDS[col] == "URL":
-                    value = furl(thec.BASE_URL).join(value)
+                if thec.FIELDS[col] == "country":
+                    value = s.CountryCreate(country=value).country
+                if thec.FIELDS[col] == "url":
+                    value = furl(thec.BASE_URL).join(value).url
 
                 values[thec.FIELDS[col]] = value
 
