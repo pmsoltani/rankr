@@ -2,7 +2,7 @@ import json
 from typing import Dict, List
 
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 from furl import furl
 
 from config import qsc
@@ -39,16 +39,13 @@ class QSCrawler(CrawlerMixin):
         """
         html_page = requests.get(self.url, headers=qsc.HEADERS)
         html_soup = BeautifulSoup(html_page.content, "html.parser")
-        link = html_soup.find_all(
-            lambda tag: tag.name == "article"
-            and tag.get("data-history-node-id") is not None
-        )
-        node = link[0]["data-history-node-id"]
+        node_tag = html_soup.find("article", {"data-history-node-id": True})
+        assert isinstance(node_tag, Tag)
 
         self.json_url = (
             furl(qsc.BASE_URL)
             / "sites/default/files/qs-rankings-data/en"
-            / f"{node}_indicators.txt"
+            / f"{node_tag['data-history-node-id']}_indicators.txt"
         ).url
         return self.json_url
 
@@ -90,6 +87,7 @@ class QSCrawler(CrawlerMixin):
                     continue
                 if columns[col] == "institution":
                     a_tag = value.find("a")
+                    assert isinstance(a_tag, Tag)
                     url = None
                     if a_tag:
                         url = furl(qsc.BASE_URL).join(a_tag["href"]).url
