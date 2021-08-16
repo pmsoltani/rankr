@@ -3,7 +3,7 @@ from typing import List, Optional
 from sqlalchemy.orm import Session
 
 from rankr import db_models as d, schemas as s
-from rankr.repos.base_repo import BaseRepo
+from rankr.repos.base import BaseRepo
 
 
 class CountryRepo(BaseRepo):

@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 from config import dbc
 from rankr import db_models as d, schemas as s
-from rankr.repos.base_repo import BaseRepo
+from rankr.repos.base import BaseRepo
 from utils import fuzzy_matcher
 
 
