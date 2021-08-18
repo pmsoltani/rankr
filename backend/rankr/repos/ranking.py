@@ -2,6 +2,7 @@ from typing import List, Optional
 
 from sqlalchemy.orm import Session
 
+from config import crwc, enums as e
 from rankr import db_models as d, schemas as s
 from rankr.repos.base import BaseRepo
 
@@ -20,11 +21,36 @@ class RankingRepo(BaseRepo):
     ) -> List[s.RankingDB]:
         return self._create_objects(new_rankings, log=log)
 
-    def get_ranking(self, ranking_id: int) -> Optional[s.RankingDB]:
+    def get_ranking_by_id(self, ranking_id: int) -> Optional[s.RankingDB]:
         return self._get_object_by_id(object_id=ranking_id)
 
-    def get_ranking_by_name(self, ranking: str) -> Optional[s.RankingDB]:
-        return self._get_object([self.db_model.ranking == ranking])
+    def get_rankings_by_institution_ids(
+        self,
+        institution_ids: List[int],
+        ranking_system: e.RankingSystemEnum,
+        ranking_type: e.RankingTypeEnum,
+        metric: e.MetricEnum,
+        field: str = "All",
+        subject: str = "All",
+        offset: int = 0,
+        limit: Optional[int] = 25,
+    ) -> List[s.RankingDB]:
+        flt = [
+            self.db_model.institution_id.in_(institution_ids),
+            self.db_model.ranking_system == ranking_system,
+            self.db_model.ranking_type == ranking_type,
+            self.db_model.field == field,
+            self.db_model.subject == subject,
+            self.db_model.metric == metric,
+        ]
+        order_by = [
+            self.db_model.institution_id,
+            self.db_model.metric,
+            self.db_model.year,
+        ]
+        return self._get_objects(
+            flt=flt, offset=offset, limit=limit, order_by=order_by
+        )
 
     def get_rankings(
         self,
@@ -35,3 +61,55 @@ class RankingRepo(BaseRepo):
         return self._get_objects(
             search_query=search_query, offset=offset, limit=limit
         )
+
+    def get_ranks_by_institution_id(
+        self, institution_id: int
+    ) -> List[s.RankingDB]:
+        flt = [
+            self.db_model.institution_id == institution_id,
+            self.db_model.ranking_type
+            == e.RankingTypeEnum["university ranking"],
+            self.db_model.metric == e.MetricEnum["Rank"],
+        ]
+        order_by = [self.db_model.ranking_system, self.db_model.year]
+        return self._get_objects(flt=flt, order_by=order_by, limit=None)
+
+    def get_stats_by_institution_id(
+        self, institution_id: int
+    ) -> List[s.RankingDB]:
+        year = self.get_latest_year(
+            institution_id=institution_id,
+            ranking_system=e.RankingSystemEnum["the"],
+            ranking_type=e.RankingTypeEnum["university ranking"],
+        )
+        if not year:
+            return []
+        flt = [
+            self.db_model.institution_id == institution_id,
+            self.db_model.ranking_system == e.RankingSystemEnum["the"],
+            self.db_model.ranking_type
+            == e.RankingTypeEnum["university ranking"],
+            self.db_model.metric.in_(crwc.RANKINGS["stat_metrics"]),
+            self.db_model.year == year,
+        ]
+        order_by = [self.db_model.year]
+        return self._get_objects(flt=flt, order_by=order_by, limit=0)
+
+    def get_latest_year(
+        self,
+        institution_id: int,
+        ranking_system: e.RankingSystemEnum,
+        ranking_type: e.RankingTypeEnum,
+        field: str = "All",
+        subject: str = "All",
+    ) -> Optional[int]:
+        flt = [
+            self.db_model.institution_id == institution_id,
+            self.db_model.ranking_system == ranking_system,
+            self.db_model.ranking_type == ranking_type,
+            self.db_model.field == field,
+            self.db_model.subject == subject,
+        ]
+        order_by = [self.db_model.year.desc()]
+        latest_ranking = self._get_objects(flt=flt, order_by=order_by, limit=1)
+        return latest_ranking[0].year if latest_ranking else None
