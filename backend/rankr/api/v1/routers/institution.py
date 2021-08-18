@@ -1,0 +1,38 @@
+from typing import Union
+
+from fastapi import APIRouter, Depends, Path
+
+from config import appc
+from rankr import repos as r, schemas as s
+from rankr.api.dependencies import get_repo
+
+
+router = APIRouter()
+
+
+@router.get(
+    "/{institution_id}",
+    name="institution:get institution",
+    response_model=s.InstitutionOut,
+)
+def get_institution(
+    institution_id: Union[int, str] = Path("", regex=appc.GRID_ID_PATTERN),
+    institution_repo: r.InstitutionRepo = Depends(get_repo(r.InstitutionRepo)),
+    ranking_repo: r.RankingRepo = Depends(get_repo(r.RankingRepo)),
+):
+    db_institution = None
+    if isinstance(institution_id, str):
+        db_institution = institution_repo.get_institution_by_grid_id(
+            grid_id=institution_id
+        )
+    if isinstance(institution_id, int):
+        db_institution = institution_repo.get_institution_by_id(
+            institution_id=institution_id
+        )
+    if db_institution:
+        db_ranks = ranking_repo.get_ranks_by_institution_id(db_institution.id)
+        db_stats = ranking_repo.get_stats_by_institution_id(db_institution.id)
+        db_institution.ranks = db_ranks
+        db_institution.stats = db_stats
+
+    return db_institution
