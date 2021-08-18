@@ -1,32 +1,39 @@
-from typing import Dict, List
+from typing import List, Optional
 
-from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
+from fastapi import APIRouter, Depends, Query
 
 from config import enums as e
-from rankr import schemas as s
-from rankr.api.dependencies import get_db
-from rankr.crud import get_ranking_systems, get_ranking_table
+from rankr import repos as r, schemas as s
+from rankr.api.dependencies import get_repo
 
 
 router = APIRouter()
 
 
 @router.get(
-    "/ranking_systems", response_model=Dict[e.RankingSystemEnum, List[int]]
+    "/i/metric",
+    name="ranking:get rankings by institution ids",
+    response_model=List[s.RankingOut],
 )
-async def ranking_systems(db: Session = Depends(get_db)):
-    return get_ranking_systems(db=db)
-
-
-@router.get(
-    "/{ranking_system}/{year}",
-    response_model=Dict[e.RankingSystemEnum, List[s.RankingSchema]],
-)
-def ranking(
+def get_rankings_by_institution_ids(
     *,
-    db: Session = Depends(get_db),
-    year: int,
+    institution_ids: List[int] = Query([]),
     ranking_system: e.RankingSystemEnum,
+    ranking_type: e.RankingTypeEnum = e.RankingTypeEnum["university ranking"],
+    metric: e.MetricEnum,
+    field: str = "All",
+    subject: str = "All",
+    offset: int = 0,
+    limit: Optional[int] = 25,
+    ranking_repo: r.RankingRepo = Depends(get_repo(r.RankingRepo)),
 ):
-    return get_ranking_table(db=db, year=year, ranking_system=ranking_system)
+    return ranking_repo.get_rankings_by_institution_ids(
+        institution_ids=institution_ids,
+        ranking_system=ranking_system,
+        ranking_type=ranking_type,
+        metric=metric,
+        field=field,
+        subject=subject,
+        offset=offset,
+        limit=limit,
+    )
