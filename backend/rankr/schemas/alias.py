@@ -19,5 +19,5 @@ class AliasOut(AliasBase):
     pass
 
 
-class AliasDB(OrmBase, AliasBase):
+class AliasDB(OrmBase, AliasOut):
     pass

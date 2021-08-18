@@ -31,10 +31,6 @@ class InstitutionCreate(InstitutionBase):
 
 
 class InstitutionOut(InstitutionBase):
-    pass
-
-
-class InstitutionDB(OrmBase, InstitutionBase):
     acronyms: List[AcronymBase] = []
     aliases: List[AliasBase] = []
     country: Optional[CountryBase]
@@ -42,4 +38,13 @@ class InstitutionDB(OrmBase, InstitutionBase):
     links: List[LinkBase] = []
     rankings: List[RankingBase] = []
     types: List[TypeBase] = []
+
+    ranks: List[RankingBase] = []
+    stats: List[RankingBase] = []
+
+    class Config:
+        validate_assignment = True
+
+
+class InstitutionDB(OrmBase, InstitutionOut):
     pass

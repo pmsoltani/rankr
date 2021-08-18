@@ -20,5 +20,5 @@ class TypeOut(TypeBase):
     pass
 
 
-class TypeDB(OrmBase, TypeBase):
+class TypeDB(OrmBase, TypeOut):
     pass

@@ -19,5 +19,5 @@ class AcronymOut(AcronymBase):
     pass
 
 
-class AcronymDB(OrmBase, AcronymBase):
+class AcronymDB(OrmBase, AcronymOut):
     pass

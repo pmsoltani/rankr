@@ -25,5 +25,5 @@ class LinkOut(LinkBase):
     pass
 
 
-class LinkDB(OrmBase, LinkBase):
+class LinkDB(OrmBase, LinkOut):
     pass

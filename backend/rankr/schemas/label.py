@@ -20,5 +20,5 @@ class LabelOut(LabelBase):
     pass
 
 
-class LabelDB(OrmBase, LabelBase):
+class LabelDB(OrmBase, LabelOut):
     pass

@@ -43,5 +43,5 @@ class RankingOut(RankingBase):
     pass
 
 
-class RankingDB(OrmBase, RankingBase):
+class RankingDB(OrmBase, RankingOut):
     pass

@@ -39,5 +39,5 @@ class CountryOut(CountryBase):
     pass
 
 
-class CountryDB(OrmBase, CountryBase):
+class CountryDB(OrmBase, CountryOut):
     pass
