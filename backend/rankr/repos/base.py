@@ -1,4 +1,4 @@
-from typing import Iterable, Optional, Type
+from typing import Optional, Type
 
 from pydantic import BaseModel
 from sqlalchemy import or_
@@ -52,17 +52,17 @@ class BaseRepo:
             )
         return new_db_objects
 
-    def _get_db_object(self, flt: Iterable = []):
+    def _get_db_object(self, flt: list = []):
         return self.db.query(self.db_model).filter(*flt).first()
 
-    def _get_object(self, flt: Iterable = []):
+    def _get_object(self, flt: list = []):
         db_object = self._get_db_object(flt=flt)
         return self.schema.from_orm(db_object) if db_object else None
 
-    def _get_db_object_by_relation(self, join, flt: Iterable):
+    def _get_db_object_by_relation(self, join, flt: list):
         return self.db.query(self.db_model).join(join).filter(*flt).first()
 
-    def _get_object_by_relation(self, join, flt: Iterable):
+    def _get_object_by_relation(self, join, flt: list):
         db_object = self._get_db_object_by_relation(join=join, flt=flt)
         return self.schema.from_orm(db_object) if db_object else None
 
@@ -72,7 +72,7 @@ class BaseRepo:
     def _get_db_objects(
         self,
         search_query: str = None,
-        flt: Iterable = [],
+        flt: list = [],
         offset: int = 0,
         limit: Optional[int] = 25,
     ):
@@ -88,7 +88,7 @@ class BaseRepo:
     def _get_objects(
         self,
         search_query: str = None,
-        flt: Iterable = [],
+        flt: list = [],
         offset: int = 0,
         limit: Optional[int] = 25,
     ):
