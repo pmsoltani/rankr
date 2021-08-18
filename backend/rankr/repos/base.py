@@ -1,4 +1,4 @@
-from typing import Optional, Type
+from typing import List, Optional, Type
 
 from pydantic import BaseModel
 from sqlalchemy import or_
@@ -14,6 +14,17 @@ class BaseRepo:
         self.db = db
         self.db_model = db_model
         self.schema = schema
+
+    def _db_to_dict(self, db_object, related_fields: List[str] = []) -> dict:
+        if not db_object:
+            return {}
+        parsed = db_object.__dict__
+        for field in related_fields:
+            value = getattr(db_object, field)
+            parsed[field] = getattr(value, "__dict__", None)
+            if isinstance(value, list):
+                parsed[field] = [item.__dict__ for item in value]
+        return parsed
 
     def _create_object(self, new_object: BaseModel):
         db_object = self.db_model(**new_object.dict(exclude_unset=True))
@@ -55,19 +66,23 @@ class BaseRepo:
     def _get_db_object(self, flt: list = []):
         return self.db.query(self.db_model).filter(*flt).first()
 
-    def _get_object(self, flt: list = []):
+    def _get_object(self, flt: list = [], related_fields: List[str] = []):
         db_object = self._get_db_object(flt=flt)
-        return self.schema.from_orm(db_object) if db_object else None
+        db_object_dict = self._db_to_dict(db_object, related_fields)
+        return self.schema(**db_object_dict) if db_object_dict else None
 
     def _get_db_object_by_relation(self, join, flt: list):
         return self.db.query(self.db_model).join(join).filter(*flt).first()
 
-    def _get_object_by_relation(self, join, flt: list):
+    def _get_object_by_relation(
+        self, join, flt: list, related_fields: List[str] = []
+    ):
         db_object = self._get_db_object_by_relation(join=join, flt=flt)
-        return self.schema.from_orm(db_object) if db_object else None
+        db_object_dict = self._db_to_dict(db_object, related_fields)
+        return self.schema(**db_object_dict) if db_object_dict else None
 
-    def _get_object_by_id(self, object_id: int):
-        return self._get_object([self.db_model.id == object_id])
+    def _get_object_by_id(self, object_id: int, related_fields: List[str] = []):
+        return self._get_object([self.db_model.id == object_id], related_fields)
 
     def _get_db_objects(
         self,
@@ -91,11 +106,15 @@ class BaseRepo:
         flt: list = [],
         offset: int = 0,
         limit: Optional[int] = 25,
+        related_fields: List[str] = [],
     ):
         db_objects = self._get_db_objects(
             search_query=search_query, flt=flt, offset=offset, limit=limit
         )
-        return [self.schema.from_orm(db_object) for db_object in db_objects]
+        return [
+            self.schema(**self._db_to_dict(db_object, related_fields))
+            for db_object in db_objects
+        ]
 
     def search(self, search_query: Optional[str]):
         if not search_query:
