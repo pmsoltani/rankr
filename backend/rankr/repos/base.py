@@ -88,6 +88,7 @@ class BaseRepo:
         self,
         search_query: str = None,
         flt: list = [],
+        order_by: list = [],
         offset: int = 0,
         limit: Optional[int] = 25,
     ):
@@ -95,6 +96,7 @@ class BaseRepo:
         return (
             self.db.query(self.db_model)
             .filter(*flt)
+            .order_by(*order_by)
             .offset(offset)
             .limit(limit or None)
             .all()
@@ -104,12 +106,17 @@ class BaseRepo:
         self,
         search_query: str = None,
         flt: list = [],
+        order_by: list = [],
         offset: int = 0,
         limit: Optional[int] = 25,
         related_fields: List[str] = [],
     ):
         db_objects = self._get_db_objects(
-            search_query=search_query, flt=flt, offset=offset, limit=limit
+            search_query=search_query,
+            flt=flt,
+            offset=offset,
+            limit=limit,
+            order_by=order_by,
         )
         return [
             self.schema(**self._db_to_dict(db_object, related_fields))
