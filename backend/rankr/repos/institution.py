@@ -13,6 +13,14 @@ class InstitutionRepo(BaseRepo):
     def __init__(self, db: Session) -> None:
         self.db_model = d.Institution
         self.schema = s.InstitutionDB
+        self.related_fields = [
+            "acronyms",
+            "aliases",
+            "country",
+            "labels",
+            "links",
+            "types",
+        ]  # "rankings" were not included to improve performance.
         super().__init__(db, self.db_model, self.schema)
 
     def create_institution(
@@ -35,18 +43,28 @@ class InstitutionRepo(BaseRepo):
     ) -> List[d.Institution]:
         return self._create_db_objects(new_db_institutions, log=log)
 
-    def get_institution(self, institution_id: int) -> Optional[s.InstitutionDB]:
-        return self._get_object_by_id(object_id=institution_id)
+    def get_institution_by_id(
+        self, institution_id: int
+    ) -> Optional[s.InstitutionDB]:
+        return self._get_object_by_id(
+            object_id=institution_id, related_fields=self.related_fields
+        )
 
     def get_institution_by_grid_id(
         self, grid_id: str
     ) -> Optional[s.InstitutionDB]:
-        return self._get_object([self.db_model.grid_id == grid_id])
+        return self._get_object(
+            [self.db_model.grid_id == grid_id],
+            related_fields=self.related_fields,
+        )
 
     def get_institution_by_name(
         self, institution: str
     ) -> Optional[s.InstitutionDB]:
-        return self._get_object([self.db_model.institution == institution])
+        return self._get_object(
+            [self.db_model.institution == institution],
+            related_fields=self.related_fields,
+        )
 
     def get_db_institutions(
         self,
@@ -65,7 +83,10 @@ class InstitutionRepo(BaseRepo):
         limit: Optional[int] = 25,
     ) -> List[s.InstitutionDB]:
         return self._get_objects(
-            search_query=search_query, offset=offset, limit=limit
+            search_query=search_query,
+            offset=offset,
+            limit=limit,
+            related_fields=self.related_fields,
         )
 
     def match_institution(
