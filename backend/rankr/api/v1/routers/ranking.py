@@ -37,3 +37,31 @@ def get_rankings_by_institution_ids(
         offset=offset,
         limit=limit,
     )
+
+
+@router.get(
+    "/ranks",
+    name="ranking:get ranks by institution id",
+    response_model=List[s.RankingOut],
+)
+def get_ranks_by_institution_id(
+    institution_id: int,
+    ranking_repo: r.RankingRepo = Depends(get_repo(r.RankingRepo)),
+):
+    return ranking_repo.get_ranks_by_institution_id(
+        institution_id=institution_id,
+    )
+
+
+@router.get(
+    "/scores",
+    name="ranking:get scores by institution id",
+    response_model=List[s.RankingOut],
+)
+def get_scores_by_institution_id(
+    institution_id: int,
+    ranking_repo: r.RankingRepo = Depends(get_repo(r.RankingRepo)),
+):
+    return ranking_repo.get_scores_by_institution_id(
+        institution_id=institution_id,
+    )
