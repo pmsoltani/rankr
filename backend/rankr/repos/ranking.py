@@ -95,6 +95,19 @@ class RankingRepo(BaseRepo):
         order_by = [self.db_model.year]
         return self._get_objects(flt=flt, order_by=order_by, limit=0)
 
+    def get_scores_by_institution_id(
+        self, institution_id: int
+    ) -> List[s.RankingDB]:
+        score_metrics = [m for m in e.MetricEnum if "Score" in m.name]
+        flt = [
+            self.db_model.institution_id == institution_id,
+            self.db_model.ranking_type
+            == e.RankingTypeEnum["university ranking"],
+            self.db_model.metric.in_(score_metrics),
+        ]
+        order_by = [self.db_model.ranking_system, self.db_model.year]
+        return self._get_objects(flt=flt, order_by=order_by, limit=0)
+
     def get_latest_year(
         self,
         institution_id: int,
