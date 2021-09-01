@@ -12,4 +12,5 @@ from rankr.schemas.institution import (
 from rankr.schemas.label import LabelCreate, LabelDB, LabelOut
 from rankr.schemas.link import LinkCreate, LinkDB, LinkOut
 from rankr.schemas.ranking import RankingCreate, RankingDB, RankingOut
+from rankr.schemas.search import SearchResults
 from rankr.schemas.type import TypeCreate, TypeDB, TypeOut
