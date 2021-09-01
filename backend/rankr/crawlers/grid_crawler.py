@@ -73,8 +73,10 @@ class GRIDCrawler:
             except IndexError:
                 institution = s.InstitutionCreate(**row)
 
-            for attr in acronyms, aliases, labels:
-                soup.extend(list(i.values())[0] for i in attr)
+            soup.extend(i["acronym"] for i in acronyms)
+            soup.extend(i["alias"] for i in aliases)
+            soup.extend(i["label"] for i in labels)
+
             institution.soup = " | ".join(i for i in soup)
             db_institution = d.Institution(
                 **institution.dict(exclude_unset=True)
