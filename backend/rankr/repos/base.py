@@ -144,11 +144,7 @@ class BaseRepo:
             )
 
         if self.db_model is d.Institution:
-            search_chain = (
-                self.db_model.name.ilike(search_query),
-                self.db_model.city.ilike(search_query),
-                self.db_model.state.ilike(search_query),
-            )
+            search_chain = (self.db_model.soup.ilike(search_query),)
 
         if self.db_model is d.Label:
             search_chain = (self.db_model.label.ilike(search_query),)
