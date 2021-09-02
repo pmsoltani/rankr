@@ -1,15 +1,15 @@
 from typing import Dict, List
 
-from config import dbc
-from rankr.db_models import Ranking
+from config import crwc
+from rankr import db_models as d
 from utils import value_process
 
 
-metric_types = dbc.RANKINGS["metrics"]
-non_metric_cols = dbc.RANKINGS["non_metrics"]
+metric_types = crwc.RANKINGS["metrics"]
+non_metric_cols = crwc.RANKINGS["non_metrics"]
 
 
-def metrics_process(row: Dict[str, str]) -> List[Ranking]:
+def metrics_process(row: Dict[str, str]) -> List[d.Ranking]:
     """Converts a .csv row into a list of Ranking objects.
 
     Args:
@@ -29,7 +29,7 @@ def metrics_process(row: Dict[str, str]) -> List[Ranking]:
         value_type = metric_types[ranking_system][col]["type"]
         metric_value = value_process(row[col], value_type=value_type)
         metrics.append(
-            Ranking(
+            d.Ranking(
                 metric=metric,
                 value=metric_value,
                 value_type=value_type,

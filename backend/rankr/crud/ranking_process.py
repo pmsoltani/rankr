@@ -6,14 +6,14 @@ from sqlalchemy.orm import Session
 from tqdm import tqdm
 
 from config import dbc
+from rankr import db_models as d
 from rankr.crud.metrics_process import metrics_process
-from rankr.db_models import Country, Institution, Link
 from utils import csv_size, fuzzy_matcher, get_row, nullify
 
 
 def ranking_process(
     db: Session, file_path: Union[Path, str], soup: Dict[str, Dict[str, str]]
-) -> Tuple[List[Institution], List[Dict[str, str]], List[Dict[str, str]]]:
+) -> Tuple[List[d.Institution], List[Dict[str, str]], List[Dict[str, str]]]:
     """Matches institutions with their GRID database counterparts.
 
     The functuin reads a .csv file row-by-row and for each row, tries
@@ -32,13 +32,13 @@ def ranking_process(
         Three lists: matched institution, not-matched institutions, and
         institutions that were matched using the fuzzywuzzy library.
     """
-    institutions_list: List[Institution] = []
+    institutions_list: List[d.Institution] = []
     not_mached_list: List[Dict[str, str]] = []
     fuzz_list: List[Dict[str, str]] = []
 
     # useful queries:
-    q1 = db.query(Institution)
-    q2 = q1.join(Institution.country)
+    q1 = db.query(d.Institution)
+    q2 = q1.join(d.Institution.country)
 
     rows = get_row(file_path)
     row_count = csv_size(file_path)
@@ -64,32 +64,30 @@ def ranking_process(
         }
 
         # checking link with institution links
-        inst: Institution = q1.join(Institution.links).filter(
-            Link.link == inst_url, Link.type == link_type
-        ).first()
+        inst = (
+            q1.join(d.Institution.links)
+            .filter(d.Link.link == inst_url, d.Link.type == link_type)
+            .first()
+        )
 
         # checking grid_id in manual matches
         if not inst and inst_country in dbc.MATCHES:
             match = dbc.MATCHES[inst_country].get(inst_name)
             if match:
-                inst: Institution = q1.filter(
-                    Institution.grid_id == match
-                ).first()
+                inst = q1.filter(d.Institution.grid_id == match).first()
 
         # checking name with institution name
         if not inst:
-            inst: Institution = q2.filter(
-                func.lower(Institution.name) == inst_name,
-                Country.country == inst_country,
+            inst = q2.filter(
+                func.lower(d.Institution.name) == inst_name,
+                d.Country.country == inst_country,
             ).first()
 
         # fuzzy-mataching of strings
         if not inst:
             inst_grid_id = fuzzy_matcher(inst_name, inst_country, soup)
             if inst_grid_id:
-                inst: Institution = q1.filter(
-                    Institution.grid_id == inst_grid_id
-                ).first()
+                inst = q1.filter(d.Institution.grid_id == inst_grid_id).first()
                 fuzz_list.append(
                     {"Fuzzy": inst.name, "GRID ID": inst_grid_id, **inst_info}
                 )
@@ -107,7 +105,7 @@ def ranking_process(
         ranking_metrics = metrics_process(row)
         inst_link_types = [link.type.name for link in inst.links]
         if (link_type not in inst_link_types) and inst_url:
-            inst.links.append(Link(type=link_type, link=inst_url))
+            inst.links.append(d.Link(type=link_type, link=inst_url))
         inst.rankings.extend(ranking_metrics)
         institutions_list.append(inst)
 

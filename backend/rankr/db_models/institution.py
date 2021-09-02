@@ -1,54 +1,41 @@
-from typing import List, TYPE_CHECKING
-
-from sqlalchemy import Column, ForeignKey
+from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
-from sqlalchemy.types import Integer, String
 
 from rankr.db_models.base import Base
-
-if TYPE_CHECKING:
-    from rankr.db_models.acronym import Acronym
-    from rankr.db_models.alias import Alias
-    from rankr.db_models.country import Country
-    from rankr.db_models.label import Label
-    from rankr.db_models.link import Link
-    from rankr.db_models.ranking import Ranking
-    from rankr.db_models.type import Type
 
 
 class Institution(Base):
     __tablename__ = "institution"
 
-    id: int = Column(Integer, primary_key=True, autoincrement=True)
-    grid_id: str = Column(String(15), unique=True, nullable=False)
-    name: str = Column(String(255), nullable=False)
-    wikipedia_url: str = Column(String(255))
-    established: int = Column(Integer)
-    lat: str = Column(String(63))
-    lng: str = Column(String(63))
-    city: str = Column(String(63))
-    state: str = Column(String(63))
-    country_id: int = Column(Integer, ForeignKey("country.id"))
-    soup: str = Column(String(1000))
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    grid_id = Column(String(15), unique=True, nullable=False)
+    name = Column(String(255), nullable=False)
+    established = Column(Integer)
+    lat = Column(String(63))
+    lng = Column(String(63))
+    city = Column(String(63))
+    state = Column(String(63))
+    country_id = Column(Integer, ForeignKey("country.id"))
+    soup = Column(String(1000))
 
     # Relationships
-    acronyms: List["Acronym"] = relationship(
+    acronyms = relationship(
         "Acronym", back_populates="institution", cascade="all, delete-orphan"
     )
-    aliases: List["Alias"] = relationship(
+    aliases = relationship(
         "Alias", back_populates="institution", cascade="all, delete-orphan"
     )
-    country: "Country" = relationship("Country", back_populates="institutions")
-    labels: List["Label"] = relationship(
+    country = relationship("Country", back_populates="institutions")
+    labels = relationship(
         "Label", back_populates="institution", cascade="all, delete-orphan"
     )
-    links: List["Link"] = relationship(
+    links = relationship(
         "Link", back_populates="institution", cascade="all, delete-orphan"
     )
-    rankings: List["Ranking"] = relationship(
+    rankings = relationship(
         "Ranking", back_populates="institution", cascade="all, delete-orphan"
     )
-    types: List["Type"] = relationship(
+    types = relationship(
         "Type", back_populates="institution", cascade="all, delete-orphan"
     )
 
