@@ -3,7 +3,6 @@ from typing import Any, Dict, List, Tuple
 
 import typer
 from sqlalchemy.orm import Session
-from typer.colors import CYAN, GREEN
 
 from config import crwc, qsc, shac, thec, wikic
 from rankr import crawlers as c, db_models as d, repos as r
@@ -78,7 +77,7 @@ def crawl(
     all_not_matched = []
     all_fuzzy_matched = []
     for engine in engines:
-        typer.secho(f"Processing {engine} urls.", fg=CYAN)
+        typer.secho(f"Processing '{engine}' urls.", fg=typer.colors.CYAN)
         config, crawler = engine_select(engine)
         if engine == "wikipedia":
             # The WikipediaCrawler class works a little different.
@@ -101,6 +100,7 @@ def crawl(
                 if not page.get("crawl"):
                     continue
 
+                crawl_mode = "online"
                 ranking_info = {
                     "ranking_system": page["ranking_system"],
                     "ranking_type": page["ranking_type"],
@@ -109,9 +109,18 @@ def crawl(
                     "subject": page["subject"],
                 }
 
-                print("Processing:", " ".join(map(str, ranking_info.values())))
-
                 p = crawler(url=page["url"], **ranking_info)
+                if p.file_path.exists():
+                    p = c.OfflineCrawler(url=page["url"], **ranking_info)
+                    crawl_mode = "offline"
+
+                typer.secho(
+                    "Processing: "
+                    + " ".join(map(str, ranking_info.values()))
+                    + f" [{crawl_mode}]",
+                    fg=typer.colors.CYAN,
+                )
+
                 matched, not_matched, fuzzy_matched = p.crawl_and_process(
                     institution_repo=institution_repo, soup=soup
                 )
@@ -128,4 +137,4 @@ def crawl(
         csv_export(crwc.DATA_DIR / "not_mached.csv", all_not_matched)
         typer.echo("Saved the list of not matched institutions.")
 
-    typer.secho("All done!", fg=GREEN)
+    typer.secho("All done!", fg=typer.colors.GREEN)
