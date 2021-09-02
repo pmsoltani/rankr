@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Path
+from fastapi import APIRouter, Depends, HTTPException, Path
 
 from config import appc
 from rankr import repos as r, schemas as s
@@ -21,10 +21,12 @@ def get_institution_by_grid_id(
     db_institution = institution_repo.get_institution_by_grid_id(
         grid_id=institution_id
     )
-    if db_institution:
-        db_ranks = ranking_repo.get_ranks_by_institution_id(db_institution.id)
-        db_stats = ranking_repo.get_stats_by_institution_id(db_institution.id)
-        db_institution.ranks = db_ranks
-        db_institution.stats = db_stats
+    if not db_institution:
+        raise HTTPException(status_code=404, detail="Institution not found!")
+
+    db_ranks = ranking_repo.get_ranks_by_institution_id(db_institution.id)
+    db_stats = ranking_repo.get_stats_by_institution_id(db_institution.id)
+    db_institution.ranks = db_ranks
+    db_institution.stats = db_stats
 
     return db_institution
