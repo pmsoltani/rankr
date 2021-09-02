@@ -3,6 +3,7 @@ from pathlib import Path
 from typing import Callable, Dict, List, Union
 
 from tqdm import tqdm
+import typer
 
 from config import crwc
 from rankr import db_models as d, repos as r, schemas as s
@@ -66,7 +67,8 @@ class CrawlerMixin(object):
             break
 
     def _csv_export(self):
-        return csv_export(file_path=self.file_path, data=self.processed_data)
+        csv_export(file_path=self.file_path, data=self.processed_data)
+        typer.secho(f"Exported file: {self.file_name}", fg=typer.colors.CYAN)
 
     def crawl_and_process(
         self,
@@ -90,6 +92,9 @@ class CrawlerMixin(object):
         matched_institutions = []
         fuzzy_matched_list = []
         not_matched_list = []
+
+        if not self.file_path.exists():
+            self._csv_export()
 
         for row in tqdm(self.processed_data):
             inst_info = {
