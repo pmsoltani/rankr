@@ -1,10 +1,9 @@
 from typing import List, Optional, Type
 
+import typer
 from pydantic import BaseModel
 from sqlalchemy import or_
 from sqlalchemy.orm import Session
-from typer import secho
-from typer.colors import GREEN
 
 from rankr import db_models as d
 
@@ -46,9 +45,9 @@ class BaseRepo:
         self.db.commit()
         if log:
             object_type = self.db_model.__name__
-            secho(
+            typer.secho(
                 f"Committed {len(new_objects)} new '{object_type}' objects.",
-                fg=GREEN,
+                fg=typer.colors.GREEN,
             )
         return [self.schema.from_orm(db_object) for db_object in db_objects]
 
@@ -57,9 +56,9 @@ class BaseRepo:
         self.db.commit()
         if log:
             object_type = self.db_model.__name__
-            secho(
+            typer.secho(
                 f"Committed {len(new_db_objects)} new '{object_type}' objects.",
-                fg=GREEN,
+                fg=typer.colors.GREEN,
             )
         return new_db_objects
 

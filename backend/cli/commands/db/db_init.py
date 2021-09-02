@@ -4,7 +4,6 @@ import typer
 from alembic.config import Config
 from alembic.script import ScriptDirectory
 from sqlalchemy_utils import database_exists, drop_database
-from typer.colors import CYAN, GREEN, RED
 
 from config import dbc
 from rankr import db_models as d
@@ -29,7 +28,7 @@ def db_init(drop: bool = typer.Option(False, help="Drop the database first?")):
     """
     if drop and database_exists(d.engine.url):
         drop_database(d.engine.url)
-        typer.secho("Dropped the database!", fg=CYAN)
+        typer.secho("Dropped the database!", fg=typer.colors.CYAN)
 
     try:
         if not head_revision:
@@ -39,8 +38,13 @@ def db_init(drop: bool = typer.Option(False, help="Drop the database first?")):
                 shell=True,
             )
         subprocess.check_call(args="alembic upgrade head", shell=True)
-        typer.secho("Successfully migrated the database to its head!", fg=GREEN)
+        typer.secho(
+            "Successfully migrated the database to its head!",
+            fg=typer.colors.GREEN,
+        )
     except subprocess.CalledProcessError as exc:
-        typer.secho(f"Error migrating the database: {type(exc)}", fg=RED)
-        typer.secho(str(exc), fg=CYAN)
+        typer.secho(
+            f"Error migrating the database: {type(exc)}", fg=typer.colors.RED
+        )
+        typer.secho(str(exc), fg=typer.colors.CYAN)
         raise typer.Abort()
