@@ -4,8 +4,8 @@
     "url",
     "institution",
     "country",
-    "ranking system",
-    "ranking type",
+    "ranking_system",
+    "ranking_type",
     "year",
     "field",
     "subject"
@@ -18,75 +18,75 @@
   ],
   "metrics": {
     "qs": {
-      "Rank": { "name": "Rank", "type": "integer" },
-      "Overall Score": { "name": "Overall Score", "type": "percent" },
-      "Academic Reputation": {
+      "rank": { "name": "Rank", "type": "integer" },
+      "overall score": { "name": "Overall Score", "type": "percent" },
+      "academic reputation": {
         "name": "Academic Reputation Score",
         "type": "percent"
       },
-      "Employer Reputation": {
+      "employer reputation": {
         "name": "Employer Reputation Score",
         "type": "percent"
       },
-      "Faculty Student": { "name": "Faculty Student Score", "type": "percent" },
-      "International Faculty": {
+      "faculty student": { "name": "Faculty Student Score", "type": "percent" },
+      "international faculty": {
         "name": "International Faculty Score",
         "type": "percent"
       },
-      "International Students": {
+      "international students": {
         "name": "International Students Score",
         "type": "percent"
       },
-      "Citations per Faculty": {
+      "citations per faculty": {
         "name": "Citations per Faculty Score",
         "type": "percent"
       },
-      "Citations per Paper": {
+      "citations per paper": {
         "name": "Citations per Paper Score",
         "type": "percent"
       },
-      "H-index Citations": {
+      "h-index citations": {
         "name": "H-index Citations Score",
         "type": "percent"
       }
     },
     "shanghai": {
-      "Rank": { "name": "Rank", "type": "integer" },
+      "rank": { "name": "Rank", "type": "integer" },
 
-      "National Rank": { "name": "National Rank", "type": "integer" },
-      "Total Score": { "name": "Overall Score", "type": "percent" },
-      "Alumni": { "name": "Alumni Score", "type": "percent" },
-      "Award": { "name": "Award Score", "type": "percent" },
-      "HiCi": { "name": "HiCi Score", "type": "percent" },
-      "N&S": { "name": "N&S Score", "type": "percent" },
-      "PUB": { "name": "PUB Score", "type": "percent" },
-      "PCP": { "name": "PCP Score", "type": "percent" },
-      "CNCI": { "name": "CNCI Score", "type": "percent" },
-      "IC": { "name": "IC Score", "type": "percent" },
-      "TOP": { "name": "TOP Score", "type": "percent" },
-      "Q1": { "name": "Q1 Score", "type": "percent" }
+      "national rank": { "name": "National Rank", "type": "integer" },
+      "total score": { "name": "Overall Score", "type": "percent" },
+      "alumni": { "name": "Alumni Score", "type": "percent" },
+      "award": { "name": "Award Score", "type": "percent" },
+      "hici": { "name": "HiCi Score", "type": "percent" },
+      "n&s": { "name": "N&S Score", "type": "percent" },
+      "pub": { "name": "PUB Score", "type": "percent" },
+      "pcp": { "name": "PCP Score", "type": "percent" },
+      "cnci": { "name": "CNCI Score", "type": "percent" },
+      "ic": { "name": "IC Score", "type": "percent" },
+      "top": { "name": "TOP Score", "type": "percent" },
+      "q1": { "name": "Q1 Score", "type": "percent" }
     },
     "the": {
-      "Rank": { "name": "Rank", "type": "integer" },
-      "No. of FTE Students": {
+      "rank": { "name": "Rank", "type": "integer" },
+      "no. of fte students": {
         "name": "# FTE Students",
         "type": "integer"
       },
-      "No. of Students per Staff": {
+      "no. of students per staff": {
         "name": "# Students per Staff",
         "type": "decimal"
       },
-      "International Students": {
+      "international students": {
         "name": "% International Students",
         "type": "percent"
       },
-      "Female:Male Ratio": { "name": "% Female Students", "type": "percent" },
-      "Overall": { "name": "Overall Score", "type": "percent" },
-      "Teaching": { "name": "Teaching Score", "type": "percent" },
-      "Research": { "name": "Research Score", "type": "percent" },
-      "Citations": { "name": "Citations Score", "type": "percent" },
-      "Industry Income": { "name": "Industry Income Score", "type": "percent" },
-      "International Outlook": {
+      "female:male ratio": { "name": "% Female Students", "type": "percent" },
+      "overall": { "name": "Overall Score", "type": "percent" },
+      "teaching": { "name": "Teaching Score", "type": "percent" },
+      "research": { "name": "Research Score", "type": "percent" },
+      "citations": { "name": "Citations Score", "type": "percent" },
+      "industry income": { "name": "Industry Income Score", "type": "percent" },
+      "international outlook": {
         "name": "International Outlook Score",
         "type": "percent"
       }

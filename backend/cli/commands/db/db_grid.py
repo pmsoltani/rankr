@@ -1,32 +1,21 @@
 from contextlib import closing
 
 import typer
-from sqlalchemy.orm import Session
-from typer.colors import CYAN, RED
 
-from rankr.crud import country_process, institution_process
-from rankr.db_models import Country, SessionLocal
+from rankr import crawlers as c, db_models as d, repos as r
 
 
 def db_grid():
     """Populates the database with country & GRID data."""
     try:
-        db: Session
-        typer.secho("Processing countries...", fg=CYAN)
-        with closing(SessionLocal()) as db:
-            db.add_all(country_process())
-            db.commit()
-
-        typer.secho("Processing institutions...", fg=CYAN)
-        with closing(SessionLocal()) as db:
-            countries = {c.country: c for c in db.query(Country).all()}
-            db.add_all(institution_process(countries=countries))
-            typer.secho(
-                "Committing results to the DB. This can take several minutes.",
-                fg=CYAN,
-            )
-            db.commit()
+        with closing(d.SessionLocal()) as db:
+            country_repo = r.CountryRepo(db)
+            institution_repo = r.InstitutionRepo(db)
+            grid_crawler = c.GRIDCrawler(country_repo, institution_repo)
+            grid_crawler.crawl()
     except Exception as exc:
-        typer.secho("Error populating the database:", fg=RED)
-        typer.secho(str(exc), fg=CYAN)
+        typer.secho(
+            "Error populating the database: {type(exc)}", fg=typer.colors.RED
+        )
+        typer.secho(str(exc), fg=typer.colors.CYAN)
         raise typer.Abort()

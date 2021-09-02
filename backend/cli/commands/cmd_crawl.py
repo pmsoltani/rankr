@@ -2,12 +2,11 @@ from contextlib import closing
 from typing import Any, Dict, List, Tuple
 
 import typer
-from sqlalchemy.orm.session import Session
-from typer.colors import CYAN, GREEN
+from sqlalchemy.orm import Session
 
 from config import crwc, qsc, shac, thec, wikic
-from crawlers import QSCrawler, ShanghaiCrawler, THECrawler, WikipediaCrawler
-from rankr.db_models import Institution, SessionLocal
+from rankr import crawlers as c, db_models as d, repos as r
+from utils import csv_export
 
 
 def engine_select(engine: str) -> Tuple[Any, Any]:
@@ -23,7 +22,12 @@ def engine_select(engine: str) -> Tuple[Any, Any]:
         Tuple[Any, Any]: The engines' Crawler & Config classes
     """
     crawler_configs = [qsc, shac, thec, wikic]
-    crawler_classes = [QSCrawler, ShanghaiCrawler, THECrawler, WikipediaCrawler]
+    crawler_classes = [
+        c.QSCrawler,
+        c.ShanghaiCrawler,
+        c.THECrawler,
+        c.WikipediaCrawler,
+    ]
     engines = zip(crwc.SUPPORTED_ENGINES, zip(crawler_configs, crawler_classes))
     for e in engines:
         if e[0] == engine:
@@ -46,16 +50,22 @@ def engine_check(value: str) -> List[str]:
 def get_wikipedia_urls() -> List[Dict[str, str]]:
     """Retrieves the list of Wikipedia URLS for ranked institutions."""
     db: Session
-    with closing(SessionLocal()) as db:
-        query = (Institution.grid_id, Institution.wikipedia_url)
+    with closing(d.SessionLocal()) as db:
+        query = (d.Institution.grid_id, d.Institution.wikipedia_url)
         institutions = (
-            db.query(*query).join(Institution.rankings).group_by(*query).all()
+            db.query(*query).join(d.Institution.rankings).group_by(*query).all()
         )
     return [institution._asdict() for institution in institutions]
 
 
-def crawl(engines: str = typer.Argument(..., callback=engine_check)):
-    """Crawls the target website using the selected engines.
+def crawl(
+    engines: str = typer.Argument(..., callback=engine_check),
+    commit: bool = typer.Option(True, help="Commit the results to the DB?"),
+    offline: bool = typer.Option(
+        False, help="Only use CSV files (no web crawling)."
+    ),
+):
+    """Crawls the ranking websites and commits the results to DB
 
     Engine values: qs, shanghai, the
 
@@ -65,9 +75,13 @@ def crawl(engines: str = typer.Argument(..., callback=engine_check)):
 
     Args:
         engines (List[str]): The selected engines used for crawling
+        commit (bool): Whether or not commit the ranking table to DB
+        offline (bool): Only use CSV files (no web crawling)
     """
+    all_not_matched = []
+    all_fuzzy_matched = []
     for engine in engines:
-        typer.secho(f"Processing {engine} urls.", fg=CYAN)
+        typer.secho(f"Processing '{engine}' urls.", fg=typer.colors.CYAN)
         config, crawler = engine_select(engine)
         if engine == "wikipedia":
             # The WikipediaCrawler class works a little different.
@@ -77,17 +91,56 @@ def crawl(engines: str = typer.Argument(..., callback=engine_check)):
                 w.crawl()
             continue
 
-        for page in config.URLS:
-            if not page.get("crawl"):
-                continue
-            p = crawler(
-                url=page["url"],
-                year=page["year"],
-                ranking_system=page["ranking_system"],
-                ranking_type=page["ranking_type"],
-                field=page["field"],
-                subject=page["subject"],
-            )
-            p.crawl()
+        with closing(d.SessionLocal()) as db:
+            institution_repo = r.InstitutionRepo(db)
+            soup = {}  # Group soup by country for better performance.
+            for inst in institution_repo.get_db_institutions(limit=0):
+                try:
+                    soup[inst.country.country][inst.soup] = inst.grid_id
+                except KeyError:
+                    soup[inst.country.country] = {inst.soup: inst.grid_id}
 
-    typer.secho("All done!", fg=GREEN)
+            for page in config.URLS:
+                if not page.get("crawl"):
+                    continue
+
+                crawl_mode = "online"
+                ranking_info = {
+                    "ranking_system": page["ranking_system"],
+                    "ranking_type": page["ranking_type"],
+                    "year": page["year"],
+                    "field": page["field"],
+                    "subject": page["subject"],
+                }
+
+                p = crawler(url=page["url"], **ranking_info)
+                if offline and not p.file_path.exists():
+                    continue
+                if p.file_path.exists():
+                    p = c.OfflineCrawler(url=page["url"], **ranking_info)
+                    crawl_mode = "offline"
+
+                typer.secho(
+                    "Processing: "
+                    + " ".join(map(str, ranking_info.values()))
+                    + f" [{crawl_mode}]",
+                    fg=typer.colors.CYAN,
+                )
+
+                matched, not_matched, fuzzy_matched = p.crawl_and_process(
+                    institution_repo=institution_repo, soup=soup
+                )
+                if commit:
+                    db.add_all(matched)
+                    db.commit()
+                all_fuzzy_matched.extend(fuzzy_matched)
+                all_not_matched.extend(not_matched)
+
+    if all_fuzzy_matched:
+        csv_export(crwc.DATA_DIR / "fuzz.csv", all_fuzzy_matched)
+        typer.echo("Saved the list of fuzzy-matched institutions.")
+    if all_not_matched:
+        csv_export(crwc.DATA_DIR / "not_mached.csv", all_not_matched)
+        typer.echo("Saved the list of not matched institutions.")
+
+    typer.secho("All done!", fg=typer.colors.GREEN)

@@ -1,0 +1,113 @@
+import re
+from typing import Any, Dict, List, Tuple
+
+from fastapi import Depends, HTTPException, Query
+from sqlalchemy.orm import Session
+
+from config import appc, enums as e
+from rankr import db_models as d
+from rankr.api.dependencies.database import get_db
+from utils import get_csv
+
+
+country_code_mapper = get_csv(appc.COUNTRIES_FILE, "country_code")
+
+
+def get_geo_data(db: Session) -> Dict[str, List[str]]:
+    """Retrieves all countries with ranked institutions."""
+    countries_list: List[d.Country] = (
+        db.query(d.Country)
+        .join(d.Country.institutions)
+        .join(d.Institution.rankings)
+        .group_by(d.Country)
+        .all()
+    )
+    geo_data = {
+        "regions": set(),
+        "sub_regions": set(),
+        "countries": set(),
+        "country_codes": set(),
+    }
+    for country in countries_list:
+        geo_data["regions"].add(country.region)
+        geo_data["sub_regions"].add(country.sub_region)
+        geo_data["countries"].add(country.country)
+        geo_data["country_codes"].add(country.country_code)
+
+    return {geo: sorted(data) for geo, data in geo_data.items()}
+
+
+geo_data: Dict[str, List[str]] = {}
+
+
+def get_entity_type(db: Session, entity: str) -> Tuple[e.EntityTypeEnum, str]:
+    """Decides the type of the entity
+
+    Args:
+        db (Session): SQLAlchemy session instant to connect to the DB
+        entity (str): The input entity from the client
+
+    Raises:
+        HTTPException: If the type of the entity cannot be decided
+
+    Returns:
+        Tuple[EntityTypeEnum, str]: Type of the entity and its name (if
+        entity type is "country_code" or "world")
+    """
+    global geo_data
+    geo_data = geo_data or get_geo_data(db=db)
+
+    entity_type = None
+    name = None
+    if re.match(appc.GRID_ID_PATTERN, entity):
+        entity_type = e.EntityTypeEnum["institution"]
+    if entity.lower() == "world":
+        entity_type = e.EntityTypeEnum["world"]
+        name = entity.title()
+    if entity in geo_data["regions"]:
+        entity_type = e.EntityTypeEnum["region"]
+    if entity in geo_data["sub_regions"]:
+        entity_type = e.EntityTypeEnum["sub_region"]
+    if entity in geo_data["countries"]:
+        entity_type = e.EntityTypeEnum["country"]
+    if entity in geo_data["country_codes"]:
+        entity_type = e.EntityTypeEnum["country_code"]
+        name = country_code_mapper[entity][0]["country"]
+
+    if not entity_type:
+        raise HTTPException(
+            status_code=404, detail=f"Invalid 'entity' value: '{entity}'"
+        )
+
+    return (entity_type, name if name else entity)
+
+
+async def resolve_entity(
+    *, db: Session = Depends(get_db), entity: str,
+) -> Dict[str, Any]:
+    """Dependency for some of the routes"""
+    entity_type = get_entity_type(db=db, entity=entity)
+    return {
+        "db": db,
+        "entity": entity,
+        "entity_type": entity_type[0],
+        "name": entity_type[1],
+    }
+
+
+async def check_entities(
+    *, entity: str, entities: List[str] = Query(str)
+) -> List[str]:
+    if entity in entities:
+        raise HTTPException(
+            status_code=400, detail="Cannot compare an entity with itself!"
+        )
+    if 4 < len(entities):
+        raise HTTPException(
+            status_code=400, detail="Select at most 4 entities!"
+        )
+    if len(set(entities)) != len(entities):
+        raise HTTPException(
+            status_code=400, detail="Selected entities have duplicates!"
+        )
+    return entities

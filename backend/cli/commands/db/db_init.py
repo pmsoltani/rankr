@@ -1,9 +1,19 @@
+import subprocess
+
 import typer
-from sqlalchemy_utils import create_database, database_exists, drop_database
-from typer.colors import CYAN, GREEN, RED
+from alembic.config import Config
+from alembic.script import ScriptDirectory
+from sqlalchemy_utils import database_exists, drop_database
 
 from config import dbc
-from rankr.db_models import Base, engine
+from rankr import db_models as d
+
+
+config = Config()
+config.set_main_option("script_location", str(dbc.MIGRATIONS_DIR))
+script = ScriptDirectory.from_config(config)
+
+head_revision = script.get_current_head()
 
 
 def db_init(drop: bool = typer.Option(False, help="Drop the database first?")):
@@ -16,17 +26,25 @@ def db_init(drop: bool = typer.Option(False, help="Drop the database first?")):
     Raises:
         typer.Abort: If there is a problem with creating the database
     """
-    if drop and database_exists(engine.url):
-        drop_database(engine.url)
-        typer.secho("Dropped the database!", fg=CYAN)
+    if drop and database_exists(d.engine.url):
+        drop_database(d.engine.url)
+        typer.secho("Dropped the database!", fg=typer.colors.CYAN)
 
     try:
-        encoding = "utf8mb4" if dbc.DIALECT == "mysql" else "utf8"
-        create_database(engine.url, encoding=encoding)
-
-        Base.metadata.create_all(engine)
-        typer.secho("Successfully created the database!", fg=GREEN)
-    except Exception as exc:
-        typer.secho("Error creating the database:", fg=RED)
-        typer.secho(str(exc), fg=CYAN)
+        if not head_revision:
+            # There are no migration revisions present
+            subprocess.check_call(
+                args="alembic revision --autogenerate -m 'First Migration'",
+                shell=True,
+            )
+        subprocess.check_call(args="alembic upgrade head", shell=True)
+        typer.secho(
+            "Successfully migrated the database to its head!",
+            fg=typer.colors.GREEN,
+        )
+    except subprocess.CalledProcessError as exc:
+        typer.secho(
+            f"Error migrating the database: {type(exc)}", fg=typer.colors.RED
+        )
+        typer.secho(str(exc), fg=typer.colors.CYAN)
         raise typer.Abort()

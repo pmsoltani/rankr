@@ -36,7 +36,7 @@ services:
         INSTALL_PATH: ${INSTALL_PATH}
         POETRY_VERSION: ${POETRY_VERSION}
     command: sh -c "
-      if [ ${APP_ENV} == 'development' ] ; then rankr start --reload ;
+      if [ ${APP_ENV} == 'dev' ] ; then rankr start --reload ;
       else rankr start ; fi"
     restart: on-failure
     volumes:
