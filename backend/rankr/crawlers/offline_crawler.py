@@ -2,6 +2,7 @@ import errno
 import os
 
 from config import crwc
+from rankr import schemas as s
 from rankr.crawlers.crawler_mixin import CrawlerMixin
 from utils import get_row
 
@@ -20,5 +21,9 @@ class OfflineCrawler(CrawlerMixin):
             raise FileNotFoundError(
                 errno.ENOENT, os.strerror(errno.ENOENT), self.file_path.name
             )
-        self.processed_data = list(get_row(self.file_path))
+
+        for row in get_row(self.file_path):
+            if row["country"]:
+                row["country"] = s.CountryCreate(country=row["country"]).country
+            self.processed_data.append(row)
         return self.processed_data

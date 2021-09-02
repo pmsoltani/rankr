@@ -61,6 +61,9 @@ def get_wikipedia_urls() -> List[Dict[str, str]]:
 def crawl(
     engines: str = typer.Argument(..., callback=engine_check),
     commit: bool = typer.Option(True, help="Commit the results to the DB?"),
+    offline: bool = typer.Option(
+        False, help="Only use CSV files (no web crawling)."
+    ),
 ):
     """Crawls the ranking websites and commits the results to DB
 
@@ -73,6 +76,7 @@ def crawl(
     Args:
         engines (List[str]): The selected engines used for crawling
         commit (bool): Whether or not commit the ranking table to DB
+        offline (bool): Only use CSV files (no web crawling)
     """
     all_not_matched = []
     all_fuzzy_matched = []
@@ -110,6 +114,8 @@ def crawl(
                 }
 
                 p = crawler(url=page["url"], **ranking_info)
+                if offline and not p.file_path.exists():
+                    continue
                 if p.file_path.exists():
                     p = c.OfflineCrawler(url=page["url"], **ranking_info)
                     crawl_mode = "offline"
