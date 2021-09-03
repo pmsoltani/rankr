@@ -181,7 +181,7 @@ const InstitutionPage = props => {
     if (selectedTabID === 'compare') {
       setPageContent(<EuiText>Comming soon!</EuiText>)
     }
-  })
+  }, [selectedTabID])
 
   const renderTabs = props => {
     return tabs.map((tab, index) => (

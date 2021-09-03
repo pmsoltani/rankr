@@ -29,7 +29,7 @@ const LineChart = props => {
     stroke: { width: 3 },
     title: { text: chartTitle },
     xaxis: { categories: categories },
-    yaxis: { show: false }
+    yaxis: { reversed: true, show: false }
   }
   return (
     <Chart

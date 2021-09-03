@@ -3,7 +3,6 @@ import {
   EuiFlexItem,
   EuiHorizontalRule,
   EuiLink,
-  EuiPanel,
   EuiText
 } from '@elastic/eui'
 
