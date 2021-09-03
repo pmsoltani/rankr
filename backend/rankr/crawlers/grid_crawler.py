@@ -109,7 +109,14 @@ class GRIDCrawler:
             "Committing results to the DB. This can take several minutes.",
             fg=typer.colors.CYAN,
         )
-        self.institution_repo.create_db_institutions(db_institutions)
+        batch_size = 5000
+        batches = [
+            db_institutions[i:i + batch_size]
+            for i in range(0, len(db_institutions), batch_size)
+        ]
+        for i, batch in enumerate(batches):
+            typer.secho(f"Batch {i + 1}/{len(batches)}", fg=typer.colors.CYAN)
+            self.institution_repo.create_db_institutions(batch)
 
     def crawl(self):
         self.institution_process()
