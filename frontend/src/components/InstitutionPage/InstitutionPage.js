@@ -7,6 +7,7 @@ import {
   EuiPageContent,
   EuiPageBody,
   EuiPageContentBody,
+  EuiSpacer,
   EuiStat,
   EuiTab,
   EuiTabs,
@@ -162,8 +163,9 @@ const InstitutionPage = props => {
     if (selectedTabID === 'scores') {
       setPageContent(
         <>
-          {scoreChart}
           {slider}
+          <EuiSpacer />
+          {scoreChart}
         </>
       )
     }
