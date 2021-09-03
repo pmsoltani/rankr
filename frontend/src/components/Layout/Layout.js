@@ -2,7 +2,7 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import styled, { ThemeProvider } from 'styled-components'
 
-import { Navbar } from '..'
+import { Footer, Navbar } from '..'
 import * as config from '../../config'
 import '../../assets/css/index.scss'
 
@@ -31,6 +31,7 @@ const Layout = props => {
       <ThemeProvider theme={customTheme}>
         <Navbar />
         <StyledLayout>{props.children}</StyledLayout>
+        <Footer />
       </ThemeProvider>
     </>
   )

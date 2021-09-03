@@ -1,0 +1,10 @@
+.footer-container {
+  background: transparent;
+  padding: 12px;
+}
+
+.footer-heart {
+  color: #e25555;
+  font-size: 24px;
+  vertical-align: middle;
+}
