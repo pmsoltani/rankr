@@ -1,4 +1,5 @@
 [
+  { "ranking_system": "the", "ranking_type": "university ranking", "year": 2022, "field": "All", "subject": "All", "url": "https://www.timeshighereducation.com/world-university-rankings/2022/world-ranking#!/page/0/length/-1/sort_by/scores_overall/sort_order/desc/cols", "crawl": true },
   { "ranking_system": "the", "ranking_type": "university ranking", "year": 2021, "field": "All", "subject": "All", "url": "https://www.timeshighereducation.com/world-university-rankings/2021/world-ranking#!/page/0/length/-1/sort_by/scores_overall/sort_order/desc/cols", "crawl": true },
   { "ranking_system": "the", "ranking_type": "university ranking", "year": 2020, "field": "All", "subject": "All", "url": "https://www.timeshighereducation.com/world-university-rankings/2020/world-ranking#!/page/0/length/-1/sort_by/scores_overall/sort_order/desc/cols", "crawl": true },
   { "ranking_system": "the", "ranking_type": "university ranking", "year": 2019, "field": "All", "subject": "All", "url": "https://www.timeshighereducation.com/world-university-rankings/2019/world-ranking#!/page/0/length/-1/sort_by/scores_overall/sort_order/desc/cols", "crawl": true },
