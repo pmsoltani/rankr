@@ -1,5 +1,7 @@
+export { default as AboutPage } from './AboutPage/AboutPage'
 export { default as App } from './App/App'
 export { default as BarChart } from './BarChart/BarChart'
+export { default as Footer } from './Footer/Footer'
 export { default as InstitutionPage } from './InstitutionPage/InstitutionPage'
 export { default as InstitutionPageHeader } from './InstitutionPageHeader/InstitutionPageHeader'
 export { default as InstitutionsRouter } from './InstitutionsRouter/InstitutionsRouter'

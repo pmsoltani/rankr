@@ -5,7 +5,6 @@ import { scoreAliases } from '../../config'
 
 const BarChart = props => {
   const { chartTitle = 'Score chart', categories, series, colors } = props
-  console.log('@BarChart', series)
   const options = {
     chart: {
       id: 'score-chart',
