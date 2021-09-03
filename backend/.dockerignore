@@ -4,6 +4,7 @@
 
 # Docker
 Dockerfile*
+backend.dockerfile
 docker-compose*
 .dockerignore
 
