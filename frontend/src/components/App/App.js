@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import {
+  AboutPage,
   InstitutionsRouter,
   LandingPage,
   Layout,
@@ -19,6 +20,7 @@ const App = () => {
             path={`${r.institutions.url}/*`}
             element={<InstitutionsRouter />}
           />
+          <Route path={r.about.url} element={<AboutPage />} />
           <Route path={r.notFoundPage.url} element={<NotFoundPage />} />
         </Routes>
       </Layout>

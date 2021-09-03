@@ -1,3 +1,4 @@
+export { default as AboutPage } from './AboutPage/AboutPage'
 export { default as App } from './App/App'
 export { default as BarChart } from './BarChart/BarChart'
 export { default as Footer } from './Footer/Footer'
