@@ -5,10 +5,10 @@ import styled, { ThemeProvider } from 'styled-components'
 import { Footer, Navbar } from '..'
 import * as config from '../../config'
 import '../../assets/css/index.scss'
+import 'flag-icon-css/css/flag-icon.min.css'
 
 const customTheme = {
-  euiTitleColor: 'dodgerblue',
-  euiFontFamily: 'Sahel'
+  euiTitleColor: 'dodgerblue'
 }
 
 const StyledLayout = styled.div`
