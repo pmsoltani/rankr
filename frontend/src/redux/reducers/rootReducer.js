@@ -3,6 +3,8 @@ import { combineReducers } from 'redux'
 import {
   institutionsReducer,
   rankingsReducer,
+  rankingSystemsReducer,
+  rankingTableReducer,
   searchReducer,
   wikiReducer
 } from '.'
@@ -10,6 +12,8 @@ import {
 const rootReducer = combineReducers({
   institutions: institutionsReducer,
   rankings: rankingsReducer,
+  rankingSystems: rankingSystemsReducer,
+  rankingTable: rankingTableReducer,
   search: searchReducer,
   wiki: wikiReducer
 })

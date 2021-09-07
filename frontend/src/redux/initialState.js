@@ -10,6 +10,8 @@ const initialState = {
     currentRankings: { ranks: [], scores: [] },
     error: null
   },
+  rankingSystems: { isLoading: false, currentRankingSystems: {}, error: null },
+  rankingTable: { isLoading: false, currentRankingTable: [], error: null },
   search: { isLoading: false, institutions: [], error: null },
   wiki: { isLoading: false, currentWikiPage: null, error: null }
 }

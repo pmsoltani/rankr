@@ -24,6 +24,22 @@ export {
 } from './rankingsReducer'
 
 export {
+  default as rankingSystemsReducer,
+  Actions as rankingSystemsActions,
+  GET_RANKING_SYSTEMS,
+  GET_RANKING_SYSTEMS_SUCCESS,
+  GET_RANKING_SYSTEMS_FAILURE
+} from './rankingSystemsReducer'
+
+export {
+  default as rankingTableReducer,
+  Actions as rankingTableActions,
+  GET_RANKING_TABLE,
+  GET_RANKING_TABLE_SUCCESS,
+  GET_RANKING_TABLE_FAILURE
+} from './rankingTableReducer'
+
+export {
   default as searchReducer,
   Actions as searchActions,
   SEARCH,
