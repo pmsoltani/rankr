@@ -141,6 +141,8 @@ class THEConfig(CrawlerConfig):
 class WikipediaConfig(CrawlerConfig):
     BASE_URL: HttpUrl = Field("https://en.wikipedia.org/")
 
+    ALLOWED_LOGO_FORMATS: List[str] = [".svg", ".png"]
+
     @validator("DOWNLOAD_DIR")
     def _download_dir_value(cls, download_dir, values) -> Path:
         return values["DATA_DIR"] / "wikipedia"
