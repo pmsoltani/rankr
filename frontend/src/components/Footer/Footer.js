@@ -10,7 +10,7 @@ const Footer = props => {
   const madeWithLove = (
     <EuiText>
       <p>
-        Made with <span class='footer-heart'>♥️</span> by{' '}
+        Made with <span className='footer-heart'>♥️</span> by{' '}
         <EuiLink href='https://www.linkedin.com/in/pmsoltani'>
           Pooria Soltani
         </EuiLink>

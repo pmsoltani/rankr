@@ -11,7 +11,6 @@ const StyledLinkComponent = styled(Link)`
   &:link,
   &:active {
     text-decoration: none !important;
-    font-family: 'Sahel'
   }
 `
 
