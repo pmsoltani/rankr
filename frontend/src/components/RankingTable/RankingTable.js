@@ -109,7 +109,6 @@ const RankingTable = props => {
     if (data.length) {
       setRankingSystem(data[0].ranking_system)
       setYear(data[0].year)
-      console.log(data.map(i => i.value))
     }
   }, [data])
 
