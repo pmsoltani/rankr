@@ -8,6 +8,7 @@ import {
   EuiFlexGrid
 } from '@elastic/eui'
 
+import { InstitutionLogo } from '..'
 import {
   gridDisabled,
   gridInverse,
@@ -20,14 +21,13 @@ import {
   shanghaiDisabled,
   theColor,
   theDisabled,
-  uniLogo,
   wikipediaDisabled,
   wikipediaInverse
 } from '../../assets/images'
 import { gridURL, openStreetMapURL } from '../../utils'
 
 const PageHeader = props => {
-  const { institution: inst, logo, rightSideItems } = props
+  const { institution: inst, rightSideItems } = props
   const renderLocation = (country, city, lat, lng) => {
     const url = openStreetMapURL(lat, lng)
     return (
@@ -74,7 +74,11 @@ const PageHeader = props => {
       <EuiFlexGroup>
         <EuiFlexItem grow={1}>
           <EuiPanel paddingSize='s' grow={false}>
-            <img src={logo || uniLogo} height='96px' alt='institution logo' />
+            <InstitutionLogo
+              alt={`${inst.name} logo`}
+              institution={inst}
+              size='96px'
+            />
           </EuiPanel>
         </EuiFlexItem>
         <EuiFlexItem grow={6}>
