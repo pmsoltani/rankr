@@ -108,6 +108,60 @@ class RankingRepo(BaseRepo):
         order_by = [self.db_model.ranking_system, self.db_model.year]
         return self._get_objects(flt=flt, order_by=order_by, limit=0)
 
+    def get_ranking_systems(self):
+        order_by = [self.db_model.ranking_system, self.db_model.year]
+        ranking_tables = (
+            self.db.query(self.db_model.ranking_system, self.db_model.year)
+            .order_by(*order_by)
+            .distinct()
+            .all()
+        )
+        result = {}
+        for item in ranking_tables:
+            try:
+                result[item["ranking_system"]].append(item["year"])
+            except KeyError:
+                result[item["ranking_system"]] = [item["year"]]
+        return result
+
+    def get_ranking_table(
+        self,
+        ranking_system: e.RankingSystemEnum,
+        ranking_type: e.RankingTypeEnum,
+        year: int,
+        field: str = "All",
+        subject: str = "All",
+        offset: int = 0,
+        limit: Optional[int] = 25,
+    ) -> List[s.RankingTableRow]:
+        flt = [
+            self.db_model.year == year,
+            self.db_model.ranking_system == ranking_system,
+            self.db_model.ranking_type == ranking_type,
+            self.db_model.metric == e.MetricEnum["Rank"],
+            self.db_model.field == field,
+            self.db_model.subject == subject,
+        ]
+        order_by = [self.db_model.value]
+        db_rankings: List[d.Ranking] = self._get_db_objects(
+            flt=flt, order_by=order_by, offset=offset, limit=limit
+        )
+
+        rankings = []
+        for db_ranking in db_rankings:
+            institution = s.InstitutionDB(
+                **{
+                    **db_ranking.institution.__dict__,
+                    "country": db_ranking.institution.country,
+                }
+            )
+            ranking = s.RankingTableRow(
+                **{**db_ranking.__dict__, "institution": institution}
+            )
+            rankings.append(ranking)
+
+        return rankings
+
     def get_latest_year(
         self,
         institution_id: int,

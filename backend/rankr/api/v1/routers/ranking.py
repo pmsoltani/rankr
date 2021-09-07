@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 from fastapi import APIRouter, Depends, Query
 
@@ -64,4 +64,41 @@ def get_scores_by_institution_id(
 ):
     return ranking_repo.get_scores_by_institution_id(
         institution_id=institution_id,
+    )
+
+
+@router.get(
+    "/systems",
+    name="ranking:get ranking systems",
+    response_model=Dict[e.RankingSystemEnum, List[int]],
+)
+def get_ranking_systems(
+    ranking_repo: r.RankingRepo = Depends(get_repo(r.RankingRepo)),
+):
+    return ranking_repo.get_ranking_systems()
+
+
+@router.get(
+    "/table/{ranking_system}/{year}",
+    name="ranking:get ranking table",
+    response_model=List[s.RankingTableRow],
+)
+def get_ranking_table(
+    ranking_system: e.RankingSystemEnum,
+    year: int,
+    ranking_type: e.RankingTypeEnum = e.RankingTypeEnum["university ranking"],
+    field: str = "All",
+    subject: str = "All",
+    offset: int = 0,
+    limit: Optional[int] = 25,
+    ranking_repo: r.RankingRepo = Depends(get_repo(r.RankingRepo)),
+):
+    return ranking_repo.get_ranking_table(
+        ranking_system=ranking_system,
+        ranking_type=ranking_type,
+        year=year,
+        field=field,
+        subject=subject,
+        offset=offset,
+        limit=limit,
     )

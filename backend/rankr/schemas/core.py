@@ -1,6 +1,8 @@
 from pydantic import BaseModel, validator
 from sqlalchemy.orm import Query
 
+from rankr import db_models as d
+
 
 class OrmBase(BaseModel):
     # Common properties across orm models
@@ -15,6 +17,8 @@ class OrmBase(BaseModel):
     def _evaluate_lazy_columns(cls, v):
         if isinstance(v, Query):
             return v.all()
+        if isinstance(v, d.Base):
+            return v.__dict__
         return v
 
     class Config:
