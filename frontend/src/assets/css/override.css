@@ -1,6 +1,12 @@
 .footer-container {
-  background: transparent;
+  background: hsl(210, 8%, 15%);
+  font-size: 12px;
+  color: #babfc4;
   padding: 12px;
+}
+
+.footer-container .euiLink {
+  color: white;
 }
 
 .footer-heart {
