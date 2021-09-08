@@ -57,7 +57,7 @@ const RankingTableCard = props => {
       getRankingTable({
         rankingSystem: selectedSystem,
         year: selectedYear,
-        limit: 30
+        limit: 0
       })
       setSearchValue('')
       setSelectedCountries([])

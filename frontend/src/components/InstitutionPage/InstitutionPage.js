@@ -59,7 +59,6 @@ const InstitutionPage = props => {
 
   const [instStats, setInstStats] = React.useState(null)
   const tabs = [
-    { id: 'overview', name: 'Overview' },
     { id: 'ranks', name: 'Ranks' },
     { id: 'scores', name: 'Scores' },
     { id: 'compare', name: 'Compare' }
@@ -77,7 +76,7 @@ const InstitutionPage = props => {
   React.useEffect(() => {
     if (institutionID) {
       getInstitutionByID({ institutionID })
-      setSelectedTabID('ranks') // TODO: change to overview
+      setSelectedTabID('ranks')
     }
     return () => clearCurrentInstitutions()
   }, [institutionID, getInstitutionByID, clearCurrentInstitutions])
@@ -141,15 +140,6 @@ const InstitutionPage = props => {
   }, [scoreYear, rankings.currentRankings.scores])
 
   React.useEffect(() => {
-    if (selectedTabID === 'overview' && wiki.isLoading) {
-      setPageContent(<LoadingPage />)
-    }
-    if (selectedTabID === 'overview' && wiki.currentWikiPage) {
-      setPageContent(wiki.currentWikiPage)
-    }
-  }, [selectedTabID, wiki.isLoading, wiki.currentWikiPage])
-
-  React.useEffect(() => {
     if (selectedTabID === 'ranks' && rankings.isLoading) {
       setPageContent(<LoadingPage />)
     }
@@ -203,7 +193,11 @@ const InstitutionPage = props => {
   return (
     <EuiPage>
       <EuiPageBody component='section'>
-        <InstitutionPageHeader institution={inst} rightSideItems={instStats} />
+        <InstitutionPageHeader
+          institution={inst}
+          overview={wiki.currentWikiPage}
+          rightSideItems={instStats}
+        />
         <EuiTabs size='l'>{renderTabs()}</EuiTabs>
         <EuiPageContent borderRadius='none' hasShadow={false}>
           <EuiPageContentBody>{pageContent}</EuiPageContentBody>

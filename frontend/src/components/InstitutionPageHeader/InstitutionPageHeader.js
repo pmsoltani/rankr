@@ -2,10 +2,9 @@ import {
   EuiPanel,
   EuiFlexGroup,
   EuiFlexItem,
-  EuiLink,
-  EuiText,
   EuiIcon,
-  EuiFlexGrid
+  EuiLink,
+  EuiText
 } from '@elastic/eui'
 
 import { InstitutionLogo } from '..'
@@ -27,7 +26,7 @@ import {
 import { gridURL, openStreetMapURL } from '../../utils'
 
 const PageHeader = props => {
-  const { institution: inst, rightSideItems } = props
+  const { institution: inst, overview, rightSideItems } = props
   const renderLocation = (country, city, lat, lng) => {
     const url = openStreetMapURL(lat, lng)
     return (
@@ -70,42 +69,56 @@ const PageHeader = props => {
   }
 
   return (
-    <header style={{ marginBottom: '24px' }}>
-      <EuiFlexGroup>
-        <EuiFlexItem grow={1}>
-          <EuiPanel paddingSize='s' grow={false}>
-            <InstitutionLogo
-              alt={`${inst.name} logo`}
-              institution={inst}
-              size='96px'
-            />
-          </EuiPanel>
-        </EuiFlexItem>
-        <EuiFlexItem grow={6}>
-          <EuiFlexGroup direction='column'>
-            <EuiFlexItem grow={false} style={{ marginBottom: '0' }}>
-              <EuiText>
-                <h1>{inst.name}</h1>
-              </EuiText>
-              <EuiText size='xs'>since {inst.established}</EuiText>
+    <header
+      style={{ marginBottom: '24px', width: '1000px', margin: '0 auto 24px' }}
+    >
+      <EuiFlexGroup justifyContent='spaceBetween' wrap>
+        <EuiFlexItem>
+          <EuiFlexGroup>
+            <EuiFlexItem grow={false} style={{ maxWidth: '112px' }}>
+              <EuiPanel paddingSize='s' grow={false}>
+                <InstitutionLogo
+                  alt={`${inst.name} logo`}
+                  institution={inst}
+                  size='96px'
+                />
+              </EuiPanel>
             </EuiFlexItem>
-            <EuiFlexItem grow={false} style={{ marginBottom: '0' }}>
+            <EuiFlexItem grow={false}>
               <EuiFlexGroup>
-                {renderLinks(inst.links).map((item, index) => (
-                  <EuiFlexItem key={index} grow={false}>
-                    {item}
-                  </EuiFlexItem>
-                ))}
+                <EuiFlexItem grow={false}>
+                  <EuiText>
+                    <h1>{inst.name}</h1>
+                  </EuiText>
+                  <EuiText size='xs'>since {inst.established}</EuiText>
+                </EuiFlexItem>
+              </EuiFlexGroup>
+              <EuiFlexGroup>
+                <EuiFlexItem grow={false} style={{}}>
+                  <EuiFlexGroup>
+                    {renderLinks(inst.links).map((item, index) => (
+                      <EuiFlexItem key={index} grow={false}>
+                        {item}
+                      </EuiFlexItem>
+                    ))}
+                  </EuiFlexGroup>
+                </EuiFlexItem>
               </EuiFlexGroup>
             </EuiFlexItem>
           </EuiFlexGroup>
         </EuiFlexItem>
-        <EuiFlexItem grow={4}>
-          <EuiFlexGrid columns={2}>
+        <EuiFlexItem grow={1} style={{ maxWidth: '250px' }}>
+          <EuiFlexGroup wrap>
             {rightSideItems.map((item, index) => (
-              <EuiFlexItem key={index}>{item}</EuiFlexItem>
+              <EuiFlexItem grow={false} key={index}>
+                {item}
+              </EuiFlexItem>
             ))}
-          </EuiFlexGrid>
+          </EuiFlexGroup>
+        </EuiFlexItem>
+
+        <EuiFlexItem style={{ minWidth: '600px', maxWidth: '1000px' }}>
+          <EuiText>{overview}</EuiText>
         </EuiFlexItem>
       </EuiFlexGroup>
     </header>
