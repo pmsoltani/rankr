@@ -37,13 +37,17 @@ export const rankChartProps = (
   rawData,
   key = 'year',
   seriesKey = 'ranking_system',
-  valueKey = 'value'
+  valueKey = 'value',
+  rawValueKey = 'raw_value'
 ) => {
   let data = Object.fromEntries(rawData.map(i => [i[key], {}]))
   rawData.forEach(i => {
-    data[i[key]][i[seriesKey]] = i[valueKey]
+    data[i[key]][i[seriesKey]] = {
+      value: i[valueKey],
+      rawValue: i[rawValueKey]
+    }
   })
-  data = addMissingKeys(data)
+  data = addMissingKeys(data, { value: null, rawValue: null })
 
   const categories = Object.keys(data).sort((a, b) => a - b)
   const seriesNames = [...new Set(rawData.map(i => i[seriesKey]))].sort(
@@ -54,7 +58,8 @@ export const rankChartProps = (
   )
   const series = seriesNames.map(seriesName => ({
     name: rankingSystems[seriesName].alias,
-    data: Object.values(data).map(i => i[seriesName])
+    data: Object.values(data).map(i => i[seriesName].value),
+    rawData: Object.values(data).map(i => i[seriesName].rawValue)
   }))
   const colors = seriesNames.map(i => rankingSystems[i].color)
   return { categories, series, colors }
