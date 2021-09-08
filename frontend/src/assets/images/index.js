@@ -1,4 +1,4 @@
-export { default as logo } from './logo.svg'
+export { default as rankrLogo } from './rankrLogo.svg'
 export { default as landing } from './landing.svg'
 export { default as uniLogo } from './uniLogo.svg'
 
