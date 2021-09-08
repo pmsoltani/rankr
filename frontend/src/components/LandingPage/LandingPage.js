@@ -16,14 +16,6 @@ const StyledEuiPage = styled(EuiPage)`
   flex: 1;
 `
 
-const StyledEuiPageContentBody = styled(EuiPageContentBody)`
-  max-width: 600px;
-  & > img {
-    width: 100%;
-    border-radius: 50%;
-  }
-`
-
 const LandingPage = props => {
   return (
     <StyledEuiPage>
@@ -31,12 +23,13 @@ const LandingPage = props => {
         <EuiFlexGroup>
           <EuiFlexItem grow={2}>
             <EuiPageContent
+              color='transparent'
               horizontalPosition='center'
               verticalPosition='center'
             >
-              <StyledEuiPageContentBody>
+              <EuiPageContentBody restrictWidth='1000px'>
                 <RankingTableCard />
-              </StyledEuiPageContentBody>
+              </EuiPageContentBody>
             </EuiPageContent>
           </EuiFlexItem>
         </EuiFlexGroup>
