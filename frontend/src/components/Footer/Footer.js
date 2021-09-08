@@ -5,6 +5,7 @@ import {
   EuiSpacer,
   EuiText
 } from '@elastic/eui'
+import { Link } from 'react-router-dom'
 
 import { StyledIcon } from '..'
 import {
@@ -14,6 +15,7 @@ import {
   shanghaiColor,
   theColor
 } from '../../assets/images'
+import { r } from '../../routes'
 
 const Footer = props => {
   const madeWithLove = (
@@ -59,6 +61,10 @@ const Footer = props => {
             <StyledIcon type={githubInverse} size='m' />
             rankr on GitHub
           </EuiLink>
+          <EuiSpacer size='s' />
+          <Link to={r.about.url}>
+            About rankr
+          </Link>
         </EuiFlexItem>
       </EuiFlexGroup>
     </div>
