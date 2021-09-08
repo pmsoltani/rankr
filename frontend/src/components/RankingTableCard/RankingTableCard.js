@@ -111,7 +111,7 @@ const RankingTableCard = props => {
         )
       } else setData(rankingTable.currentRankingTable)
     },
-    [data, rankingTable.currentRankingTable]
+    [rankingTable.currentRankingTable]
   )
 
   const onCountriesChange = selectedCountries => {
