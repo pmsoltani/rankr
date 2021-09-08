@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet'
 import { useLocation } from 'react-router'
 import styled, { ThemeProvider } from 'styled-components'
 
-import { Footer, Navbar, ScrollToTop } from '..'
+import { AutoScrollToTop, Footer, Navbar, ScrollToTop } from '..'
 import * as config from '../../config'
 import '../../assets/css/index.scss'
 import 'flag-icon-css/css/flag-icon.min.css'
@@ -31,6 +31,7 @@ const Layout = props => {
         <link rel='canonical' href={config.APP_URL} />
       </Helmet>
       <ThemeProvider theme={customTheme}>
+        <AutoScrollToTop />
         {location.pathname !== '/' && <Navbar />}
         <StyledLayout>{props.children}</StyledLayout>
         <ScrollToTop />

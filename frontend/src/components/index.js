@@ -1,5 +1,6 @@
 export { default as AboutPage } from './AboutPage/AboutPage'
 export { default as App } from './App/App'
+export { default as AutoScrollToTop } from './AutoScrollToTop/AutoScrollToTop'
 export { default as BarChart } from './BarChart/BarChart'
 export { default as CountrySelect } from './CountrySelect/CountrySelect'
 export { default as Footer } from './Footer/Footer'
