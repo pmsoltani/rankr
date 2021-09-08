@@ -1,5 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
+import { useLocation } from 'react-router'
 import styled, { ThemeProvider } from 'styled-components'
 
 import { Footer, Navbar } from '..'
@@ -21,6 +22,7 @@ const StyledLayout = styled.div`
 `
 
 const Layout = props => {
+  const location = useLocation()
   return (
     <>
       <Helmet>
@@ -29,7 +31,7 @@ const Layout = props => {
         <link rel='canonical' href={config.APP_URL} />
       </Helmet>
       <ThemeProvider theme={customTheme}>
-        <Navbar />
+        {location.pathname !== '/' && <Navbar />}
         <StyledLayout>{props.children}</StyledLayout>
         <Footer />
       </ThemeProvider>
