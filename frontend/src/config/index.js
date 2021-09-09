@@ -1,3 +1,12 @@
+import {
+  qsColor,
+  qsDisabled,
+  shanghaiColor,
+  shanghaiDisabled,
+  theColor,
+  theDisabled
+} from '../assets/images'
+
 export const APP_NAME = process.env.REACT_APP_APP_NAME || 'rankr'
 export const APP_URL = process.env.REACT_APP_APP_URL
 export const SERVER_HOST = process.env.REACT_APP_SERVER_HOST || 'localhost'
@@ -9,9 +18,24 @@ export const gridBase = 'https://www.grid.ac/'
 export const openStreetMapBase = 'https://www.openstreetmap.org/'
 
 export const rankingSystems = {
-  qs: { alias: 'QS', color: '#feb019' },
-  shanghai: { alias: 'Shanghai', color: '#ff4560' },
-  the: { alias: 'THE', color: '#008ffb' }
+  qs: {
+    alias: 'QS',
+    color: '#feb019',
+    icon: qsColor,
+    iconDisabled: qsDisabled
+  },
+  shanghai: {
+    alias: 'Shanghai',
+    color: '#ff4560',
+    icon: shanghaiColor,
+    iconDisabled: shanghaiDisabled
+  },
+  the: {
+    alias: 'THE',
+    color: '#008ffb',
+    icon: theColor,
+    iconDisabled: theDisabled
+  }
 }
 
 export const scoreAliases = {

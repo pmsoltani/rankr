@@ -4,7 +4,8 @@ import {
   EuiFlexItem,
   EuiIcon,
   EuiLink,
-  EuiText
+  EuiText,
+  EuiToolTip
 } from '@elastic/eui'
 
 import { InstitutionLogo } from '..'
@@ -14,15 +15,10 @@ import {
   homeDisabled,
   homeFill,
   locationOutline,
-  qsColor,
-  qsDisabled,
-  shanghaiColor,
-  shanghaiDisabled,
-  theColor,
-  theDisabled,
   wikipediaDisabled,
   wikipediaInverse
 } from '../../assets/images'
+import { rankingSystems } from '../../config'
 import { gridURL, openStreetMapURL } from '../../utils'
 
 const PageHeader = props => {
@@ -39,29 +35,48 @@ const PageHeader = props => {
 
   const renderLinks = links => {
     const linkTypes = {
-      homepage: { icon: homeFill, iconDisabled: homeDisabled },
-      grid: { icon: gridInverse, iconDisabled: gridDisabled },
-      wikipedia: { icon: wikipediaInverse, iconDisabled: wikipediaDisabled },
-      qs: { icon: qsColor, iconDisabled: qsDisabled },
-      shanghai: { icon: shanghaiColor, iconDisabled: shanghaiDisabled },
-      the: { icon: theColor, iconDisabled: theDisabled }
+      homepage: {
+        alias: 'Hompage',
+        icon: homeFill,
+        iconDisabled: homeDisabled
+      },
+      grid: {
+        alias: 'GRID profile',
+        icon: gridInverse,
+        iconDisabled: gridDisabled
+      },
+      wikipedia: {
+        alias: 'Wikipedia page',
+        icon: wikipediaInverse,
+        iconDisabled: wikipediaDisabled
+      },
+      ...rankingSystems
     }
     links = Object.assign({}, ...links.map(i => ({ [i.type]: i.link })))
     links.grid = gridURL(inst.grid_id)
-    const linkElements = Object.keys(linkTypes).map(i => (
-      <EuiLink
-        key={i}
-        href={links[i]}
-        disabled={!links[i]}
-        target='_blank'
-        external={false}
-      >
-        <EuiIcon
-          type={links[i] ? linkTypes[i].icon : linkTypes[i].iconDisabled}
-          size='l'
-        />
-      </EuiLink>
-    ))
+    const linkElements = Object.keys(linkTypes).map(i => {
+      let tooltipContent = linkTypes[i].alias
+      if (Object.keys(rankingSystems).includes(i)) {
+        tooltipContent = tooltipContent.concat(' ranking profile')
+      }
+      return (
+        <EuiToolTip content={tooltipContent} key={i} position='top'>
+          <EuiLink
+            href={links[i]}
+            disabled={!links[i]}
+            target='_blank'
+            external={false}
+          >
+            <EuiIcon
+              type={links[i] ? linkTypes[i].icon : linkTypes[i].iconDisabled}
+              size='l'
+              title={tooltipContent.concat(' icon')}
+              aria-label={tooltipContent.concat(' icon')}
+            />
+          </EuiLink>
+        </EuiToolTip>
+      )
+    })
     linkElements.push(
       renderLocation(inst.country, inst.city, inst.lat, inst.lng)
     )
