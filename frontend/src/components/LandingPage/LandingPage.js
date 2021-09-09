@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { useParams } from 'react-router'
 import {
   EuiPage,
   EuiPageBody,
@@ -19,6 +19,7 @@ const StyledEuiPage = styled(EuiPage)`
 `
 
 const LandingPage = props => {
+  const { rankingSystem = '', year = '' } = useParams()
   return (
     <StyledEuiPage>
       <EuiPageBody component='section'>
@@ -50,7 +51,10 @@ const LandingPage = props => {
                 <EuiSpacer />
                 <EuiFlexGroup justifyContent='center'>
                   <EuiFlexItem>
-                    <RankingTableCard />
+                    <RankingTableCard
+                      rankingSystem={rankingSystem}
+                      year={year}
+                    />
                   </EuiFlexItem>
                 </EuiFlexGroup>
               </EuiPageContentBody>

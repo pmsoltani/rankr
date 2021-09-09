@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { useNavigate } from 'react-router'
 import {
   EuiFieldSearch,
   EuiFlexGroup,
@@ -12,8 +13,10 @@ import {
   rankingSystemsActions,
   rankingTableActions
 } from '../../redux/reducers'
+import { r } from '../../routes'
 
 const RankingTableCard = props => {
+  const { rankingSystem = '', year = '' } = props
   const { rankingSystems, rankingTable } = props.state
   const {
     getRankingSystems,
@@ -23,12 +26,14 @@ const RankingTableCard = props => {
   } = props
   const [systems, setSystems] = React.useState([])
   const [years, setYears] = React.useState([])
-  const [selectedSystem, setSelectedSystem] = React.useState('')
-  const [selectedYear, setSelectedYear] = React.useState('')
+  const [selectedSystem, setSelectedSystem] = React.useState(rankingSystem)
+  const [selectedYear, setSelectedYear] = React.useState(parseInt(year) || '')
   const [countries, setCountries] = React.useState([])
   const [selectedCountries, setSelectedCountries] = React.useState([])
   const [data, setData] = React.useState([])
   const [searchValue, setSearchValue] = React.useState('')
+
+  const navigate = useNavigate()
 
   React.useEffect(() => {
     getRankingSystems()
@@ -39,21 +44,29 @@ const RankingTableCard = props => {
     const systems = Object.keys(rankingSystems.currentRankingSystems)
     if (rankingSystems.currentRankingSystems && systems.length) {
       setSystems(systems)
-      setSelectedSystem(systems[0])
+      if (!selectedSystem) setSelectedSystem(systems[0])
     }
-  }, [rankingSystems.currentRankingSystems])
+  }, [rankingSystems.currentRankingSystems, selectedSystem])
 
   React.useEffect(() => {
     if (systems.length && selectedSystem) {
       let years = rankingSystems.currentRankingSystems[selectedSystem]
       years = [...years].sort((a, b) => b - a)
       setYears(years)
-      setSelectedYear(years[0])
+      if (!selectedYear || !years.includes(selectedYear)) {
+        setSelectedYear(years[0])
+      }
     }
-  }, [rankingSystems.currentRankingSystems, selectedSystem, systems])
+  }, [
+    rankingSystems.currentRankingSystems,
+    selectedSystem,
+    selectedYear,
+    systems
+  ])
 
   React.useEffect(() => {
     if (selectedSystem && selectedYear) {
+      navigate(`${r.rankingTable.url}/${selectedSystem}/${selectedYear}`)
       getRankingTable({
         rankingSystem: selectedSystem,
         year: selectedYear,
@@ -63,7 +76,13 @@ const RankingTableCard = props => {
       setSelectedCountries([])
     }
     return () => clearCurrentRankingTable()
-  }, [clearCurrentRankingTable, getRankingTable, selectedSystem, selectedYear])
+  }, [
+    clearCurrentRankingTable,
+    getRankingTable,
+    navigate,
+    selectedSystem,
+    selectedYear
+  ])
 
   React.useEffect(() => {
     if (

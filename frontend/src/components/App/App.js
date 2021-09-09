@@ -4,9 +4,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import {
   AboutPage,
   InstitutionsRouter,
-  LandingPage,
   Layout,
-  NotFoundPage
+  NotFoundPage,
+  RankingTableRouter
 } from '../../components'
 import { r } from '../../routes'
 
@@ -15,7 +15,7 @@ const App = () => {
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route path={r.home.url} element={<LandingPage />} />
+          <Route path={`${r.home.url}/*`} element={<RankingTableRouter />} />
           <Route
             path={`${r.institutions.url}/*`}
             element={<InstitutionsRouter />}

@@ -7,6 +7,7 @@ import { AutoScrollToTop, Footer, Navbar, ScrollToTop } from '..'
 import * as config from '../../config'
 import '../../assets/css/index.scss'
 import 'flag-icon-css/css/flag-icon.min.css'
+import { r } from '../../routes'
 
 const customTheme = {
   euiTitleColor: 'dodgerblue'
@@ -22,7 +23,20 @@ const StyledLayout = styled.div`
 `
 
 const Layout = props => {
+  const [navbarVisible, setNavbarVisible] = React.useState(true)
   const location = useLocation()
+
+  React.useEffect(() => {
+    if (
+      location.pathname === '/' ||
+      location.pathname.startsWith(r.rankingTable.url)
+    ) {
+      setNavbarVisible(false)
+    } else {
+      setNavbarVisible(true)
+    }
+  }, [location.pathname])
+
   return (
     <>
       <Helmet>
@@ -32,7 +46,7 @@ const Layout = props => {
       </Helmet>
       <ThemeProvider theme={customTheme}>
         <AutoScrollToTop />
-        {location.pathname !== '/' && <Navbar />}
+        {navbarVisible && <Navbar />}
         <StyledLayout>{props.children}</StyledLayout>
         <ScrollToTop />
         <Footer />
