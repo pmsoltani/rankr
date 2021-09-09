@@ -28,6 +28,7 @@ const SiteSearch = props => {
   const [searchValue, setSearchValue] = React.useState('')
   const [institutionResults, setInstitutionsResults] = React.useState([])
   const [searchResults, setSearchResults] = React.useState([])
+  const inputRef = React.useRef(null)
 
   const navigate = useNavigate()
   const closePopover = () => setPopoverOpen(false)
@@ -89,10 +90,14 @@ const SiteSearch = props => {
           aria-label='site-wide search field'
           fullWidth
           icon={() => <EuiIcon type='search' color='#a9a9a9' size='xl' />}
+          inputRef={inputRef}
           isInvalid={error}
           isLoading={isLoading}
           onChange={onSearchChange}
-          onFocus={() => setPopoverOpen(true)}
+          onFocus={() => {
+            inputRef.current.scrollIntoView({ behavior: 'smooth' })
+            setPopoverOpen(true)
+          }}
           placeholder='Search for institutions'
           style={{
             fontSize: 30,
@@ -108,11 +113,11 @@ const SiteSearch = props => {
 
   return (
     <EuiInputPopover
+      fullWidth
+      closePopover={closePopover}
       input={searchField}
       isOpen={popoverOpen}
-      closePopover={closePopover}
       panelPaddingSize='s'
-      fullWidth
     >
       <div style={{ height: 300 }}>
         <EuiSelectable
