@@ -22,7 +22,7 @@ const Footer = props => {
     <EuiText>
       <p>
         Made with <span className='footer-heart'>♥️</span> by{' '}
-        <EuiLink href='https://www.linkedin.com/in/pmsoltani'>
+        <EuiLink href='https://www.linkedin.com/in/pmsoltani' target='_blank'>
           Pooria Soltani
         </EuiLink>
       </p>
@@ -35,36 +35,50 @@ const Footer = props => {
       </EuiFlexGroup>
       <EuiFlexGroup justifyContent='spaceAround'>
         <EuiFlexItem grow={false}>
-          <EuiLink external href='https://www.topuniversities.com'>
+          <EuiLink
+            external
+            href='https://www.topuniversities.com'
+            target='_blank'
+          >
             <StyledIcon type={qsColor} size='m' />
             Top Universities (QS)
           </EuiLink>
           <EuiSpacer size='s' />
-          <EuiLink external href='https://www.shanghairanking.com'>
+          <EuiLink
+            external
+            href='https://www.shanghairanking.com'
+            target='_blank'
+          >
             <StyledIcon type={shanghaiColor} size='m' />
             Shanghai Ranking
           </EuiLink>
           <EuiSpacer size='s' />
-          <EuiLink external href='https://www.timeshighereducation.com'>
+          <EuiLink
+            external
+            href='https://www.timeshighereducation.com'
+            target='_blank'
+          >
             <StyledIcon type={theColor} size='m' />
             Times Higher Education (THE)
           </EuiLink>
         </EuiFlexItem>
 
         <EuiFlexItem grow={false}>
-          <EuiLink external href='https://grid.ac'>
+          <EuiLink external href='https://grid.ac' target='_blank'>
             <StyledIcon type={gridInverse} size='m' />
             Global Research Identifier Database (GRID)
           </EuiLink>
           <EuiSpacer size='s' />
-          <EuiLink external href='https://github.com/pmsoltani/rankr'>
+          <EuiLink
+            external
+            href='https://github.com/pmsoltani/rankr'
+            target='_blank'
+          >
             <StyledIcon type={githubInverse} size='m' />
             rankr on GitHub
           </EuiLink>
           <EuiSpacer size='s' />
-          <Link to={r.about.url}>
-            About rankr
-          </Link>
+          <Link to={r.about.url}>About rankr</Link>
         </EuiFlexItem>
       </EuiFlexGroup>
     </div>
