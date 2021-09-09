@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import axios from 'axios'
 import {
   EuiMarkdownFormat,
@@ -9,25 +10,34 @@ import {
 } from '@elastic/eui'
 
 import aboutPageContents from './about.md'
+import * as config from '../../config'
 
 const AboutPage = props => {
   const [content, setContent] = React.useState(null)
   React.useEffect(() => {
-    axios.get(aboutPageContents)
+    axios
+      .get(aboutPageContents)
       .then(res => res.data)
       .then(text => setContent(text))
   })
 
   return (
-    <EuiPage>
-      <EuiPageBody component='section'>
-        <EuiPageContent borderRadius='none' hasShadow={false}>
-          <EuiPageContentBody restrictWidth={800}>
-            <EuiMarkdownFormat>{content}</EuiMarkdownFormat>
-          </EuiPageContentBody>
-        </EuiPageContent>
-      </EuiPageBody>
-    </EuiPage>
+    <>
+      <Helmet>
+        <meta charSet='utf-8' />
+        <title>{`${config.APP_NAME}: About`}</title>
+        <link rel='canonical' href={config.APP_URL} />
+      </Helmet>
+      <EuiPage>
+        <EuiPageBody component='section'>
+          <EuiPageContent borderRadius='none' hasShadow={false}>
+            <EuiPageContentBody restrictWidth={800}>
+              <EuiMarkdownFormat>{content}</EuiMarkdownFormat>
+            </EuiPageContentBody>
+          </EuiPageContent>
+        </EuiPageBody>
+      </EuiPage>
+    </>
   )
 }
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
@@ -23,6 +24,7 @@ import {
   NotFoundPage,
   YearRange
 } from '..'
+import * as config from '../../config'
 import {
   institutionActions,
   rankingActions,
@@ -191,19 +193,26 @@ const InstitutionPage = props => {
   if (institutions.isLoading || !inst || !instStats) return <LoadingPage />
 
   return (
-    <EuiPage>
-      <EuiPageBody component='section'>
-        <InstitutionPageHeader
-          institution={inst}
-          overview={wiki.currentWikiPage}
-          rightSideItems={instStats}
-        />
-        <EuiTabs size='l'>{renderTabs()}</EuiTabs>
-        <EuiPageContent borderRadius='none' hasShadow={false}>
-          <EuiPageContentBody>{pageContent}</EuiPageContentBody>
-        </EuiPageContent>
-      </EuiPageBody>
-    </EuiPage>
+    <>
+      <Helmet>
+        <meta charSet='utf-8' />
+        <title>{`${config.APP_NAME}: ${inst.name}`}</title>
+        <link rel='canonical' href={config.APP_URL} />
+      </Helmet>
+      <EuiPage>
+        <EuiPageBody component='section'>
+          <InstitutionPageHeader
+            institution={inst}
+            overview={wiki.currentWikiPage}
+            rightSideItems={instStats}
+          />
+          <EuiTabs size='l'>{renderTabs()}</EuiTabs>
+          <EuiPageContent borderRadius='none' hasShadow={false}>
+            <EuiPageContentBody>{pageContent}</EuiPageContentBody>
+          </EuiPageContent>
+        </EuiPageBody>
+      </EuiPage>
+    </>
   )
 }
 
