@@ -1,6 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { EuiFieldSearch, EuiFlexGroup, EuiFlexItem } from '@elastic/eui'
+import {
+  EuiFieldSearch,
+  EuiFlexGroup,
+  EuiFlexItem,
+  EuiPanel
+} from '@elastic/eui'
 
 import { CountrySelect, RankingTable, SuperSelect } from '..'
 import {
@@ -98,66 +103,71 @@ const RankingTableCard = props => {
       setSearchValue(e.target.value)
       if (e.target.value) {
         setData(
-          data.filter(i =>
+          rankingTable.currentRankingTable.filter(i =>
             i.institution.soup
               .toLowerCase()
               .includes(e.target.value.toLowerCase())
           )
         )
-      } else setData(data)
+      } else setData(rankingTable.currentRankingTable)
     },
-    [data]
+    [rankingTable.currentRankingTable]
   )
 
   const onCountriesChange = selectedCountries => {
-    console.log(selectedCountries)
     setSelectedCountries(selectedCountries)
     setSearchValue('')
   }
 
   return (
     <>
-      <EuiFlexGroup gutterSize='m'>
-        <EuiFlexItem grow={5}>
-          <SuperSelect
-            key='ranking system select'
-            isLoading={rankingSystems.isLoading}
-            options={systems}
-            onSelectChange={value => setSelectedSystem(value)}
-            selectedValue={selectedSystem}
-          />
-        </EuiFlexItem>
+      <EuiFlexGroup direction='rowReverse'>
         <EuiFlexItem grow={false}>
-          <SuperSelect
-            key='ranking year select'
-            isLoading={rankingSystems.isLoading}
-            options={years}
-            onSelectChange={value => setSelectedYear(value)}
-            selectedValue={selectedYear}
-          />
+          <EuiFlexGroup gutterSize='m' direction='column'>
+            <EuiFlexItem grow={false} style={{ minWidth: 200, maxWidth: 200 }}>
+              <SuperSelect
+                key='ranking system select'
+                isLoading={rankingSystems.isLoading}
+                options={systems}
+                onSelectChange={value => setSelectedSystem(value)}
+                selectedValue={selectedSystem}
+              />
+            </EuiFlexItem>
+            <EuiFlexItem grow={false} style={{ minWidth: 200, maxWidth: 200 }}>
+              <SuperSelect
+                key='ranking year select'
+                isLoading={rankingSystems.isLoading}
+                options={years}
+                onSelectChange={value => setSelectedYear(value)}
+                selectedValue={selectedYear}
+              />
+            </EuiFlexItem>
+            <EuiFlexItem grow={false} style={{ minWidth: 200, maxWidth: 200 }}>
+              <EuiFieldSearch
+                fullWidth
+                incremental
+                value={searchValue}
+                onChange={onSearchChange}
+                placeholder='Institution filter'
+                compressed
+              />
+            </EuiFlexItem>
+            <EuiFlexItem grow={false} style={{ minWidth: 200, maxWidth: 200 }}>
+              <CountrySelect
+                isLoading={rankingTable.isLoading}
+                options={countries}
+                onSelectChange={onCountriesChange}
+                selectedValues={selectedCountries}
+              />
+            </EuiFlexItem>
+          </EuiFlexGroup>
         </EuiFlexItem>
-        <EuiFlexItem grow={7}>
-          <EuiFieldSearch
-            value={searchValue}
-            onChange={onSearchChange}
-            placeholder='Institution filter'
-            compressed
-          />
-        </EuiFlexItem>
-        <EuiFlexItem grow={7}>
-          <CountrySelect
-            isLoading={rankingTable.isLoading}
-            options={countries}
-            onSelectChange={onCountriesChange}
-            selectedValues={selectedCountries}
-          />
+        <EuiFlexItem grow={1} style={{ flexBasis: '800px' }}>
+          <EuiPanel>
+            <RankingTable isLoading={rankingTable.isLoading} data={data} />
+          </EuiPanel>
         </EuiFlexItem>
       </EuiFlexGroup>
-      <RankingTable
-        // key={`${selectedSystem}-${selectedYear}`}
-        isLoading={rankingTable.isLoading}
-        data={data}
-      />
     </>
   )
 }

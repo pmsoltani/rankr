@@ -93,7 +93,7 @@ const RankingTable = props => {
   const pagination = {
     pageIndex: offset,
     pageSize: limit,
-    totalItemCount: data.length,
+    totalItemCount: data.length || 1,
     pageSizeOptions: [10, 25, 50],
     hidePerPageOptions: false
   }
@@ -115,36 +115,35 @@ const RankingTable = props => {
   React.useEffect(() => setOffset(0), [rankingSystem, year])
 
   React.useEffect(() => {
-    if (data.length) {
-      const start = limit * offset
-      const slice = data
-        .sort((a, b) => {
-          if (sortField === 'institution') {
-            return sortDirection === 'asc'
-              ? a[sortField].name.localeCompare(b[sortField].name)
-              : b[sortField].name.localeCompare(a[sortField].name)
+    const start = limit * offset
+    const slice = data
+      .sort((a, b) => {
+        if (sortField === 'institution') {
+          return sortDirection === 'asc'
+            ? a[sortField].name.localeCompare(b[sortField].name)
+            : b[sortField].name.localeCompare(a[sortField].name)
+        }
+        if (sortField === 'raw_value') {
+          let result
+          if (a.value === null) {
+            result = 1
+          } else if (b.value === null) {
+            result = -1
+          } else {
+            result = a.value - b.value
           }
-          if (sortField === 'raw_value') {
-            let result
-            if (a.value === null) {
-              result = 1
-            } else if (b.value === null) {
-              result = -1
-            } else {
-              result = a.value - b.value
-            }
-            return sortDirection === 'asc' ? result : -result
-          }
-          return sortDirection === 'asc' ? a - b : b - a
-        })
-        .slice(start, start + limit)
+          return sortDirection === 'asc' ? result : -result
+        }
+        return sortDirection === 'asc' ? a - b : b - a
+      })
+      .slice(start, start + limit)
 
-      setTableItems(slice)
-    }
+    setTableItems(slice)
   }, [offset, limit, data, sortField, sortDirection])
 
   return (
     <EuiBasicTable
+      tableCaption={`Ranking table for ${rankingSystem}-${year}`}
       columns={columns}
       compressed={false}
       items={isLoading ? [] : tableItems}
@@ -155,6 +154,7 @@ const RankingTable = props => {
       rowHeader='institution'
       noItemsMessage={isLoading ? 'Getting it...' : 'No items found'}
       sorting={sorting}
+      style={{ minHeight: 750 }}
       tableLayout='fixed'
     />
   )

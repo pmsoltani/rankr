@@ -22,7 +22,7 @@ const AboutPage = props => {
     <EuiPage>
       <EuiPageBody component='section'>
         <EuiPageContent borderRadius='none' hasShadow={false}>
-          <EuiPageContentBody>
+          <EuiPageContentBody restrictWidth={800}>
             <EuiMarkdownFormat>{content}</EuiMarkdownFormat>
           </EuiPageContentBody>
         </EuiPageContent>

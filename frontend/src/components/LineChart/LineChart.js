@@ -28,6 +28,14 @@ const LineChart = props => {
     legend: { horizontalAlign: 'right', position: 'top' },
     stroke: { width: 3 },
     title: { text: chartTitle },
+    tooltip: {
+      y: {
+        formatter: (val, { seriesIndex, dataPointIndex, w }) => {
+          const rawValue = w.config.series[seriesIndex].rawData[dataPointIndex]
+          if (rawValue) return rawValue
+        }
+      }
+    },
     xaxis: { categories: categories },
     yaxis: { reversed: true, show: false }
   }

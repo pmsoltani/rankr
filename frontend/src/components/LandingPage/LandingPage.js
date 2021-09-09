@@ -6,22 +6,16 @@ import {
   EuiPageContent,
   EuiFlexGroup,
   EuiFlexItem,
-  EuiPageContentBody
+  EuiPageContentBody,
+  EuiSpacer
 } from '@elastic/eui'
 import styled from 'styled-components'
 
-import { RankingTableCard } from '..'
+import { RankingTableCard, SiteSearch } from '..'
+import { rankrLogo } from '../../assets/images'
 
 const StyledEuiPage = styled(EuiPage)`
   flex: 1;
-`
-
-const StyledEuiPageContentBody = styled(EuiPageContentBody)`
-  max-width: 600px;
-  & > img {
-    width: 100%;
-    border-radius: 50%;
-  }
 `
 
 const LandingPage = props => {
@@ -31,12 +25,35 @@ const LandingPage = props => {
         <EuiFlexGroup>
           <EuiFlexItem grow={2}>
             <EuiPageContent
+              color='transparent'
               horizontalPosition='center'
               verticalPosition='center'
             >
-              <StyledEuiPageContentBody>
-                <RankingTableCard />
-              </StyledEuiPageContentBody>
+              <EuiPageContentBody restrictWidth='1000px'>
+                <EuiFlexGroup justifyContent='center'>
+                  <EuiFlexItem
+                    style={{ display: 'flex', justifyContent: 'center' }}
+                  >
+                    <img
+                      src={rankrLogo}
+                      alt='rankr logo'
+                      style={{ width: 600, margin: 'auto' }}
+                    />
+                  </EuiFlexItem>
+                </EuiFlexGroup>
+                <EuiSpacer />
+                <EuiFlexGroup justifyContent='center'>
+                  <EuiFlexItem>
+                    <SiteSearch />
+                  </EuiFlexItem>
+                </EuiFlexGroup>
+                <EuiSpacer />
+                <EuiFlexGroup justifyContent='center'>
+                  <EuiFlexItem>
+                    <RankingTableCard />
+                  </EuiFlexItem>
+                </EuiFlexGroup>
+              </EuiPageContentBody>
             </EuiPageContent>
           </EuiFlexItem>
         </EuiFlexGroup>

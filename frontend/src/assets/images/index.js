@@ -1,4 +1,4 @@
-export { default as logo } from './logo.svg'
+export { default as rankrLogo } from './rankrLogo.svg'
 export { default as landing } from './landing.svg'
 export { default as uniLogo } from './uniLogo.svg'
 
@@ -6,6 +6,8 @@ export { default as homeDisabled } from './homeDisabled.svg'
 export { default as homeFill } from './homeFill.svg'
 export { default as institutionOutline } from './institutionOutline.svg'
 export { default as locationOutline } from './locationOutline.svg'
+
+export { default as githubInverse } from './githubInverse.svg'
 
 export { default as gridInverse } from './gridInverse.svg'
 export { default as gridDisabled } from './gridDisabled.svg'
