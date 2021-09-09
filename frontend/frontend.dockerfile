@@ -20,6 +20,7 @@ ARG REACT_APP_SERVER_API_V1_STR
 
 COPY . .
 
+ENV GENERATE_SOURCEMAP=false
 RUN npm run build
 
 # stage 2: copy the built app and run the nginx server
