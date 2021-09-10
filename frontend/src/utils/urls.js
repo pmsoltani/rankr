@@ -13,7 +13,9 @@ import {
  * @param {Object.<string, any>} params: query params to format at end of url
  */
 export const formatURL = (endpoint, params) => {
-  const defaultBaseURL = new URL(`http://${SERVER_HOST}:${SERVER_PORT}`)
+  const defaultBaseURL = SERVER_HOST.startsWith('http')
+    ? new URL(`${SERVER_HOST}:${SERVER_PORT}`)
+    : new URL(`http://${SERVER_HOST}:${SERVER_PORT}`)
   const fullURL =
     process.env.NODE_ENV === 'prod'
       ? new URL(process.env.REMOTE_SERVER_URL)
