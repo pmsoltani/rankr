@@ -31,9 +31,6 @@ const Footer = props => {
   return (
     <div className='footer-container'>
       <EuiFlexGroup justifyContent='spaceAround'>
-        <EuiFlexItem grow={false}>{madeWithLove}</EuiFlexItem>
-      </EuiFlexGroup>
-      <EuiFlexGroup justifyContent='spaceAround'>
         <EuiFlexItem grow={false}>
           <EuiLink
             external
@@ -80,6 +77,9 @@ const Footer = props => {
           <EuiSpacer size='s' />
           <Link to={r.about.url}>About rankr</Link>
         </EuiFlexItem>
+      </EuiFlexGroup>
+      <EuiFlexGroup justifyContent='spaceAround'>
+        <EuiFlexItem grow={false}>{madeWithLove}</EuiFlexItem>
       </EuiFlexGroup>
     </div>
   )
