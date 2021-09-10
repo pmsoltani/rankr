@@ -7,8 +7,10 @@ import {
   theDisabled
 } from '../assets/images'
 
+export const APP_ENV = process.env.REACT_APP_APP_ENV || 'dev'
 export const APP_NAME = process.env.REACT_APP_APP_NAME || 'rankr'
 export const APP_URL = process.env.REACT_APP_APP_URL
+export const REMOTE_SERVER_URL = process.env.REACT_APP_REMOTE_SERVER_URL
 export const SERVER_HOST = process.env.REACT_APP_SERVER_HOST || 'localhost'
 export const SERVER_PORT = process.env.REACT_APP_SERVER_PORT || 8000
 export const SERVER_API_V1_STR =

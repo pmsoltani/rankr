@@ -1,10 +1,4 @@
-import {
-  gridBase,
-  openStreetMapBase,
-  SERVER_HOST,
-  SERVER_PORT,
-  SERVER_API_V1_STR
-} from '../config'
+import * as c from '../config'
 
 /**
  * Constructs API request URLs
@@ -13,15 +7,14 @@ import {
  * @param {Object.<string, any>} params: query params to format at end of url
  */
 export const formatURL = (endpoint, params) => {
-  const defaultBaseURL = SERVER_HOST.startsWith('http')
-    ? new URL(`${SERVER_HOST}:${SERVER_PORT}`)
-    : new URL(`http://${SERVER_HOST}:${SERVER_PORT}`)
+  const defaultBaseURL = new URL(`http://${c.SERVER_HOST}:${c.SERVER_PORT}`)
   const fullURL =
-    process.env.NODE_ENV === 'prod'
-      ? new URL(process.env.REMOTE_SERVER_URL)
-      : defaultBaseURL
+    c.APP_ENV === 'prod' ? new URL(c.REMOTE_SERVER_URL) : defaultBaseURL
 
-  const endpointPath = [...SERVER_API_V1_STR.split('/'), ...endpoint.split('/')]
+  const endpointPath = [
+    ...c.SERVER_API_V1_STR.split('/'),
+    ...endpoint.split('/')
+  ]
     .filter(i => i)
     .join('/')
   fullURL.pathname = endpointPath
@@ -46,7 +39,7 @@ export const formatURL = (endpoint, params) => {
  */
 export const openStreetMapURL = (lat, lng) => {
   if (lat && lng) {
-    const fullURL = new URL(openStreetMapBase)
+    const fullURL = new URL(c.openStreetMapBase)
     const searchParams = new URLSearchParams({ mlat: lat, mlon: lng, zoom: 18 })
     fullURL.search = searchParams
     return fullURL.href
@@ -61,7 +54,7 @@ export const openStreetMapURL = (lat, lng) => {
  */
 export const gridURL = gridID => {
   if (gridID) {
-    const fullURL = new URL(gridBase)
+    const fullURL = new URL(c.gridBase)
     fullURL.pathname = ['institutes', gridID].join('/')
     return fullURL.href
   }
