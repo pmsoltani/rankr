@@ -8,7 +8,7 @@ router = APIRouter()
 
 
 @router.get(
-    "/", name="search:site search", response_model=s.SearchResults,
+    "", name="search:site search", response_model=s.SearchResults,
 )
 def site_search(
     q: str = None,
