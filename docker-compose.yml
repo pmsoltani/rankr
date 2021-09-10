@@ -2,8 +2,8 @@ version: "3.7"
 
 services:
   postgres:
-    image: "postgres:12-alpine"
-    env_file: ".env"
+    image: postgres:12-alpine
+    env_file: .env
     environment:
       PGDATA: /var/lib/postgresql/data/rankr/
       POSTGRES_DB: ${POSTGRESQL_NAME}
@@ -12,13 +12,13 @@ services:
     networks:
       - traefik-public
     ports:
-      - "${POSTGRESQL_PORT}:${POSTGRESQL_PORT}"
+      - ${POSTGRESQL_PORT}:${POSTGRESQL_PORT}
     volumes:
-      - "postgres:/var/lib/postgresql/data/"
+      - postgres:/var/lib/postgresql/data/
 
   adminer:
-    image: "michalhosna/adminer:latest"
-    env_file: ".env"
+    image: michalhosna/adminer:latest
+    env_file: .env
     command: php -S ${ADMINER_HOST}:${ADMINER_PORT} -t /var/adminer
     depends_on:
       - postgres
@@ -28,7 +28,7 @@ services:
     networks:
       - traefik-public
     ports:
-      - "${ADMINER_PORT}:${ADMINER_PORT}"
+      - ${ADMINER_PORT}:${ADMINER_PORT}
     restart: always
 
   backend:
@@ -43,7 +43,7 @@ services:
       else rankr start ; fi"
     depends_on:
       - postgres
-    env_file: ".env"
+    env_file: .env
     labels:
       - traefik.enable=true
       - traefik.http.routers.${STACK_NAME}-backend-http.entrypoints=http
@@ -53,31 +53,31 @@ services:
       - traefik-public
     restart: on-failure
     volumes:
-      - "./backend/data:${INSTALL_PATH}/data"
+      - ./backend/data:${INSTALL_PATH}/data
 
-  frontend:
-    build:
-      args:
-        INSTALL_PATH: ${INSTALL_PATH}
-        REACT_APP_APP_ENV: ${REACT_APP_APP_ENV}
-        REACT_APP_APP_NAME: ${REACT_APP_APP_NAME}
-        REACT_APP_APP_URL: ${REACT_APP_APP_URL}
-        REACT_APP_REMOTE_SERVER_URL: ${REACT_APP_REMOTE_SERVER_URL}
-        REACT_APP_SERVER_API_V1_STR: ${REACT_APP_SERVER_API_V1_STR}
-        REACT_APP_SERVER_HOST: ${REACT_APP_SERVER_HOST}
-        REACT_APP_SERVER_PORT: ${REACT_APP_SERVER_PORT}
-      context: ./frontend
-      dockerfile: frontend.dockerfile
-    depends_on:
-      - backend
-    env_file: ".env"
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.${STACK_NAME}-frontend-http.entrypoints=http
-      - traefik.http.routers.${STACK_NAME}-frontend-http.rule=PathPrefix(`/`)
-      - traefik.http.services.${STACK_NAME}-frontend.loadbalancer.server.port=${FRONTEND_PORT}
-    networks:
-      - traefik-public
+  # frontend:
+  #   build:
+  #     args:
+  #       INSTALL_PATH: ${INSTALL_PATH}
+  #       REACT_APP_APP_ENV: ${REACT_APP_APP_ENV}
+  #       REACT_APP_APP_NAME: ${REACT_APP_APP_NAME}
+  #       REACT_APP_APP_URL: ${REACT_APP_APP_URL}
+  #       REACT_APP_REMOTE_SERVER_URL: ${REACT_APP_REMOTE_SERVER_URL}
+  #       REACT_APP_SERVER_API_V1_STR: ${REACT_APP_SERVER_API_V1_STR}
+  #       REACT_APP_SERVER_HOST: ${REACT_APP_SERVER_HOST}
+  #       REACT_APP_SERVER_PORT: ${REACT_APP_SERVER_PORT}
+  #     context: ./frontend
+  #     dockerfile: frontend.dockerfile
+  #   depends_on:
+  #     - backend
+  #   env_file: .env
+  #   labels:
+  #     - traefik.enable=true
+  #     - traefik.http.routers.${STACK_NAME}-frontend-http.entrypoints=http
+  #     - traefik.http.routers.${STACK_NAME}-frontend-http.rule=PathPrefix(`/`)
+  #     - traefik.http.services.${STACK_NAME}-frontend.loadbalancer.server.port=${FRONTEND_PORT}
+  #   networks:
+  #     - traefik-public
 
   traefik:
     image: traefik:v2.5.2
@@ -86,7 +86,7 @@ services:
       - --providers.docker
       # Do not expose all Docker services, only the ones explicitly exposed
       - --providers.docker.exposedbydefault=false
-      # Create an entrypoint "http" listening on port "80"
+      # Create an entrypoint 'http' listening on port '80'
       - --entrypoints.http.address=:80
       # Enable the access log, with HTTP requests
       - --accesslog

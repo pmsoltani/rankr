@@ -1,0 +1,177 @@
+version: "3.7"
+
+services:
+  postgres:
+    image: postgres:12-alpine
+    env_file: .env
+    environment:
+      PGDATA: /var/lib/postgresql/data/rankr/
+      POSTGRES_DB: ${POSTGRESQL_NAME}
+      POSTGRES_USER: ${POSTGRESQL_USER}
+      POSTGRES_PASSWORD: ${POSTGRESQL_PASS}
+    networks:
+      - ${TRAEFIK_PUBLIC_NETWORK}
+    ports:
+      - ${POSTGRESQL_PORT}:${POSTGRESQL_PORT}
+    volumes:
+      - postgres:/var/lib/postgresql/data/
+
+  adminer:
+    image: michalhosna/adminer:latest
+    env_file: .env
+    command: php -S ${ADMINER_HOST}:${ADMINER_PORT} -t /var/adminer
+    depends_on:
+      - postgres
+    init: true
+    labels:
+      - traefik.enable=true
+
+      - traefik.http.middlewares.${STACK_NAME}-adminer-https-redirect.redirectscheme.permanent=true
+      - traefik.http.middlewares.${STACK_NAME}-adminer-https-redirect.redirectscheme.scheme=https
+
+      - traefik.http.routers.${STACK_NAME}-adminer-http.entrypoints=http
+      - traefik.http.routers.${STACK_NAME}-adminer-http.middlewares=${STACK_NAME}-adminer-https-redirect
+      - traefik.http.routers.${STACK_NAME}-adminer-http.rule=HOST(`adminer.${DOMAIN}`)
+
+      - traefik.http.routers.${STACK_NAME}-adminer-https.entrypoints=https
+      - traefik.http.routers.${STACK_NAME}-adminer-https.rule=HOST(`adminer.${DOMAIN}`)
+      - traefik.http.routers.${STACK_NAME}-adminer-https.tls=true
+      - traefik.http.routers.${STACK_NAME}-adminer-https.tls.certresolver=le
+
+      - traefik.http.services.${STACK_NAME}-adminer.loadbalancer.server.port=${ADMINER_PORT}
+    networks:
+      - ${TRAEFIK_PUBLIC_NETWORK}
+    ports:
+      - ${ADMINER_PORT}:${ADMINER_PORT}
+    restart: always
+
+  backend:
+    build:
+      args:
+        INSTALL_PATH: ${INSTALL_PATH}
+        POETRY_VERSION: ${POETRY_VERSION}
+      context: ./backend
+      dockerfile: backend.dockerfile
+    command: sh -c "
+      if [ ${APP_ENV} == 'dev' ] ; then rankr start --reload ;
+      else rankr start ; fi"
+    depends_on:
+      - postgres
+    env_file: .env
+    labels:
+      - traefik.enable=true
+
+      - traefik.http.middlewares.${STACK_NAME}-backend-https-redirect.redirectscheme.permanent=true
+      - traefik.http.middlewares.${STACK_NAME}-backend-https-redirect.redirectscheme.scheme=https
+
+      - traefik.http.routers.${STACK_NAME}-backend-http.entrypoints=http
+      - traefik.http.routers.${STACK_NAME}-backend-http.middlewares=${STACK_NAME}-backend-https-redirect
+      - traefik.http.routers.${STACK_NAME}-backend-http.rule=PathPrefix(`${API_V1_STR}`)
+
+      - traefik.http.routers.${STACK_NAME}-backend-https.entrypoints=https
+      - traefik.http.routers.${STACK_NAME}-backend-https.rule=PathPrefix(`${API_V1_STR}`)
+      - traefik.http.routers.${STACK_NAME}-backend-https.tls=true
+      - traefik.http.routers.${STACK_NAME}-backend-https.tls.certresolver=le
+
+      - traefik.http.services.${STACK_NAME}-backend.loadbalancer.server.port=${APP_PORT}
+    networks:
+      - ${TRAEFIK_PUBLIC_NETWORK}
+    restart: on-failure
+    volumes:
+      - ./backend/data:${INSTALL_PATH}/data
+
+  frontend:
+    build:
+      args:
+        INSTALL_PATH: ${INSTALL_PATH}
+        REACT_APP_APP_ENV: ${REACT_APP_APP_ENV}
+        REACT_APP_APP_NAME: ${REACT_APP_APP_NAME}
+        REACT_APP_APP_URL: ${REACT_APP_APP_URL}
+        REACT_APP_REMOTE_SERVER_URL: ${REACT_APP_REMOTE_SERVER_URL}
+        REACT_APP_SERVER_API_V1_STR: ${REACT_APP_SERVER_API_V1_STR}
+        REACT_APP_SERVER_HOST: ${REACT_APP_SERVER_HOST}
+        REACT_APP_SERVER_PORT: ${REACT_APP_SERVER_PORT}
+      context: ./frontend
+      dockerfile: frontend.dockerfile
+    depends_on:
+      - backend
+    env_file: .env
+    labels:
+      - traefik.enable=true
+
+      - traefik.http.middlewares.${STACK_NAME}-frontend-https-redirect.redirectscheme.permanent=true
+      - traefik.http.middlewares.${STACK_NAME}-frontend-https-redirect.redirectscheme.scheme=https
+
+      - traefik.http.routers.${STACK_NAME}-frontend-http.entrypoints=http
+      - traefik.http.routers.${STACK_NAME}-frontend-http.middlewares=${STACK_NAME}-frontend-https-redirect
+      - traefik.http.routers.${STACK_NAME}-frontend-http.rule=PathPrefix(`/`)
+
+      - traefik.http.routers.${STACK_NAME}-frontend-https.entrypoints=https
+      - traefik.http.routers.${STACK_NAME}-frontend-https.rule=PathPrefix(`/`)
+      - traefik.http.routers.${STACK_NAME}-frontend-https.tls=true
+      - traefik.http.routers.${STACK_NAME}-frontend-https.tls.certresolver=le
+
+      - traefik.http.services.${STACK_NAME}-frontend.loadbalancer.server.port=${FRONTEND_PORT}
+    networks:
+      - ${TRAEFIK_PUBLIC_NETWORK}
+
+  traefik:
+    image: traefik:v2.5.2
+    command:
+      # Enable Docker in Traefik, so that it reads labels from Docker services
+      - --providers.docker
+      # Do not expose all Docker services, only the ones explicitly exposed
+      - --providers.docker.exposedbydefault=false
+      # Create an entrypoint 'http' listening on port '80'
+      - --entrypoints.http.address=:80
+      # Create an entrypoint 'https' listening on port '443'
+      - --entrypoints.https.address=:443
+      # Create the certificate resolver 'le' for Let's Encrypt
+      - --certificatesresolvers.le.acme.email=${LETS_ENCRYPT_EMAIL}
+      # Store the certificate in the mounted volume
+      - --certificatesresolvers.le.acme.storage=/certificates/acme.json
+      # Use the TLS challenge
+      - --certificatesresolvers.le.acme.tlschallenge=true
+      # Enable the access log, with HTTP requests
+      - --accesslog
+      # Enable the Traefik log, for configurations and errors
+      - --log
+      # - --log.level=DEBUG
+      # Enable the Dashboard and API
+      - --api
+    env_file: .env
+    labels:
+      - traefik.enable=true
+
+      - traefik.http.middlewares.${STACK_NAME}-traefik-https-redirect.redirectscheme.permanent=true
+      - traefik.http.middlewares.${STACK_NAME}-traefik-https-redirect.redirectscheme.scheme=https
+
+      - traefik.http.routers.${STACK_NAME}-traefik-http.entrypoints=http
+      - traefik.http.routers.${STACK_NAME}-traefik-http.middlewares=${STACK_NAME}-traefik-https-redirect
+      - traefik.http.routers.${STACK_NAME}-traefik-http.rule=Host(`traefik.${DOMAIN}`)
+
+      - traefik.http.routers.${STACK_NAME}-traefik-https.entrypoints=https
+      - traefik.http.routers.${STACK_NAME}-traefik-https.rule=Host(`traefik.${DOMAIN}`)
+      - traefik.http.routers.${STACK_NAME}-traefik-https.service=api@internal
+      - traefik.http.routers.${STACK_NAME}-traefik-https.tls=true
+      - traefik.http.routers.${STACK_NAME}-traefik-https.tls.certresolver=le
+
+      - traefik.http.services.${STACK_NAME}-traefik.loadbalancer.server.port=${TRAEFIK_PORT}
+    networks:
+      - ${TRAEFIK_PUBLIC_NETWORK}
+    ports:
+      - 80:80
+      - 443:443
+      - ${TRAEFIK_PORT}:${TRAEFIK_PORT}
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - traefik-public-certificates:/certificates
+
+networks:
+  traefik-network:
+    external: true
+
+volumes:
+  postgres:
+  traefik-public-certificates:
