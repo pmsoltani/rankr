@@ -44,6 +44,7 @@ fuzzywuzzy = {extras = ["speedup"], version = "^0.18.0"}
 typer = {extras = ["all"], version = "^0.3.2"}
 pydantic = {extras = ["dotenv"], version = "^1.6.1"}
 aiofiles = "^0.7.0"
+selenium = "^3.141.0"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.8.3"
