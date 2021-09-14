@@ -12,7 +12,7 @@ import {
 import styled from 'styled-components'
 
 import { RankingTableCard, SiteSearch } from '..'
-import { rankrLogo } from '../../assets/images'
+import { appLogo } from '../../assets/images'
 
 const StyledEuiPage = styled(EuiPage)`
   flex: 1;
@@ -36,7 +36,7 @@ const LandingPage = props => {
                     style={{ display: 'flex', justifyContent: 'center' }}
                   >
                     <img
-                      src={rankrLogo}
+                      src={appLogo}
                       alt='rankr logo'
                       style={{ width: 600, margin: 'auto' }}
                     />
