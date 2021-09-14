@@ -6,13 +6,13 @@ import * as c from '../config'
  * @param {string} url: url string representing relative path to api endpoint
  * @param {Object.<string, any>} params: query params to format at end of url
  */
-export const formatURL = (endpoint, params) => {
+export const formatURL = (endpoint, params = [], serverSide = true) => {
   const defaultBaseURL = new URL(`http://${c.SERVER_HOST}:${c.SERVER_PORT}`)
   const fullURL =
     c.APP_ENV === 'prod' ? new URL(c.REMOTE_SERVER_URL) : defaultBaseURL
 
   const endpointPath = [
-    ...c.SERVER_API_V1_STR.split('/'),
+    ...(serverSide ? c.SERVER_API_V1_STR.split('/') : []),
     ...endpoint.split('/')
   ]
     .filter(i => i)

@@ -4,6 +4,7 @@ import { useLocation } from 'react-router'
 import styled, { ThemeProvider } from 'styled-components'
 
 import { AutoScrollToTop, Footer, Navbar, ScrollToTop } from '..'
+import { appLogo } from '../../assets/images'
 import * as config from '../../config'
 import '../../assets/css/index.scss'
 import 'flag-icon-css/css/flag-icon.min.css'
@@ -42,6 +43,11 @@ const Layout = props => {
       <Helmet>
         <meta charSet='utf-8' />
         <title>{config.APP_NAME}</title>
+        <meta name='description' content={config.APP_DESCRIPTION} />
+        <html lang='en-US' />
+        <meta property='og:title' content={config.APP_NAME} />
+        <meta property='og:image' content={appLogo} />
+        <base target='_blank' href={config.APP_URL} />
         <link rel='canonical' href={config.APP_URL} />
       </Helmet>
       <ThemeProvider theme={customTheme}>

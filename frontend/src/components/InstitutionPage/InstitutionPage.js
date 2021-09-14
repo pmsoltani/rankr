@@ -2,7 +2,6 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
-
 import {
   EuiPage,
   EuiPageContent,
@@ -30,7 +29,13 @@ import {
   rankingActions,
   wikiActions
 } from '../../redux/reducers'
-import { institutionStats, rankChartProps, scoreChartProps } from '../../utils'
+import { r } from '../../routes'
+import {
+  formatURL,
+  institutionStats,
+  rankChartProps,
+  scoreChartProps
+} from '../../utils'
 
 const InstitutionPage = props => {
   /** @type {{
@@ -195,9 +200,22 @@ const InstitutionPage = props => {
   return (
     <>
       <Helmet>
-        <meta charSet='utf-8' />
-        <title>{`${config.APP_NAME}: ${inst.name}`}</title>
-        <link rel='canonical' href={config.APP_URL} />
+        <title>{`${inst.name} - ${config.APP_NAME}`}</title>
+        <meta
+          name='description'
+          content={
+            `${inst.name}'s profile, containing its performance in ` +
+            'different ranking systems'
+          }
+        />
+        <meta
+          property='og:title'
+          content={`${inst.name} - ${config.APP_NAME}`}
+        />
+        <link
+          rel='canonical'
+          href={formatURL(`${r.institutions.url}/${inst.grid_id}`, [], false)}
+        />
       </Helmet>
       <EuiPage>
         <EuiPageBody component='section'>
