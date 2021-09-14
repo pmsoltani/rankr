@@ -15,6 +15,10 @@ export const SERVER_HOST = process.env.REACT_APP_SERVER_HOST || 'localhost'
 export const SERVER_PORT = process.env.REACT_APP_SERVER_PORT || 8000
 export const SERVER_API_V1_STR =
   process.env.REACT_APP_SERVER_API_V1_STR || '/api/v1'
+export const APP_DESCRIPTION =
+  `${APP_NAME} is a free and open-source platform ` +
+  'for aggregating the results of different academic rankings, which could ' +
+  'help students to get a more clear picture about their next place of study.'
 
 export const gridBase = 'https://www.grid.ac/'
 export const openStreetMapBase = 'https://www.openstreetmap.org/'

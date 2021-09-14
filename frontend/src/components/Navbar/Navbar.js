@@ -3,12 +3,12 @@ import { EuiHeader, EuiHeaderSection, EuiHeaderSectionItem } from '@elastic/eui'
 
 import { Search, StyledLink } from '..'
 import { r } from '../../routes'
-import { rankrLogo } from '../../assets/images'
+import { appLogo } from '../../assets/images'
 
 const renderLogo = () => (
   <StyledLink to={r.home.url}>
     <img
-      src={rankrLogo}
+      src={appLogo}
       alt='rankr logo'
       style={{ height: 36, margin: '4px 12px 0px' }}
     />
