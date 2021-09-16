@@ -6,15 +6,14 @@ import {
   EuiFieldSearch,
   EuiIcon,
   EuiPopover,
-  EuiPopoverFooter,
   EuiPopoverTitle,
   EuiSelectable,
   EuiText
 } from '@elastic/eui'
 
 import '../../types'
-import { StyledLink } from '..'
 import { institutionOutline } from '../../assets/images'
+import { useWindowDimensions } from '../../hooks'
 import { searchActions } from '../../redux/reducers'
 import { r } from '../../routes'
 
@@ -32,6 +31,8 @@ const Search = props => {
   const [searchResults, setSearchResults] = React.useState([])
 
   const navigate = useNavigate()
+  const { width } = useWindowDimensions()
+
   const closePopover = () => setPopoverOpen(false)
   const resetSearch = () => {
     closePopover()
@@ -111,7 +112,7 @@ const Search = props => {
         />
       </EuiPopoverTitle>
 
-      <div style={{ width: 500, height: 300 }}>
+      <div style={{ width: width > 500 ? 500 : '100%', height: 300 }}>
         <EuiSelectable
           aria-label='Search results'
           emptyMessage={emptyMessage()}
@@ -124,18 +125,6 @@ const Search = props => {
           {list => list}
         </EuiSelectable>
       </div>
-      {searchValue && (
-        <EuiPopoverFooter>
-          <EuiText size='xs'>
-            <StyledLink
-              onClick={resetSearch}
-              to={`${r.search.url}/q=${searchValue}`}
-            >
-              View more results
-            </StyledLink>
-          </EuiText>
-        </EuiPopoverFooter>
-      )}
     </EuiPopover>
   )
 }

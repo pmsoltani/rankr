@@ -139,55 +139,54 @@ const RankingTableCard = props => {
   }
 
   return (
-    <>
-      <EuiFlexGroup direction='rowReverse'>
+    <EuiFlexGroup direction='rowReverse'>
+      <EuiFlexItem grow={1}>
+        <EuiFlexItem grow={false} style={{ marginBottom: '12px' }}>
+          <SuperSelect
+            key='ranking system select'
+            isLoading={rankingSystems.isLoading}
+            options={systems}
+            onSelectChange={value => setSelectedSystem(value)}
+            selectedValue={selectedSystem}
+          />
+        </EuiFlexItem>
+
+        <EuiFlexItem grow={false} style={{ marginBottom: '12px' }}>
+          <SuperSelect
+            key='ranking year select'
+            isLoading={rankingSystems.isLoading}
+            options={years}
+            onSelectChange={value => setSelectedYear(value)}
+            selectedValue={selectedYear}
+          />
+        </EuiFlexItem>
+
+        <EuiFlexItem grow={false} style={{ marginBottom: '12px' }}>
+          <EuiFieldSearch
+            fullWidth
+            incremental
+            value={searchValue}
+            onChange={onSearchChange}
+            placeholder='Institution filter'
+            compressed
+          />
+        </EuiFlexItem>
+
         <EuiFlexItem grow={false}>
-          <EuiFlexGroup gutterSize='m' direction='column'>
-            <EuiFlexItem grow={false} style={{ minWidth: 200, maxWidth: 200 }}>
-              <SuperSelect
-                key='ranking system select'
-                isLoading={rankingSystems.isLoading}
-                options={systems}
-                onSelectChange={value => setSelectedSystem(value)}
-                selectedValue={selectedSystem}
-              />
-            </EuiFlexItem>
-            <EuiFlexItem grow={false} style={{ minWidth: 200, maxWidth: 200 }}>
-              <SuperSelect
-                key='ranking year select'
-                isLoading={rankingSystems.isLoading}
-                options={years}
-                onSelectChange={value => setSelectedYear(value)}
-                selectedValue={selectedYear}
-              />
-            </EuiFlexItem>
-            <EuiFlexItem grow={false} style={{ minWidth: 200, maxWidth: 200 }}>
-              <EuiFieldSearch
-                fullWidth
-                incremental
-                value={searchValue}
-                onChange={onSearchChange}
-                placeholder='Institution filter'
-                compressed
-              />
-            </EuiFlexItem>
-            <EuiFlexItem grow={false} style={{ minWidth: 200, maxWidth: 200 }}>
-              <CountrySelect
-                isLoading={rankingTable.isLoading}
-                options={countries}
-                onSelectChange={onCountriesChange}
-                selectedValues={selectedCountries}
-              />
-            </EuiFlexItem>
-          </EuiFlexGroup>
+          <CountrySelect
+            isLoading={rankingTable.isLoading}
+            options={countries}
+            onSelectChange={onCountriesChange}
+            selectedValues={selectedCountries}
+          />
         </EuiFlexItem>
-        <EuiFlexItem grow={1} style={{ flexBasis: '800px' }}>
-          <EuiPanel>
-            <RankingTable isLoading={rankingTable.isLoading} data={data} />
-          </EuiPanel>
-        </EuiFlexItem>
-      </EuiFlexGroup>
-    </>
+      </EuiFlexItem>
+      <EuiFlexItem grow={4}>
+        <EuiPanel>
+          <RankingTable isLoading={rankingTable.isLoading} data={data} />
+        </EuiPanel>
+      </EuiFlexItem>
+    </EuiFlexGroup>
   )
 }
 

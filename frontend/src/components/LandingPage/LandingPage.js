@@ -23,44 +23,37 @@ const LandingPage = props => {
   return (
     <StyledEuiPage>
       <EuiPageBody component='section'>
-        <EuiFlexGroup>
-          <EuiFlexItem grow={2}>
-            <EuiPageContent
-              color='transparent'
-              horizontalPosition='center'
-              verticalPosition='center'
-            >
-              <EuiPageContentBody restrictWidth='1000px'>
-                <EuiFlexGroup justifyContent='center'>
-                  <EuiFlexItem
-                    style={{ display: 'flex', justifyContent: 'center' }}
-                  >
-                    <img
-                      src={appLogo}
-                      alt='rankr logo'
-                      style={{ width: 600, margin: 'auto' }}
-                    />
-                  </EuiFlexItem>
-                </EuiFlexGroup>
-                <EuiSpacer />
-                <EuiFlexGroup justifyContent='center'>
-                  <EuiFlexItem>
-                    <SiteSearch />
-                  </EuiFlexItem>
-                </EuiFlexGroup>
-                <EuiSpacer />
-                <EuiFlexGroup justifyContent='center'>
-                  <EuiFlexItem>
-                    <RankingTableCard
-                      rankingSystem={rankingSystem}
-                      year={year}
-                    />
-                  </EuiFlexItem>
-                </EuiFlexGroup>
-              </EuiPageContentBody>
-            </EuiPageContent>
-          </EuiFlexItem>
-        </EuiFlexGroup>
+        <EuiPageContent
+          color='transparent'
+          horizontalPosition='center'
+          verticalPosition='center'
+        >
+          <EuiPageContentBody restrictWidth='1200px'>
+            <EuiFlexGroup justifyContent='center'>
+              <EuiFlexItem
+                style={{ display: 'flex', justifyContent: 'center' }}
+              >
+                <img
+                  src={appLogo}
+                  alt='rankr logo'
+                  style={{ width: '30%', margin: 'auto' }}
+                />
+              </EuiFlexItem>
+            </EuiFlexGroup>
+            <EuiSpacer />
+            <EuiFlexGroup justifyContent='center'>
+              <EuiFlexItem>
+                <SiteSearch />
+              </EuiFlexItem>
+            </EuiFlexGroup>
+            <EuiSpacer />
+            <EuiFlexGroup justifyContent='center'>
+              <EuiFlexItem>
+                <RankingTableCard rankingSystem={rankingSystem} year={year} />
+              </EuiFlexItem>
+            </EuiFlexGroup>
+          </EuiPageContentBody>
+        </EuiPageContent>
       </EuiPageBody>
     </StyledEuiPage>
   )
