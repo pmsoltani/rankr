@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 
 import {
+  compareReducer,
   institutionsReducer,
   rankingsReducer,
   rankingSystemsReducer,
@@ -10,6 +11,7 @@ import {
 } from '.'
 
 const rootReducer = combineReducers({
+  compare: compareReducer,
   institutions: institutionsReducer,
   rankings: rankingsReducer,
   rankingSystems: rankingSystemsReducer,
