@@ -33,16 +33,16 @@ const addMissingKeys = (obj, missingValue = null) => {
  *   categories: Array.<string|number>, series: Array, colors: Array.<string>
  * }}
  */
-export const rankChartProps = (
+export const rankChartProps = ({
   rawData,
-  key = 'year',
+  categoryKey = 'year',
   seriesKey = 'ranking_system',
   valueKey = 'value',
   rawValueKey = 'raw_value'
-) => {
-  let data = Object.fromEntries(rawData.map(i => [i[key], {}]))
+}) => {
+  let data = Object.fromEntries(rawData.map(i => [i[categoryKey], {}]))
   rawData.forEach(i => {
-    data[i[key]][i[seriesKey]] = {
+    data[i[categoryKey]][i[seriesKey]] = {
       value: i[valueKey],
       rawValue: i[rawValueKey]
     }
@@ -57,11 +57,16 @@ export const rankChartProps = (
     }
   )
   const series = seriesNames.map(seriesName => ({
-    name: rankingSystems[seriesName].alias,
+    name:
+      seriesKey === 'ranking_system'
+        ? rankingSystems[seriesName].alias
+        : seriesName,
     data: Object.values(data).map(i => i[seriesName].value),
     rawData: Object.values(data).map(i => i[seriesName].rawValue)
   }))
-  const colors = seriesNames.map(i => rankingSystems[i].color)
+  const colors = seriesNames.map(i =>
+    seriesKey === 'ranking_system' ? rankingSystems[i].color : '#f00'
+  )
   return { categories, series, colors }
 }
 
@@ -75,12 +80,12 @@ export const rankChartProps = (
  *   categories: Array.<string|number>, series: Array, colors: Array.<string>
  * }}
  */
-export const scoreChartProps = (
+export const scoreChartProps = ({
   rawData,
   filters,
-  key = 'metric',
+  categoryKey = 'metric',
   valueKey = 'value'
-) => {
+}) => {
   const filteredData = rawData
     .filter(i => Object.entries(filters).every(([k, v]) => i[k] === v))
     .sort((a, b) => {
@@ -93,7 +98,7 @@ export const scoreChartProps = (
   const data = Object.fromEntries(
     filteredData.map(i => {
       const rankingSystem = rankingSystems[i.ranking_system].alias
-      const score = scoreAliases[i.ranking_system][i[key]]
+      const score = scoreAliases[i.ranking_system][i[categoryKey]]
       return [`${rankingSystem}: ${score}`, i]
     })
   )
@@ -104,5 +109,88 @@ export const scoreChartProps = (
   const colors = categories.map(
     i => rankingSystems[i.split(':')[0].toLowerCase()].color
   )
+  return { categories, series, colors }
+}
+
+/**
+ * Reforms raw API data to be displayed by ApexCharts
+ * @param {Array.<Ranking>} rawData
+ * @param {string} key
+ * @param {string} seriesKey
+ * @param {Array.<{{ id: string, name: string }}>} seriesNames
+ * @param {string} valueKey
+ * @returns {{
+ *   categories: Array.<string|number>, series: Array, colors: Array.<string>
+ * }}
+ */
+export const compareRankChartProps = ({
+  rawData,
+  categoryKey = 'year',
+  seriesKey = 'institution_id',
+  seriesNames,
+  valueKey = 'value',
+  rawValueKey = 'raw_value'
+}) => {
+  let data = Object.fromEntries(rawData.map(i => [i[categoryKey], {}]))
+  rawData.forEach(i => {
+    data[i[categoryKey]][i[seriesKey]] = {
+      value: i[valueKey],
+      rawValue: i[rawValueKey]
+    }
+  })
+  data = addMissingKeys(data, { value: null, rawValue: null })
+
+  const categories = Object.keys(data).sort((a, b) => a - b)
+  const series = seriesNames.map(series => ({
+    name: series.name,
+    data: Object.values(data).map(i => i[series.id].value),
+    rawData: Object.values(data).map(i => i[series.id].rawValue)
+  }))
+  const colors = ['#00B87A', '#2C2C54', '#808080']
+  return { categories, series, colors }
+}
+
+/**
+ * Reforms raw API data to be displayed by ApexCharts
+ * @param {Array.<Ranking>} rawData
+ * @param {string} key
+ * @param {string} seriesKey
+ * @param {Array.<{ id: string, name: string }>} seriesNames
+ * @param {string} valueKey
+ * @returns {{
+ *   categories: Array.<string|number>, series: Array, colors: Array.<string>
+ * }}
+ */
+export const compareScoreChartProps = ({
+  rawData,
+  key = 'metric',
+  seriesKey = 'institution_id',
+  seriesNames,
+  valueKey = 'value',
+  rawValueKey = 'raw_value'
+}) => {
+  const filteredData = rawData.filter(i =>
+    i.metric.toLowerCase().endsWith('score')
+  )
+  const rankingSystem = filteredData[0].ranking_system
+  let data = Object.fromEntries(
+    filteredData.map(i => [scoreAliases[rankingSystem][i[key]], {}])
+  )
+  filteredData.forEach(i => {
+    data[scoreAliases[rankingSystem][i[key]]][i[seriesKey]] = {
+      value: i[valueKey],
+      rawValue: i[rawValueKey]
+    }
+  })
+  data = addMissingKeys(data, { value: null, rawValue: null })
+
+  const categories = Object.keys(data).sort((a, b) => a - b)
+  const series = seriesNames.map(series => ({
+    name: series.name,
+    data: Object.values(data).map(i => i[series.id].value),
+    rawData: Object.values(data).map(i => i[series.id].rawValue),
+    rankingSystem: rankingSystem
+  }))
+  const colors = ['#00B87A', '#2C2C54', '#808080']
   return { categories, series, colors }
 }
