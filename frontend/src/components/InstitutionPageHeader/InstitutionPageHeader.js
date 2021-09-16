@@ -5,7 +5,8 @@ import {
   EuiIcon,
   EuiLink,
   EuiText,
-  EuiToolTip
+  EuiToolTip,
+  EuiPageHeader
 } from '@elastic/eui'
 
 import { InstitutionLogo } from '..'
@@ -84,59 +85,60 @@ const PageHeader = props => {
   }
 
   return (
-    <header
-      style={{ marginBottom: '24px', width: '1000px', margin: '0 auto 24px' }}
-    >
-      <EuiFlexGroup justifyContent='spaceBetween' wrap>
-        <EuiFlexItem>
-          <EuiFlexGroup>
-            <EuiFlexItem grow={false} style={{ maxWidth: '112px' }}>
-              <EuiPanel paddingSize='s' grow={false}>
-                <InstitutionLogo
-                  alt={`${inst.name} logo`}
-                  institution={inst}
-                  size='96px'
-                />
-              </EuiPanel>
-            </EuiFlexItem>
-            <EuiFlexItem grow={false}>
-              <EuiFlexGroup>
-                <EuiFlexItem grow={false}>
-                  <EuiText>
-                    <h1>{inst.name}</h1>
-                  </EuiText>
-                  <EuiText size='xs'>since {inst.established}</EuiText>
-                </EuiFlexItem>
-              </EuiFlexGroup>
-              <EuiFlexGroup>
-                <EuiFlexItem grow={false} style={{}}>
-                  <EuiFlexGroup>
-                    {renderLinks(inst.links).map((item, index) => (
-                      <EuiFlexItem key={index} grow={false}>
-                        {item}
-                      </EuiFlexItem>
-                    ))}
-                  </EuiFlexGroup>
-                </EuiFlexItem>
-              </EuiFlexGroup>
-            </EuiFlexItem>
-          </EuiFlexGroup>
-        </EuiFlexItem>
-        <EuiFlexItem grow={1} style={{ maxWidth: '250px' }}>
-          <EuiFlexGroup wrap>
-            {rightSideItems.map((item, index) => (
-              <EuiFlexItem grow={false} key={index}>
-                {item}
+    <EuiPageHeader restrictWidth='1200px'>
+      <div>
+        <EuiFlexGroup justifyContent='spaceBetween'>
+          <EuiFlexItem>
+            <EuiFlexGroup>
+              <EuiFlexItem grow={false} style={{ maxWidth: '112px' }}>
+                <EuiPanel paddingSize='s' grow={false}>
+                  <InstitutionLogo
+                    alt={`${inst.name} logo`}
+                    institution={inst}
+                    size='96px'
+                  />
+                </EuiPanel>
               </EuiFlexItem>
-            ))}
-          </EuiFlexGroup>
-        </EuiFlexItem>
-
-        <EuiFlexItem style={{ minWidth: '600px', maxWidth: '1000px' }}>
-          <EuiText>{overview}</EuiText>
-        </EuiFlexItem>
-      </EuiFlexGroup>
-    </header>
+              <EuiFlexItem grow={false}>
+                <EuiFlexGroup>
+                  <EuiFlexItem grow={false}>
+                    <EuiText>
+                      <h1>{inst.name}</h1>
+                    </EuiText>
+                    <EuiText size='xs'>since {inst.established}</EuiText>
+                  </EuiFlexItem>
+                </EuiFlexGroup>
+                <EuiFlexGroup>
+                  <EuiFlexItem grow={false} style={{}}>
+                    <EuiFlexGroup>
+                      {renderLinks(inst.links).map((item, index) => (
+                        <EuiFlexItem key={index} grow={false}>
+                          {item}
+                        </EuiFlexItem>
+                      ))}
+                    </EuiFlexGroup>
+                  </EuiFlexItem>
+                </EuiFlexGroup>
+              </EuiFlexItem>
+            </EuiFlexGroup>
+          </EuiFlexItem>
+          <EuiFlexItem grow={1} style={{ maxWidth: '250px' }}>
+            <EuiFlexGroup wrap>
+              {rightSideItems.map((item, index) => (
+                <EuiFlexItem grow={false} key={index}>
+                  {item}
+                </EuiFlexItem>
+              ))}
+            </EuiFlexGroup>
+          </EuiFlexItem>
+        </EuiFlexGroup>
+        <EuiFlexGroup>
+          <EuiFlexItem>
+            <EuiText>{overview}</EuiText>
+          </EuiFlexItem>
+        </EuiFlexGroup>
+      </div>
+    </EuiPageHeader>
   )
 }
 

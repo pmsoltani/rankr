@@ -24,6 +24,7 @@ import {
   YearRange
 } from '..'
 import * as config from '../../config'
+import { useWindowDimensions } from '../../hooks'
 import {
   institutionActions,
   rankingActions,
@@ -79,6 +80,7 @@ const InstitutionPage = props => {
   const onYearChange = e => setScoreYear(parseInt(e.target.value))
   const onSelectedTabChanged = id => setSelectedTabID(id)
   const { institutionID } = useParams()
+  const { width } = useWindowDimensions()
 
   React.useEffect(() => {
     if (institutionID) {
@@ -227,9 +229,19 @@ const InstitutionPage = props => {
             overview={wiki.currentWikiPage}
             rightSideItems={instStats}
           />
-          <EuiTabs size='l'>{renderTabs()}</EuiTabs>
+          <EuiTabs
+            style={{
+              maxWidth: '1200px',
+              marginLeft: width >= 1200 ? (width - 1200) / 2 : 0
+            }}
+            size='l'
+          >
+            {renderTabs()}
+          </EuiTabs>
           <EuiPageContent borderRadius='none' hasShadow={false}>
-            <EuiPageContentBody>{pageContent}</EuiPageContentBody>
+            <EuiPageContentBody restrictWidth='1200px'>
+              {pageContent}
+            </EuiPageContentBody>
           </EuiPageContent>
         </EuiPageBody>
       </EuiPage>
