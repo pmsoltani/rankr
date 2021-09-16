@@ -29,7 +29,8 @@ class RankingRepo(BaseRepo):
         institution_ids: List[int],
         ranking_system: e.RankingSystemEnum,
         ranking_type: e.RankingTypeEnum,
-        metric: e.MetricEnum,
+        metrics: List[e.MetricEnum],
+        year: Optional[int] = None,
         field: str = "All",
         subject: str = "All",
         offset: int = 0,
@@ -41,8 +42,11 @@ class RankingRepo(BaseRepo):
             self.db_model.ranking_type == ranking_type,
             self.db_model.field == field,
             self.db_model.subject == subject,
-            self.db_model.metric == metric,
         ]
+        if metrics:
+            flt.append(self.db_model.metric.in_(metrics))
+        if year:
+            flt.append(self.db_model.year == year)
         order_by = [
             self.db_model.institution_id,
             self.db_model.metric,
