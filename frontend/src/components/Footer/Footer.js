@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 
 import { StyledIcon } from '..'
 import {
+  appLogoInverse,
   githubInverse,
   gridInverse,
   qsColor,
@@ -29,8 +30,15 @@ const Footer = props => {
     </EuiText>
   )
   return (
-    <div className='footer-container'>
-      <EuiFlexGroup justifyContent='spaceAround'>
+    <footer className='footer-container'>
+      <EuiFlexGroup
+        justifyContent='spaceBetween'
+        gutterSize='l'
+        style={{ maxWidth: '1200px', margin: 'auto' }}
+      >
+        <EuiFlexItem grow={false}>
+          <img src={appLogoInverse} alt='rankr logo' style={{ height: 36 }} />
+        </EuiFlexItem>
         <EuiFlexItem grow={false}>
           <EuiLink
             external
@@ -81,7 +89,7 @@ const Footer = props => {
       <EuiFlexGroup justifyContent='spaceAround'>
         <EuiFlexItem grow={false}>{madeWithLove}</EuiFlexItem>
       </EuiFlexGroup>
-    </div>
+    </footer>
   )
 }
 
