@@ -51,9 +51,9 @@ const ComparePage = props => {
   const [compareScoreChart, setCompareScoreChart] = React.useState(null)
   const noChartMessage = (
     <EuiEmptyPrompt
-      iconType='visLine'
+      iconType='glasses'
       style={{ height: '400px' }}
-      title={<p>Select an institution to compare.</p>}
+      body={<p>Select an institution to compare.</p>}
     />
   )
 
