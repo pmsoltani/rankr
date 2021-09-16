@@ -1,4 +1,16 @@
 const initialState = {
+  compare: {
+    isLoadingSearch: false,
+    institutions: [],
+    errorSearch: null,
+    selectedInstitutions: [],
+    selectedRankingSystem: '',
+    selectedRankingYear: '',
+    isLoadingRanks: false,
+    isLoadingScores: false,
+    currentRankings: { ranks: [], scores: [] },
+    errorRankings: null
+  },
   institutions: {
     isLoading: false,
     currentInstitutions: [],
