@@ -10,13 +10,13 @@ import {
   EuiSpacer,
   EuiStat,
   EuiTab,
-  EuiTabs,
-  EuiText
+  EuiTabs
 } from '@elastic/eui'
 
 import '../../types'
 import {
   BarChart,
+  ComparePage,
   InstitutionPageHeader,
   LineChart,
   LoadingPage,
@@ -125,7 +125,9 @@ const InstitutionPage = props => {
 
   React.useEffect(() => {
     if (rankings.currentRankings.ranks.length) {
-      const chartProps = rankChartProps(rankings.currentRankings.ranks)
+      const chartProps = rankChartProps({
+        rawData: rankings.currentRankings.ranks
+      })
       setRankChart(<LineChart chartTitle='Rank' {...chartProps} />)
     }
   }, [rankings.currentRankings.ranks])
@@ -134,8 +136,9 @@ const InstitutionPage = props => {
     if (rankings.currentRankings.scores.length) {
       const years = new Set(rankings.currentRankings.scores.map(i => i.year))
       if (!scoreYear) setScoreYear(Math.max(...years))
-      const chartProps = scoreChartProps(rankings.currentRankings.scores, {
-        year: scoreYear
+      const chartProps = scoreChartProps({
+        rawData: rankings.currentRankings.scores,
+        filters: { year: scoreYear }
       })
       setSlider(
         <YearRange years={years} value={scoreYear} onChange={onYearChange} />
@@ -176,9 +179,9 @@ const InstitutionPage = props => {
 
   React.useEffect(() => {
     if (selectedTabID === 'compare') {
-      setPageContent(<EuiText>Comming soon!</EuiText>)
+      setPageContent(<ComparePage inst={inst} />)
     }
-  }, [selectedTabID])
+  }, [inst, selectedTabID])
 
   const renderTabs = props => {
     return tabs.map((tab, index) => (
