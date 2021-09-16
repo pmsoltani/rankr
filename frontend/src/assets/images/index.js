@@ -1,4 +1,5 @@
 export { default as appLogo } from './appLogo.svg'
+export { default as appLogoInverse } from './appLogoInverse.svg'
 export { default as landing } from './landing.svg'
 export { default as uniLogo } from './uniLogo.svg'
 
