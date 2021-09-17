@@ -232,7 +232,7 @@ const InstitutionPage = props => {
           <EuiTabs
             style={{
               maxWidth: '1200px',
-              marginLeft: width >= 1200 ? (width - 1200) / 2 : 0
+              marginLeft: width >= 1200 ? (width - 1200 - 40) / 2 : 0
             }}
             size='l'
           >
