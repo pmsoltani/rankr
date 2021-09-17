@@ -33,3 +33,16 @@
 #site-search-field input::placeholder {
   color: #a9a9a9;
 }
+
+@media only screen and (min-width: 768px) {
+  #site-search-field {
+    height: 80px;
+    width: 100%;
+  }
+  #site-search-field input {
+    font-size: 30px;
+    height: 88px;
+    width: 100%;
+    padding-left: 60px;
+  }
+}

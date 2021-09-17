@@ -13,6 +13,7 @@ import {
 
 import '../../types'
 import { institutionOutline } from '../../assets/images'
+import { useWindowDimensions } from '../../hooks'
 import { searchActions } from '../../redux/reducers'
 import { r } from '../../routes'
 
@@ -31,6 +32,8 @@ const SiteSearch = props => {
   const inputRef = React.useRef(null)
 
   const navigate = useNavigate()
+  const { width } = useWindowDimensions()
+
   const closePopover = () => setPopoverOpen(false)
   const resetSearch = () => {
     closePopover()
@@ -80,16 +83,18 @@ const SiteSearch = props => {
   }
 
   const searchField = (
-    <EuiPanel paddingSize='none' style={{ minWidth: 1000 }}>
-      <EuiFormControlLayout
-        id='site-search-field'
-        fullWidth
-        style={{ height: 88, minWidth: 1000 }}
-      >
+    <EuiPanel paddingSize='none'>
+      <EuiFormControlLayout id='site-search-field' fullWidth>
         <EuiFieldText
           aria-label='site-wide search field'
           fullWidth
-          icon={() => <EuiIcon type='search' color='#a9a9a9' size='xl' />}
+          icon={() => (
+            <EuiIcon
+              type='search'
+              color='#a9a9a9'
+              size={width > 768 ? 'xl' : 's'}
+            />
+          )}
           inputRef={inputRef}
           isInvalid={error}
           isLoading={isLoading}
@@ -99,12 +104,6 @@ const SiteSearch = props => {
             setPopoverOpen(true)
           }}
           placeholder='Search for institutions'
-          style={{
-            fontSize: 30,
-            height: 88,
-            minWidth: 1000,
-            paddingLeft: 60
-          }}
           value={searchValue}
         />
       </EuiFormControlLayout>
