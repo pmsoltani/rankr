@@ -7,9 +7,10 @@ import {
   EuiSpacer
 } from '@elastic/eui'
 
-import '../../types'
 import { CompareSearch, LineChart, RadarChart, SuperSelect } from '..'
+import { rankingSystems as rankingSystemsAliases } from '../../config'
 import { compareActions, rankingSystemsActions } from '../../redux/reducers'
+import '../../types'
 import { compareRankChartProps, compareScoreChartProps } from '../../utils'
 
 const ComparePage = props => {
@@ -149,11 +150,15 @@ const ComparePage = props => {
   ])
 
   React.useEffect(() => {
-    const seriesCount = new Set([
+    const rankingSeriesSet = new Set([
       ...compare.currentRankings.ranks.map(i => i.institution_id)
-    ]).size
+    ])
+    const rankingSeries = [...rankingSeriesSet].sort()
+    const currentSeries = compare.selectedInstitutions
+      .map(i => parseInt(i.key))
+      .sort()
     if (
-      seriesCount === compare.selectedInstitutions.length &&
+      rankingSeries.every((value, index) => value === currentSeries[index]) &&
       compare.selectedInstitutions.length > 1 &&
       compare.currentRankings.ranks.length
     ) {
@@ -166,20 +171,29 @@ const ComparePage = props => {
           name: i.label
         }))
       })
+      const alias = rankingSystemsAliases[compare.selectedRankingSystem].alias
       setCompareRankChart(
-        <LineChart chartTitle='Rank compare' {...chartProps} />
+        <LineChart chartTitle={`Rank compare: ${alias}`} {...chartProps} />
       )
     } else {
       setCompareRankChart(null)
     }
-  }, [compare.currentRankings.ranks, compare.selectedInstitutions])
+  }, [
+    compare.currentRankings.ranks,
+    compare.selectedInstitutions,
+    compare.selectedRankingSystem
+  ])
 
   React.useEffect(() => {
-    const seriesCount = new Set([
+    const rankingSeriesSet = new Set([
       ...compare.currentRankings.scores.map(i => i.institution_id)
-    ]).size
+    ])
+    const rankingSeries = [...rankingSeriesSet].sort()
+    const currentSeries = compare.selectedInstitutions
+      .map(i => parseInt(i.key))
+      .sort()
     if (
-      seriesCount === compare.selectedInstitutions.length &&
+      rankingSeries.every((value, index) => value === currentSeries[index]) &&
       compare.selectedInstitutions.length > 1 &&
       compare.currentRankings.scores.length
     ) {
@@ -190,13 +204,22 @@ const ComparePage = props => {
           name: i.label
         }))
       })
+      const alias = rankingSystemsAliases[compare.selectedRankingSystem].alias
       setCompareScoreChart(
-        <RadarChart chartTitle='Score compare' {...chartProps} />
+        <RadarChart
+          chartTitle={`Score compare: ${alias} - ${compare.selectedRankingYear}`}
+          {...chartProps}
+        />
       )
     } else {
       setCompareScoreChart(null)
     }
-  }, [compare.selectedInstitutions, compare.currentRankings.scores])
+  }, [
+    compare.currentRankings.scores,
+    compare.selectedInstitutions,
+    compare.selectedRankingSystem,
+    compare.selectedRankingYear
+  ])
 
   return (
     <>

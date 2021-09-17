@@ -1,5 +1,9 @@
+import { saveAs } from 'file-saver'
 import React from 'react'
 import Chart from 'react-apexcharts'
+import watermark from 'watermarkjs'
+
+import { appLogoSmall, download } from '../../assets/images'
 
 const LineChart = props => {
   const { chartTitle = 'Rank chart', categories, series, colors } = props
@@ -7,19 +11,29 @@ const LineChart = props => {
     chart: {
       id: 'rank-chart',
       toolbar: {
-        export: {
-          csv: { filename: chartTitle },
-          png: { filename: chartTitle },
-          svg: { filename: chartTitle }
-        },
         tools: {
-          download: true,
+          download: false,
           pan: false,
           reset: false,
           selection: false,
           zoom: false,
           zoomin: false,
-          zoomout: false
+          zoomout: false,
+          customIcons: [
+            {
+              icon: `<img src="${download}" width="20">`,
+              index: 0,
+              title: 'Download PNG',
+              class: 'custom-icon',
+              click: (chart, options, e) => {
+                chart.dataURI().then(({ imgURI }) => {
+                  watermark([imgURI, appLogoSmall])
+                    .image(watermark.image.lowerLeft(0.5))
+                    .then(img => saveAs(img.src, 'image.png'))
+                })
+              }
+            }
+          ]
         }
       }
     },
@@ -39,6 +53,7 @@ const LineChart = props => {
     xaxis: { categories: categories },
     yaxis: { reversed: true, show: false }
   }
+
   return (
     <Chart
       options={options}
