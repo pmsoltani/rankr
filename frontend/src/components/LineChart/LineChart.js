@@ -4,6 +4,7 @@ import Chart from 'react-apexcharts'
 import watermark from 'watermarkjs'
 
 import { appLogoSmall, download } from '../../assets/images'
+import { fileNameSafe } from '../../utils'
 
 const LineChart = props => {
   const { chartTitle = 'Rank chart', categories, series, colors } = props
@@ -29,7 +30,9 @@ const LineChart = props => {
                 chart.dataURI().then(({ imgURI }) => {
                   watermark([imgURI, appLogoSmall])
                     .image(watermark.image.lowerLeft(0.5))
-                    .then(img => saveAs(img.src, 'image.png'))
+                    .then(img =>
+                      saveAs(img.src, `${fileNameSafe(chartTitle)}.png`)
+                    )
                 })
               }
             }

@@ -5,6 +5,7 @@ import watermark from 'watermarkjs'
 
 import { appLogoSmall, download } from '../../assets/images'
 import { scoreAliases } from '../../config'
+import { fileNameSafe } from '../../utils'
 
 const BarChart = props => {
   const { chartTitle = 'Score chart', categories, series, colors } = props
@@ -24,7 +25,9 @@ const BarChart = props => {
                 chart.dataURI().then(({ imgURI }) => {
                   watermark([imgURI, appLogoSmall])
                     .image(watermark.image.lowerLeft(0.5))
-                    .then(img => saveAs(img.src, 'image.png'))
+                    .then(img =>
+                      saveAs(img.src, `${fileNameSafe(chartTitle)}.png`)
+                    )
                 })
               }
             }

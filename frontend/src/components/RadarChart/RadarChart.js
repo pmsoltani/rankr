@@ -5,6 +5,7 @@ import watermark from 'watermarkjs'
 
 import { appLogoSmall, download } from '../../assets/images'
 import { scoreAliases } from '../../config'
+import { fileNameSafe } from '../../utils'
 
 const RadarChart = props => {
   const {
@@ -28,7 +29,9 @@ const RadarChart = props => {
                 chart.dataURI().then(({ imgURI }) => {
                   watermark([imgURI, appLogoSmall])
                     .image(watermark.image.lowerLeft(0.5))
-                    .then(img => saveAs(img.src, 'image.png'))
+                    .then(img =>
+                      saveAs(img.src, `${fileNameSafe(chartTitle)}.png`)
+                    )
                 })
               }
             }
@@ -65,6 +68,7 @@ const RadarChart = props => {
     xaxis: { categories: categories },
     yaxis: { min: 0, max: 100, tickAmount: 5 }
   }
+
   return (
     <Chart
       options={options}
