@@ -13,7 +13,6 @@ import {
   EuiTabs
 } from '@elastic/eui'
 
-import '../../types'
 import {
   BarChart,
   ComparePage,
@@ -31,6 +30,7 @@ import {
   wikiActions
 } from '../../redux/reducers'
 import { r } from '../../routes'
+import '../../types'
 import {
   formatURL,
   institutionStats,
@@ -126,16 +126,18 @@ const InstitutionPage = props => {
   }, [inst, getScoresByInstitutionID, clearCurrentRankings])
 
   React.useEffect(() => {
-    if (rankings.currentRankings.ranks.length) {
+    if (inst?.name && rankings.currentRankings.ranks.length) {
       const chartProps = rankChartProps({
         rawData: rankings.currentRankings.ranks
       })
-      setRankChart(<LineChart chartTitle='Rank' {...chartProps} />)
+      setRankChart(
+        <LineChart chartTitle={`Ranks: ${inst.name}`} {...chartProps} />
+      )
     }
-  }, [rankings.currentRankings.ranks])
+  }, [inst, rankings.currentRankings.ranks])
 
   React.useEffect(() => {
-    if (rankings.currentRankings.scores.length) {
+    if (inst?.name && rankings.currentRankings.scores.length) {
       const years = new Set(rankings.currentRankings.scores.map(i => i.year))
       if (!scoreYear) setScoreYear(Math.max(...years))
       const chartProps = scoreChartProps({
@@ -146,10 +148,13 @@ const InstitutionPage = props => {
         <YearRange years={years} value={scoreYear} onChange={onYearChange} />
       )
       setScoreChart(
-        <BarChart chartTitle={`Scores for ${scoreYear}`} {...chartProps} />
+        <BarChart
+          chartTitle={`Scores: ${inst.name} - ${scoreYear}`}
+          {...chartProps}
+        />
       )
     }
-  }, [scoreYear, rankings.currentRankings.scores])
+  }, [inst, rankings.currentRankings.scores, scoreYear])
 
   React.useEffect(() => {
     if (selectedTabID === 'ranks' && rankings.isLoading) {
