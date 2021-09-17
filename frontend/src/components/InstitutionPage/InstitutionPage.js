@@ -86,6 +86,7 @@ const InstitutionPage = props => {
     if (institutionID) {
       getInstitutionByID({ institutionID })
       setSelectedTabID('ranks')
+      setScoreYear(null)
     }
     return () => clearCurrentInstitutions()
   }, [institutionID, getInstitutionByID, clearCurrentInstitutions])

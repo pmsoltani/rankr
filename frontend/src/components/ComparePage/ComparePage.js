@@ -150,11 +150,15 @@ const ComparePage = props => {
   ])
 
   React.useEffect(() => {
-    const seriesCount = new Set([
+    const rankingSeriesSet = new Set([
       ...compare.currentRankings.ranks.map(i => i.institution_id)
-    ]).size
+    ])
+    const rankingSeries = [...rankingSeriesSet].sort()
+    const currentSeries = compare.selectedInstitutions
+      .map(i => parseInt(i.key))
+      .sort()
     if (
-      seriesCount === compare.selectedInstitutions.length &&
+      rankingSeries.every((value, index) => value === currentSeries[index]) &&
       compare.selectedInstitutions.length > 1 &&
       compare.currentRankings.ranks.length
     ) {
@@ -181,11 +185,15 @@ const ComparePage = props => {
   ])
 
   React.useEffect(() => {
-    const seriesCount = new Set([
+    const rankingSeriesSet = new Set([
       ...compare.currentRankings.scores.map(i => i.institution_id)
-    ]).size
+    ])
+    const rankingSeries = [...rankingSeriesSet].sort()
+    const currentSeries = compare.selectedInstitutions
+      .map(i => parseInt(i.key))
+      .sort()
     if (
-      seriesCount === compare.selectedInstitutions.length &&
+      rankingSeries.every((value, index) => value === currentSeries[index]) &&
       compare.selectedInstitutions.length > 1 &&
       compare.currentRankings.scores.length
     ) {
