@@ -1,8 +1,10 @@
 export { default as appLogo } from './appLogo.svg'
 export { default as appLogoInverse } from './appLogoInverse.svg'
+export { default as appLogoSmall } from './appLogoSmall.svg'
 export { default as landing } from './landing.svg'
 export { default as uniLogo } from './uniLogo.svg'
 
+export { default as download } from './download.svg'
 export { default as homeDisabled } from './homeDisabled.svg'
 export { default as homeFill } from './homeFill.svg'
 export { default as institutionOutline } from './institutionOutline.svg'
