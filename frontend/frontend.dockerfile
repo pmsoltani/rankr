@@ -40,6 +40,7 @@ RUN rm -rf ./*
 COPY --from=frontend-build ${INSTALL_PATH}/build .
 RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx/nginx.conf /etc/nginx/conf.d
+COPY robots.txt sitemap.txt ./
 
 # Containers run nginx with global directives and daemon off
 CMD ["nginx", "-g", "daemon off;"]
