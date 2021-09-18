@@ -83,6 +83,8 @@ class InstitutionRepo(BaseRepo):
         limit: Optional[int] = 25,
     ) -> List[s.InstitutionDB]:
         return self._get_objects(
+            join=d.Ranking,
+            distinct=True,
             search_query=search_query,
             offset=offset,
             limit=limit,

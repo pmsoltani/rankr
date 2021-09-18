@@ -85,6 +85,8 @@ class BaseRepo:
 
     def _get_db_objects(
         self,
+        join: Optional[Type[d.Base]] = None,
+        distinct: bool = False,
         search_query: str = None,
         flt: list = [],
         order_by: list = [],
@@ -92,9 +94,13 @@ class BaseRepo:
         limit: Optional[int] = 25,
     ):
         flt = [self.search(search_query), *flt]
+        query = self.db.query(self.db_model)
+        if join:
+            query = query.join(join)
+        if distinct:
+            query = query.distinct()
         return (
-            self.db.query(self.db_model)
-            .filter(*flt)
+            query.filter(*flt)
             .order_by(*order_by)
             .offset(offset)
             .limit(limit or None)
@@ -103,6 +109,8 @@ class BaseRepo:
 
     def _get_objects(
         self,
+        join: Optional[Type[d.Base]] = None,
+        distinct: bool = False,
         search_query: str = None,
         flt: list = [],
         order_by: list = [],
@@ -111,6 +119,8 @@ class BaseRepo:
         related_fields: List[str] = [],
     ):
         db_objects = self._get_db_objects(
+            join=join,
+            distinct=distinct,
             search_query=search_query,
             flt=flt,
             offset=offset,
