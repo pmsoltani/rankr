@@ -38,9 +38,11 @@ services:
         POETRY_VERSION: ${POETRY_VERSION}
       context: ./backend
       dockerfile: backend.dockerfile
-    command: sh -c "
-      if [ ${APP_ENV} == 'dev' ] ; then rankr start --reload ;
-      else rankr start ; fi"
+    command: sh -c '
+      if [ "${APP_ENV}" = "dev" ] ;
+      then rankr start --reload ;
+      else rankr start ;
+      fi'
     depends_on:
       - postgres
     env_file: .env
@@ -53,31 +55,32 @@ services:
       - traefik-public
     restart: on-failure
     volumes:
+      - ./backend:${INSTALL_PATH}
       - ./backend/data:${INSTALL_PATH}/data
 
-  # frontend:
-  #   build:
-  #     args:
-  #       INSTALL_PATH: ${INSTALL_PATH}
-  #       REACT_APP_APP_ENV: ${REACT_APP_APP_ENV}
-  #       REACT_APP_APP_NAME: ${REACT_APP_APP_NAME}
-  #       REACT_APP_APP_URL: ${REACT_APP_APP_URL}
-  #       REACT_APP_REMOTE_SERVER_URL: ${REACT_APP_REMOTE_SERVER_URL}
-  #       REACT_APP_SERVER_API_V1_STR: ${REACT_APP_SERVER_API_V1_STR}
-  #       REACT_APP_SERVER_HOST: ${REACT_APP_SERVER_HOST}
-  #       REACT_APP_SERVER_PORT: ${REACT_APP_SERVER_PORT}
-  #     context: ./frontend
-  #     dockerfile: frontend.dockerfile
-  #   depends_on:
-  #     - backend
-  #   env_file: .env
-  #   labels:
-  #     - traefik.enable=true
-  #     - traefik.http.routers.${STACK_NAME}-frontend-http.entrypoints=http
-  #     - traefik.http.routers.${STACK_NAME}-frontend-http.rule=PathPrefix(`/`)
-  #     - traefik.http.services.${STACK_NAME}-frontend.loadbalancer.server.port=${FRONTEND_PORT}
-  #   networks:
-  #     - traefik-public
+  frontend:
+    build:
+      args:
+        INSTALL_PATH: ${INSTALL_PATH}
+        REACT_APP_APP_ENV: ${REACT_APP_APP_ENV}
+        REACT_APP_APP_NAME: ${REACT_APP_APP_NAME}
+        REACT_APP_APP_URL: ${REACT_APP_APP_URL}
+        REACT_APP_REMOTE_SERVER_URL: ${REACT_APP_REMOTE_SERVER_URL}
+        REACT_APP_SERVER_API_V1_STR: ${REACT_APP_SERVER_API_V1_STR}
+        REACT_APP_SERVER_HOST: ${REACT_APP_SERVER_HOST}
+        REACT_APP_SERVER_PORT: ${REACT_APP_SERVER_PORT}
+      context: ./frontend
+      dockerfile: frontend.dockerfile
+    depends_on:
+      - backend
+    env_file: .env
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.${STACK_NAME}-frontend-http.entrypoints=http
+      - traefik.http.routers.${STACK_NAME}-frontend-http.rule=PathPrefix(`/`)
+      - traefik.http.services.${STACK_NAME}-frontend.loadbalancer.server.port=${FRONTEND_PORT}
+    networks:
+      - traefik-public
 
   traefik:
     image: traefik:v2.5.2

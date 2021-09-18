@@ -52,9 +52,7 @@ services:
         POETRY_VERSION: ${POETRY_VERSION}
       context: ./backend
       dockerfile: backend.dockerfile
-    command: sh -c "
-      if [ ${APP_ENV} == 'dev' ] ; then rankr start --reload ;
-      else rankr start ; fi"
+    command: sh -c 'rankr start'
     depends_on:
       - postgres
     env_file: .env
