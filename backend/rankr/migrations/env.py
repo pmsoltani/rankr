@@ -23,6 +23,7 @@ d.validate_database()
 
 # Interpret the config file for Python logging. This line sets up loggers
 # basically.
+assert config.config_file_name
 fileConfig(config.config_file_name)
 
 # Add your model's MetaData object here:

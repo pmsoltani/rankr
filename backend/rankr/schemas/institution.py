@@ -8,7 +8,7 @@ from rankr.schemas.core import OrmBase
 from rankr.schemas.country import CountryBase
 from rankr.schemas.label import LabelBase
 from rankr.schemas.link import LinkBase
-from rankr.schemas.ranking import RankingBase
+from rankr.schemas.ranking import RankingDB
 from rankr.schemas.type import TypeBase
 
 
@@ -36,11 +36,11 @@ class InstitutionOut(InstitutionBase):
     country: Optional[CountryBase]
     labels: List[LabelBase] = []
     links: List[LinkBase] = []
-    rankings: List[RankingBase] = []
+    rankings: List[RankingDB] = []
     types: List[TypeBase] = []
 
-    ranks: List[RankingBase] = []
-    stats: List[RankingBase] = []
+    ranks: List[RankingDB] = []
+    stats: List[RankingDB] = []
 
     class Config:
         validate_assignment = True
