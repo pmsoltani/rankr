@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Path, status
 from fastapi.responses import FileResponse
 
-from config import appc, wikic
+from config import backc, wikic
 from rankr import repos as r, schemas as s
 from rankr.api.dependencies import get_repo
 
@@ -15,7 +15,7 @@ router = APIRouter()
     response_class=FileResponse,
 )
 def get_institution_logo_by_grid_id(
-    institution_id: str = Path(..., regex=appc.GRID_ID_PATTERN),
+    institution_id: str = Path(..., regex=backc.GRID_ID_PATTERN),
 ):
     for logoFormat in wikic.ALLOWED_LOGO_FORMATS:
         file_path = wikic.DOWNLOAD_DIR / f"{institution_id}{logoFormat}"
@@ -34,7 +34,7 @@ def get_institution_logo_by_grid_id(
     response_model=s.InstitutionOut,
 )
 def get_institution_by_grid_id(
-    institution_id: str = Path(..., regex=appc.GRID_ID_PATTERN),
+    institution_id: str = Path(..., regex=backc.GRID_ID_PATTERN),
     institution_repo: r.InstitutionRepo = Depends(get_repo(r.InstitutionRepo)),
     ranking_repo: r.RankingRepo = Depends(get_repo(r.RankingRepo)),
 ):

@@ -7,21 +7,21 @@ import {
   theDisabled
 } from '../assets/images'
 
-export const APP_ENV = process.env.REACT_APP_APP_ENV || 'dev'
-export const APP_NAME = process.env.REACT_APP_APP_NAME || 'rankr'
-export const APP_URL = process.env.REACT_APP_APP_URL
-export const REMOTE_SERVER_URL = process.env.REACT_APP_REMOTE_SERVER_URL
-export const SERVER_HOST = process.env.REACT_APP_SERVER_HOST || 'localhost'
-export const SERVER_PORT = process.env.REACT_APP_SERVER_PORT || 8000
-export const SERVER_API_V1_STR =
-  process.env.REACT_APP_SERVER_API_V1_STR || '/api/v1'
-export const APP_DESCRIPTION =
-  `${APP_NAME} is a free and open-source platform ` +
+export const FRONTEND_ENV = process.env.REACT_APP_FRONTEND_ENV || 'dev'
+export const FRONTEND_NAME = process.env.REACT_APP_FRONTEND_NAME || 'rankr'
+export const FRONTEND_URL = process.env.REACT_APP_FRONTEND_URL
+export const PROD_BACKEND_URL = process.env.REACT_APP_PROD_BACKEND_URL
+export const DEV_BACKEND_HOST =
+  process.env.REACT_APP_DEV_BACKEND_HOST || 'localhost'
+export const DEV_BACKEND_PORT = process.env.REACT_APP_DEV_BACKEND_PORT || 8000
+export const API_V1_STR = process.env.REACT_APP_API_V1_STR || '/api/v1'
+export const FRONTEND_DESCRIPTION =
+  `${FRONTEND_NAME} is a free and open-source platform ` +
   'for aggregating the results of different academic rankings, which could ' +
   'help students to get a more clear picture about their next place of study.'
 
-export const gridBase = 'https://www.grid.ac/'
-export const openStreetMapBase = 'https://www.openstreetmap.org/'
+export const gridBaseURL = 'https://www.grid.ac/'
+export const openStreetMapBaseURL = 'https://www.openstreetmap.org/'
 
 export const rankingSystems = {
   qs: {

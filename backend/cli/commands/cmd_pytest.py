@@ -3,11 +3,11 @@ from pathlib import Path
 
 import typer
 
-from config import appc
+from config import backc
 
 
 def test(
-    path: Path = typer.Argument(appc.ROOT_DIR),
+    path: Path = typer.Argument(backc.ROOT_DIR),
     capture: bool = typer.Option(True, help="Disable print statements?"),
 ) -> int:
     """Runs unit tests with pytest.
@@ -25,7 +25,7 @@ def test(
     return subprocess.call(args=cmd, shell=True)
 
 
-def cov(path: Path = typer.Argument(appc.ROOT_DIR)) -> int:
+def cov(path: Path = typer.Argument(backc.ROOT_DIR)) -> int:
     """Runs a test coverage report.
 
     Args:

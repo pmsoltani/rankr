@@ -1,16 +1,23 @@
 import enum
 
-from config.app_config import APPConfig
 from config.crawler_config import CrawlerConfig
 
 
-appc = APPConfig()
 crwc = CrawlerConfig()
 
 
 # The Enums below are used to regulate & restrict the types of different things:
 # institution types: Education, Company, ...
-institution_types = appc.ENTITIES["institution_types"]
+institution_types = [
+    "Archive",
+    "Company",
+    "Education",
+    "Facility",
+    "Government",
+    "Healthcare",
+    "Nonprofit",
+    "Other",
+]
 InstTypeEnum = enum.Enum("InstTypeEnum", {t: t for t in institution_types})
 
 # institution link types: homepage, qs, ...
@@ -44,12 +51,3 @@ StatMetricEnum = enum.Enum(
 
 # metric value types: integer, decimal, ...
 ValueTypeEnum = enum.Enum("ValueTypeEnum", {t: t for t in metric_value_types})
-
-# compare entity types (for comparing an institution with different entities)
-entities = appc.ENTITIES["entity_types"]
-EntityTypeEnum = enum.Enum("EntityTypeEnum", {t: t for t in entities})
-
-# different paths for different entity_types: i, geo
-EntityTypePathEnum = enum.Enum(
-    "EntityTypePathEnum", {t: t for t in entities.values()}
-)

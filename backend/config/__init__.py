@@ -1,4 +1,4 @@
-from config.app_config import APPConfig
+from config.backend_config import BackendConfig
 from config.crawler_config import (
     CrawlerConfig,
     QSConfig,
@@ -9,7 +9,7 @@ from config.crawler_config import (
 from config.db_config import DBConfig
 
 
-appc = APPConfig()
+backc = BackendConfig()
 crwc = CrawlerConfig()
 qsc = QSConfig()
 shac = ShanghaiConfig()

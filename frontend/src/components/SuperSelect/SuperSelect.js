@@ -2,7 +2,7 @@ import { EuiIcon, EuiSuperSelect } from '@elastic/eui'
 import React from 'react'
 import { qsColor, shanghaiColor, theColor } from '../../assets/images'
 
-import { rankingSystems } from '../../config'
+import * as c from '../../config'
 
 const rankingSystemIcons = {
   qs: qsColor,
@@ -25,13 +25,13 @@ const SuperSelect = props => {
       setOptions(
         rawOptions.map(i => ({
           value: i,
-          inputDisplay: Object.keys(rankingSystems).includes(i) ? (
+          inputDisplay: Object.keys(c.rankingSystems).includes(i) ? (
             <>
               <EuiIcon
                 type={rankingSystemIcons[i]}
                 style={{ marginRight: 4 }}
               />
-              {rankingSystems[i].alias}
+              {c.rankingSystems[i].alias}
             </>
           ) : (
             i

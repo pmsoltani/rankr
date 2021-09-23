@@ -4,7 +4,7 @@ import Chart from 'react-apexcharts'
 import watermark from 'watermarkjs'
 
 import { appLogoSmall, download } from '../../assets/images'
-import { scoreAliases } from '../../config'
+import * as c from '../../config'
 import { fileNameSafe } from '../../utils'
 
 const RadarChart = props => {
@@ -51,9 +51,9 @@ const RadarChart = props => {
         formatter: (value, { dataPointIndex, w }) => {
           const rankingSystem = w.config.series[0].rankingSystem
           const fullMetric = Object.keys(
-            scoreAliases[rankingSystem.toLowerCase()]
+            c.scoreAliases[rankingSystem.toLowerCase()]
           ).find(
-            key => scoreAliases[rankingSystem.toLowerCase()][key] === value
+            key => c.scoreAliases[rankingSystem.toLowerCase()][key] === value
           )
           return fullMetric
         }

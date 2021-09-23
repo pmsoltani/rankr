@@ -3,10 +3,10 @@ from pathlib import Path
 
 import typer
 
-from config import appc
+from config import backc
 
 
-def flake8(path: Path = typer.Argument(appc.ROOT_DIR)) -> int:
+def flake8(path: Path = typer.Argument(backc.ROOT_DIR)) -> int:
     """Runs flake8 to analyze the code-base for linting issues.
 
     Args:
