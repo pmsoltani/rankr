@@ -15,7 +15,7 @@ meta = _get_project_meta()
 
 
 class ProjectMeta(BaseSettings):
-    APP_NAME: str = meta["name"]
+    BACKEND_NAME: str = meta["name"]
 
     DESCRIPTION = meta["description"]
     AUTHORS = meta["authors"]

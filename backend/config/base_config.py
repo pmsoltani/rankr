@@ -13,25 +13,24 @@ class DialectEnum(str, enum.Enum):
     postgresql = "postgresql"
 
 
-class AppEnvEnum(str, enum.Enum):
+class BackendEnvEnum(str, enum.Enum):
     dev = "dev"
     prod = "prod"
     test = "test"
 
 
 class BaseConfig(ProjectMeta):
-    APP_ENV: AppEnvEnum = AppEnvEnum.dev
+    BACKEND_ENV: BackendEnvEnum = BackendEnvEnum.dev
 
     ROOT_DIR: Path = Path.cwd()
-    APP_DIR: Path = ROOT_DIR / ProjectMeta().APP_NAME
-    MIGRATIONS_DIR: Path = APP_DIR / "migrations"
+    BACKEND_DIR: Path = ROOT_DIR / ProjectMeta().BACKEND_NAME
+    MIGRATIONS_DIR: Path = BACKEND_DIR / "migrations"
     DATA_DIR: Path = ROOT_DIR / "data"
     ESSENTIALS_DIR: Path = ROOT_DIR / "essentials"
     RESPONSES_DIR: Path = DATA_DIR / "responses"
 
     COUNTRIES_FILE: Path = ESSENTIALS_DIR / "countries.csv"
     COUNTRY_NAMES_FILE: Path = ESSENTIALS_DIR / "country_names.json"
-    ENTITIES_FILE: Path = ESSENTIALS_DIR / "entities.json"
     MATCHES_FILE: Path = ESSENTIALS_DIR / "matches.json"
     RANKINGS_FILE: Path = ESSENTIALS_DIR / "rankings.json"
 
@@ -48,7 +47,7 @@ class BaseConfig(ProjectMeta):
         env_file_encoding = "utf-8"
 
     @validator(
-        "APP_DIR",
+        "BACKEND_DIR",
         "MIGRATIONS_DIR",
         "DATA_DIR",
         "ESSENTIALS_DIR",
@@ -63,7 +62,6 @@ class BaseConfig(ProjectMeta):
     @validator(
         "COUNTRIES_FILE",
         "COUNTRY_NAMES_FILE",
-        "ENTITIES_FILE",
         "MATCHES_FILE",
         "RANKINGS_FILE",
         "QS_URLS_FILE",
