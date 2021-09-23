@@ -5,7 +5,7 @@ import styled, { ThemeProvider } from 'styled-components'
 
 import { AutoScrollToTop, Footer, Navbar, ScrollToTop } from '..'
 import { appLogo } from '../../assets/images'
-import * as config from '../../config'
+import * as c from '../../config'
 import '../../assets/css/index.scss'
 import 'flag-icon-css/css/flag-icon.min.css'
 import { r } from '../../routes'
@@ -42,13 +42,13 @@ const Layout = props => {
     <>
       <Helmet>
         <meta charSet='utf-8' />
-        <title>{config.APP_NAME}</title>
-        <meta name='description' content={config.APP_DESCRIPTION} />
+        <title>{c.FRONTEND_NAME}</title>
+        <meta name='description' content={c.FRONTEND_DESCRIPTION} />
         <html lang='en-US' />
-        <meta property='og:title' content={config.APP_NAME} />
+        <meta property='og:title' content={c.FRONTEND_NAME} />
         <meta property='og:image' content={appLogo} />
-        <base target='_blank' href={config.APP_URL} />
-        <link rel='canonical' href={config.APP_URL} />
+        <base target='_blank' href={c.FRONTEND_URL} />
+        <link rel='canonical' href={c.FRONTEND_URL} />
       </Helmet>
       <ThemeProvider theme={customTheme}>
         <AutoScrollToTop />

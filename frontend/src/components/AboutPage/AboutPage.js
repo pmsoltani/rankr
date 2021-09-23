@@ -10,7 +10,7 @@ import {
 } from '@elastic/eui'
 
 import aboutPageContents from './about.md'
-import * as config from '../../config'
+import * as c from '../../config'
 import { r } from '../../routes'
 import { formatURL } from '../../utils'
 
@@ -26,9 +26,9 @@ const AboutPage = props => {
   return (
     <>
       <Helmet>
-        <title>{`${config.APP_NAME}: About`}</title>
-        <meta name='description' content={`About ${config.APP_NAME}`} />
-        <meta property='og:title' content={`${config.APP_NAME}: About`} />
+        <title>{`${c.FRONTEND_NAME}: About`}</title>
+        <meta name='description' content={`About ${c.FRONTEND_NAME}`} />
+        <meta property='og:title' content={`${c.FRONTEND_NAME}: About`} />
         <link rel='canonical' href={formatURL(`${r.about.url}`, [], false)} />
       </Helmet>
       <EuiPage>

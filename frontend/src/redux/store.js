@@ -10,7 +10,7 @@ export default function configureReduxStore () {
   })
 
   // enable hot reloading in development
-  if (c.APP_ENV !== 'prod' && module.hot) {
+  if (c.FRONTEND_ENV !== 'prod' && module.hot) {
     module.hot.accept('./reducers/rootReducer', () =>
       store.replaceReducer(rootReducer)
     )

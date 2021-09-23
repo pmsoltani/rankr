@@ -19,7 +19,7 @@ import {
   wikipediaDisabled,
   wikipediaInverse
 } from '../../assets/images'
-import { rankingSystems } from '../../config'
+import * as c from '../../config'
 import { gridURL, openStreetMapURL } from '../../utils'
 
 const PageHeader = props => {
@@ -51,13 +51,13 @@ const PageHeader = props => {
         icon: wikipediaInverse,
         iconDisabled: wikipediaDisabled
       },
-      ...rankingSystems
+      ...c.rankingSystems
     }
     links = Object.assign({}, ...links.map(i => ({ [i.type]: i.link })))
     links.grid = gridURL(inst.grid_id)
     const linkElements = Object.keys(linkTypes).map(i => {
       let tooltipContent = linkTypes[i].alias
-      if (Object.keys(rankingSystems).includes(i)) {
+      if (Object.keys(c.rankingSystems).includes(i)) {
         tooltipContent = tooltipContent.concat(' ranking profile')
       }
       return (

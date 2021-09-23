@@ -8,7 +8,7 @@ import {
 } from '@elastic/eui'
 
 import { CompareSearch, LineChart, RadarChart, SuperSelect } from '..'
-import { rankingSystems as rankingSystemsAliases } from '../../config'
+import * as c from '../../config'
 import { compareActions, rankingSystemsActions } from '../../redux/reducers'
 import '../../types'
 import { compareRankChartProps, compareScoreChartProps } from '../../utils'
@@ -171,7 +171,7 @@ const ComparePage = props => {
           name: i.label
         }))
       })
-      const alias = rankingSystemsAliases[compare.selectedRankingSystem].alias
+      const alias = c.rankingSystems[compare.selectedRankingSystem].alias
       setCompareRankChart(
         <LineChart chartTitle={`Rank compare: ${alias}`} {...chartProps} />
       )
@@ -204,7 +204,7 @@ const ComparePage = props => {
           name: i.label
         }))
       })
-      const alias = rankingSystemsAliases[compare.selectedRankingSystem].alias
+      const alias = c.rankingSystems[compare.selectedRankingSystem].alias
       setCompareScoreChart(
         <RadarChart
           chartTitle={`Score compare: ${alias} - ${compare.selectedRankingYear}`}

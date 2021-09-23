@@ -71,7 +71,7 @@ services:
       - traefik.http.routers.${STACK_NAME}-backend-https.tls=true
       - traefik.http.routers.${STACK_NAME}-backend-https.tls.certresolver=le
 
-      - traefik.http.services.${STACK_NAME}-backend.loadbalancer.server.port=${APP_PORT}
+      - traefik.http.services.${STACK_NAME}-backend.loadbalancer.server.port=${BACKEND_PORT}
     networks:
       - ${TRAEFIK_PUBLIC_NETWORK}
     restart: on-failure
@@ -82,13 +82,13 @@ services:
     build:
       args:
         INSTALL_PATH: ${INSTALL_PATH}
-        REACT_APP_APP_ENV: ${REACT_APP_APP_ENV}
-        REACT_APP_APP_NAME: ${REACT_APP_APP_NAME}
-        REACT_APP_APP_URL: ${REACT_APP_APP_URL}
-        REACT_APP_REMOTE_SERVER_URL: ${REACT_APP_REMOTE_SERVER_URL}
-        REACT_APP_SERVER_API_V1_STR: ${REACT_APP_SERVER_API_V1_STR}
-        REACT_APP_SERVER_HOST: ${REACT_APP_SERVER_HOST}
-        REACT_APP_SERVER_PORT: ${REACT_APP_SERVER_PORT}
+        REACT_APP_API_V1_STR: ${REACT_APP_API_V1_STR}
+        REACT_APP_DEV_BACKEND_HOST: ${REACT_APP_DEV_BACKEND_HOST}
+        REACT_APP_DEV_BACKEND_PORT: ${REACT_APP_DEV_BACKEND_PORT}
+        REACT_APP_FRONTEND_ENV: ${REACT_APP_FRONTEND_ENV}
+        REACT_APP_FRONTEND_NAME: ${REACT_APP_FRONTEND_NAME}
+        REACT_APP_FRONTEND_URL: ${REACT_APP_FRONTEND_URL}
+        REACT_APP_PROD_BACKEND_URL: ${REACT_APP_PROD_BACKEND_URL}
       context: ./frontend
       dockerfile: frontend.dockerfile
     depends_on:
@@ -109,7 +109,7 @@ services:
       - traefik.http.routers.${STACK_NAME}-frontend-https.tls=true
       - traefik.http.routers.${STACK_NAME}-frontend-https.tls.certresolver=le
 
-      - traefik.http.services.${STACK_NAME}-frontend.loadbalancer.server.port=${FRONTEND_PORT}
+      - traefik.http.services.${STACK_NAME}-frontend.loadbalancer.server.port=80
     networks:
       - ${TRAEFIK_PUBLIC_NETWORK}
 

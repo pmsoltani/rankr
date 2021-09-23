@@ -7,12 +7,14 @@ import * as c from '../config'
  * @param {Object.<string, any>} params: query params to format at end of url
  */
 export const formatURL = (endpoint, params = [], serverSide = true) => {
-  const defaultBaseURL = new URL(`http://${c.SERVER_HOST}:${c.SERVER_PORT}`)
+  const defaultBaseURL = new URL(
+    `http://${c.DEV_BACKEND_HOST}:${c.DEV_BACKEND_PORT}`
+  )
   const fullURL =
-    c.APP_ENV === 'prod' ? new URL(c.REMOTE_SERVER_URL) : defaultBaseURL
+    c.FRONTEND_ENV === 'prod' ? new URL(c.PROD_BACKEND_URL) : defaultBaseURL
 
   const endpointPath = [
-    ...(serverSide ? c.SERVER_API_V1_STR.split('/') : []),
+    ...(serverSide ? c.API_V1_STR.split('/') : []),
     ...endpoint.split('/')
   ]
     .filter(i => i)
@@ -39,7 +41,7 @@ export const formatURL = (endpoint, params = [], serverSide = true) => {
  */
 export const openStreetMapURL = (lat, lng) => {
   if (lat && lng) {
-    const fullURL = new URL(c.openStreetMapBase)
+    const fullURL = new URL(c.openStreetMapBaseURL)
     const searchParams = new URLSearchParams({ mlat: lat, mlon: lng, zoom: 18 })
     fullURL.search = searchParams
     return fullURL.href
@@ -54,7 +56,7 @@ export const openStreetMapURL = (lat, lng) => {
  */
 export const gridURL = gridID => {
   if (gridID) {
-    const fullURL = new URL(c.gridBase)
+    const fullURL = new URL(c.gridBaseURL)
     fullURL.pathname = ['institutes', gridID].join('/')
     return fullURL.href
   }

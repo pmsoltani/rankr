@@ -22,7 +22,7 @@ import {
   NotFoundPage,
   YearRange
 } from '..'
-import * as config from '../../config'
+import * as c from '../../config'
 import { useWindowDimensions } from '../../hooks'
 import {
   institutionActions,
@@ -211,7 +211,7 @@ const InstitutionPage = props => {
   return (
     <>
       <Helmet>
-        <title>{`${inst.name} - ${config.APP_NAME}`}</title>
+        <title>{`${inst.name} - ${c.FRONTEND_NAME}`}</title>
         <meta
           name='description'
           content={
@@ -221,7 +221,7 @@ const InstitutionPage = props => {
         />
         <meta
           property='og:title'
-          content={`${inst.name} - ${config.APP_NAME}`}
+          content={`${inst.name} - ${c.FRONTEND_NAME}`}
         />
         <link
           rel='canonical'

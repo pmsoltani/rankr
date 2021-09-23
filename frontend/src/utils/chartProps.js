@@ -1,4 +1,4 @@
-import { rankingSystems, scoreAliases } from '../config'
+import * as c from '../config'
 import '../types'
 
 /**
@@ -52,20 +52,20 @@ export const rankChartProps = ({
   const categories = Object.keys(data).sort((a, b) => a - b)
   const seriesNames = [...new Set(rawData.map(i => i[seriesKey]))].sort(
     (a, b) => {
-      const sortingArr = Object.keys(rankingSystems)
+      const sortingArr = Object.keys(c.rankingSystems)
       return sortingArr.indexOf(a) - sortingArr.indexOf(b)
     }
   )
   const series = seriesNames.map(seriesName => ({
     name:
       seriesKey === 'ranking_system'
-        ? rankingSystems[seriesName].alias
+        ? c.rankingSystems[seriesName].alias
         : seriesName,
     data: Object.values(data).map(i => i[seriesName].value),
     rawData: Object.values(data).map(i => i[seriesName].rawValue)
   }))
   const colors = seriesNames.map(i =>
-    seriesKey === 'ranking_system' ? rankingSystems[i].color : '#f00'
+    seriesKey === 'ranking_system' ? c.rankingSystems[i].color : '#f00'
   )
   return { categories, series, colors }
 }
@@ -89,7 +89,7 @@ export const scoreChartProps = ({
   const filteredData = rawData
     .filter(i => Object.entries(filters).every(([k, v]) => i[k] === v))
     .sort((a, b) => {
-      const sortingArr = Object.keys(scoreAliases[a.ranking_system])
+      const sortingArr = Object.keys(c.scoreAliases[a.ranking_system])
       return (
         a.ranking_system.localeCompare(b.ranking_system) ||
         sortingArr.indexOf(a.metric) - sortingArr.indexOf(b.metric)
@@ -97,8 +97,8 @@ export const scoreChartProps = ({
     })
   const data = Object.fromEntries(
     filteredData.map(i => {
-      const rankingSystem = rankingSystems[i.ranking_system].alias
-      const score = scoreAliases[i.ranking_system][i[categoryKey]]
+      const rankingSystem = c.rankingSystems[i.ranking_system].alias
+      const score = c.scoreAliases[i.ranking_system][i[categoryKey]]
       return [`${rankingSystem}: ${score}`, i]
     })
   )
@@ -107,7 +107,7 @@ export const scoreChartProps = ({
     { name: 'Scores', data: Object.values(data).map(i => i[valueKey]) }
   ]
   const colors = categories.map(
-    i => rankingSystems[i.split(':')[0].toLowerCase()].color
+    i => c.rankingSystems[i.split(':')[0].toLowerCase()].color
   )
   return { categories, series, colors }
 }
@@ -174,10 +174,10 @@ export const compareScoreChartProps = ({
   )
   const rankingSystem = filteredData[0].ranking_system
   let data = Object.fromEntries(
-    filteredData.map(i => [scoreAliases[rankingSystem][i[key]], {}])
+    filteredData.map(i => [c.scoreAliases[rankingSystem][i[key]], {}])
   )
   filteredData.forEach(i => {
-    data[scoreAliases[rankingSystem][i[key]]][i[seriesKey]] = {
+    data[c.scoreAliases[rankingSystem][i[key]]][i[seriesKey]] = {
       value: i[valueKey],
       rawValue: i[rawValueKey]
     }
