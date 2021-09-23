@@ -158,7 +158,7 @@ const ComparePage = props => {
       .map(i => parseInt(i.key))
       .sort()
     if (
-      rankingSeries.every((value, index) => value === currentSeries[index]) &&
+      JSON.stringify(rankingSeries) === JSON.stringify(currentSeries) &&
       compare.selectedInstitutions.length > 1 &&
       compare.currentRankings.ranks.length
     ) {
@@ -193,7 +193,7 @@ const ComparePage = props => {
       .map(i => parseInt(i.key))
       .sort()
     if (
-      rankingSeries.every((value, index) => value === currentSeries[index]) &&
+      JSON.stringify(rankingSeries) === JSON.stringify(currentSeries) &&
       compare.selectedInstitutions.length > 1 &&
       compare.currentRankings.scores.length
     ) {
