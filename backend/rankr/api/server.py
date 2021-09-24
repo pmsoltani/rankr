@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from config import backc
+from rankr.api import tasks
 from rankr.api.v1.routers import router as api_router
 
 
@@ -21,6 +22,9 @@ def get_application() -> FastAPI:  # Server factory function
         allow_methods=["*"],
         allow_headers=["*"],
     )
+
+    app.add_event_handler("startup", tasks.create_app_startup_handler(app))
+    app.add_event_handler("shutdown", tasks.create_app_shutdown_handler(app))
 
     app.include_router(api_router, prefix=backc.API_V1_STR)
 
