@@ -1,10 +1,12 @@
 from typing import Dict, List, Optional
 
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, Query, Request, Response
+from fastapi_cache.decorator import cache
 
-from config import enums as e
+from config import backc, enums as e
 from rankr import repos as r, schemas as s
 from rankr.api.dependencies import get_repo
+from utils import redis_cache_key_builder
 
 
 router = APIRouter()
@@ -85,7 +87,14 @@ def get_ranking_systems(
     name="ranking:get ranking table",
     response_model=List[s.RankingTableRow],
 )
-def get_ranking_table(
+@cache(
+    expire=backc.REDIS_CACHE_EXPIRES_AFTER,
+    namespace="ranking-table",
+    key_builder=redis_cache_key_builder,
+)
+async def get_ranking_table(
+    request: Request,
+    response: Response,
     ranking_system: e.RankingSystemEnum,
     year: int,
     ranking_type: e.RankingTypeEnum = e.RankingTypeEnum["university ranking"],
