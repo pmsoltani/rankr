@@ -2,7 +2,7 @@
   <a href="https://rankr.online"><img src="https://rankr.online/static/media/appLogo.250b85cc.svg" height="100" alt="rankr logo"></a>
 </p>
 
-# rankr
+# rankr <img src="https://healthchecks.io/badge/07172acf-6279-4d07-9e00-8af225eda20f/j7hHd2IJ-2/rankr.online.svg" alt="rankr.online status">
 
 **rankr** is a platform for aggregating the results of different academic rankings.
 
