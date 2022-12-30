@@ -10,7 +10,7 @@ WORKDIR ${INSTALL_PATH}
 
 COPY package.json package-lock.json ./
 
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 ARG REACT_APP_API_V1_STR
 ARG REACT_APP_DEV_BACKEND_HOST
