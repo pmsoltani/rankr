@@ -27,7 +27,7 @@ RUN poetry install --no-interaction --no-ansi
 FROM ${python}
 
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y libpq-dev && \
+    apt-get install -y libpq-dev wget && \
     apt-get clean
 
 RUN adduser --disabled-login worker
