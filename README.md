@@ -1,8 +1,8 @@
 <p align="center">
-  <a href="https://rankr.online"><img src="https://rankr.online/static/media/appLogo.250b85cc.svg" height="100" alt="rankr logo"></a>
+  <a href="https://rankr.online"><img src="https://raw.githubusercontent.com/pmsoltani/rankr/master/frontend/src/assets/images/appLogo.svg" height="100" alt="rankr logo"></a>
 </p>
 
-# rankr <img src="https://healthchecks.io/badge/07172acf-6279-4d07-9e00-8af225eda20f/j7hHd2IJ-2/rankr.online.svg" alt="rankr.online status">
+# rankr ![rankr.online status](https://cronitor.io/badges/sVPIbI/production/ibNgDm3nK_B4D_j8by_H1zX4Y8A.svg)
 
 **rankr** is a platform for aggregating the results of different academic rankings.
 
@@ -86,13 +86,13 @@ The stack currently has three containers:
 ## TODO
 
 - [x] Create a web server and an API.
-- [ ] Design and develop a dashboard.
+- [x] Design and develop a dashboard.
 - [x] Finish the documentation.
 - [x] Make `countries.csv` a public file.
-- [ ] Report the country name problem of the `addresses.csv` file to the GRID database maintainers.
 - [x] Update the `config.py` module to reflect the recent changes (i.e., the new rankr CLI).
 - [x] Add more functionalities to the CLI (e.g., starting the webserver and running the tests).
 - [x] Dockerize the app.
+- [ ] Add subject ranking tables
 
 ## Contributions
 
