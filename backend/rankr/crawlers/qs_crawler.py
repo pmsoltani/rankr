@@ -82,9 +82,12 @@ class QSCrawler(CrawlerMixin):
                 row[col] = "" if not row[col] else row[col]
                 value = BeautifulSoup(row[col], "html.parser")
                 if columns[col] == "country":
-                    country = s.CountryCreate(country=value.text)
-                    values[columns[col]] = country.country
-                    continue
+                    try:
+                        country = s.CountryCreate(country=value.text)
+                        values[columns[col]] = country.country
+                        continue
+                    except KeyError:
+                        pass
                 if columns[col] == "institution":
                     a_tag = value.find("a")
                     assert isinstance(a_tag, Tag)
