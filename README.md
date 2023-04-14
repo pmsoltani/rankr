@@ -29,11 +29,10 @@ It should be noted that the metadata from the GRID database is preferred in case
 - Switch to the repo directory: `cd rankr`
 - Make sure Docker is running.
 - Create a `.env` file in the root directory (More info [here](#the-env-file)).
-- Create a data directory: `mkdir backend/data`
-- Download the GRID database (from the link above) and extract it inside the new `data` directory.
+- Download the GRID database (from the link above) and extract it inside the `backend/data/grid` directory.
 - Start the application: `docker-compose up -d`
-- Crawl the ranking tables: `docker-compose exec backend rankr crawl rankings`
 - Initialize the database for the first time: `docker-compose exec backend rankr db reset --confirm`
+- Crawl the ranking tables: `docker-compose exec backend rankr crawl rankings`
 - And you're done! Visit the following URL in your browser: [http://0.0.0.0:8000](http://0.0.0.0:8000)
 
 ### Important notice

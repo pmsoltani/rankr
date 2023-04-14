@@ -67,4 +67,9 @@ playground.py
 instance/*
 
 # output & data
-data/
+data/grid/*
+!data/grid/.gitkeep
+data/responses/*
+!data/responses/.gitkeep
+data/qs
+data/shanghai

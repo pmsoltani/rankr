@@ -54,6 +54,7 @@ services:
       context: ./backend
       dockerfile: backend.dockerfile
     command: sh -c '
+      pip install . &&
       if [ "${BACKEND_ENV}" = "dev" ] ;
       then rankr start --reload ;
       else rankr start ;
