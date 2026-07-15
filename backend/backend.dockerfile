@@ -1,43 +1,41 @@
-ARG python=python:3.8-slim-buster
+ARG python=python:3.12-slim
 
-# stage 1: compile
-FROM ${python} AS backend-compile
+# stage 1: build the virtualenv with uv
+FROM ${python} AS builder
 
 LABEL maintainer="Pooria Soltani <pooria.ms@gmail.com>"
 
-RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y gcc libpq-dev build-essential python3-dev && \
-    apt-get clean
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc libpq-dev build-essential python3-dev && \
+    rm -rf /var/lib/apt/lists/*
 
 ARG INSTALL_PATH
-ENV VIRTUAL_ENV=/opt/venv
+ENV UV_COMPILE_BYTECODE=1 \
+    UV_LINK_MODE=copy \
+    UV_PYTHON_DOWNLOADS=never
 WORKDIR ${INSTALL_PATH}
 
-RUN python -m venv ${VIRTUAL_ENV}
-# Entering venv:
-ENV PATH="${VIRTUAL_ENV}/bin:$PATH"
+# Install dependencies first (cached layer), then the project itself.
+COPY pyproject.toml uv.lock ./
+RUN uv sync --frozen --no-install-project --no-dev
+COPY . .
+RUN uv sync --frozen --no-dev
 
-ARG POETRY_VERSION
-RUN pip install "poetry==${POETRY_VERSION}"
-
-COPY pyproject.toml poetry.lock ./
-RUN poetry install --no-interaction --no-ansi
-
-# stage 2: build
+# stage 2: runtime
 FROM ${python}
 
-RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y libpq-dev wget && \
-    apt-get clean
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpq5 wget && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN adduser --disabled-login worker
 ARG INSTALL_PATH
-ENV VIRTUAL_ENV=/opt/venv
 WORKDIR ${INSTALL_PATH}
 
-# Entering venv:
-ENV PATH="${VIRTUAL_ENV}/bin:$PATH"
+COPY --from=builder --chown=worker:worker ${INSTALL_PATH} ${INSTALL_PATH}
+# Put the uv-managed virtualenv on PATH so `rankr` is directly runnable.
+ENV PATH="${INSTALL_PATH}/.venv/bin:$PATH"
 
-COPY --from=backend-compile ${VIRTUAL_ENV} ${VIRTUAL_ENV}
-COPY --chown=worker:worker . .
-RUN poetry install --no-interaction --no-ansi
+USER worker
