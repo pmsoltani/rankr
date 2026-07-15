@@ -40,14 +40,20 @@ const SiteSearch = props => {
     setSearchValue('')
     clearCurrentSearch()
   }
-  const onSearchChange = React.useCallback(
-    e => {
-      setSearchValue(e.target.value)
-      if (e.target.value) search({ q: e.target.value })
-      else clearCurrentSearch()
-    },
-    [search, clearCurrentSearch]
-  )
+  const onSearchChange = e => setSearchValue(e.target.value)
+
+  // Debounce the search: only fire a request once the user pauses ~300ms, and
+  // discard the pending timer whenever the query changes again. Combined with
+  // the reducer's stale-response guard, this fixes results lagging a keystroke
+  // behind when typing quickly.
+  React.useEffect(() => {
+    if (!searchValue) {
+      clearCurrentSearch()
+      return
+    }
+    const timer = setTimeout(() => search({ q: searchValue }), 300)
+    return () => clearTimeout(timer)
+  }, [searchValue, search, clearCurrentSearch])
   const onSelectChange = changedSearchResults => {
     setSearchResults(changedSearchResults)
     const choice = changedSearchResults.filter(i => i.checked === 'on')[0]

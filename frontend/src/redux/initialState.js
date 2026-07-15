@@ -9,7 +9,8 @@ const initialState = {
     isLoadingRanks: false,
     isLoadingScores: false,
     currentRankings: { ranks: [], scores: [] },
-    errorRankings: null
+    errorRankings: null,
+    latestSearchQuery: ''
   },
   institutions: {
     isLoading: false,
@@ -24,7 +25,7 @@ const initialState = {
   },
   rankingSystems: { isLoading: false, currentRankingSystems: {}, error: null },
   rankingTable: { isLoading: false, currentRankingTable: [], error: null },
-  search: { isLoading: false, institutions: [], error: null },
+  search: { isLoading: false, institutions: [], error: null, latestQuery: '' },
   wiki: { isLoading: false, currentWikiPage: null, error: null }
 }
 

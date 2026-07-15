@@ -37,8 +37,10 @@ export default function compareReducer (
 ) {
   switch (action.type) {
     case SEARCH_FOR_COMPARE:
-      return { ...state, isLoadingSearch: true }
+      return { ...state, isLoadingSearch: true, latestSearchQuery: action.meta?.q }
     case SEARCH_FOR_COMPARE_SUCCESS:
+      // Discard out-of-order responses to superseded queries.
+      if (action.meta?.q !== state.latestSearchQuery) return state
       return {
         ...state,
         isLoadingSearch: false,
@@ -46,6 +48,7 @@ export default function compareReducer (
         errorSearch: null
       }
     case SEARCH_FOR_COMPARE_FAILURE:
+      if (action.meta?.q !== state.latestSearchQuery) return state
       return {
         ...state,
         isLoadingSearch: false,
@@ -133,7 +136,8 @@ Actions.searchForCompare = args => {
       SUCCESS: SEARCH_FOR_COMPARE_SUCCESS,
       FAILURE: SEARCH_FOR_COMPARE_FAILURE
     },
-    options: { data: {}, params: args }
+    options: { data: {}, params: args },
+    meta: { q: args.q }
   })
 }
 

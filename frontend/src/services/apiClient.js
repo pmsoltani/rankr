@@ -35,6 +35,7 @@ const apiClient = ({
   method,
   types: { REQUEST, SUCCESS, FAILURE },
   options: { contentType = 'application/json', data, params },
+  meta = {},
   onSuccess = res => ({
     type: res.type,
     success: true,
@@ -52,20 +53,21 @@ const apiClient = ({
     const token = window.localStorage.getItem('accessToken')
     const client = getClient(contentType, token)
 
-    dispatch({ type: REQUEST })
+    dispatch({ type: REQUEST, meta })
     const urlPath = formatURL(url, params)
 
     try {
       const res = await client[method.toLowerCase()](urlPath, data)
 
-      dispatch({ type: SUCCESS, data: res.data })
+      dispatch({ type: SUCCESS, data: res.data, meta })
 
       return onSuccess({ type: SUCCESS, ...res })
     } catch (error) {
       console.log(error)
       dispatch({
         type: FAILURE,
-        error: error?.response?.data ? error.response.data : error
+        error: error?.response?.data ? error.response.data : error,
+        meta
       })
 
       return onFailure({

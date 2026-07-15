@@ -17,6 +17,7 @@ const CompareSearch = props => {
   } = props
 
   const [options, setOptions] = React.useState([])
+  const debounceRef = React.useRef(null)
   const onChange = selectedOptions => setInstitutionsForCompare(selectedOptions)
 
   React.useEffect(() => {
@@ -27,10 +28,13 @@ const CompareSearch = props => {
       : setOptions([])
   }, [institutions])
 
+  // Debounce the lookup so a request fires only once typing settles (~300ms);
+  // the reducer additionally drops any out-of-order response to a stale query.
   const onSearchChange = React.useCallback(
     value => {
+      clearTimeout(debounceRef.current)
       if (value && selectedInstitutions.length < 3) {
-        searchForCompare({ q: value })
+        debounceRef.current = setTimeout(() => searchForCompare({ q: value }),300)
       } else clearSearchForCompare()
     },
     [searchForCompare, clearSearchForCompare, selectedInstitutions]

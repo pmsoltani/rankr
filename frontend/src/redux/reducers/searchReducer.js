@@ -14,8 +14,13 @@ export default function searchReducer (
 ) {
   switch (action.type) {
     case SEARCH:
-      return { ...state, isLoading: true }
+      // Record the query this request is for, so out-of-order responses to
+      // earlier queries can be discarded below.
+      return { ...state, isLoading: true, latestQuery: action.meta?.q }
     case SEARCH_SUCCESS:
+      // Ignore responses that don't match the most recent query (a slower
+      // response to a shorter query must not clobber the current results).
+      if (action.meta?.q !== state.latestQuery) return state
       return {
         ...state,
         isLoading: false,
@@ -23,6 +28,7 @@ export default function searchReducer (
         error: null
       }
     case SEARCH_FAILURE:
+      if (action.meta?.q !== state.latestQuery) return state
       return {
         ...state,
         isLoading: false,
@@ -47,7 +53,8 @@ Actions.search = args => {
       SUCCESS: SEARCH_SUCCESS,
       FAILURE: SEARCH_FAILURE
     },
-    options: { data: {}, params: args }
+    options: { data: {}, params: args },
+    meta: { q: args.q }
   })
 }
 
