@@ -1,5 +1,4 @@
 import re
-from typing import Dict, Optional
 
 from fuzzywuzzy import fuzz, process
 
@@ -7,9 +6,9 @@ from fuzzywuzzy import fuzz, process
 def fuzzy_matcher(
     inst_name: str,
     inst_country: str,
-    soup: Dict[str, Dict[str, str]],
+    soup: dict[str, dict[str, str]],
     score_cutoff: int = 100,
-) -> Optional[str]:
+) -> str | None:
     """Selects the best matching institution from a set of choices.
 
     First the function narrows-down the list of choices by filtering
@@ -33,13 +32,13 @@ def fuzzy_matcher(
     Args:
         inst_name (str): The institution name to be matched
         inst_country (str): The institution's country
-        soup (Dict[str, Dict[str, str]]): A set of choices for matching
+        soup (dict[str, dict[str, str]]): A set of choices for matching
         the institution
         score_cutoff (int, optional): The accuracy of the algorithm.
         Defaults to 100.
 
     Returns:
-        Optional[str]: The GRID ID of the best matching institution
+        str | None: The GRID ID of the best matching institution
     """
     if not inst_country:
         return None

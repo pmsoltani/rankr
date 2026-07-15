@@ -1,5 +1,3 @@
-from typing import Dict, List
-
 import typer
 from pydantic import ValidationError
 from tqdm.std import tqdm
@@ -18,12 +16,12 @@ class GRIDCrawler:
         self.country_repo = country_repo
         self.institution_repo = institution_repo
 
-    def country_process(self) -> List[d.Country]:
+    def country_process(self) -> list[d.Country]:
         typer.secho("Processing countries...", fg=typer.colors.CYAN)
         db_countries = self.country_repo.get_countries(limit=None)
         if not db_countries:
             rows = get_row(crwc.COUNTRIES_FILE)
-            new_countries: Dict[str, s.CountryCreate] = {}
+            new_countries: dict[str, s.CountryCreate] = {}
             for row in rows:
                 nullify(row)
                 country = s.CountryCreate(**row)
@@ -46,7 +44,7 @@ class GRIDCrawler:
             get_csv(crwc.GRID_DATABASE_DIR / f"{attr}.csv", "grid_id") for attr in attrs
         ]
 
-        db_institutions: List[d.Institution] = []
+        db_institutions: list[d.Institution] = []
         for row in tqdm(rows, total=total_rows):
             nullify(row)
             if self.institution_repo.get_institution_by_grid_id(row["grid_id"]):
@@ -105,11 +103,11 @@ class GRIDCrawler:
             except ValidationError:
                 pass
 
-            db_institution.acronyms = acronyms  # type: ignore
-            db_institution.aliases = aliases  # type: ignore
-            db_institution.labels = labels  # type: ignore
-            db_institution.links = links  # type: ignore
-            db_institution.types = types  # type: ignore
+            db_institution.acronyms = acronyms
+            db_institution.aliases = aliases
+            db_institution.labels = labels
+            db_institution.links = links
+            db_institution.types = types
             db_institutions.append(db_institution)
 
         typer.secho(

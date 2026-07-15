@@ -1,5 +1,3 @@
-from typing import List, Optional
-
 from sqlalchemy.orm import Session
 
 from rankr import db_models as d
@@ -13,16 +11,16 @@ class CountryRepo(BaseRepo):
         super().__init__(db, self.db_model)
 
     def create_countries(
-        self, new_countries: List[s.CountryCreate], log: bool = True
-    ) -> List[d.Country]:
+        self, new_countries: list[s.CountryCreate], log: bool = True
+    ) -> list[d.Country]:
         return self._create_objects(new_countries, log=log)
 
     def get_countries(
         self,
         search_query: str = None,
         offset: int = 0,
-        limit: Optional[int] = 25,
-    ) -> List[d.Country]:
+        limit: int | None = 25,
+    ) -> list[d.Country]:
         return self._get_db_objects(
             search_query=search_query, offset=offset, limit=limit
         )

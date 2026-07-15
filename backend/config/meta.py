@@ -1,11 +1,11 @@
 import tomllib
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any
 
 from pydantic import BaseSettings
 
 
-def _get_project_meta() -> Dict[str, Any]:
+def _get_project_meta() -> dict[str, Any]:
     with open(Path.cwd() / "pyproject.toml", "rb") as pyproject:
         return tomllib.load(pyproject)["project"]
 

@@ -1,7 +1,6 @@
 import re
 import time
 from contextlib import closing
-from typing import Dict, List
 
 import requests
 from bs4 import BeautifulSoup, Tag
@@ -42,21 +41,21 @@ class ShanghaiCrawler(CrawlerMixin):
         page.raise_for_status()
 
         soup = BeautifulSoup(page.content, "html.parser")
-        li_tags: List[Tag] = soup.select("li.ant-pagination-item")
+        li_tags: list[Tag] = soup.select("li.ant-pagination-item")
         self._last_page_number = int(li_tags[-1].text)
         return self._last_page_number
 
-    def _get_tbl(self) -> List[Dict[str, str]]:
+    def _get_tbl(self) -> list[dict[str, str]]:
         """Finds the ranking table within the page & extracts the data.
 
         Returns:
-            List[Dict[str, str]]: Table data as a list of dictionaries
+            list[dict[str, str]]: Table data as a list of dictionaries
         """
-        self.processed_data: List[Dict[str, str]] = []
+        self.processed_data: list[dict[str, str]] = []
         with closing(self._get_driver()) as d:
             d.get(self.url)
             for page in trange(self._last_page_number, desc="Crawling pages"):
-                li_tags: List[WebElement] = d.find_elements_by_tag_name("li")
+                li_tags: list[WebElement] = d.find_elements_by_tag_name("li")
                 values = {}
                 for metric in self.metrics:
                     scores_button = d.find_elements_by_class_name("head-bg")[-1]

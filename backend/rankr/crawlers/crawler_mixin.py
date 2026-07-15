@@ -1,6 +1,6 @@
 import time
 from pathlib import Path
-from typing import Callable, Dict, List, Union
+from typing import Callable
 
 import typer
 from tqdm import tqdm
@@ -18,12 +18,12 @@ class CrawlerMixin(object):
     _get_page: Callable
     _get_tbl: Callable
     download_dir: Path
-    processed_data: List[Dict[str, str]]
+    processed_data: list[dict[str, str]]
     url: str
 
     def __init__(
         self,
-        year: Union[str, int],
+        year: str | int,
         ranking_system: str,
         ranking_type: str,
         field: str,
@@ -33,7 +33,7 @@ class CrawlerMixin(object):
     ) -> None:
         # self.ranking_info is mainly used to enrich ranking tables with
         # additional metadata
-        self.ranking_info: Dict[str, str] = {
+        self.ranking_info: dict[str, str] = {
             "ranking_system": ranking_system,
             "ranking_type": ranking_type,
             "year": str(year),
@@ -75,7 +75,7 @@ class CrawlerMixin(object):
     def crawl_and_process(
         self,
         institution_repo: r.InstitutionRepo,
-        soup: Dict[str, Dict[str, str]],
+        soup: dict[str, dict[str, str]],
     ):
         for i in range(self.tries):
             try:

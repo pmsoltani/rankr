@@ -1,4 +1,4 @@
-from typing import Optional, Type
+from typing import Type
 
 import typer
 from sqlalchemy import or_
@@ -45,13 +45,13 @@ class BaseRepo:
 
     def _get_db_objects(
         self,
-        join: Optional[Type[d.Base]] = None,
+        join: Type[d.Base] | None = None,
         distinct: bool = False,
-        search_query: str = None,
+        search_query: str | None = None,
         flt: list = [],
         order_by: list = [],
         offset: int = 0,
-        limit: Optional[int] = 25,
+        limit: int | None = 25,
     ):
         flt = [self.search(search_query), *flt]
         query = self.db.query(self.db_model)
@@ -67,7 +67,7 @@ class BaseRepo:
             .all()
         )
 
-    def search(self, search_query: Optional[str]):
+    def search(self, search_query: str | None):
         if not search_query:
             return or_()
 

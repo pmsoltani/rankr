@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Dict, List
+from typing import Any
 
 from pydantic import Field, HttpUrl, validator
 
@@ -20,18 +20,18 @@ class CrawlerConfig(BaseConfig):
         + "Chrome/39.0.2171.95 "
         + "Safari/537.36"
     )
-    HEADERS: Dict[str, str] = {}
+    HEADERS: dict[str, str] = {}
 
     DOWNLOAD_DIR: Path = Path()
 
-    COUNTRY_NAMES: dict = {}
-    COUNTRIES: Dict[str, Dict[str, str]] = {}
+    COUNTRY_NAMES: dict[str, str] = {}
+    COUNTRIES: dict[str, dict[str, str]] = {}
 
-    RANKINGS: dict = {}
-    SUPPORTED_ENGINES: List[str] = []
+    RANKINGS: dict[str, Any] = {}
+    SUPPORTED_ENGINES: list[str] = []
 
     @validator("HEADERS")
-    def _headers_value(cls, headers, values) -> Dict[str, str]:
+    def _headers_value(cls, headers, values) -> dict[str, str]:
         return {"User-Agent": values["USER_AGENT"]}
 
     @validator("COUNTRY_NAMES")
@@ -43,27 +43,27 @@ class CrawlerConfig(BaseConfig):
         return {row["country"]: row for row in get_row(dbc.COUNTRIES_FILE)}
 
     @validator("RANKINGS")
-    def _load_rankings(cls, rankings, values) -> dict:
+    def _load_rankings(cls, rankings, values) -> dict[str, Any]:
         return cls.read_json(values["RANKINGS_FILE"])
 
     @validator("SUPPORTED_ENGINES")
-    def _resolve_supported_engines(cls, supported_engines, values) -> List[str]:
+    def _resolve_supported_engines(cls, supported_engines, values) -> list[str]:
         return list(values["RANKINGS"]["metrics"]) + ["wikipedia"]
 
 
 class QSConfig(CrawlerConfig):
     BASE_URL: HttpUrl = Field("https://www.topuniversities.com/")
-    URLS: List[dict] = []
+    URLS: list[dict[str, Any]] = []
 
     @validator("URLS")
-    def _load_urls(cls, urls, values) -> List[dict]:
+    def _load_urls(cls, urls, values) -> list[dict[str, Any]]:
         return cls.read_json(values["QS_URLS_FILE"])
 
     @validator("DOWNLOAD_DIR")
     def _download_dir_value(cls, download_dir, values) -> Path:
         return values["DATA_DIR"] / "qs"
 
-    FIELDS: Dict[str, str] = {
+    FIELDS: dict[str, str] = {
         "rank": "rank",
         "# rank": "rank",
         "university": "institution",
@@ -86,17 +86,17 @@ class QSConfig(CrawlerConfig):
 
 class ShanghaiConfig(CrawlerConfig):
     BASE_URL: HttpUrl = Field("http://www.shanghairanking.com/")
-    URLS: List[dict] = []
+    URLS: list[dict[str, Any]] = []
 
     @validator("URLS")
-    def _load_urls(cls, urls, values) -> List[dict]:
+    def _load_urls(cls, urls, values) -> list[dict[str, Any]]:
         return cls.read_json(values["SHANGHAI_URLS_FILE"])
 
     @validator("DOWNLOAD_DIR")
     def _download_dir_value(cls, download_dir, values) -> Path:
         return values["DATA_DIR"] / "shanghai"
 
-    FIELDS: Dict[str, str] = {
+    FIELDS: dict[str, str] = {
         "world rank": "rank",
         "url": "url",
         "national/regionalrank": "national rank",
@@ -117,17 +117,17 @@ class ShanghaiConfig(CrawlerConfig):
 
 class THEConfig(CrawlerConfig):
     BASE_URL: HttpUrl = Field("https://www.timeshighereducation.com/")
-    URLS: List[dict] = []
+    URLS: list[dict[str, Any]] = []
 
     @validator("URLS")
-    def _load_urls(cls, urls, values) -> List[dict]:
+    def _load_urls(cls, urls, values) -> list[dict[str, Any]]:
         return cls.read_json(values["THE_URLS_FILE"])
 
     @validator("DOWNLOAD_DIR")
     def _download_dir_value(cls, download_dir, values) -> Path:
         return values["DATA_DIR"] / "the"
 
-    FIELDS: Dict[str, str] = {
+    FIELDS: dict[str, str] = {
         "rank": "rank",
         "name": "institution",
         "scores_overall": "overall",
@@ -148,7 +148,7 @@ class THEConfig(CrawlerConfig):
 class WikipediaConfig(CrawlerConfig):
     BASE_URL: HttpUrl = Field("https://en.wikipedia.org/")
 
-    ALLOWED_LOGO_FORMATS: List[str] = [".svg", ".png"]
+    ALLOWED_LOGO_FORMATS: list[str] = [".svg", ".png"]
 
     @validator("DOWNLOAD_DIR")
     def _download_dir_value(cls, download_dir, values) -> Path:

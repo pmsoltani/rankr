@@ -1,5 +1,3 @@
-from typing import Dict, List, Optional, Tuple
-
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 
@@ -15,19 +13,19 @@ class InstitutionRepo(BaseRepo):
         super().__init__(db, self.db_model)
 
     def create_db_institutions(
-        self, new_db_institutions: List[d.Institution], log: bool = True
-    ) -> List[d.Institution]:
+        self, new_db_institutions: list[d.Institution], log: bool = True
+    ) -> list[d.Institution]:
         return self._create_db_objects(new_db_institutions, log=log)
 
-    def get_institution_by_grid_id(self, grid_id: str) -> Optional[d.Institution]:
+    def get_institution_by_grid_id(self, grid_id: str) -> d.Institution | None:
         return self._get_db_object([self.db_model.grid_id == grid_id])
 
     def get_db_institutions(
         self,
         search_query: str = None,
         offset: int = 0,
-        limit: Optional[int] = 25,
-    ) -> List[d.Institution]:
+        limit: int | None = 25,
+    ) -> list[d.Institution]:
         return self._get_db_objects(
             search_query=search_query, offset=offset, limit=limit
         )
@@ -38,11 +36,11 @@ class InstitutionRepo(BaseRepo):
         institution_url: str,
         link_type: str,
         country_name: str,
-        soup: Dict[str, Dict[str, str]],
-    ) -> Tuple[Optional[d.Institution], bool]:
+        soup: dict[str, dict[str, str]],
+    ) -> tuple[d.Institution | None, bool]:
         institution_name = institution_name.strip().lower()
         fuzzy_flag = False
-        db_institution: Optional[d.Institution] = None
+        db_institution: d.Institution | None = None
 
         # checking grid_id in manual matches
         match = dbc.MATCHES.get(country_name, {}).get(institution_name)

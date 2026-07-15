@@ -1,5 +1,5 @@
 from contextlib import closing
-from typing import Any, Dict, List, Tuple
+from typing import Any
 
 import typer
 from sqlalchemy.orm import Session
@@ -11,7 +11,7 @@ from rankr import repos as r
 from utils import csv_export
 
 
-def engine_select(engine: str) -> Tuple[Any, Any]:
+def engine_select(engine: str) -> tuple[Any, Any]:
     """Returns the Crawler & the Config classes for the selected engine.
 
     Args:
@@ -21,7 +21,7 @@ def engine_select(engine: str) -> Tuple[Any, Any]:
         ValueError: If engine is not supported
 
     Returns:
-        Tuple[Any, Any]: The engines' Crawler & Config classes
+        tuple[Any, Any]: The engines' Crawler & Config classes
     """
     crawler_configs = [qsc, shac, thec, wikic]
     crawler_classes = [
@@ -40,7 +40,7 @@ def engine_select(engine: str) -> Tuple[Any, Any]:
     )
 
 
-def engine_check(value: str) -> List[str]:
+def engine_check(value: str) -> list[str]:
     value = value.lower()
     if value == "all":
         return crwc.SUPPORTED_ENGINES
@@ -49,7 +49,7 @@ def engine_check(value: str) -> List[str]:
     return [value]
 
 
-def get_wikipedia_urls() -> List[Dict[str, str]]:
+def get_wikipedia_urls() -> list[dict[str, str]]:
     """Retrieves the list of Wikipedia URLS for ranked institutions."""
     db: Session
     with closing(d.SessionLocal()) as db:
@@ -74,7 +74,7 @@ def crawl(
     Special engine value: rankings = [qs, shanghai, the]
 
     Args:
-        engines (List[str]): The selected engines used for crawling
+        engines (list[str]): The selected engines used for crawling
         commit (bool): Whether or not commit the ranking table to DB
         offline (bool): Only use CSV files (no web crawling)
     """

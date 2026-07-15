@@ -1,7 +1,6 @@
 import shutil
 import time
 from pathlib import Path
-from typing import Optional
 
 import requests
 from bs4 import BeautifulSoup
@@ -12,7 +11,11 @@ from config import wikic
 
 class WikipediaCrawler(object):
     def __init__(
-        self, grid_id: str, url: str, wait: int = 10, tries: int = 5,
+        self,
+        grid_id: str,
+        url: str,
+        wait: int = 10,
+        tries: int = 5,
     ) -> None:
         self.grid_id = grid_id
         self.url = furl(url).set(scheme="https").url
@@ -37,7 +40,7 @@ class WikipediaCrawler(object):
 
             break
 
-    def _get_page(self) -> Optional[BeautifulSoup]:
+    def _get_page(self) -> BeautifulSoup | None:
         """Retrieves the page containing the institution logo.
 
         Raises:
@@ -51,9 +54,7 @@ class WikipediaCrawler(object):
             raise ConnectionError(f"Error getting page: {self.url}")
 
         wiki_page = BeautifulSoup(wiki_page.content, "html.parser")
-        info_card = wiki_page.find(
-            "table", attrs={"class": ["infobox", "vcard"]}
-        )
+        info_card = wiki_page.find("table", attrs={"class": ["infobox", "vcard"]})
         logo_page_elem = info_card.find_all("a", attrs={"class": "image"})
         if not logo_page_elem:
             return None
@@ -63,14 +64,14 @@ class WikipediaCrawler(object):
         self.page = BeautifulSoup(logo_page.content, "html.parser")
         return self.page
 
-    def _get_logo(self) -> Optional[requests.Response]:
-        """[summary]
+    def _get_logo(self) -> requests.Response | None:
+        """Retrieves the logo file from the page.
 
         Raises:
             ConnectionError: If the request is not successful
 
         Returns:
-            Optional[requests.Response]: The stream of logo file
+            requests.Response | None: The stream of logo file
         """
         logo_elem = self.page.find("div", attrs={"id": "file"})
         if not logo_elem:

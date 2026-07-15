@@ -1,10 +1,10 @@
-from typing import Sequence
+from typing import Any, Sequence
 
 
 nulls = ("", " ", "-", "#n/a", "n/a", "#N/A", "N/A", "\\")
 
 
-def nullify(data: dict, nulls: Sequence[str] = nulls) -> None:
+def nullify(data: dict[str, Any], nulls: Sequence[str] = nulls) -> None:
     """Changes the null-looking values in a dictionary to None.
 
     If an item in the input dictionary has a null-looking value,it will

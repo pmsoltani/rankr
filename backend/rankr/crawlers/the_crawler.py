@@ -1,6 +1,5 @@
 import json
 import re
-from typing import Dict, List
 
 import requests
 from furl import furl
@@ -37,17 +36,17 @@ class THECrawler(CrawlerMixin):
         self.json_url = json_url.replace("\\", "")
         return self.json_url
 
-    def _get_tbl(self) -> List[Dict[str, str]]:
+    def _get_tbl(self) -> list[dict[str, str]]:
         """Processes raw ranking data into a list of dictionaries.
 
         Returns:
-            List[Dict[str, str]]: Processed ranking data to be exported
+            list[dict[str, str]]: Processed ranking data to be exported
         """
         page = requests.get(self.json_url, headers=thec.HEADERS)
         raw_data = json.loads(page.text)
 
         # processing raw_data
-        processed_data: List[Dict[str, str]] = []
+        processed_data: list[dict[str, str]] = []
         for row in raw_data["data"]:
             values = {}
             for col in row:
