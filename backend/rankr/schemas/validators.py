@@ -1,24 +1,21 @@
 import re
 from decimal import Decimal
-from typing import Optional
 
 
-def basic_process(text: str) -> Optional[str]:
+def basic_process(text: str) -> str | None:
     if not text:
         return None
     return text.strip()
 
 
-def text_process(text: str) -> Optional[str]:
+def text_process(text: str) -> str | None:
     if not text:
         return None
     parts = re.findall(r"[a-zA-Z0-9_.:/\&\(\)]+", text)
     return " ".join(parts)
 
 
-def value_process(
-    value: Optional[str], value_type: str = "integer"
-) -> Optional[str]:
+def value_process(value: str | None, value_type: str = "integer") -> str | None:
     """Cleans and processes raw values to be stored in the database.
 
     Rank and score values from ranking tables can take many different
@@ -29,12 +26,12 @@ def value_process(
     the purpose of this function.
 
     Args:
-        value (Optional[str]): The string to be processed
+        value (str | None): The string to be processed
         value_type (str, optional): The type of the final value.
         Defaults to "integer".
 
     Returns:
-        Optional[str]: [description]
+        str | None: [description]
     """
     if value is None:
         return None
@@ -50,7 +47,7 @@ def value_process(
 
     # Dealing with ranges (e.g. Rank = "800-1000" -> "900", Rank = "47" -> "47")
     range_pattern = r"(\d+\.*\d*)[-־᠆‐‑‒–—―⁻₋−⸺⸻﹘﹣－:]*(\d+\.*\d*)*"
-    matches: Optional[re.Match[str]] = re.search(range_pattern, value)
+    matches: re.Match[str] | None = re.search(range_pattern, value)
     try:
         lower_bound, upper_bound = matches.groups()
         if upper_bound:  # e.g. Rank = "800-1000"
