@@ -1,5 +1,6 @@
 from typing import Sequence
 
+
 nulls = ("", " ", "-", "#n/a", "n/a", "#N/A", "N/A", "\\")
 
 

@@ -7,20 +7,19 @@ import requests
 from bs4 import BeautifulSoup, Tag
 from furl import furl
 from selenium import webdriver
-from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.remote.webelement import WebElement
 from tqdm import trange
 
-from config import enums as e, shac
+from config import enums as e
+from config import shac
 from rankr import schemas as s
 from rankr.crawlers.crawler_mixin import CrawlerMixin
 from rankr.schemas.validators import text_process
 
 
 class ShanghaiCrawler(CrawlerMixin):
-    def __init__(
-        self, url: str, driver_path: str = "chromedriver", **kwargs
-    ) -> None:
+    def __init__(self, url: str, driver_path: str = "chromedriver", **kwargs) -> None:
         self.url = url
         self.download_dir = shac.DOWNLOAD_DIR
 
@@ -36,9 +35,7 @@ class ShanghaiCrawler(CrawlerMixin):
         options.add_argument("--disable-notifications")
         prefs = {"profile.managed_default_content_settings.images": 2}
         options.add_experimental_option("prefs", prefs)
-        return webdriver.Chrome(
-            executable_path=self.driver_path, options=options
-        )
+        return webdriver.Chrome(executable_path=self.driver_path, options=options)
 
     def _get_page(self) -> int:
         page = requests.get(self.url, headers=shac.HEADERS)
@@ -65,9 +62,7 @@ class ShanghaiCrawler(CrawlerMixin):
                     scores_button = d.find_elements_by_class_name("head-bg")[-1]
                     scores_button.click()
 
-                    score_tag = [
-                        t for t in li_tags if t.text.lower() == metric
-                    ][0]
+                    score_tag = [t for t in li_tags if t.text.lower() == metric][0]
                     score_tag.click()
 
                     soup = BeautifulSoup(d.page_source, "html.parser")

@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Dict, List
 
-from pydantic import HttpUrl, Field, validator
+from pydantic import Field, HttpUrl, validator
 
 from config.base_config import BaseConfig
 from config.db_config import DBConfig

@@ -5,7 +5,9 @@ import typer
 from sqlalchemy.orm import Session
 
 from config import crwc, qsc, shac, thec, wikic
-from rankr import crawlers as c, db_models as d, repos as r
+from rankr import crawlers as c
+from rankr import db_models as d
+from rankr import repos as r
 from utils import csv_export
 
 
@@ -61,9 +63,7 @@ def get_wikipedia_urls() -> List[Dict[str, str]]:
 def crawl(
     engines: str = typer.Argument(..., callback=engine_check),
     commit: bool = typer.Option(True, help="Commit the results to the DB?"),
-    offline: bool = typer.Option(
-        False, help="Only use CSV files (no web crawling)."
-    ),
+    offline: bool = typer.Option(False, help="Only use CSV files (no web crawling)."),
 ):
     """Crawls the ranking websites and commits the results to DB
 

@@ -1,10 +1,11 @@
 from sqlalchemy import create_engine
+from sqlalchemy.exc import DatabaseError
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.exc import DatabaseError
 from sqlalchemy_utils import create_database
 
 from config import dbc
+
 
 engine = create_engine(dbc.DB_URL, encoding=dbc.DB_ENCODING)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

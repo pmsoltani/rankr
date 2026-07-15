@@ -1,4 +1,4 @@
-from sqlalchemy import Column, DECIMAL, Enum, ForeignKey, Integer, String
+from sqlalchemy import DECIMAL, Column, Enum, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
 from config import enums as e
@@ -10,9 +10,7 @@ class Ranking(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     institution_id = Column(Integer, ForeignKey("institution.id"))
-    ranking_system = Column(
-        Enum(e.RankingSystemEnum), nullable=False, index=True
-    )
+    ranking_system = Column(Enum(e.RankingSystemEnum), nullable=False, index=True)
     ranking_type = Column(Enum(e.RankingTypeEnum), nullable=False, index=True)
     year = Column(Integer)
     field = Column(String(255), nullable=False)

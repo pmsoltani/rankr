@@ -2,11 +2,11 @@ import sys
 from logging.config import fileConfig
 from pathlib import Path
 
+
 sys.path.append(str(Path.cwd()))
 
 from alembic import context
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
+from sqlalchemy import engine_from_config, pool
 
 from config import dbc
 from rankr import db_models as d

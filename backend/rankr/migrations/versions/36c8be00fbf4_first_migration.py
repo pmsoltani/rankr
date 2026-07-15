@@ -5,8 +5,9 @@ Revises:
 Create Date: 2021-08-14 23:07:56.430429
 
 """
-from alembic import op
+
 import sqlalchemy as sa
+from alembic import op
 
 
 # revision identifiers, used by Alembic.
@@ -41,7 +42,7 @@ def upgrade():
         sa.Column("state", sa.String(length=63), nullable=True),
         sa.Column("country_id", sa.Integer(), nullable=True),
         sa.Column("soup", sa.String(length=1000), nullable=True),
-        sa.ForeignKeyConstraint(["country_id"], ["country.id"],),
+        sa.ForeignKeyConstraint(["country_id"], ["country.id"]),
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint("grid_id"),
     )
@@ -50,7 +51,7 @@ def upgrade():
         sa.Column("id", sa.Integer(), autoincrement=True, nullable=False),
         sa.Column("institution_id", sa.Integer(), nullable=True),
         sa.Column("acronym", sa.String(length=255), nullable=False),
-        sa.ForeignKeyConstraint(["institution_id"], ["institution.id"],),
+        sa.ForeignKeyConstraint(["institution_id"], ["institution.id"]),
         sa.PrimaryKeyConstraint("id"),
     )
     op.create_table(
@@ -58,7 +59,7 @@ def upgrade():
         sa.Column("id", sa.Integer(), autoincrement=True, nullable=False),
         sa.Column("institution_id", sa.Integer(), nullable=True),
         sa.Column("alias", sa.String(length=255), nullable=False),
-        sa.ForeignKeyConstraint(["institution_id"], ["institution.id"],),
+        sa.ForeignKeyConstraint(["institution_id"], ["institution.id"]),
         sa.PrimaryKeyConstraint("id"),
     )
     op.create_table(
@@ -67,7 +68,7 @@ def upgrade():
         sa.Column("institution_id", sa.Integer(), nullable=True),
         sa.Column("iso639", sa.String(length=2), nullable=False),
         sa.Column("label", sa.String(length=255), nullable=False),
-        sa.ForeignKeyConstraint(["institution_id"], ["institution.id"],),
+        sa.ForeignKeyConstraint(["institution_id"], ["institution.id"]),
         sa.PrimaryKeyConstraint("id"),
     )
     op.create_table(
@@ -88,7 +89,7 @@ def upgrade():
             nullable=False,
         ),
         sa.Column("link", sa.String(length=1023), nullable=False),
-        sa.ForeignKeyConstraint(["institution_id"], ["institution.id"],),
+        sa.ForeignKeyConstraint(["institution_id"], ["institution.id"]),
         sa.PrimaryKeyConstraint("id"),
     )
     op.create_index(op.f("ix_link_type"), "link", ["type"], unique=False)
@@ -103,9 +104,7 @@ def upgrade():
         ),
         sa.Column(
             "ranking_type",
-            sa.Enum(
-                "university ranking", "subject ranking", name="rankingtypeenum"
-            ),
+            sa.Enum("university ranking", "subject ranking", name="rankingtypeenum"),
             nullable=False,
         ),
         sa.Column("year", sa.Integer(), nullable=True),
@@ -155,12 +154,10 @@ def upgrade():
             sa.Enum("integer", "percent", "decimal", name="valuetypeenum"),
             nullable=False,
         ),
-        sa.ForeignKeyConstraint(["institution_id"], ["institution.id"],),
+        sa.ForeignKeyConstraint(["institution_id"], ["institution.id"]),
         sa.PrimaryKeyConstraint("id"),
     )
-    op.create_index(
-        op.f("ix_ranking_metric"), "ranking", ["metric"], unique=False
-    )
+    op.create_index(op.f("ix_ranking_metric"), "ranking", ["metric"], unique=False)
     op.create_index(
         op.f("ix_ranking_ranking_system"),
         "ranking",
@@ -192,7 +189,7 @@ def upgrade():
             ),
             nullable=False,
         ),
-        sa.ForeignKeyConstraint(["institution_id"], ["institution.id"],),
+        sa.ForeignKeyConstraint(["institution_id"], ["institution.id"]),
         sa.PrimaryKeyConstraint("id"),
     )
     op.create_index(op.f("ix_type_type"), "type", ["type"], unique=False)
