@@ -1,5 +1,4 @@
 from decimal import Decimal
-from typing import Optional, Union
 
 from pydantic import BaseModel, Field, validator
 
@@ -8,8 +7,8 @@ from rankr.schemas.validators import basic_process, value_process
 
 
 class RankingBase(BaseModel):
-    id: Optional[int]
-    institution_id: Optional[int]
+    id: int | None
+    institution_id: int | None
 
     ranking_system: e.RankingSystemEnum
     ranking_type: e.RankingTypeEnum
@@ -18,9 +17,9 @@ class RankingBase(BaseModel):
     subject: str
 
     metric: e.MetricEnum
-    raw_value: Optional[str]
+    raw_value: str | None
     value_type: e.ValueTypeEnum
-    value: Union[Decimal, int, str, None]
+    value: Decimal | int | str | None
 
     # validators
     _clean_raw_value = validator("raw_value", allow_reuse=True, pre=True)(basic_process)

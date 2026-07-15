@@ -1,12 +1,10 @@
-from typing import Optional
-
 from pydantic import BaseModel
 
 
 class AliasBase(BaseModel):
-    id: Optional[int]
-    institution_id: Optional[int]
-    alias: Optional[str]
+    id: int | None
+    institution_id: int | None
+    alias: str | None
 
 
 class AliasCreate(AliasBase):

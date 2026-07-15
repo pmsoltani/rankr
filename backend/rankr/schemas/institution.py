@@ -1,20 +1,18 @@
-from typing import Optional
-
 from pydantic import BaseModel
 
 
 class InstitutionBase(BaseModel):
-    id: Optional[int]
-    country_id: Optional[int]
+    id: int | None
+    country_id: int | None
 
     grid_id: str
     name: str
-    established: Optional[int]
+    established: int | None
     lat: str
     lng: str
     city: str
     state: str
-    soup: Optional[str]
+    soup: str | None
 
 
 class InstitutionCreate(InstitutionBase):

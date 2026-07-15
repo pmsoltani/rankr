@@ -1,5 +1,3 @@
-from typing import Optional
-
 from pydantic import AnyHttpUrl, BaseModel, validator
 
 from config import enums as e
@@ -7,8 +5,8 @@ from rankr.schemas.validators import basic_process
 
 
 class LinkBase(BaseModel):
-    id: Optional[int]
-    institution_id: Optional[int]
+    id: int | None
+    institution_id: int | None
     type: e.LinkTypeEnum = e.LinkTypeEnum.homepage
     link: AnyHttpUrl
 

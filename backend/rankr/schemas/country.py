@@ -1,5 +1,3 @@
-from typing import Optional
-
 from pydantic import BaseModel, root_validator, validator
 
 from config import crwc
@@ -7,11 +5,11 @@ from rankr.schemas.validators import text_process
 
 
 class CountryBase(BaseModel):
-    id: Optional[int]
+    id: int | None
     country: str
-    country_code: Optional[str]
-    region: Optional[str]
-    sub_region: Optional[str]
+    country_code: str | None
+    region: str | None
+    sub_region: str | None
 
     # validators
     @root_validator(pre=True)

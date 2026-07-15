@@ -1,12 +1,10 @@
-from typing import Optional
-
 from pydantic import BaseModel
 
 
 class AcronymBase(BaseModel):
-    id: Optional[int]
-    institution_id: Optional[int]
-    acronym: Optional[str]
+    id: int | None
+    institution_id: int | None
+    acronym: str | None
 
 
 class AcronymCreate(AcronymBase):
