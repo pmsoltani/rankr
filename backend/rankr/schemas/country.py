@@ -3,7 +3,6 @@ from typing import Optional
 from pydantic import BaseModel, root_validator, validator
 
 from config import crwc
-from rankr.schemas.core import OrmBase
 from rankr.schemas.validators import text_process
 
 
@@ -45,12 +44,4 @@ class CountryBase(BaseModel):
 
 
 class CountryCreate(CountryBase):
-    pass
-
-
-class CountryOut(CountryBase):
-    pass
-
-
-class CountryDB(OrmBase, CountryOut):
     pass

@@ -2,8 +2,6 @@ from typing import Optional
 
 from pydantic import BaseModel, Field
 
-from rankr.schemas.core import OrmBase
-
 
 class LabelBase(BaseModel):
     id: Optional[int]
@@ -14,11 +12,3 @@ class LabelBase(BaseModel):
 
 class LabelCreate(LabelBase):
     institution_id: int
-
-
-class LabelOut(LabelBase):
-    pass
-
-
-class LabelDB(OrmBase, LabelOut):
-    pass

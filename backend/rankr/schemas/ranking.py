@@ -4,7 +4,6 @@ from typing import Optional, Union
 from pydantic import BaseModel, Field, validator
 
 from config import enums as e
-from rankr.schemas.core import OrmBase
 from rankr.schemas.validators import basic_process, value_process
 
 
@@ -24,9 +23,7 @@ class RankingBase(BaseModel):
     value: Union[Decimal, int, str, None]
 
     # validators
-    _clean_raw_value = validator("raw_value", allow_reuse=True, pre=True)(
-        basic_process
-    )
+    _clean_raw_value = validator("raw_value", allow_reuse=True, pre=True)(basic_process)
 
     @validator("value", always=True)
     def _coerce_value(cls, value, values):
@@ -37,11 +34,3 @@ class RankingBase(BaseModel):
 
 class RankingCreate(RankingBase):
     institution_id: int
-
-
-class RankingOut(RankingBase):
-    pass
-
-
-class RankingDB(OrmBase, RankingOut):
-    pass

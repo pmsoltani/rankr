@@ -1,16 +1,10 @@
-"""pydantic models (schemas) to validate/filter data prior sending to client"""
+"""pydantic models (schemas) to validate & clean crawled data before writing."""
 
-from rankr.schemas.acronym import AcronymCreate, AcronymDB, AcronymOut
-from rankr.schemas.alias import AliasCreate, AliasDB, AliasOut
-from rankr.schemas.country import CountryCreate, CountryDB, CountryOut
-from rankr.schemas.institution import (
-    InstitutionCreate,
-    InstitutionDB,
-    InstitutionOut,
-)
-from rankr.schemas.label import LabelCreate, LabelDB, LabelOut
-from rankr.schemas.link import LinkCreate, LinkDB, LinkOut
-from rankr.schemas.ranking import RankingCreate, RankingDB, RankingOut
-from rankr.schemas.ranking_table import RankingTableRow
-from rankr.schemas.search import SearchResults
-from rankr.schemas.type import TypeCreate, TypeDB, TypeOut
+from rankr.schemas.acronym import AcronymBase, AcronymCreate
+from rankr.schemas.alias import AliasBase, AliasCreate
+from rankr.schemas.country import CountryCreate
+from rankr.schemas.institution import InstitutionCreate
+from rankr.schemas.label import LabelBase, LabelCreate
+from rankr.schemas.link import LinkCreate
+from rankr.schemas.ranking import RankingCreate
+from rankr.schemas.type import TypeBase, TypeCreate

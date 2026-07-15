@@ -5,7 +5,9 @@ from pydantic import ValidationError
 from tqdm.std import tqdm
 
 from config import crwc
-from rankr import db_models as d, repos as r, schemas as s
+from rankr import db_models as d
+from rankr import repos as r
+from rankr import schemas as s
 from utils import csv_size, get_csv, get_row, nullify
 
 
@@ -16,7 +18,7 @@ class GRIDCrawler:
         self.country_repo = country_repo
         self.institution_repo = institution_repo
 
-    def country_process(self) -> List[s.CountryDB]:
+    def country_process(self) -> List[d.Country]:
         typer.secho("Processing countries...", fg=typer.colors.CYAN)
         db_countries = self.country_repo.get_countries(limit=None)
         if not db_countries:
@@ -41,8 +43,7 @@ class GRIDCrawler:
         attrs = ["addresses", "acronyms", "aliases", "labels", "links", "types"]
         # Group the GRID data tables by grid_id for better access.
         institution_attrs = [
-            get_csv(crwc.GRID_DATABASE_DIR / f"{attr}.csv", "grid_id")
-            for attr in attrs
+            get_csv(crwc.GRID_DATABASE_DIR / f"{attr}.csv", "grid_id") for attr in attrs
         ]
 
         db_institutions: List[d.Institution] = []
@@ -60,9 +61,7 @@ class GRIDCrawler:
             soup = [row["name"]]
 
             try:
-                raw_country = s.CountryCreate(
-                    country=addresses[0].pop("country")
-                )
+                raw_country = s.CountryCreate(country=addresses[0].pop("country"))
                 country = countries[raw_country.country]
                 institution = s.InstitutionCreate(
                     **{**row, **addresses[0], "country_id": country.id}
@@ -76,15 +75,23 @@ class GRIDCrawler:
             soup.extend(i["label"] for i in labels)
 
             institution.soup = " | ".join(i for i in soup)
-            db_institution = d.Institution(
-                **institution.dict(exclude_unset=True)
-            )
+            db_institution = d.Institution(**institution.dict(exclude_unset=True))
 
-            acronyms = [d.Acronym(**i) for i in acronyms]
-            aliases = [d.Alias(**i) for i in aliases]
-            labels = [d.Label(**i) for i in labels]
+            # Validate & clean each related row through its pydantic schema
+            # before building the ORM object. institution_id is left unset here
+            # and populated by SQLAlchemy via the relationship assignment below.
+            acronyms = [
+                d.Acronym(**s.AcronymBase(**i).dict(exclude_unset=True))
+                for i in acronyms
+            ]
+            aliases = [
+                d.Alias(**s.AliasBase(**i).dict(exclude_unset=True)) for i in aliases
+            ]
+            labels = [
+                d.Label(**s.LabelBase(**i).dict(exclude_unset=True)) for i in labels
+            ]
             links = [d.Link(**i) for i in links]
-            types = [d.Type(**i) for i in types]
+            types = [d.Type(**s.TypeBase(**i).dict(exclude_unset=True)) for i in types]
 
             try:
                 wikipedia_url = s.LinkCreate(
@@ -111,7 +118,7 @@ class GRIDCrawler:
         )
         batch_size = 5000
         batches = [
-            db_institutions[i:i + batch_size]
+            db_institutions[i : i + batch_size]
             for i in range(0, len(db_institutions), batch_size)
         ]
         for i, batch in enumerate(batches):

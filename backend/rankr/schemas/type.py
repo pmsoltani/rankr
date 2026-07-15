@@ -3,7 +3,6 @@ from typing import Optional
 from pydantic import BaseModel
 
 from config import enums as e
-from rankr.schemas.core import OrmBase
 
 
 class TypeBase(BaseModel):
@@ -14,11 +13,3 @@ class TypeBase(BaseModel):
 
 class TypeCreate(TypeBase):
     institution_id: int
-
-
-class TypeOut(TypeBase):
-    pass
-
-
-class TypeDB(OrmBase, TypeOut):
-    pass

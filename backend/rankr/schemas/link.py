@@ -3,7 +3,6 @@ from typing import Optional
 from pydantic import AnyHttpUrl, BaseModel, validator
 
 from config import enums as e
-from rankr.schemas.core import OrmBase
 from rankr.schemas.validators import basic_process
 
 
@@ -19,11 +18,3 @@ class LinkBase(BaseModel):
 
 class LinkCreate(LinkBase):
     institution_id: int
-
-
-class LinkOut(LinkBase):
-    pass
-
-
-class LinkDB(OrmBase, LinkOut):
-    pass
