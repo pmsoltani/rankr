@@ -26,8 +26,6 @@ dependencies = [
   "beautifulsoup4>=4.9.1,<5",
   "sqlalchemy>=1.4.22,<2",
   "alembic>=1.7.3,<2",
-  "fastapi>=0.68.1,<1",
-  "uvicorn>=0.11.7,<1",
   "psycopg2>=2.8.5,<3",
   "sqlalchemy-utils>=0.37.8,<1",
   "furl>=2.1.0,<3",
@@ -35,9 +33,7 @@ dependencies = [
   "fuzzywuzzy[speedup]>=0.18.0,<1",
   "typer>=0.3.2,<1",
   "pydantic[dotenv]>=1.6.1,<2",
-  "aiofiles>=0.7.0,<1",
   "selenium>=3.141.0,<4",
-  "fastapi-cache2[redis]>=0.1.6,<1",
 ]
 
 [project.urls]
