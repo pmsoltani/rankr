@@ -1,16 +1,11 @@
 import enum
 from pathlib import Path
-from typing import Callable, Union
+from typing import Any, Callable
 
-from pydantic import Field, validator
+from pydantic import validator
 
 from config.meta import ProjectMeta
 from utils.get_json import get_json
-
-
-class DialectEnum(str, enum.Enum):
-    mysql = "mysql"
-    postgresql = "postgresql"
 
 
 class BackendEnvEnum(str, enum.Enum):
@@ -24,7 +19,6 @@ class BaseConfig(ProjectMeta):
 
     ROOT_DIR: Path = Path.cwd()
     BACKEND_DIR: Path = ROOT_DIR / ProjectMeta().BACKEND_NAME
-    MIGRATIONS_DIR: Path = BACKEND_DIR / "migrations"
     DATA_DIR: Path = ROOT_DIR / "data"
     ESSENTIALS_DIR: Path = ROOT_DIR / "essentials"
     RESPONSES_DIR: Path = DATA_DIR / "responses"
@@ -40,15 +34,12 @@ class BaseConfig(ProjectMeta):
 
     GRID_DATABASE_DIR: Path = DATA_DIR / "grid" / "full_tables"
 
-    DB_DIALECT: DialectEnum = Field(..., env="DB_DIALECT")
-
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
 
     @validator(
         "BACKEND_DIR",
-        "MIGRATIONS_DIR",
         "DATA_DIR",
         "ESSENTIALS_DIR",
         "GRID_DATABASE_DIR",
@@ -75,6 +66,8 @@ class BaseConfig(ProjectMeta):
 
     @classmethod
     def read_json(
-        cls, file_path: Union[Path, str], object_hook: Callable = None
+        cls,
+        file_path: Path | str,
+        object_hook: Callable[..., Any] | None = None,
     ):
         return get_json(file_path=file_path, object_hook=object_hook)

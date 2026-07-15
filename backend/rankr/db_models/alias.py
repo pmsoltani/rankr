@@ -1,18 +1,24 @@
-from sqlalchemy import Column, ForeignKey, Integer, String
-from sqlalchemy.orm import relationship
+from typing import TYPE_CHECKING
+
+from sqlalchemy import ForeignKey, String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from rankr.db_models.base import Base
+
+
+if TYPE_CHECKING:
+    from rankr.db_models.institution import Institution
 
 
 class Alias(Base):
     __tablename__ = "alias"
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    institution_id = Column(Integer, ForeignKey("institution.id"))
-    alias = Column(String(255), nullable=False)
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    institution_id: Mapped[int | None] = mapped_column(ForeignKey("institution.id"))
+    alias: Mapped[str] = mapped_column(String(255))
 
     # Relationships
-    institution = relationship("Institution", back_populates="aliases")
+    institution: Mapped["Institution | None"] = relationship(back_populates="aliases")
 
     def __init__(self, **kwargs):
         kwargs = {k: v for k, v in kwargs.items() if k in self.__table__.c}

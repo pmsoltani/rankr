@@ -1,20 +1,26 @@
-from sqlalchemy import create_engine
-from sqlalchemy.exc import DatabaseError
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy_utils import create_database
+import sqlite3
+
+from sqlalchemy import create_engine, event
+from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
 from config import dbc
 
 
-engine = create_engine(dbc.DB_URL, encoding=dbc.DB_ENCODING)
+engine = create_engine(dbc.DB_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-Base = declarative_base(bind=engine)
+
+class Base(DeclarativeBase):
+    pass
 
 
-def validate_database():
-    try:
-        create_database(engine.url, encoding=dbc.DB_ENCODING)
-    except DatabaseError:
-        pass
+@event.listens_for(engine, "connect")
+def _set_sqlite_pragma(dbapi_connection, connection_record):
+    # SQLite disables foreign-key enforcement by default; turn it on so the
+    # relationships/cascades behave. WAL improves throughput for the bulk
+    # GRID/ranking imports.
+    if isinstance(dbapi_connection, sqlite3.Connection):
+        cursor = dbapi_connection.cursor()
+        cursor.execute("PRAGMA foreign_keys=ON")
+        cursor.execute("PRAGMA journal_mode=WAL")
+        cursor.close()

@@ -1,11 +1,29 @@
+from pathlib import Path
+
 import typer
+from sqlalchemy.schema import CreateTable
 
 from cli.commands.db import db_grid, db_init
+from rankr import db_models as d
 
 
 cli = typer.Typer()
 cli.command(name="init")(db_init.db_init)
 cli.command(name="grid")(db_grid.db_grid)
+
+
+@cli.command()
+def schema(output: Path = typer.Argument(Path("schema.sql"))):
+    """Emits the CREATE TABLE DDL (SQLite dialect) to a file.
+
+    This is the canonical schema for the downstream Cloudflare D1 database.
+    """
+    statements = [
+        str(CreateTable(table).compile(d.engine)).strip() + ";"
+        for table in d.Base.metadata.sorted_tables
+    ]
+    output.write_text("\n\n".join(statements) + "\n")
+    typer.secho(f"Wrote schema to {output}", fg=typer.colors.GREEN)
 
 
 @cli.command()
