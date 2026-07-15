@@ -19,7 +19,10 @@ class BackendConfig(BaseConfig):
     REDIS_DB: str
     REDIS_URL: str = ""
     REDIS_ENCODING: str = "utf8"
-    REDIS_CACHE_EXPIRES_AFTER: int = 2592000
+    # 7 days. The underlying data only changes a few times a year, but a short
+    # TTL (plus LRU eviction on the Redis side) bounds how many distinct
+    # request-URL keys can accumulate and keeps memory from growing unbounded.
+    REDIS_CACHE_EXPIRES_AFTER: int = 7 * 24 * 3600
 
     class Config:
         env_file = ".env"
