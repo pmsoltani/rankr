@@ -1,16 +1,12 @@
-[tool.poetry]
+[project]
 name = "rankr"
 version = "0.1.0"
 description = "A platform for aggregating different academic rankings."
-authors = ["Pooria Soltani <pooria.ms@gmail.com>"]
-license = "MIT"
+authors = [{ name = "Pooria Soltani", email = "pooria.ms@gmail.com" }]
+license = { text = "MIT" }
 readme = "README.md"
-homepage = "https://github.com/pmsoltani/rankr"
-repository = "https://github.com/pmsoltani/rankr"
-documentation = "https://github.com/pmsoltani/rankr"
-
+requires-python = ">=3.12"
 keywords = ["university-ranking", "ranking-systems", "grid"]
-
 classifiers = [
   "Development Status :: 2 - Pre-Alpha",
   "Environment :: Web Environment",
@@ -20,66 +16,79 @@ classifiers = [
   "Framework :: FastAPI",
   "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
-  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.12",
   "Topic :: Education",
-  "Typing :: Typed"
+  "Typing :: Typed",
 ]
 
-[tool.poetry.scripts]
+dependencies = [
+  "requests>=2.24.0,<3",
+  "beautifulsoup4>=4.9.1,<5",
+  "sqlalchemy>=1.4.22,<2",
+  "alembic>=1.7.3,<2",
+  "fastapi>=0.68.1,<1",
+  "uvicorn>=0.11.7,<1",
+  "psycopg2>=2.8.5,<3",
+  "sqlalchemy-utils>=0.37.8,<1",
+  "furl>=2.1.0,<3",
+  "tqdm>=4.48.2,<5",
+  "fuzzywuzzy[speedup]>=0.18.0,<1",
+  "typer>=0.3.2,<1",
+  "pydantic[dotenv]>=1.6.1,<2",
+  "aiofiles>=0.7.0,<1",
+  "selenium>=3.141.0,<4",
+  "fastapi-cache2[redis]>=0.1.6,<1",
+]
+
+[project.urls]
+homepage = "https://github.com/pmsoltani/rankr"
+repository = "https://github.com/pmsoltani/rankr"
+documentation = "https://github.com/pmsoltani/rankr"
+
+[project.scripts]
 rankr = "cli.cli:cli"
 
-[tool.poetry.dependencies]
-python = "^3.7"
-requests = "^2.24.0"
-beautifulsoup4 = "^4.9.1"
-sqlalchemy = "^1.4.22"
-alembic = "^1.7.3"
-fastapi = "^0.68.1"
-uvicorn = "^0.11.7"
-psycopg2 = "^2.8.5"
-SQLAlchemy-Utils = "^0.37.8"
-furl = "^2.1.0"
-tqdm = "^4.48.2"
-fuzzywuzzy = {extras = ["speedup"], version = "^0.18.0"}
-typer = {extras = ["all"], version = "^0.3.2"}
-pydantic = {extras = ["dotenv"], version = "^1.6.1"}
-aiofiles = "^0.7.0"
-selenium = "^3.141.0"
-fastapi-cache2 = {extras = ["redis"], version = "^0.1.6"}
+[dependency-groups]
+dev = [
+  "ruff>=0.15",
+  "ty>=0.0.1a1",
+  "pytest>=6.0.1",
+  "pytest-cov>=2.10.1",
+  "devtools[pygments]>=0.6",
+]
 
-[tool.poetry.dev-dependencies]
-flake8 = "^3.8.3"
-black = "^19.10b0"
-pytest = "^6.0.1"
-pytest-cov = {extras = ["toml"], version = "^2.10.1"}
-devtools = {extras = ["pygments"], version = "^0.6"}
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["cli", "config", "rankr", "utils"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+extend-exclude = [".venv", "dist", "build"]
+
+[tool.ruff.lint]
+# E/W = pycodestyle, F = pyflakes (flake8 parity).
+select = ["E", "F", "W"]
+extend-select = ["I", "RUF022"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+lines-after-imports = 2
+
+[tool.ruff.lint.per-file-ignores]
+# re-exports in package inits; alembic env preamble does path setup before imports
+"**/__init__.py" = ["F401"]
+"**/migrations/env.py" = ["E402", "F401"]
+
+[tool.ty.environment]
+python-version = "3.12"
+
+[tool.ty.rules]
+all = "warn"
+
 
 [tool.coverage.run]
 omit = [".venv/*"]
-
-[tool.black]
-line-length = 80
-target-version = ['py36', 'py37', 'py38']
-include = '\.pyi?$'
-exclude = '''
-/(
-    \.eggs
-  | \.git
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | _build
-  | buck-out
-  | build
-  | dist
-  # The following are specific to Black, you probably don't want those.
-  | blib2to3
-  | tests/data
-  | profiling
-)/
-'''
-
-[build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
