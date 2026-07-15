@@ -61,7 +61,11 @@ services:
   redis:
     image: redis:6.2.5-alpine
     env_file: .env
-    command: redis-server --requirepass ${REDIS_PASS}
+    # Bound Redis memory with LRU eviction.
+    command: >
+      redis-server --requirepass ${REDIS_PASS}
+      --maxmemory 256mb --maxmemory-policy allkeys-lru
+    mem_limit: 320m
     networks:
       - traefik-public-network
     ports:

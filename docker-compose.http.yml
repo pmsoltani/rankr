@@ -15,6 +15,9 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
+    # Per-container memory caps (tune to your VPS) so a single runaway
+    # container is killed and restarted instead of crashing the whole host.
+    mem_limit: 768m
     networks:
       - traefik-public-network
     ports:
@@ -43,6 +46,7 @@ services:
       - traefik.http.routers.${STACK_NAME}-adminer-http.rule=HOST(`${DOMAIN}`) && PathPrefix(`/adminer`)
 
       - traefik.http.services.${STACK_NAME}-adminer.loadbalancer.server.port=${ADMINER_PORT}
+    mem_limit: 128m
     networks:
       - traefik-public-network
     ports:
@@ -52,7 +56,13 @@ services:
   redis:
     image: redis:6.2.5-alpine
     env_file: .env
-    command: redis-server --requirepass ${REDIS_PASS}
+    # Cap Redis memory and evict least-recently-used keys instead of growing
+    # unbounded (the cache uses a 30-day TTL keyed by request URL, which
+    # otherwise accumulates until the host runs out of RAM).
+    command: >
+      redis-server --requirepass ${REDIS_PASS}
+      --maxmemory 256mb --maxmemory-policy allkeys-lru
+    mem_limit: 320m
     networks:
       - traefik-public-network
     ports:
@@ -91,6 +101,7 @@ services:
       - traefik.http.middlewares.${STACK_NAME}-backend-ratelimit.ratelimit.period=1
 
       - traefik.http.services.${STACK_NAME}-backend.loadbalancer.server.port=${BACKEND_PORT}
+    mem_limit: 512m
     networks:
       - traefik-public-network
     ports:
@@ -122,6 +133,7 @@ services:
       - traefik.http.routers.${STACK_NAME}-frontend-http.rule=HOST(`${DOMAIN}`) && PathPrefix(`/`)
 
       - traefik.http.services.${STACK_NAME}-frontend.loadbalancer.server.port=80
+    mem_limit: 128m
     networks:
       - traefik-public-network
     restart: always
@@ -162,6 +174,7 @@ services:
       - traefik.http.routers.${STACK_NAME}-traefik-http.service=api@internal
 
       - traefik.http.services.${STACK_NAME}-traefik.loadbalancer.server.port=${TRAEFIK_PORT}
+    mem_limit: 192m
     networks:
       - traefik-public-network
     ports:
