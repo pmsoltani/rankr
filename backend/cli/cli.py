@@ -1,12 +1,10 @@
 import typer
 
-from cli.commands import cmd_crawl, cmd_db, cmd_flake8, cmd_pytest, cmd_start
+from cli.commands import cmd_crawl, cmd_db, cmd_pytest, cmd_start
 
 
 cli = typer.Typer()
 cli.command(name="crawl")(cmd_crawl.crawl)
-
-cli.command(name="flake8")(cmd_flake8.flake8)
 
 cli.command(name="start")(cmd_start.start)
 
