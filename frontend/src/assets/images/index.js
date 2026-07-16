@@ -15,6 +15,9 @@ export { default as githubInverse } from './githubInverse.svg'
 export { default as gridInverse } from './gridInverse.svg'
 export { default as gridDisabled } from './gridDisabled.svg'
 
+export { default as rorInverse } from './rorInverse.svg'
+export { default as rorDisabled } from './rorDisabled.svg'
+
 export { default as qsColor } from './qsColor.svg'
 export { default as qsDisabled } from './qsDisabled.svg'
 
