@@ -1,0 +1,71 @@
+---
+import appLogoInverse from "@/assets/images/appLogoInverse.svg";
+import githubInverse from "@/assets/images/githubInverse.svg";
+import qsColor from "@/assets/images/qsColor.svg";
+import rorInverse from "@/assets/images/rorInverse.svg";
+import shanghaiColor from "@/assets/images/shanghaiColor.svg";
+import theColor from "@/assets/images/theColor.svg";
+import { RANKING_SYSTEMS, SITE } from "@/lib/site";
+
+const rankingLinks = [
+  { icon: qsColor.src, ...RANKING_SYSTEMS.qs },
+  { icon: shanghaiColor.src, ...RANKING_SYSTEMS.shanghai },
+  { icon: theColor.src, ...RANKING_SYSTEMS.the },
+];
+---
+
+<footer class="mt-16 bg-neutral-900 text-neutral-100">
+  <div class="mx-auto grid max-w-300 gap-8 px-6 py-10 sm:grid-cols-2 md:grid-cols-4">
+    <div>
+      <img src={appLogoInverse.src} alt="rankr logo" class="h-9" />
+    </div>
+
+    <nav class="flex flex-col gap-2 text-sm" aria-label="Ranking systems">
+      {
+        rankingLinks.map((rs) => (
+          <a
+            href={rs.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-2 text-neutral-300 hover:text-white"
+          >
+            <img src={rs.icon} alt="" class="size-4" />
+            {rs.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <nav class="flex flex-col gap-2 text-sm" aria-label="Resources">
+      <a
+        href={SITE.ror.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-2 text-neutral-300 hover:text-white"
+      >
+        <img src={rorInverse.src} alt="" class="size-4" />
+        {SITE.ror.label}
+      </a>
+      <a
+        href={SITE.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-2 text-neutral-300 hover:text-white"
+      >
+        <img src={githubInverse.src} alt="" class="size-4" />
+        rankr on GitHub
+      </a>
+      <a href="/about" class="text-neutral-300 hover:text-white">About rankr</a>
+    </nav>
+
+    <p class="text-sm text-neutral-400">
+      Made with <span class="text-red-500">&hearts;</span> by{" "}
+      <a
+        href={SITE.author.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="underline hover:text-white">{SITE.author.name}</a
+      >
+    </p>
+  </div>
+</footer>

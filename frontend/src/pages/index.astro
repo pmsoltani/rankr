@@ -1,19 +1,64 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import appLogo from "@/assets/images/appLogo.svg";
+import qsColor from "@/assets/images/qsColor.svg";
+import shanghaiColor from "@/assets/images/shanghaiColor.svg";
+import theColor from "@/assets/images/theColor.svg";
+import { RANKING_SYSTEMS } from "@/lib/site";
 
 export const prerender = true;
+
+const systems = [
+  { id: "qs", icon: qsColor.src, ...RANKING_SYSTEMS.qs },
+  { id: "shanghai", icon: shanghaiColor.src, ...RANKING_SYSTEMS.shanghai },
+  { id: "the", icon: theColor.src, ...RANKING_SYSTEMS.the },
+];
 ---
 
-<Layout title="rankr">
-  <main
-    class="mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center gap-4 p-8 text-center"
+<Layout showNav={false}>
+  <section
+    class="mx-auto flex max-w-300 flex-col items-center gap-8 px-4 py-16 text-center"
   >
-    <h1 class="text-4xl font-bold tracking-tight">rankr</h1>
-    <p class="text-muted-foreground text-lg">
-      Aggregating the results of different academic rankings.
+    <img src={appLogo.src} alt="rankr logo" class="w-64 max-w-[70%]" />
+    <p class="text-muted-foreground max-w-xl text-lg text-balance">
+      Aggregating the results of different academic rankings, to help you get a clearer
+      picture of your next place of study.
     </p>
-    <p class="text-muted-foreground text-sm">
-      Astro + Tailwind + shadcn scaffold is live. Pages are being ported.
-    </p>
-  </main>
+
+    {/* TODO(islands batch): replace with the interactive <SiteSearch client:load /> */}
+    <div
+      class="text-muted-foreground flex w-full max-w-md items-center gap-2 rounded-lg border bg-white px-4 py-3 shadow-sm"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.3-4.3"></path>
+      </svg>
+      <span>Search for institutions…</span>
+    </div>
+
+    <div class="grid w-full max-w-3xl gap-4 pt-4 sm:grid-cols-3">
+      {
+        systems.map((rs) => (
+          <a
+            href={`/rankings/${rs.id}`}
+            class="flex flex-col items-center gap-2 rounded-lg border bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
+          >
+            <img src={rs.icon} alt="" class="size-10" />
+            <span class="font-medium">{rs.alias}</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
 </Layout>

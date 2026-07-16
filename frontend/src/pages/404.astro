@@ -1,0 +1,30 @@
+---
+import Layout from "@/layouts/Layout.astro";
+
+export const prerender = true;
+---
+
+<Layout title="rankr: Not Found" description="Page not found">
+  <section
+    class="mx-auto flex max-w-xl flex-col items-center gap-4 px-4 py-24 text-center"
+  >
+    <p class="text-6xl font-bold tracking-tight">404</p>
+    <h1 class="text-2xl font-semibold">Page not found</h1>
+    <p class="text-muted-foreground">We couldn't find the page you were looking for.</p>
+    <div class="flex gap-3 pt-2">
+      <button
+        type="button"
+        onclick="history.back()"
+        class="inline-flex h-9 items-center rounded-md border px-4 text-sm font-medium hover:bg-neutral-100"
+      >
+        Go back
+      </button>
+      <a
+        href="/"
+        class="bg-primary text-primary-foreground inline-flex h-9 items-center rounded-md px-4 text-sm font-medium hover:opacity-90"
+      >
+        Home
+      </a>
+    </div>
+  </section>
+</Layout>

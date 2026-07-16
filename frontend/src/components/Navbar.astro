@@ -1,0 +1,33 @@
+---
+import appLogo from "@/assets/images/appLogo.svg";
+---
+
+<header class="sticky top-0 z-40 border-b bg-white/90 backdrop-blur">
+  <div class="mx-auto flex h-14 max-w-300 items-center justify-between gap-4 px-4">
+    <a href="/" aria-label="rankr home" class="flex items-center">
+      <img src={appLogo.src} alt="rankr logo" class="h-9" />
+    </a>
+
+    {/* TODO(islands batch): replace with the interactive <SiteSearch client:load /> */}
+    <div
+      class="text-muted-foreground flex w-full max-w-sm items-center gap-2 rounded-md border bg-neutral-50 px-3 py-1.5 text-sm"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.3-4.3"></path>
+      </svg>
+      <span>Search for institutions…</span>
+    </div>
+  </div>
+</header>

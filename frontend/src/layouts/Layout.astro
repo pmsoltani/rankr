@@ -1,15 +1,25 @@
 ---
 import "@/styles/global.css";
+import "flag-icons/css/flag-icons.min.css";
+
+import Footer from "@/components/Footer.astro";
+import Navbar from "@/components/Navbar.astro";
+import { SITE } from "@/lib/site";
+import appLogo from "@/assets/images/appLogo.svg";
 
 interface Props {
   title?: string;
   description?: string;
+  showNav?: boolean;
 }
 
 const {
-  title = "rankr",
-  description = "Aggregating the results of different academic rankings.",
+  title = SITE.name,
+  description = SITE.description,
+  showNav = true,
 } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, SITE.url).href;
 ---
 
 <!doctype html>
@@ -18,10 +28,18 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={appLogo.src} />
+    <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.ico" />
     <title>{title}</title>
   </head>
-  <body class="min-h-screen antialiased">
-    <slot />
+  <body class="flex min-h-screen flex-col bg-neutral-100">
+    {showNav && <Navbar />}
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>
