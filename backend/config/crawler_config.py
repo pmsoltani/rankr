@@ -24,6 +24,7 @@ class CrawlerConfig(BaseConfig):
 
     DOWNLOAD_DIR: Path = Path()
 
+    EXCLUSIONS: list[str] = []
     COUNTRY_NAMES: dict[str, str] = {}
     COUNTRIES: dict[str, dict[str, str]] = {}
 
@@ -34,6 +35,11 @@ class CrawlerConfig(BaseConfig):
     @classmethod
     def _headers_value(cls, headers, info: ValidationInfo) -> dict[str, str]:
         return {"User-Agent": info.data["USER_AGENT"]}
+
+    @field_validator("EXCLUSIONS")
+    @classmethod
+    def _load_exclusions(cls, exclusions, info: ValidationInfo):
+        return cls.read_json(info.data["EXCLUSIONS_FILE"])
 
     @field_validator("COUNTRY_NAMES")
     @classmethod

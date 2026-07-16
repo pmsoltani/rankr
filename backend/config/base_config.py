@@ -33,6 +33,7 @@ class BaseConfig(ProjectMeta):
     THE_URLS_FILE: Path = ESSENTIALS_DIR / "the_urls.json"
 
     ROR_DATA_DIR: Path = DATA_DIR / "ror"
+    EXCLUSIONS_FILE: Path = ESSENTIALS_DIR / "exclusions.json"
 
     @computed_field
     @property
@@ -60,6 +61,7 @@ class BaseConfig(ProjectMeta):
     @field_validator(
         "COUNTRIES_FILE",
         "COUNTRY_NAMES_FILE",
+        "EXCLUSIONS_FILE",
         "MATCHES_FILE",
         "RANKINGS_FILE",
         "QS_URLS_FILE",

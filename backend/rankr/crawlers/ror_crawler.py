@@ -67,6 +67,8 @@ class RORCrawler:
             return None
 
         ror_id = record["id"].rsplit("/", 1)[-1]
+        if ror_id in crwc.EXCLUSIONS:
+            return None
 
         grid_id = None
         for ext in record.get("external_ids", []):
