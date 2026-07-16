@@ -58,21 +58,20 @@ class QSCrawler(CrawlerMixin):
         raw_data = json.loads(page.text)
 
         # Column names are separated from actual data.
-        columns = {}
+        columns: dict[str, str] = {}
         for col in raw_data["columns"]:
             col_disp = BeautifulSoup(col["title"], "html.parser").text
-            col_name = qsc.FIELDS.get(col_disp.lower(), None)
+            col_name = qsc.FIELDS.get(col_disp.lower())
             if not col_name:  # ignoring irrelevant data
                 if "university" in col_disp.lower():
-                    col_name = qsc.FIELDS.get("university")
-                    columns[col["data"]] = col_name
+                    columns[col["data"]] = qsc.FIELDS["university"]
                 continue
             columns[col["data"]] = col_name
 
         # processing raw_data
         processed_data: list[dict[str, str]] = []
         for row in raw_data["data"]:
-            values = {}
+            values: dict[str, str] = {}
             for col in row:
                 if col not in columns:
                     continue
@@ -90,9 +89,7 @@ class QSCrawler(CrawlerMixin):
                 if columns[col] == "institution":
                     a_tag = value.find("a")
                     assert isinstance(a_tag, Tag)
-                    url = None
-                    if a_tag:
-                        url = furl(qsc.BASE_URL).join(a_tag["href"]).url
+                    url = furl(qsc.BASE_URL).join(a_tag["href"]).url
                     values["url"] = url
                     values[columns[col]] = value.text.strip()
                     continue

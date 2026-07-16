@@ -61,12 +61,12 @@ class GRIDCrawler:
             try:
                 raw_country = s.CountryCreate(country=addresses[0].pop("country"))
                 country = countries[raw_country.country]
-                institution = s.InstitutionCreate(
-                    **{**row, **addresses[0], "country_id": country.id}
+                institution = s.InstitutionCreate.model_validate(
+                    {**row, **addresses[0], "country_id": country.id}
                 )
                 soup.append(country.country)
             except IndexError:
-                institution = s.InstitutionCreate(**row)
+                institution = s.InstitutionCreate.model_validate(row)
 
             soup.extend(i["acronym"] for i in acronyms)
             soup.extend(i["alias"] for i in aliases)

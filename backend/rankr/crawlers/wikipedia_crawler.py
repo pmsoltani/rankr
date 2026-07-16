@@ -3,7 +3,7 @@ import time
 from pathlib import Path
 
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 from furl import furl
 
 from config import wikic
@@ -55,6 +55,8 @@ class WikipediaCrawler(object):
 
         wiki_page = BeautifulSoup(wiki_page.content, "html.parser")
         info_card = wiki_page.find("table", attrs={"class": ["infobox", "vcard"]})
+        if not isinstance(info_card, Tag):
+            return None
         logo_page_elem = info_card.find_all("a", attrs={"class": "image"})
         if not logo_page_elem:
             return None
@@ -74,10 +76,14 @@ class WikipediaCrawler(object):
             requests.Response | None: The stream of logo file
         """
         logo_elem = self.page.find("div", attrs={"id": "file"})
-        if not logo_elem:
+        if not isinstance(logo_elem, Tag):
             return None
 
-        logo_url = furl(logo_elem.find("a")["href"]).set(scheme="https").url
+        logo_anchor = logo_elem.find("a")
+        if not isinstance(logo_anchor, Tag):
+            return None
+
+        logo_url = furl(logo_anchor["href"]).set(scheme="https").url
         file_ext = Path(logo_url).suffix.lower()
         if file_ext not in [".png", ".svg"]:
             return None

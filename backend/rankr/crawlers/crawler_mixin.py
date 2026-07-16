@@ -1,6 +1,6 @@
 import time
 from pathlib import Path
-from typing import Callable
+from typing import Any, Callable
 
 import typer
 from tqdm import tqdm
@@ -15,8 +15,9 @@ from utils import csv_export
 class CrawlerMixin:
     """Common tools and settings across different ranking crawlers"""
 
-    _get_page: Callable
-    _get_tbl: Callable
+    # Implemented by each concrete crawler subclass.
+    _get_page: Callable[..., Any]
+    _get_tbl: Callable[..., Any]
     download_dir: Path
     processed_data: list[dict[str, str]]
     url: str

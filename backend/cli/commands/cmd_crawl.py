@@ -5,6 +5,7 @@ import typer
 from sqlalchemy.orm import Session
 
 from config import crwc, qsc, shac, thec, wikic
+from config import enums as e
 from rankr import crawlers as c
 from rankr import db_models as d
 from rankr import repos as r
@@ -31,9 +32,9 @@ def engine_select(engine: str) -> tuple[Any, Any]:
         c.WikipediaCrawler,
     ]
     engines = zip(crwc.SUPPORTED_ENGINES, zip(crawler_configs, crawler_classes))
-    for e in engines:
-        if e[0] == engine:
-            return e[1]
+    for name, config_and_crawler in engines:
+        if name == engine:
+            return config_and_crawler
     raise typer.BadParameter(
         f"Wrong engine value '{engine}'. "
         + f"Only {crwc.SUPPORTED_ENGINES} are supported."
@@ -50,14 +51,22 @@ def engine_check(value: str) -> list[str]:
 
 
 def get_wikipedia_urls() -> list[dict[str, str]]:
-    """Retrieves the list of Wikipedia URLS for ranked institutions."""
+    """Retrieves the list of Wikipedia URLs for ranked institutions.
+
+    The Wikipedia URL is stored as a `link` row (type=wikipedia), not on the
+    institution itself, so we join through the links relationship.
+    """
     db: Session
     with closing(d.SessionLocal()) as db:
-        query = (d.Institution.grid_id, d.Institution.wikipedia_url)
-        institutions = (
-            db.query(*query).join(d.Institution.rankings).group_by(*query).all()
+        rows = (
+            db.query(d.Institution.grid_id, d.Link.link.label("wikipedia_url"))
+            .join(d.Institution.links)
+            .join(d.Institution.rankings)
+            .filter(d.Link.type == e.LinkTypeEnum.wikipedia)
+            .group_by(d.Institution.grid_id, d.Link.link)
+            .all()
         )
-    return [institution._asdict() for institution in institutions]
+    return [row._asdict() for row in rows]
 
 
 def crawl(
@@ -93,12 +102,12 @@ def crawl(
 
         with closing(d.SessionLocal()) as db:
             institution_repo = r.InstitutionRepo(db)
-            soup = {}  # Group soup by country for better performance.
+            # Group soup by country for better performance.
+            soup: dict[str, dict[str, str]] = {}
             for inst in institution_repo.get_db_institutions(limit=0):
-                try:
-                    soup[inst.country.country][inst.soup] = inst.grid_id
-                except KeyError:
-                    soup[inst.country.country] = {inst.soup: inst.grid_id}
+                if not inst.country or inst.soup is None:
+                    continue
+                soup.setdefault(inst.country.country, {})[inst.soup] = inst.grid_id
 
             for page in config.URLS:
                 if not page.get("crawl"):
