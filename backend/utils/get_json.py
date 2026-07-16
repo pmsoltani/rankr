@@ -12,8 +12,7 @@ def get_json(
 
     Args:
         file_path (Path | str): The path to the .json file
-        object_hook (Callable | None, optional): A function to process values.
-        Defaults to None.
+        object_hook (Callable | None): A function to process values. Defaults to None.
 
     Returns:
         The contents of the .json file

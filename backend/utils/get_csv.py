@@ -14,10 +14,8 @@ def get_csv(
     Args:
         file_path (Path | str): The path to the .csv file
         key (str): The csv field name to perform the group by
-        encoding (str, optional): The encoding to be used when reading
-        the .csv file. Defaults to "utf-8".
-        delimiter (str, optional): The delimiter used in the .csv file.
-        Defaults to ",".
+        encoding (str): The encoding used when reading the file. Defaults to "utf-8".
+        delimiter (str): The delimiter used in the .csv file. Defaults to ",".
 
     Returns:
         dict[str, list[dict[str, str]]]: A dictionary of grouped items

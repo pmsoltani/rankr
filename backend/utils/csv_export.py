@@ -13,8 +13,7 @@ def csv_export(
     Args:
         file_path (Path | str): The path to the .csv file
         data (list[dict[str, str]]): The data to be exported
-        encoding (str, optional): The encoding to be used when writing
-        the .csv file. Defaults to "utf-8".
+        encoding (str): The encoding used when writing the file. Defaults to "utf-8".
     """
     with io.open(file_path, "w", newline="", encoding=encoding) as csv_file:
         writer = csv.DictWriter(csv_file, data[0].keys(), quoting=csv.QUOTE_ALL)

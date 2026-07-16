@@ -11,9 +11,9 @@ def fuzzy_matcher(
 ) -> str | None:
     """Selects the best matching institution from a set of choices.
 
-    First the function narrows-down the list of choices by filtering
-    the institution's country. It then uses the fuzzywuzzy library's
-    token_set_ratio method to extract only 1 institution from 'soup'.
+    First the function narrows-down the list of choices by filtering the institution's
+    country. It then uses the fuzzywuzzy library's token_set_ratio method to extract
+    only 1 institution from 'soup'.
 
     'soup' if a dictionary like this:
 
@@ -26,16 +26,13 @@ def fuzzy_matcher(
 
     "University of Sydney | Australia | USYD | Sydney University"
 
-    which is a mix of institution's name, country, acroynms, labels and
-    aliases.
+    which is a mix of institution's name, country, acroynms, labels and aliases.
 
     Args:
         inst_name (str): The institution name to be matched
         inst_country (str): The institution's country
-        soup (dict[str, dict[str, str]]): A set of choices for matching
-        the institution
-        score_cutoff (int, optional): The accuracy of the algorithm.
-        Defaults to 100.
+        soup (dict[str, dict[str, str]]): A set of choices for matching the institution.
+        score_cutoff (int): The accuracy of the algorithm. Defaults to 100.
 
     Returns:
         str | None: The GRID ID of the best matching institution

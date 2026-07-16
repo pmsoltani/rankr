@@ -9,8 +9,7 @@ def db_init(drop: bool = typer.Option(False, help="Drop the database first?")):
     """Creates the SQLite database file and all of its tables.
 
     Args:
-        drop (bool, optional): Deletes the database file before creating it.
-        Defaults to False.
+        drop (bool): Deletes the database file before creating it. Defaults to False.
     """
     if drop:
         db_path = d.engine.url.database

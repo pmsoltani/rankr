@@ -9,15 +9,13 @@ def get_row(
 ) -> Iterator[dict[str, str]]:
     """Yields a row from a .csv file.
 
-    This simple function is used to yield the specified .csv file
-    row-by-row, so as not to consume too much memory.
+    This simple function is used to yield the specified .csv file row-by-row, so as
+    not to consume too much memory.
 
     Args:
         file_path (Path | str): The path to the .csv file
-        encoding (str, optional): The encoding to be used when reading
-        the .csv file. Defaults to "utf-8".
-        delimiter (str, optional): The delimiter used in the .csv file.
-        Defaults to ",".
+        encoding (str): The encoding used when reading the file. Defaults to "utf-8".
+        delimiter (str): The delimiter used in the .csv file. Defaults to ",".
 
     Yields:
         Iterator[dict[str, str]]: A row of .csv file as a dictionary

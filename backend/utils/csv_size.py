@@ -8,15 +8,12 @@ def csv_size(
 ) -> int:
     """Returns the number of rows in a .csv file.
 
-    This function uses python's generators, so it's both fast and
-    efficient.
+    This function uses python's generators, so it's both fast and efficient.
 
     Args:
         file_path (Path): The path to the .csv file
-        encoding (str, optional): The encoding to be used when reading
-        the .csv file. Defaults to "utf-8".
-        delimiter (str, optional): The delimiter used in the .csv file.
-        Defaults to ",".
+        encoding (str): The encoding used when reading the file. Defaults to "utf-8".
+        delimiter (str): The delimiter used in the .csv file. Defaults to ",".
 
     Returns:
         int: The number of rows in the .csv file
