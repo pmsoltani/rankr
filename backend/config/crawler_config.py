@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Any
 
-from pydantic import Field, HttpUrl, validator
+from pydantic import ValidationInfo, field_validator
 
 from config.base_config import BaseConfig
 from config.db_config import DBConfig
@@ -30,38 +30,47 @@ class CrawlerConfig(BaseConfig):
     RANKINGS: dict[str, Any] = {}
     SUPPORTED_ENGINES: list[str] = []
 
-    @validator("HEADERS")
-    def _headers_value(cls, headers, values) -> dict[str, str]:
-        return {"User-Agent": values["USER_AGENT"]}
+    @field_validator("HEADERS")
+    @classmethod
+    def _headers_value(cls, headers, info: ValidationInfo) -> dict[str, str]:
+        return {"User-Agent": info.data["USER_AGENT"]}
 
-    @validator("COUNTRY_NAMES")
-    def _load_country_names(cls, country_names, values):
-        return cls.read_json(values["COUNTRY_NAMES_FILE"])
+    @field_validator("COUNTRY_NAMES")
+    @classmethod
+    def _load_country_names(cls, country_names, info: ValidationInfo):
+        return cls.read_json(info.data["COUNTRY_NAMES_FILE"])
 
-    @validator("COUNTRIES")
+    @field_validator("COUNTRIES")
+    @classmethod
     def _load_countries(cls, countries):
         return {row["country"]: row for row in get_row(dbc.COUNTRIES_FILE)}
 
-    @validator("RANKINGS")
-    def _load_rankings(cls, rankings, values) -> dict[str, Any]:
-        return cls.read_json(values["RANKINGS_FILE"])
+    @field_validator("RANKINGS")
+    @classmethod
+    def _load_rankings(cls, rankings, info: ValidationInfo) -> dict[str, Any]:
+        return cls.read_json(info.data["RANKINGS_FILE"])
 
-    @validator("SUPPORTED_ENGINES")
-    def _resolve_supported_engines(cls, supported_engines, values) -> list[str]:
-        return list(values["RANKINGS"]["metrics"]) + ["wikipedia"]
+    @field_validator("SUPPORTED_ENGINES")
+    @classmethod
+    def _resolve_supported_engines(
+        cls, supported_engines, info: ValidationInfo
+    ) -> list[str]:
+        return list(info.data["RANKINGS"]["metrics"]) + ["wikipedia"]
 
 
 class QSConfig(CrawlerConfig):
-    BASE_URL: HttpUrl = Field("https://www.topuniversities.com/")
+    BASE_URL: str = "https://www.topuniversities.com/"
     URLS: list[dict[str, Any]] = []
 
-    @validator("URLS")
-    def _load_urls(cls, urls, values) -> list[dict[str, Any]]:
-        return cls.read_json(values["QS_URLS_FILE"])
+    @field_validator("URLS")
+    @classmethod
+    def _load_urls(cls, urls, info: ValidationInfo) -> list[dict[str, Any]]:
+        return cls.read_json(info.data["QS_URLS_FILE"])
 
-    @validator("DOWNLOAD_DIR")
-    def _download_dir_value(cls, download_dir, values) -> Path:
-        return values["DATA_DIR"] / "qs"
+    @field_validator("DOWNLOAD_DIR")
+    @classmethod
+    def _download_dir_value(cls, download_dir, info: ValidationInfo) -> Path:
+        return info.data["DATA_DIR"] / "qs"
 
     FIELDS: dict[str, str] = {
         "rank": "rank",
@@ -85,16 +94,18 @@ class QSConfig(CrawlerConfig):
 
 
 class ShanghaiConfig(CrawlerConfig):
-    BASE_URL: HttpUrl = Field("http://www.shanghairanking.com/")
+    BASE_URL: str = "http://www.shanghairanking.com/"
     URLS: list[dict[str, Any]] = []
 
-    @validator("URLS")
-    def _load_urls(cls, urls, values) -> list[dict[str, Any]]:
-        return cls.read_json(values["SHANGHAI_URLS_FILE"])
+    @field_validator("URLS")
+    @classmethod
+    def _load_urls(cls, urls, info: ValidationInfo) -> list[dict[str, Any]]:
+        return cls.read_json(info.data["SHANGHAI_URLS_FILE"])
 
-    @validator("DOWNLOAD_DIR")
-    def _download_dir_value(cls, download_dir, values) -> Path:
-        return values["DATA_DIR"] / "shanghai"
+    @field_validator("DOWNLOAD_DIR")
+    @classmethod
+    def _download_dir_value(cls, download_dir, info: ValidationInfo) -> Path:
+        return info.data["DATA_DIR"] / "shanghai"
 
     FIELDS: dict[str, str] = {
         "world rank": "rank",
@@ -116,16 +127,18 @@ class ShanghaiConfig(CrawlerConfig):
 
 
 class THEConfig(CrawlerConfig):
-    BASE_URL: HttpUrl = Field("https://www.timeshighereducation.com/")
+    BASE_URL: str = "https://www.timeshighereducation.com/"
     URLS: list[dict[str, Any]] = []
 
-    @validator("URLS")
-    def _load_urls(cls, urls, values) -> list[dict[str, Any]]:
-        return cls.read_json(values["THE_URLS_FILE"])
+    @field_validator("URLS")
+    @classmethod
+    def _load_urls(cls, urls, info: ValidationInfo) -> list[dict[str, Any]]:
+        return cls.read_json(info.data["THE_URLS_FILE"])
 
-    @validator("DOWNLOAD_DIR")
-    def _download_dir_value(cls, download_dir, values) -> Path:
-        return values["DATA_DIR"] / "the"
+    @field_validator("DOWNLOAD_DIR")
+    @classmethod
+    def _download_dir_value(cls, download_dir, info: ValidationInfo) -> Path:
+        return info.data["DATA_DIR"] / "the"
 
     FIELDS: dict[str, str] = {
         "rank": "rank",
@@ -146,10 +159,11 @@ class THEConfig(CrawlerConfig):
 
 
 class WikipediaConfig(CrawlerConfig):
-    BASE_URL: HttpUrl = Field("https://en.wikipedia.org/")
+    BASE_URL: str = "https://en.wikipedia.org/"
 
     ALLOWED_LOGO_FORMATS: list[str] = [".svg", ".png"]
 
-    @validator("DOWNLOAD_DIR")
-    def _download_dir_value(cls, download_dir, values) -> Path:
-        return values["DATA_DIR"] / "wikipedia"
+    @field_validator("DOWNLOAD_DIR")
+    @classmethod
+    def _download_dir_value(cls, download_dir, info: ValidationInfo) -> Path:
+        return info.data["DATA_DIR"] / "wikipedia"

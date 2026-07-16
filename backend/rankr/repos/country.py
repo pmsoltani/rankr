@@ -17,7 +17,7 @@ class CountryRepo(BaseRepo):
 
     def get_countries(
         self,
-        search_query: str = None,
+        search_query: str | None = None,
         offset: int = 0,
         limit: int | None = 25,
     ) -> list[d.Country]:

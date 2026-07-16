@@ -2,9 +2,9 @@ from pydantic import BaseModel
 
 
 class AliasBase(BaseModel):
-    id: int | None
-    institution_id: int | None
-    alias: str | None
+    id: int | None = None
+    institution_id: int | None = None
+    alias: str | None = None
 
 
 class AliasCreate(AliasBase):

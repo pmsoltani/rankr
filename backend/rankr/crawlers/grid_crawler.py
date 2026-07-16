@@ -73,23 +73,27 @@ class GRIDCrawler:
             soup.extend(i["label"] for i in labels)
 
             institution.soup = " | ".join(i for i in soup)
-            db_institution = d.Institution(**institution.dict(exclude_unset=True))
+            db_institution = d.Institution(**institution.model_dump(exclude_unset=True))
 
             # Validate & clean each related row through its pydantic schema
             # before building the ORM object. institution_id is left unset here
             # and populated by SQLAlchemy via the relationship assignment below.
             acronyms = [
-                d.Acronym(**s.AcronymBase(**i).dict(exclude_unset=True))
+                d.Acronym(**s.AcronymBase(**i).model_dump(exclude_unset=True))
                 for i in acronyms
             ]
             aliases = [
-                d.Alias(**s.AliasBase(**i).dict(exclude_unset=True)) for i in aliases
+                d.Alias(**s.AliasBase(**i).model_dump(exclude_unset=True))
+                for i in aliases
             ]
             labels = [
-                d.Label(**s.LabelBase(**i).dict(exclude_unset=True)) for i in labels
+                d.Label(**s.LabelBase(**i).model_dump(exclude_unset=True))
+                for i in labels
             ]
             links = [d.Link(**i) for i in links]
-            types = [d.Type(**s.TypeBase(**i).dict(exclude_unset=True)) for i in types]
+            types = [
+                d.Type(**s.TypeBase(**i).model_dump(exclude_unset=True)) for i in types
+            ]
 
             try:
                 wikipedia_url = s.LinkCreate(
@@ -97,7 +101,7 @@ class GRIDCrawler:
                     link=row["wikipedia_url"],
                     type="wikipedia",
                 )
-                wikipedia_url_dict = wikipedia_url.dict(exclude_unset=True)
+                wikipedia_url_dict = wikipedia_url.model_dump(exclude_unset=True)
                 wikipedia_url_dict.pop("institution_id")
                 links.append(d.Link(**wikipedia_url_dict))
             except ValidationError:

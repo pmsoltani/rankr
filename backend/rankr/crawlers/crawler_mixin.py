@@ -12,7 +12,7 @@ from rankr import schemas as s
 from utils import csv_export
 
 
-class CrawlerMixin(object):
+class CrawlerMixin:
     """Common tools and settings across different ranking crawlers"""
 
     _get_page: Callable
@@ -140,7 +140,7 @@ class CrawlerMixin(object):
                     type=row["ranking_system"],
                     link=row["url"],
                 )
-                db_institution.links.append(d.Link(**link.dict()))
+                db_institution.links.append(d.Link(**link.model_dump()))
 
             for col in row:
                 if col in non_metric_cols:
@@ -157,7 +157,7 @@ class CrawlerMixin(object):
                     value_type=metric_types[row["ranking_system"]][col]["type"],
                     value=row[col],
                 )
-                db_institution.rankings.append(d.Ranking(**ranking.dict()))
+                db_institution.rankings.append(d.Ranking(**ranking.model_dump()))
 
             matched_institutions.append(db_institution)
 

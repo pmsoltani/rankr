@@ -18,11 +18,11 @@ class InstitutionRepo(BaseRepo):
         return self._create_db_objects(new_db_institutions, log=log)
 
     def get_institution_by_grid_id(self, grid_id: str) -> d.Institution | None:
-        return self._get_db_object([self.db_model.grid_id == grid_id])
+        return self._get_db_object([d.Institution.grid_id == grid_id])
 
     def get_db_institutions(
         self,
-        search_query: str = None,
+        search_query: str | None = None,
         offset: int = 0,
         limit: int | None = 25,
     ) -> list[d.Institution]:

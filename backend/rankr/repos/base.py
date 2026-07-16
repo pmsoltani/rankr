@@ -1,7 +1,7 @@
-from typing import Type
+from typing import Any, Type
 
 import typer
-from sqlalchemy import or_
+from sqlalchemy import or_, true
 from sqlalchemy.orm import Session
 
 from rankr import db_models as d
@@ -14,7 +14,7 @@ class BaseRepo:
 
     def _create_objects(self, new_objects, log: bool = True):
         db_objects = [
-            self.db_model(**new_obj.dict(exclude_unset=True)) for new_obj in new_objects
+            self.db_model(**obj.model_dump(exclude_unset=True)) for obj in new_objects
         ]
         self.db.add_all(db_objects)
         self.db.commit()
@@ -37,10 +37,10 @@ class BaseRepo:
             )
         return new_db_objects
 
-    def _get_db_object(self, flt: list = []):
+    def _get_db_object(self, flt: list[Any] = []):
         return self.db.query(self.db_model).filter(*flt).first()
 
-    def _get_db_object_by_relation(self, join, flt: list):
+    def _get_db_object_by_relation(self, join, flt: list[Any]):
         return self.db.query(self.db_model).join(join).filter(*flt).first()
 
     def _get_db_objects(
@@ -48,8 +48,8 @@ class BaseRepo:
         join: Type[d.Base] | None = None,
         distinct: bool = False,
         search_query: str | None = None,
-        flt: list = [],
-        order_by: list = [],
+        flt: list[Any] = [],
+        order_by: list[Any] = [],
         offset: int = 0,
         limit: int | None = 25,
     ):
@@ -69,7 +69,7 @@ class BaseRepo:
 
     def search(self, search_query: str | None):
         if not search_query:
-            return or_()
+            return true()  # no filter (SQLAlchemy 2.0: empty or_() is invalid)
 
         search_query = f"%{search_query}%"
         search_chain = ()

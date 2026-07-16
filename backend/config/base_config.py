@@ -2,7 +2,7 @@ import enum
 from pathlib import Path
 from typing import Any, Callable
 
-from pydantic import validator
+from pydantic import field_validator
 
 from config.meta import ProjectMeta
 from utils.get_json import get_json
@@ -34,23 +34,20 @@ class BaseConfig(ProjectMeta):
 
     GRID_DATABASE_DIR: Path = DATA_DIR / "grid" / "full_tables"
 
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
-
-    @validator(
+    @field_validator(
         "BACKEND_DIR",
         "DATA_DIR",
         "ESSENTIALS_DIR",
         "GRID_DATABASE_DIR",
         "RESPONSES_DIR",
     )
+    @classmethod
     def _ensure_dir_exists(cls, directory: Path) -> Path:
         if not directory.exists():
             raise FileNotFoundError(directory)
         return directory
 
-    @validator(
+    @field_validator(
         "COUNTRIES_FILE",
         "COUNTRY_NAMES_FILE",
         "MATCHES_FILE",
@@ -59,6 +56,7 @@ class BaseConfig(ProjectMeta):
         "SHANGHAI_URLS_FILE",
         "THE_URLS_FILE",
     )
+    @classmethod
     def _ensure_file_exists(cls, file: Path) -> Path:
         if not file.exists():
             raise FileNotFoundError(file)

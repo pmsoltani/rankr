@@ -4,8 +4,8 @@ from config import enums as e
 
 
 class TypeBase(BaseModel):
-    id: int | None
-    institution_id: int | None
+    id: int | None = None
+    institution_id: int | None = None
     type: e.InstTypeEnum
 
 
