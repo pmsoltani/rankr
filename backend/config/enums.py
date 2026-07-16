@@ -13,6 +13,7 @@ institution_types = [
     "Company",
     "Education",
     "Facility",
+    "Funder",
     "Government",
     "Healthcare",
     "Nonprofit",

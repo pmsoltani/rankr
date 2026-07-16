@@ -5,13 +5,14 @@ class InstitutionBase(BaseModel):
     id: int | None = None
     country_id: int | None = None
 
-    grid_id: str
+    ror_id: str
+    grid_id: str | None = None
     name: str
     established: int | None = None
-    lat: str
-    lng: str
-    city: str
-    state: str
+    lat: str | None = None
+    lng: str | None = None
+    city: str | None = None
+    state: str | None = None
     soup: str | None = None
 
 

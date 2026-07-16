@@ -17,8 +17,8 @@ class InstitutionRepo(BaseRepo):
     ) -> list[d.Institution]:
         return self._create_db_objects(new_db_institutions, log=log)
 
-    def get_institution_by_grid_id(self, grid_id: str) -> d.Institution | None:
-        return self._get_db_object([d.Institution.grid_id == grid_id])
+    def get_institution_by_ror_id(self, ror_id: str) -> d.Institution | None:
+        return self._get_db_object([d.Institution.ror_id == ror_id])
 
     def get_db_institutions(
         self,
@@ -42,10 +42,10 @@ class InstitutionRepo(BaseRepo):
         fuzzy_flag = False
         db_institution: d.Institution | None = None
 
-        # checking grid_id in manual matches
+        # checking ror_id in manual matches
         match = dbc.MATCHES.get(country_name, {}).get(institution_name)
         if match:
-            db_institution = self._get_db_object(flt=[d.Institution.grid_id == match])
+            db_institution = self._get_db_object(flt=[d.Institution.ror_id == match])
 
         # checking link with institution links
         if not db_institution:
@@ -69,7 +69,7 @@ class InstitutionRepo(BaseRepo):
             match = fuzzy_matcher(institution_name, country_name, soup)
             if match:
                 db_institution = self._get_db_object(
-                    flt=[d.Institution.grid_id == match]
+                    flt=[d.Institution.ror_id == match]
                 )
                 fuzzy_flag = True
 

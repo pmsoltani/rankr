@@ -2,7 +2,7 @@ import enum
 from pathlib import Path
 from typing import Any, Callable
 
-from pydantic import field_validator
+from pydantic import computed_field, field_validator
 
 from config.meta import ProjectMeta
 from utils.get_json import get_json
@@ -32,13 +32,23 @@ class BaseConfig(ProjectMeta):
     SHANGHAI_URLS_FILE: Path = ESSENTIALS_DIR / "shanghai_urls.json"
     THE_URLS_FILE: Path = ESSENTIALS_DIR / "the_urls.json"
 
-    GRID_DATABASE_DIR: Path = DATA_DIR / "grid" / "full_tables"
+    ROR_DATA_DIR: Path = DATA_DIR / "ror"
+
+    @computed_field
+    @property
+    def ROR_DATA_FILE(self) -> Path:
+        files = sorted(self.ROR_DATA_DIR.glob("*ror-data.json"))
+        if not files:
+            raise FileNotFoundError(
+                f"No '*ror-data.json' dump found in {self.ROR_DATA_DIR}"
+            )
+        return files[-1]  # newest by versioned filename
 
     @field_validator(
         "BACKEND_DIR",
         "DATA_DIR",
         "ESSENTIALS_DIR",
-        "GRID_DATABASE_DIR",
+        "ROR_DATA_DIR",
         "RESPONSES_DIR",
     )
     @classmethod

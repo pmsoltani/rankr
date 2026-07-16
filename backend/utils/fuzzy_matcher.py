@@ -18,8 +18,8 @@ def fuzzy_matcher(
     'soup' if a dictionary like this:
 
     {
-        "country_1": {"inst1": "grid_id1", "inst2": "grid_id1", ...}
-        "country_2": {"inst3": "grid_id3", "inst4": "grid_id4", ...}
+        "country_1": {"inst1": "ror_id1", "inst2": "ror_id1", ...}
+        "country_2": {"inst3": "ror_id3", "inst4": "ror_id4", ...}
     }
 
     The keys of each country dictionary should have a format like this:
@@ -35,7 +35,7 @@ def fuzzy_matcher(
         score_cutoff (int): The accuracy of the algorithm. Defaults to 100.
 
     Returns:
-        str | None: The GRID ID of the best matching institution
+        str | None: The ROR ID of the best matching institution
     """
     if not inst_country:
         return None
@@ -43,7 +43,7 @@ def fuzzy_matcher(
     # "The University of Melbourne" -> "university of melbourne"
     inst_name = re.sub(r"^the\s", "", inst_name.lower(), count=1)
 
-    inst_grid_id = process.extractOne(
+    best_match = process.extractOne(
         query=inst_name,
         choices=soup[inst_country].keys(),
         scorer=fuzz.token_set_ratio,
@@ -51,6 +51,6 @@ def fuzzy_matcher(
     )
 
     try:
-        return soup[inst_country][inst_grid_id[0]]
+        return soup[inst_country][best_match[0]]
     except TypeError:  # not a good enough match found
         return None

@@ -129,7 +129,7 @@ class CrawlerMixin:
                 fuzzy_matched_list.append(
                     {
                         "fuzzy": db_institution.name,
-                        "grid_id": db_institution.grid_id,
+                        "ror_id": db_institution.ror_id,
                         **inst_info,
                     }
                 )

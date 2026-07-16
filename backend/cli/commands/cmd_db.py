@@ -3,13 +3,14 @@ from pathlib import Path
 import typer
 from sqlalchemy.schema import CreateTable
 
-from cli.commands.db import db_grid, db_init
+from cli.commands.db import db_crosswalk, db_init, db_ror
 from rankr import db_models as d
 
 
 cli = typer.Typer()
 cli.command(name="init")(db_init.db_init)
-cli.command(name="grid")(db_grid.db_grid)
+cli.command(name="ror")(db_ror.db_ror)
+cli.command(name="crosswalk")(db_crosswalk.db_crosswalk)
 
 
 @cli.command()
@@ -47,4 +48,4 @@ def reset(
     if not confirm:
         raise typer.Abort()
     ctx.invoke(db_init.db_init, drop=True)
-    ctx.invoke(db_grid.db_grid)
+    ctx.invoke(db_ror.db_ror)

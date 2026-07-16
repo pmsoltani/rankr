@@ -20,7 +20,9 @@ class Institution(Base):
     __tablename__ = "institution"
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    grid_id: Mapped[str] = mapped_column(String(15), unique=True)
+    ror_id: Mapped[str] = mapped_column(String(9), unique=True)
+    # Retired identifier kept for provenance & legacy /i/grid.x redirects.
+    grid_id: Mapped[str | None] = mapped_column(String(15), unique=True)
     name: Mapped[str] = mapped_column(String(255))
     established: Mapped[int | None] = mapped_column()
     lat: Mapped[str | None] = mapped_column(String(63))
@@ -57,5 +59,5 @@ class Institution(Base):
 
     def __repr__(self):
         if self.id:
-            return f"{self.id} - {self.grid_id}: {self.name}"
-        return f"{self.grid_id}: {self.name}"
+            return f"{self.id} - {self.ror_id}: {self.name}"
+        return f"{self.ror_id}: {self.name}"

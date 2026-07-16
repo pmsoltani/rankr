@@ -12,15 +12,15 @@ from config import wikic
 class WikipediaCrawler(object):
     def __init__(
         self,
-        grid_id: str,
+        ror_id: str,
         url: str,
         wait: int = 10,
         tries: int = 5,
     ) -> None:
-        self.grid_id = grid_id
+        self.ror_id = ror_id
         self.url = furl(url).set(scheme="https").url
 
-        self.file_path = Path(wikic.DOWNLOAD_DIR) / self.grid_id
+        self.file_path = Path(wikic.DOWNLOAD_DIR) / self.ror_id
         self.file_path.parent.mkdir(parents=True, exist_ok=True)
 
         self.wait = wait

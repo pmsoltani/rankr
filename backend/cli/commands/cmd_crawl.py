@@ -59,11 +59,11 @@ def get_wikipedia_urls() -> list[dict[str, str]]:
     db: Session
     with closing(d.SessionLocal()) as db:
         rows = (
-            db.query(d.Institution.grid_id, d.Link.link.label("wikipedia_url"))
+            db.query(d.Institution.ror_id, d.Link.link.label("wikipedia_url"))
             .join(d.Institution.links)
             .join(d.Institution.rankings)
             .filter(d.Link.type == e.LinkTypeEnum.wikipedia)
-            .group_by(d.Institution.grid_id, d.Link.link)
+            .group_by(d.Institution.ror_id, d.Link.link)
             .all()
         )
     return [row._asdict() for row in rows]
@@ -96,7 +96,7 @@ def crawl(
             # The WikipediaCrawler class works a little different.
             urls = get_wikipedia_urls() or config.URLS
             for url in urls:
-                w = crawler(url["grid_id"], url["wikipedia_url"])
+                w = crawler(url["ror_id"], url["wikipedia_url"])
                 w.crawl()
             continue
 
@@ -107,7 +107,7 @@ def crawl(
             for inst in institution_repo.get_db_institutions(limit=0):
                 if not inst.country or inst.soup is None:
                     continue
-                soup.setdefault(inst.country.country, {})[inst.soup] = inst.grid_id
+                soup.setdefault(inst.country.country, {})[inst.soup] = inst.ror_id
 
             for page in config.URLS:
                 if not page.get("crawl"):
