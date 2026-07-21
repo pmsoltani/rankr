@@ -1,0 +1,149 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getDb } from "@/lib/db";
+import { getRankingSystems, getRankingTable } from "@/lib/queries";
+import { RANKING_SYSTEMS, type RankingSystemId } from "@/lib/site";
+
+const { system, year: yearParam } = Astro.params;
+const year = Number(yearParam);
+
+if (!system || !(system in RANKING_SYSTEMS) || !Number.isInteger(year)) {
+  return Astro.rewrite("/404");
+}
+const sysId = system as RankingSystemId;
+
+const db = getDb();
+const systems = await getRankingSystems(db);
+const years = systems[sysId];
+if (!years?.includes(year)) {
+  return Astro.rewrite("/404");
+}
+
+const perPage = 100;
+const page = Math.max(1, Number(Astro.url.searchParams.get("page") ?? "1") || 1);
+const { rows, total } = await getRankingTable(db, sysId, year, page, perPage);
+const totalPages = Math.max(1, Math.ceil(total / perPage));
+const alias = RANKING_SYSTEMS[sysId].alias;
+const pageUrl = (p: number) => `/rankings/${sysId}/${year}?page=${p}`;
+---
+
+<Layout
+  title={`${alias} ${year} — rankr`}
+  description={`${alias} world university ranking, ${year}.`}
+>
+  <div class="mx-auto max-w-300 px-4 py-8">
+    <h1 class="text-2xl font-bold tracking-tight">World University Rankings</h1>
+
+    <!-- Ranking-system tabs -->
+    <div class="mt-4 flex flex-wrap gap-2">
+      {
+        (Object.keys(RANKING_SYSTEMS) as RankingSystemId[]).map((id) => {
+          const yrs = systems[id];
+          if (!yrs?.length) return null;
+          const target = yrs.includes(year) ? year : yrs[0];
+          return (
+            <a
+              href={`/rankings/${id}/${target}`}
+              class:list={[
+                "rounded-md px-3 py-1.5 text-sm font-medium",
+                id === sysId
+                  ? "bg-primary text-primary-foreground"
+                  : "border hover:bg-neutral-100",
+              ]}
+            >
+              {RANKING_SYSTEMS[id].alias}
+            </a>
+          );
+        })
+      }
+    </div>
+
+    <!-- Year selector -->
+    <div class="mt-3 flex flex-wrap gap-1.5">
+      {
+        years.map((y) => (
+          <a
+            href={`/rankings/${sysId}/${y}`}
+            class:list={[
+              "rounded px-2 py-1 text-xs tabular-nums",
+              y === year ? "bg-neutral-900 text-white" : "border hover:bg-neutral-100",
+            ]}
+          >
+            {y}
+          </a>
+        ))
+      }
+    </div>
+
+    <!-- Table -->
+    <div class="mt-6 overflow-x-auto rounded-lg border bg-white">
+      <table class="w-full text-sm">
+        <thead class="bg-neutral-50 text-left">
+          <tr>
+            <th class="w-20 px-4 py-2 text-center font-medium">Rank</th>
+            <th class="w-16 px-4 py-2 font-medium">Country</th>
+            <th class="px-4 py-2 font-medium">Institution</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            rows.map((row) => (
+              <tr class="border-t hover:bg-neutral-50">
+                <td class="px-4 py-2 text-center">
+                  <span class="inline-block rounded bg-neutral-200 px-2 py-0.5 text-xs font-medium tabular-nums">
+                    {row.raw_value ?? row.value}
+                  </span>
+                </td>
+                <td class="px-4 py-2">
+                  {row.country_code && (
+                    <span
+                      class={`fi fi-${row.country_code.toLowerCase()}`}
+                      title={row.country ?? ""}
+                    />
+                  )}
+                </td>
+                <td class="px-4 py-2">
+                  <a
+                    href={`/i/${row.ror_id}`}
+                    class="font-medium text-sky-700 hover:underline"
+                  >
+                    {row.name}
+                  </a>
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="mt-4 flex items-center justify-between text-sm">
+      <span class="text-muted-foreground">
+        {total.toLocaleString()} institutions · page {page} of {totalPages}
+      </span>
+      <div class="flex gap-2">
+        {
+          page > 1 && (
+            <a
+              href={pageUrl(page - 1)}
+              class="rounded-md border px-3 py-1.5 hover:bg-neutral-100"
+            >
+              Previous
+            </a>
+          )
+        }
+        {
+          page < totalPages && (
+            <a
+              href={pageUrl(page + 1)}
+              class="rounded-md border px-3 py-1.5 hover:bg-neutral-100"
+            >
+              Next
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</Layout>

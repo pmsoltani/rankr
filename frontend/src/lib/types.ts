@@ -49,3 +49,15 @@ export interface InstitutionDetail extends Institution {
   ranks: Ranking[];
   stats: Ranking[];
 }
+
+/** system id -> available years, e.g. { qs: [2018, ...], the: [...] } */
+export type RankingSystems = Record<string, number[]>;
+
+export interface RankingTableRow {
+  ror_id: string;
+  name: string;
+  country: string | null;
+  country_code: string | null;
+  raw_value: string | null;
+  value: number | string | null;
+}

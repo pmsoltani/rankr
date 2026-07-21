@@ -5,6 +5,8 @@ import type {
   InstitutionDetail,
   InstitutionLink,
   Ranking,
+  RankingSystems,
+  RankingTableRow,
 } from "@/lib/types";
 
 const STAT_METRICS = [
@@ -88,4 +90,45 @@ export async function getInstitutionByRorId(
     ranks,
     stats,
   };
+}
+
+export async function getRankingSystems(db: Db): Promise<RankingSystems> {
+  const rows = await db.all<{ ranking_system: string; year: number }>(
+    `SELECT DISTINCT ranking_system, year FROM ranking
+     WHERE ranking_type = 'university ranking' AND metric = 'Rank'
+       AND field = 'All' AND subject = 'All'
+     ORDER BY ranking_system, year DESC`,
+  );
+  const systems: RankingSystems = {};
+  for (const r of rows) (systems[r.ranking_system] ??= []).push(r.year);
+  return systems;
+}
+
+export async function getRankingTable(
+  db: Db,
+  system: string,
+  year: number,
+  page = 1,
+  perPage = 100,
+): Promise<{ rows: RankingTableRow[]; total: number }> {
+  const offset = (page - 1) * perPage;
+  const rows = await db.all<RankingTableRow>(
+    `SELECT i.ror_id, i.name, c.country, c.country_code, r.raw_value, r.value
+     FROM ranking r
+     JOIN institution i ON i.id = r.institution_id
+     LEFT JOIN country c ON c.id = i.country_id
+     WHERE r.ranking_system = ? AND r.ranking_type = 'university ranking'
+       AND r.metric = 'Rank' AND r.field = 'All' AND r.subject = 'All'
+       AND r.year = ?
+     ORDER BY r.value
+     LIMIT ? OFFSET ?`,
+    [system, year, perPage, offset],
+  );
+  const total = await db.first<{ n: number }>(
+    `SELECT COUNT(*) AS n FROM ranking
+     WHERE ranking_system = ? AND ranking_type = 'university ranking'
+       AND metric = 'Rank' AND field = 'All' AND subject = 'All' AND year = ?`,
+    [system, year],
+  );
+  return { rows, total: total?.n ?? 0 };
 }
