@@ -1,0 +1,160 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import uniLogo from "@/assets/images/uniLogo.svg";
+import { getDb } from "@/lib/db";
+import { getInstitutionByRorId } from "@/lib/queries";
+import { RANKING_SYSTEMS, SITE, type RankingSystemId } from "@/lib/site";
+import type { Ranking } from "@/lib/types";
+
+const { rorId } = Astro.params;
+
+const db = getDb();
+const inst = rorId ? await getInstitutionByRorId(db, rorId) : null;
+
+if (!inst) {
+  return Astro.rewrite("/404");
+}
+
+function renderValue(value: number | string | null, valueType: string): string {
+  if (value === null || value === "") return "—";
+  if (valueType === "percent") return `${value}%`;
+  const num = Number(value);
+  return Number.isNaN(num) ? String(value) : num.toLocaleString();
+}
+
+const STAT_LABELS: Record<string, string> = {
+  "# FTE Students": "Total Students",
+  "# Students per Staff": "Students per Staff",
+  "% International Students": "Intl. Students",
+  "% Female Students": "Female Students",
+};
+
+// Build the link set: ROR (always), homepage, wikipedia, ranking profiles.
+const linkByType = new Map(inst.links.map((l) => [l.type, l.link]));
+const externalLinks: { label: string; url: string | undefined }[] = [
+  { label: "ROR", url: `${SITE.ror.baseURL}${inst.ror_id}` },
+  { label: "Homepage", url: linkByType.get("homepage") },
+  { label: "Wikipedia", url: linkByType.get("wikipedia") },
+  ...(Object.keys(RANKING_SYSTEMS) as RankingSystemId[]).map((id) => ({
+    label: `${RANKING_SYSTEMS[id].alias} profile`,
+    url: linkByType.get(id),
+  })),
+].filter((l) => l.url);
+
+const osmUrl =
+  inst.lat && inst.lng
+    ? `https://www.openstreetmap.org/?mlat=${inst.lat}&mlon=${inst.lng}#map=12/${inst.lat}/${inst.lng}`
+    : undefined;
+
+const rankLabel = (r: Ranking) =>
+  RANKING_SYSTEMS[r.ranking_system as RankingSystemId]?.alias ?? r.ranking_system;
+---
+
+<Layout title={`${inst.name} — ${SITE.name}`} description={`${inst.name} rankings`}>
+  <div class="mx-auto max-w-300 px-4 py-8">
+    <!-- Header -->
+    <header class="flex flex-col gap-4 sm:flex-row sm:items-start">
+      <div class="rounded-lg border bg-white p-2">
+        <img src={uniLogo.src} alt={`${inst.name} logo`} class="size-24" />
+      </div>
+      <div class="flex flex-col gap-2">
+        <h1 class="text-3xl font-bold tracking-tight">{inst.name}</h1>
+        <div
+          class="text-muted-foreground flex flex-wrap items-center gap-x-3 gap-y-1 text-sm"
+        >
+          {inst.established && <span>since {inst.established}</span>}
+          {
+            (inst.city || inst.country) && (
+              <a
+                href={osmUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class:list={[
+                  "hover:text-foreground",
+                  { "pointer-events-none": !osmUrl },
+                ]}
+              >
+                📍 {[inst.city, inst.country?.country].filter(Boolean).join(", ")}
+              </a>
+            )
+          }
+        </div>
+        <div class="flex flex-wrap gap-2 pt-1">
+          {
+            externalLinks.map((l) => (
+              <a
+                href={l.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="rounded-full border px-3 py-1 text-xs font-medium hover:bg-neutral-100"
+              >
+                {l.label}
+              </a>
+            ))
+          }
+          {
+            inst.types.map((t) => (
+              <span class="rounded-full bg-neutral-100 px-3 py-1 text-xs text-neutral-600">
+                {t}
+              </span>
+            ))
+          }
+        </div>
+      </div>
+    </header>
+
+    <!-- Stats (THE, latest year) -->
+    {
+      inst.stats.length > 0 && (
+        <section class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          {inst.stats.map((s) => (
+            <div class="rounded-lg border bg-white p-4 text-center">
+              <div class="text-2xl font-semibold">
+                {renderValue(s.value, s.value_type)}
+              </div>
+              <div class="text-muted-foreground text-xs">
+                {STAT_LABELS[s.metric] ?? s.metric}
+              </div>
+            </div>
+          ))}
+        </section>
+      )
+    }
+
+    <!-- Ranks -->
+    <section class="mt-8">
+      <h2 class="mb-3 text-xl font-semibold">World university rankings</h2>
+      {
+        inst.ranks.length === 0 ? (
+          <p class="text-muted-foreground text-sm">No ranking data available.</p>
+        ) : (
+          <div class="overflow-x-auto rounded-lg border bg-white">
+            <table class="w-full text-sm">
+              <thead class="bg-neutral-50 text-left">
+                <tr>
+                  <th class="px-4 py-2 font-medium">System</th>
+                  <th class="px-4 py-2 font-medium">Year</th>
+                  <th class="px-4 py-2 font-medium">Rank</th>
+                </tr>
+              </thead>
+              <tbody>
+                {inst.ranks.map((r) => (
+                  <tr class="border-t">
+                    <td class="px-4 py-2">{rankLabel(r)}</td>
+                    <td class="px-4 py-2">{r.year}</td>
+                    <td class="px-4 py-2 tabular-nums">
+                      {r.raw_value ?? renderValue(r.value, r.value_type)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )
+      }
+      <p class="text-muted-foreground mt-3 text-xs">
+        Rank trend &amp; score charts (Recharts) come in the interactive-islands batch.
+      </p>
+    </section>
+  </div>
+</Layout>
