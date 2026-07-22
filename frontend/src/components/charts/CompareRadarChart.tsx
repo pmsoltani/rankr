@@ -93,7 +93,12 @@ export function CompareRadarChart({
           <RadarChart data={rows} margin={{ top: 16, right: 24, bottom: 16, left: 24 }}>
             <PolarGrid />
             <PolarAngleAxis dataKey="metric" tick={{ fontSize: 11 }} />
-            <PolarRadiusAxis domain={[0, 100]} tickCount={6} tick={{ fontSize: 10 }} />
+            <PolarRadiusAxis
+              domain={[0, 100]}
+              tickCount={6}
+              tick={false}
+              axisLine={false}
+            />
             <Tooltip content={<CompareRadarTooltip />} />
             <Legend verticalAlign="top" align="right" wrapperStyle={{ fontSize: 12 }} />
             {institutions.map((inst, i) => (

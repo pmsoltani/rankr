@@ -2,7 +2,6 @@ import { useState } from "react";
 import {
   Bar,
   BarChart,
-  CartesianGrid,
   Cell,
   LabelList,
   ResponsiveContainer,
@@ -118,7 +117,6 @@ export default function ScoreBarChart({
       ) : (
         <ResponsiveContainer width="100%" height={380}>
           <BarChart data={rows} margin={{ top: 24, right: 16, bottom: 4, left: 8 }}>
-            <CartesianGrid stroke="#eee" vertical={false} />
             <XAxis
               dataKey="label"
               interval={0}
