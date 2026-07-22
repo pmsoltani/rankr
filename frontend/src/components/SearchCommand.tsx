@@ -43,6 +43,14 @@ function SearchInner() {
   const debounced = useDebounced(query, 300).trim();
   const active = debounced.length >= 2;
 
+  // Show the platform-correct modifier (⌘ on Mac, Ctrl elsewhere). Defaults to
+  // "⌘K" so SSR and first client render match; the effect corrects it after mount.
+  const [modKey, setModKey] = useState("⌘K");
+  useEffect(() => {
+    const isMac = /Mac|iPhone|iPad|iPod/.test(navigator.userAgent);
+    if (!isMac) setModKey("Ctrl K");
+  }, []);
+
   // ⌘K / Ctrl+K toggles the palette.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -81,8 +89,8 @@ function SearchInner() {
       >
         <SearchIcon className="size-4 shrink-0" aria-hidden="true" />
         <span className="truncate">Search for institutions…</span>
-        <kbd className="ml-auto hidden items-center gap-0.5 rounded border bg-white px-1.5 font-mono text-[10px] sm:inline-flex">
-          ⌘K
+        <kbd className="ml-auto hidden items-center gap-0.5 rounded border bg-white px-2 py-0.5 font-mono text-xs sm:inline-flex">
+          {modKey}
         </kbd>
       </button>
 

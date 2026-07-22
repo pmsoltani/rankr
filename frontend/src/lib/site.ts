@@ -26,7 +26,7 @@ export const RANKING_SYSTEMS: Record<
 > = {
   qs: {
     alias: "QS",
-    color: "#feb019",
+    color: "#e69500",
     url: "https://www.topuniversities.com",
     label: "Top Universities (QS)",
   },
