@@ -51,6 +51,15 @@ export interface InstitutionDetail extends Institution {
   stats: Ranking[];
 }
 
+/** Lean payload for the Compare island (fetched client-side per institution). */
+export interface InstitutionRankingData {
+  ror_id: string;
+  name: string;
+  country_code: string | null;
+  ranks: Ranking[];
+  scores: Ranking[];
+}
+
 /** system id -> available years, e.g. { qs: [2018, ...], the: [...] } */
 export type RankingSystems = Record<string, number[]>;
 

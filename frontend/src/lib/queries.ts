@@ -4,6 +4,7 @@ import type {
   Institution,
   InstitutionDetail,
   InstitutionLink,
+  InstitutionRankingData,
   Ranking,
   RankingSystems,
   RankingTableRow,
@@ -170,4 +171,50 @@ export async function searchInstitutions(
      LIMIT ?`,
     [`%${q}%`, `${q}%`, limit],
   );
+}
+
+// Lean ranks + scores for one institution, used by the Compare island's
+// per-institution fetch (/api/institution/[rorId]).
+export async function getInstitutionRankingData(
+  db: Db,
+  rorId: string,
+): Promise<InstitutionRankingData | null> {
+  const inst = await db.first<{
+    id: number;
+    ror_id: string;
+    name: string;
+    country_code: string | null;
+  }>(
+    `SELECT i.id, i.ror_id, i.name, c.country_code
+     FROM institution i
+     LEFT JOIN country c ON c.id = i.country_id
+     WHERE i.ror_id = ?`,
+    [rorId],
+  );
+  if (!inst) return null;
+
+  const [ranks, scores] = await Promise.all([
+    db.all<Ranking>(
+      `SELECT * FROM ranking
+       WHERE institution_id = ? AND ranking_type = 'university ranking'
+         AND metric = 'Rank' AND field = 'All' AND subject = 'All'
+       ORDER BY ranking_system, year`,
+      [inst.id],
+    ),
+    db.all<Ranking>(
+      `SELECT * FROM ranking
+       WHERE institution_id = ? AND ranking_type = 'university ranking'
+         AND metric LIKE '%Score' AND field = 'All' AND subject = 'All'
+       ORDER BY ranking_system, year, metric`,
+      [inst.id],
+    ),
+  ]);
+
+  return {
+    ror_id: inst.ror_id,
+    name: inst.name,
+    country_code: inst.country_code,
+    ranks,
+    scores,
+  };
 }

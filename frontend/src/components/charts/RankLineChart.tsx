@@ -91,8 +91,14 @@ export default function RankLineChart({
             tick={{ fontSize: 12 }}
             tickLine={false}
             axisLine={{ stroke: "#e5e5e5" }}
+            padding={{ left: 16, right: 16 }}
           />
-          <YAxis reversed hide domain={["dataMin", "dataMax"]} />
+          <YAxis
+            reversed
+            hide
+            domain={["dataMin", "dataMax"]}
+            padding={{ top: 12, bottom: 12 }}
+          />
           <Tooltip content={<RankTooltip />} />
           <Legend
             verticalAlign="top"

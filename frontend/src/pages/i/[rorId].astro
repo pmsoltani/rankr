@@ -125,7 +125,15 @@ const rankLabel = (r: Ranking) =>
 
     <!-- Ranks -->
     <section class="mt-8">
-      <h2 class="mb-3 text-xl font-semibold">World university rankings</h2>
+      <div class="mb-3 flex items-center justify-between gap-3">
+        <h2 class="text-xl font-semibold">World university rankings</h2>
+        <a
+          href={`/compare?ids=${inst.ror_id}`}
+          class="rounded-md border px-3 py-1.5 text-sm font-medium whitespace-nowrap hover:bg-neutral-100"
+        >
+          ⇄ Compare
+        </a>
+      </div>
       {
         inst.ranks.length === 0 ? (
           <p class="text-muted-foreground text-sm">No ranking data available.</p>
