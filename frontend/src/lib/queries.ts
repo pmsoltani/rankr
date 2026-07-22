@@ -7,6 +7,7 @@ import type {
   Ranking,
   RankingSystems,
   RankingTableRow,
+  SearchResult,
 } from "@/lib/types";
 
 const STAT_METRICS = [
@@ -131,4 +132,31 @@ export async function getRankingTable(
     [system, year],
   );
   return { rows, total: total?.n ?? 0 };
+}
+
+export async function searchInstitutions(
+  db: Db,
+  query: string,
+  limit = 20,
+): Promise<SearchResult[]> {
+  const q = query.trim();
+  if (!q) return [];
+  // Match the pipe-joined `soup` blob (name | country | acronyms | aliases |
+  // labels), limited to institutions that appear in any ranking. The
+  // `id IN (…)` set lets SQLite drive from the small ranked subset via the
+  // institution PK (fast) and drops the long tail of unranked orgs. Name-prefix
+  // matches rank first, then shorter names, so the canonical institution
+  // surfaces near the top.
+  return db.all<SearchResult>(
+    `SELECT i.ror_id, i.name, c.country, c.country_code
+     FROM institution i
+     LEFT JOIN country c ON c.id = i.country_id
+     WHERE i.soup LIKE ?
+       AND i.id IN (SELECT institution_id FROM ranking)
+     ORDER BY
+       CASE WHEN i.name LIKE ? THEN 0 ELSE 1 END,
+       LENGTH(i.name)
+     LIMIT ?`,
+    [`%${q}%`, `${q}%`, limit],
+  );
 }

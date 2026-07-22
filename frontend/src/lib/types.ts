@@ -61,3 +61,10 @@ export interface RankingTableRow {
   raw_value: string | null;
   value: number | string | null;
 }
+
+export interface SearchResult {
+  ror_id: string;
+  name: string;
+  country: string | null;
+  country_code: string | null;
+}
