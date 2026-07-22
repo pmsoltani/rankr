@@ -55,7 +55,7 @@ function SearchInner() {
     return () => document.removeEventListener("keydown", onKey);
   }, []);
 
-  // TanStack Query keyed on the debounced query — this alone fixes the old
+  // TanStack Query keyed on the debounced query; this alone fixes the old
   // keystroke-lag bug: only the latest key's data is rendered, stale responses
   // are discarded, and keepPreviousData avoids flicker while retyping.
   const { data, isFetching, isError } = useQuery({

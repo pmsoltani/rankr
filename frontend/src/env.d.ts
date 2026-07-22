@@ -6,3 +6,6 @@ declare namespace Cloudflare {
     DB: import("@cloudflare/workers-types").D1Database;
   }
 }
+
+// watermarkjs ships no type declarations.
+declare module "watermarkjs";

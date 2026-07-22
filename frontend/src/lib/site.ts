@@ -43,3 +43,42 @@ export const RANKING_SYSTEMS: Record<
     label: "Times Higher Education (THE)",
   },
 };
+
+/**
+ * Full metric name -> short chart label, per ranking system. Key order also
+ * defines the display/sort order of score categories in the charts.
+ */
+export const SCORE_ALIASES: Record<RankingSystemId, Record<string, string>> = {
+  qs: {
+    "Overall Score": "Overall",
+    "Academic Reputation Score": "Academic Rep.",
+    "Employer Reputation Score": "Employer Rep.",
+    "Faculty Student Score": "Faculty Student",
+    "International Faculty Score": "Intl. Faculty",
+    "International Students Score": "Intl. Student",
+    "Citations per Faculty Score": "Cite/Faculty",
+    "Citations per Paper Score": "Cite/Paper",
+    "H-index Citations Score": "H-index Cite",
+  },
+  shanghai: {
+    "Overall Score": "Overall",
+    "Alumni Score": "Alumni",
+    "Award Score": "Award",
+    "HiCi Score": "HiCi",
+    "N&S Score": "N&S",
+    "PUB Score": "PUB",
+    "PCP Score": "PCP",
+    "CNCI Score": "CNCI",
+    "IC Score": "IC",
+    "TOP Score": "TOP",
+    "Q1 Score": "Q1",
+  },
+  the: {
+    "Overall Score": "Overall",
+    "Teaching Score": "Teaching",
+    "Research Score": "Research",
+    "Citations Score": "Citations",
+    "Industry Income Score": "Ind. Income",
+    "International Outlook Score": "Intl. Outlook",
+  },
+};

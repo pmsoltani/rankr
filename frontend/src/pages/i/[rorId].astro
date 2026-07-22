@@ -1,6 +1,8 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import uniLogo from "@/assets/images/uniLogo.svg";
+import RankLineChart from "@/components/charts/RankLineChart";
+import ScoreBarChart from "@/components/charts/ScoreBarChart";
 import { getDb } from "@/lib/db";
 import { getInstitutionByRorId } from "@/lib/queries";
 import { RANKING_SYSTEMS, SITE, type RankingSystemId } from "@/lib/site";
@@ -128,33 +130,48 @@ const rankLabel = (r: Ranking) =>
         inst.ranks.length === 0 ? (
           <p class="text-muted-foreground text-sm">No ranking data available.</p>
         ) : (
-          <div class="overflow-x-auto rounded-lg border bg-white">
-            <table class="w-full text-sm">
-              <thead class="bg-neutral-50 text-left">
-                <tr>
-                  <th class="px-4 py-2 font-medium">System</th>
-                  <th class="px-4 py-2 font-medium">Year</th>
-                  <th class="px-4 py-2 font-medium">Rank</th>
-                </tr>
-              </thead>
-              <tbody>
-                {inst.ranks.map((r) => (
-                  <tr class="border-t">
-                    <td class="px-4 py-2">{rankLabel(r)}</td>
-                    <td class="px-4 py-2">{r.year}</td>
-                    <td class="px-4 py-2 tabular-nums">
-                      {r.raw_value ?? renderValue(r.value, r.value_type)}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div class="flex flex-col gap-6">
+            <RankLineChart client:only="react" ranks={inst.ranks} name={inst.name} />
+            <details class="rounded-lg border bg-white">
+              <summary class="text-muted-foreground cursor-pointer px-4 py-2.5 text-sm font-medium">
+                All rankings (table)
+              </summary>
+              <div class="overflow-x-auto border-t">
+                <table class="w-full text-sm">
+                  <thead class="bg-neutral-50 text-left">
+                    <tr>
+                      <th class="px-4 py-2 font-medium">System</th>
+                      <th class="px-4 py-2 font-medium">Year</th>
+                      <th class="px-4 py-2 font-medium">Rank</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {inst.ranks.map((r) => (
+                      <tr class="border-t">
+                        <td class="px-4 py-2">{rankLabel(r)}</td>
+                        <td class="px-4 py-2">{r.year}</td>
+                        <td class="px-4 py-2 tabular-nums">
+                          {r.raw_value ?? renderValue(r.value, r.value_type)}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </details>
           </div>
         )
       }
-      <p class="text-muted-foreground mt-3 text-xs">
-        Rank trend &amp; score charts (Recharts) come in the interactive-islands batch.
-      </p>
     </section>
+
+    <!-- Scores -->
+    {
+      inst.scores.length > 0 && (
+        <section class="mt-8">
+          <h2 class="mb-3 text-xl font-semibold">Score breakdown</h2>
+          <ScoreBarChart client:only="react" scores={inst.scores} name={inst.name} />
+        </section>
+      )
+    }
   </div>
 </Layout>

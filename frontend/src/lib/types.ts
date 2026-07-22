@@ -47,6 +47,7 @@ export interface InstitutionDetail extends Institution {
   links: InstitutionLink[];
   types: string[];
   ranks: Ranking[];
+  scores: Ranking[];
   stats: Ranking[];
 }
 

@@ -80,6 +80,16 @@ export async function getInstitutionByRorId(
     );
   }
 
+  // Score metrics (percent sub-scores, all systems/years) for the score charts;
+  // metric names end in "Score", which excludes Rank/National Rank and THE stats.
+  const scores = await db.all<Ranking>(
+    `SELECT * FROM ranking
+     WHERE institution_id = ? AND ranking_type = 'university ranking'
+       AND field = 'All' AND subject = 'All' AND metric LIKE '%Score'
+     ORDER BY ranking_system, year, metric`,
+    [id],
+  );
+
   return {
     ...institution,
     country,
@@ -89,6 +99,7 @@ export async function getInstitutionByRorId(
     links,
     types: types.map((t) => t.type),
     ranks,
+    scores,
     stats,
   };
 }
