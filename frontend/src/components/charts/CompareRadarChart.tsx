@@ -100,7 +100,12 @@ export function CompareRadarChart({
               axisLine={false}
             />
             <Tooltip content={<CompareRadarTooltip />} />
-            <Legend verticalAlign="top" align="right" wrapperStyle={{ fontSize: 12 }} />
+            <Legend
+              verticalAlign="top"
+              align="right"
+              iconType="plainline"
+              wrapperStyle={{ fontSize: 14 }}
+            />
             {institutions.map((inst, i) => (
               <Radar
                 key={inst.ror_id}

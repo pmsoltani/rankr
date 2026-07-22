@@ -108,7 +108,7 @@ export function CompareRankChart({
               verticalAlign="top"
               align="right"
               iconType="plainline"
-              wrapperStyle={{ fontSize: 12 }}
+              wrapperStyle={{ fontSize: 14 }}
             />
             {institutions.map((inst, i) => (
               <Line
@@ -119,7 +119,7 @@ export function CompareRankChart({
                 stroke={shades[i]}
                 strokeWidth={2.5}
                 strokeDasharray={lineDash(i)}
-                dot={{ r: 3, strokeDasharray: "0" }}
+                dot={{ r: 5, strokeDasharray: "0" }}
                 activeDot={{ r: 5, strokeDasharray: "0" }}
                 connectNulls={false}
                 isAnimationActive={false}

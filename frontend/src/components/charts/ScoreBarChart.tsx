@@ -126,12 +126,7 @@ export default function ScoreBarChart({
               tick={{ fontSize: 11 }}
               tickLine={false}
             />
-            <YAxis
-              domain={[0, 100]}
-              tick={{ fontSize: 12 }}
-              tickLine={false}
-              axisLine={false}
-            />
+            <YAxis domain={[0, 100]} tick={false} tickLine={false} axisLine={false} />
             <Tooltip content={<ScoreTooltip />} cursor={{ fill: "rgba(0,0,0,0.04)" }} />
             <Bar dataKey="value" radius={[4, 4, 0, 0]} isAnimationActive={false}>
               {rows.map((r) => (
@@ -140,7 +135,7 @@ export default function ScoreBarChart({
               <LabelList
                 dataKey="rounded"
                 position="top"
-                fontSize={10}
+                fontSize={16}
                 fill="#525252"
               />
             </Bar>

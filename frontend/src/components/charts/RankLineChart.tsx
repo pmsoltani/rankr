@@ -102,7 +102,7 @@ export default function RankLineChart({
             verticalAlign="top"
             align="right"
             iconType="plainline"
-            wrapperStyle={{ fontSize: 12 }}
+            wrapperStyle={{ fontSize: 16 }}
           />
           {present.map((s) => (
             <Line
@@ -112,7 +112,7 @@ export default function RankLineChart({
               name={RANKING_SYSTEMS[s].alias}
               stroke={RANKING_SYSTEMS[s].color}
               strokeWidth={3}
-              dot={{ r: 3 }}
+              dot={{ r: 5 }}
               activeDot={{ r: 5 }}
               connectNulls={false}
               isAnimationActive={false}
