@@ -18,10 +18,8 @@ class BaseConfig(ProjectMeta):
     BACKEND_ENV: BackendEnvEnum = BackendEnvEnum.dev
 
     ROOT_DIR: Path = Path.cwd()
-    BACKEND_DIR: Path = ROOT_DIR / ProjectMeta().BACKEND_NAME
     DATA_DIR: Path = ROOT_DIR / "data"
     ESSENTIALS_DIR: Path = ROOT_DIR / "essentials"
-    RESPONSES_DIR: Path = DATA_DIR / "responses"
 
     COUNTRIES_FILE: Path = ESSENTIALS_DIR / "countries.csv"
     COUNTRY_NAMES_FILE: Path = ESSENTIALS_DIR / "country_names.json"
@@ -46,11 +44,9 @@ class BaseConfig(ProjectMeta):
         return files[-1]  # newest by versioned filename
 
     @field_validator(
-        "BACKEND_DIR",
         "DATA_DIR",
         "ESSENTIALS_DIR",
         "ROR_DATA_DIR",
-        "RESPONSES_DIR",
     )
     @classmethod
     def _ensure_dir_exists(cls, directory: Path) -> Path:
