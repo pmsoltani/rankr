@@ -1,12 +1,17 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import uniLogo from "@/assets/images/uniLogo.svg";
-import RankLineChart from "@/components/charts/RankLineChart";
-import ScoreBarChart from "@/components/charts/ScoreBarChart";
+import rorColor from "@/assets/images/rorColor.svg";
+import homeFill from "@/assets/images/homeFill.svg";
+import wikipediaIcon from "@/assets/images/wikipediaInverse.svg";
+import qsColor from "@/assets/images/qsColor.svg";
+import shanghaiColor from "@/assets/images/shanghaiColor.svg";
+import theColor from "@/assets/images/theColor.svg";
+import InstitutionCharts from "@/components/charts/InstitutionCharts";
+import WikiSummary from "@/components/WikiSummary";
 import { getDb } from "@/lib/db";
 import { getInstitutionByRorId } from "@/lib/queries";
 import { RANKING_SYSTEMS, SITE, type RankingSystemId } from "@/lib/site";
-import type { Ranking } from "@/lib/types";
 
 const { rorId } = Astro.params;
 
@@ -31,102 +36,113 @@ const STAT_LABELS: Record<string, string> = {
   "% Female Students": "Female Students",
 };
 
-// Build the link set: ROR (always), homepage, wikipedia, ranking profiles.
+const SYSTEM_ICON: Record<RankingSystemId, string> = {
+  qs: qsColor.src,
+  shanghai: shanghaiColor.src,
+  the: theColor.src,
+};
+
+// External links as icon buttons (previous design): ROR (always), homepage,
+// wikipedia, and each ranking-system profile.
 const linkByType = new Map(inst.links.map((l) => [l.type, l.link]));
-const externalLinks: { label: string; url: string | undefined }[] = [
-  { label: "ROR", url: `${SITE.ror.baseURL}${inst.ror_id}` },
-  { label: "Homepage", url: linkByType.get("homepage") },
-  { label: "Wikipedia", url: linkByType.get("wikipedia") },
+const externalLinks: { label: string; url: string | undefined; icon: string }[] = [
+  { label: "Homepage", url: linkByType.get("homepage"), icon: homeFill.src },
+  { label: "ROR", url: `${SITE.ror.baseURL}${inst.ror_id}`, icon: rorColor.src },
+  { label: "Wikipedia", url: linkByType.get("wikipedia"), icon: wikipediaIcon.src },
   ...(Object.keys(RANKING_SYSTEMS) as RankingSystemId[]).map((id) => ({
     label: `${RANKING_SYSTEMS[id].alias} profile`,
     url: linkByType.get(id),
+    icon: SYSTEM_ICON[id],
   })),
 ].filter((l) => l.url);
+
+const wikiUrl = linkByType.get("wikipedia");
 
 const osmUrl =
   inst.lat && inst.lng
     ? `https://www.openstreetmap.org/?mlat=${inst.lat}&mlon=${inst.lng}#map=12/${inst.lat}/${inst.lng}`
     : undefined;
-
-const rankLabel = (r: Ranking) =>
-  RANKING_SYSTEMS[r.ranking_system as RankingSystemId]?.alias ?? r.ranking_system;
 ---
 
 <Layout title={`${inst.name} — ${SITE.name}`} description={`${inst.name} rankings`}>
   <div class="mx-auto max-w-300 px-4 py-8">
-    <!-- Header -->
-    <header class="flex flex-col gap-4 sm:flex-row sm:items-start">
-      <div class="rounded-lg border bg-white p-2">
-        <img src={uniLogo.src} alt={`${inst.name} logo`} class="size-24" />
-      </div>
-      <div class="flex flex-col gap-2">
-        <h1 class="text-3xl font-bold tracking-tight">{inst.name}</h1>
-        <div
-          class="text-muted-foreground flex flex-wrap items-center gap-x-3 gap-y-1 text-sm"
-        >
-          {inst.established && <span>since {inst.established}</span>}
-          {
-            (inst.city || inst.country) && (
-              <a
-                href={osmUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                class:list={[
-                  "hover:text-foreground",
-                  { "pointer-events-none": !osmUrl },
-                ]}
-              >
-                📍 {[inst.city, inst.country?.country].filter(Boolean).join(", ")}
-              </a>
-            )
-          }
+    <!-- Header: profile (left) + stats (2x2 on wide screens, right) -->
+    <header class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-start">
+        <div class="shrink-0 rounded-lg border bg-white p-2">
+          <img src={uniLogo.src} alt={`${inst.name} logo`} class="size-24" />
         </div>
-        <div class="flex flex-wrap gap-2 pt-1">
-          {
-            externalLinks.map((l) => (
-              <a
-                href={l.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="rounded-full border px-3 py-1 text-xs font-medium hover:bg-neutral-100"
-              >
-                {l.label}
-              </a>
-            ))
-          }
-          {
-            inst.types.map((t) => (
-              <span class="rounded-full bg-neutral-100 px-3 py-1 text-xs text-neutral-600">
-                {t}
-              </span>
-            ))
-          }
+        <div class="flex flex-col gap-2">
+          <h1 class="text-3xl font-bold tracking-tight">{inst.name}</h1>
+          <div
+            class="text-muted-foreground flex flex-wrap items-center gap-x-3 gap-y-1 text-sm"
+          >
+            {inst.established && <span>since {inst.established}</span>}
+            {
+              (inst.city || inst.country) && (
+                <a
+                  href={osmUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class:list={[
+                    "hover:text-foreground",
+                    { "pointer-events-none": !osmUrl },
+                  ]}
+                >
+                  📍 {[inst.city, inst.country?.country].filter(Boolean).join(", ")}
+                </a>
+              )
+            }
+          </div>
+          <div class="flex flex-wrap items-center gap-3 pt-1">
+            {
+              externalLinks.map((l) => (
+                <a
+                  href={l.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={l.label}
+                  aria-label={l.label}
+                  class="transition-opacity hover:opacity-70"
+                >
+                  <img src={l.icon} alt="" class="size-6" />
+                </a>
+              ))
+            }
+          </div>
         </div>
       </div>
+
+      {
+        inst.stats.length > 0 && (
+          <section class="grid grid-cols-1 gap-3 sm:grid-cols-4 lg:w-80 lg:shrink-0 lg:grid-cols-2">
+            {inst.stats.map((s) => (
+              <div class="rounded-lg border bg-white p-4 text-center">
+                <div class="text-2xl font-semibold">
+                  {renderValue(s.value, s.value_type)}
+                </div>
+                <div class="text-muted-foreground text-xs">
+                  {STAT_LABELS[s.metric] ?? s.metric}
+                </div>
+              </div>
+            ))}
+          </section>
+        )
+      }
     </header>
 
-    <!-- Stats (THE, latest year) -->
     {
-      inst.stats.length > 0 && (
-        <section class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
-          {inst.stats.map((s) => (
-            <div class="rounded-lg border bg-white p-4 text-center">
-              <div class="text-2xl font-semibold">
-                {renderValue(s.value, s.value_type)}
-              </div>
-              <div class="text-muted-foreground text-xs">
-                {STAT_LABELS[s.metric] ?? s.metric}
-              </div>
-            </div>
-          ))}
+      wikiUrl && (
+        <section class="mt-4">
+          <WikiSummary client:visible url={wikiUrl} />
         </section>
       )
     }
 
-    <!-- Ranks -->
-    <section class="mt-8">
+    <!-- Rankings & scores (tabbed charts) -->
+    <section class="mt-10">
       <div class="mb-3 flex items-center justify-between gap-3">
-        <h2 class="text-xl font-semibold">World university rankings</h2>
+        <h2 class="text-xl font-semibold">Rankings &amp; scores</h2>
         <a
           href={`/compare?ids=${inst.ror_id}`}
           class="rounded-md border px-3 py-1.5 text-sm font-medium whitespace-nowrap hover:bg-neutral-100"
@@ -135,51 +151,17 @@ const rankLabel = (r: Ranking) =>
         </a>
       </div>
       {
-        inst.ranks.length === 0 ? (
+        inst.ranks.length === 0 && inst.scores.length === 0 ? (
           <p class="text-muted-foreground text-sm">No ranking data available.</p>
         ) : (
-          <div class="flex flex-col gap-6">
-            <RankLineChart client:only="react" ranks={inst.ranks} name={inst.name} />
-            <details class="rounded-lg border bg-white">
-              <summary class="text-muted-foreground cursor-pointer px-4 py-2.5 text-sm font-medium">
-                All rankings (table)
-              </summary>
-              <div class="overflow-x-auto border-t">
-                <table class="w-full text-sm">
-                  <thead class="bg-neutral-50 text-left">
-                    <tr>
-                      <th class="px-4 py-2 font-medium">System</th>
-                      <th class="px-4 py-2 font-medium">Year</th>
-                      <th class="px-4 py-2 font-medium">Rank</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {inst.ranks.map((r) => (
-                      <tr class="border-t">
-                        <td class="px-4 py-2">{rankLabel(r)}</td>
-                        <td class="px-4 py-2">{r.year}</td>
-                        <td class="px-4 py-2 tabular-nums">
-                          {r.raw_value ?? renderValue(r.value, r.value_type)}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </details>
-          </div>
+          <InstitutionCharts
+            client:only="react"
+            ranks={inst.ranks}
+            scores={inst.scores}
+            name={inst.name}
+          />
         )
       }
     </section>
-
-    <!-- Scores -->
-    {
-      inst.scores.length > 0 && (
-        <section class="mt-8">
-          <h2 class="mb-3 text-xl font-semibold">Score breakdown</h2>
-          <ScoreBarChart client:only="react" scores={inst.scores} name={inst.name} />
-        </section>
-      )
-    }
   </div>
 </Layout>

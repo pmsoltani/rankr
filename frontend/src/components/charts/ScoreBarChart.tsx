@@ -2,14 +2,15 @@ import { useState } from "react";
 import {
   Bar,
   BarChart,
-  Cell,
   LabelList,
+  Rectangle,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
 
+import { Slider } from "@/components/ui/slider";
 import { RANKING_SYSTEMS, SCORE_ALIASES, type RankingSystemId } from "@/lib/site";
 import type { Ranking } from "@/lib/types";
 
@@ -53,7 +54,8 @@ function ScoreTooltip({
 }
 
 // Scores for a selected year as distributed bars (one color per system), 0-100,
-// labeled "System: Alias"; mirrors the old ApexCharts score chart.
+// labeled "System: Alias". Year is chosen with a slider; per-bar color uses the
+// `shape` prop (Recharts' replacement for the deprecated <Cell>).
 export default function ScoreBarChart({
   scores,
   name,
@@ -61,8 +63,8 @@ export default function ScoreBarChart({
   scores: Ranking[];
   name: string;
 }) {
-  const years = [...new Set(scores.map((s) => s.year))].sort((a, b) => b - a);
-  const [year, setYear] = useState(years[0]);
+  const years = [...new Set(scores.map((s) => s.year))].sort((a, b) => a - b);
+  const [year, setYear] = useState(years[years.length - 1]);
   if (!years.length) return null;
 
   const rows: ScoreRow[] = scores
@@ -92,30 +94,13 @@ export default function ScoreBarChart({
     );
 
   return (
-    <ChartCard
-      title="Scores"
-      filename={`scores-${name}-${year}`}
-      action={
-        <select
-          value={year}
-          onChange={(e) => setYear(Number(e.target.value))}
-          className="rounded-md border bg-white px-2 py-1 text-xs tabular-nums"
-          aria-label="Score year"
-        >
-          {years.map((y) => (
-            <option key={y} value={y}>
-              {y}
-            </option>
-          ))}
-        </select>
-      }
-    >
+    <ChartCard title="Scores" filename={`scores-${name}-${year}`}>
       {rows.length === 0 ? (
         <p className="text-muted-foreground py-12 text-center text-sm">
           No score data for {year}.
         </p>
       ) : (
-        <ResponsiveContainer width="100%" height={380}>
+        <ResponsiveContainer width="100%" height={350}>
           <BarChart data={rows} margin={{ top: 24, right: 16, bottom: 4, left: 8 }}>
             <XAxis
               dataKey="label"
@@ -126,12 +111,18 @@ export default function ScoreBarChart({
               tick={{ fontSize: 11 }}
               tickLine={false}
             />
-            <YAxis domain={[0, 100]} tick={false} tickLine={false} axisLine={false} />
             <Tooltip content={<ScoreTooltip />} cursor={{ fill: "rgba(0,0,0,0.04)" }} />
-            <Bar dataKey="value" radius={[4, 4, 0, 0]} isAnimationActive={false}>
-              {rows.map((r) => (
-                <Cell key={r.label} fill={r.color} />
-              ))}
+            <Bar
+              dataKey="value"
+              isAnimationActive={false}
+              shape={(props: { payload?: ScoreRow }) => (
+                <Rectangle
+                  {...props}
+                  radius={[4, 4, 0, 0]}
+                  fill={props.payload?.color}
+                />
+              )}
+            >
               <LabelList
                 dataKey="rounded"
                 position="top"
@@ -141,6 +132,30 @@ export default function ScoreBarChart({
             </Bar>
           </BarChart>
         </ResponsiveContainer>
+      )}
+      {years.length > 1 && (
+        <div className="mx-auto mb-5 max-w-[90%]">
+          <Slider
+            min={0}
+            max={years.length - 1}
+            step={1}
+            value={[years.indexOf(year)]}
+            onValueChange={([i]) => setYear(years[i] ?? year)}
+            aria-label="Score year"
+          />
+          <div className="mt-2 flex justify-between text-[11px] tabular-nums">
+            {years.map((y) => (
+              <span
+                key={y}
+                className={
+                  y === year ? "text-foreground font-semibold" : "text-muted-foreground"
+                }
+              >
+                {y}
+              </span>
+            ))}
+          </div>
+        </div>
       )}
     </ChartCard>
   );
