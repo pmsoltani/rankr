@@ -122,28 +122,45 @@ export async function getRankingTable(
   system: string,
   year: number,
   page = 1,
-  perPage = 100,
+  perPage = 50,
+  country?: string,
 ): Promise<{ rows: RankingTableRow[]; total: number }> {
   const offset = (page - 1) * perPage;
-  const rows = await db.all<RankingTableRow>(
-    `SELECT i.ror_id, i.name, c.country, c.country_code, r.raw_value, r.value
-     FROM ranking r
+  // Non-numeric ranks (e.g. THE's "Reporter" tier, value NULL) sort to the end.
+  const base = `FROM ranking r
      JOIN institution i ON i.id = r.institution_id
      LEFT JOIN country c ON c.id = i.country_id
      WHERE r.ranking_system = ? AND r.ranking_type = 'university ranking'
        AND r.metric = 'Rank' AND r.field = 'All' AND r.subject = 'All'
-       AND r.year = ?
-     ORDER BY r.value
+       AND r.year = ?${country ? " AND c.country = ?" : ""}`;
+  const filters = country ? [system, year, country] : [system, year];
+  const rows = await db.all<RankingTableRow>(
+    `SELECT i.ror_id, i.name, c.country, c.country_code, r.raw_value, r.value
+     ${base}
+     ORDER BY (r.value IS NULL), r.value
      LIMIT ? OFFSET ?`,
-    [system, year, perPage, offset],
+    [...filters, perPage, offset],
   );
-  const total = await db.first<{ n: number }>(
-    `SELECT COUNT(*) AS n FROM ranking
-     WHERE ranking_system = ? AND ranking_type = 'university ranking'
-       AND metric = 'Rank' AND field = 'All' AND subject = 'All' AND year = ?`,
+  const total = await db.first<{ n: number }>(`SELECT COUNT(*) AS n ${base}`, filters);
+  return { rows, total: total?.n ?? 0 };
+}
+
+export async function getCountries(
+  db: Db,
+  system: string,
+  year: number,
+): Promise<{ country: string; country_code: string }[]> {
+  return db.all<{ country: string; country_code: string }>(
+    `SELECT DISTINCT c.country, c.country_code
+     FROM ranking r
+     JOIN institution i ON i.id = r.institution_id
+     JOIN country c ON c.id = i.country_id
+     WHERE r.ranking_system = ? AND r.ranking_type = 'university ranking'
+       AND r.metric = 'Rank' AND r.field = 'All' AND r.subject = 'All'
+       AND r.year = ?
+     ORDER BY c.country`,
     [system, year],
   );
-  return { rows, total: total?.n ?? 0 };
 }
 
 export async function searchInstitutions(
@@ -155,7 +172,7 @@ export async function searchInstitutions(
   if (!q) return [];
   // Match the pipe-joined `soup` blob (name | country | acronyms | aliases |
   // labels), limited to institutions that appear in any ranking. The
-  // `id IN (…)` set lets SQLite drive from the small ranked subset via the
+  // `id IN (...)` set lets SQLite drive from the small ranked subset via the
   // institution PK (fast) and drops the long tail of unranked orgs. Name-prefix
   // matches rank first, then shorter names, so the canonical institution
   // surfaces near the top.

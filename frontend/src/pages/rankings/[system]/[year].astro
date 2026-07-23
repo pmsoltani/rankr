@@ -19,7 +19,7 @@ if (!years?.includes(year)) {
   return Astro.rewrite("/404");
 }
 
-const perPage = 100;
+const perPage = 50;
 const page = Math.max(1, Number(Astro.url.searchParams.get("page") ?? "1") || 1);
 const { rows, total } = await getRankingTable(db, sysId, year, page, perPage);
 const totalPages = Math.max(1, Math.ceil(total / perPage));
@@ -80,7 +80,7 @@ const pageUrl = (p: number) => `/rankings/${sysId}/${year}?page=${p}`;
       <table class="w-full text-sm">
         <thead class="bg-neutral-50 text-left">
           <tr>
-            <th class="w-20 px-4 py-2 text-center font-medium">Rank</th>
+            <th class="w-28 px-4 py-2 text-center font-medium">Rank</th>
             <th class="w-16 px-4 py-2 font-medium">Country</th>
             <th class="px-4 py-2 font-medium">Institution</th>
           </tr>
@@ -90,8 +90,8 @@ const pageUrl = (p: number) => `/rankings/${sysId}/${year}?page=${p}`;
             rows.map((row) => (
               <tr class="border-t hover:bg-neutral-50">
                 <td class="px-4 py-2 text-center">
-                  <span class="inline-block rounded bg-neutral-200 px-2 py-0.5 text-xs font-medium tabular-nums">
-                    {row.raw_value ?? row.value}
+                  <span class="inline-block rounded bg-neutral-200 px-2 py-0.5 text-xs font-medium whitespace-nowrap tabular-nums">
+                    {String(row.raw_value ?? row.value ?? "").replace(/�/g, "\u2013")}
                   </span>
                 </td>
                 <td class="px-4 py-2">
