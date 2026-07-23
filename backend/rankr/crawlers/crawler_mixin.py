@@ -77,6 +77,9 @@ class CrawlerMixin:
         self,
         institution_repo: r.InstitutionRepo,
         soup: dict[str, dict[str, str]],
+        education_rors: set[str] | None = None,
+        cache: dict[str, dict[str, str]] | None = None,
+        use_api: bool = True,
     ):
         for i in range(self.tries):
             try:
@@ -112,6 +115,9 @@ class CrawlerMixin:
                 link_type=row["ranking_system"],
                 country_name=row["country"],
                 soup=soup,
+                education_rors=education_rors,
+                cache=cache,
+                use_api=use_api,
             )
             db_institution, fuzzy_flag = match
             # could not match, or was matched before (with another institution)
@@ -126,8 +132,15 @@ class CrawlerMixin:
                 )
                 continue
             if fuzzy_flag:
+                # Flag matches whose winner is not an education org; the strongest
+                # signal of a fuzzy mis-match to review first.
+                non_education = (
+                    education_rors is not None
+                    and db_institution.ror_id not in education_rors
+                )
                 fuzzy_matched_list.append(
                     {
+                        "review": "NON-EDUCATION" if non_education else "",
                         "fuzzy": db_institution.name,
                         "ror_id": db_institution.ror_id,
                         **inst_info,

@@ -1,3 +1,4 @@
+import json
 from contextlib import closing
 from typing import Any
 
@@ -89,6 +90,14 @@ def crawl(
     """
     all_not_matched = []
     all_fuzzy_matched = []
+    # (name -> ror_id) and (link -> ror_id) of past confident matches, so a
+    # renamed-but-same-URL entry resolves without re-hitting the ROR API.
+    cache_path = crwc.DATA_DIR / "affiliation_cache.json"
+    cache: dict[str, dict[str, str]] = (
+        json.loads(cache_path.read_text(encoding="utf-8"))
+        if cache_path.exists()
+        else {"names": {}, "links": {}}
+    )
     for engine in engines:
         typer.secho(f"Processing '{engine}' urls.", fg=typer.colors.CYAN)
         config, crawler = engine_select(engine)
@@ -102,6 +111,15 @@ def crawl(
 
         with closing(d.SessionLocal()) as db:
             institution_repo = r.InstitutionRepo(db)
+            # ROR ids typed "Education": used to break fuzzy-match ties toward
+            # the canonical university (not a hospital / facility / sub-unit).
+            education_rors: set[str] = {
+                ror
+                for (ror,) in db.query(d.Institution.ror_id)
+                .join(d.Institution.types)
+                .filter(d.Type.type == e.InstTypeEnum.Education)
+                .distinct()
+            }
             # Group soup by country for better performance.
             soup: dict[str, dict[str, str]] = {}
             for inst in institution_repo.get_db_institutions(limit=0):
@@ -137,7 +155,11 @@ def crawl(
                 )
 
                 matched, not_matched, fuzzy_matched = p.crawl_and_process(
-                    institution_repo=institution_repo, soup=soup
+                    institution_repo=institution_repo,
+                    soup=soup,
+                    education_rors=education_rors,
+                    cache=cache,
+                    use_api=not offline,
                 )
                 if commit:
                     db.add_all(matched)
@@ -145,6 +167,9 @@ def crawl(
                 all_fuzzy_matched.extend(fuzzy_matched)
                 all_not_matched.extend(not_matched)
 
+    cache_path.write_text(
+        json.dumps(cache, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
     if all_fuzzy_matched:
         csv_export(crwc.DATA_DIR / "fuzz.csv", all_fuzzy_matched)
         typer.echo("Saved the list of fuzzy-matched institutions.")
