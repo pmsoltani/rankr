@@ -7,7 +7,6 @@ import {
   ResponsiveContainer,
   Tooltip,
   XAxis,
-  YAxis,
 } from "recharts";
 
 import { Slider } from "@/components/ui/slider";
