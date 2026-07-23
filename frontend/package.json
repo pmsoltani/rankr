@@ -9,6 +9,7 @@
     "preview": "wrangler dev",
     "check": "astro check",
     "seed:local": "bun scripts/seed-local-d1.ts",
+    "logos": "bun scripts/prepare-logos.ts",
     "astro": "astro"
   },
   "dependencies": {

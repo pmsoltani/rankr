@@ -7,6 +7,9 @@ node_modules/
 dist/
 .astro/
 
+# institution logos — copied by scripts/prepare-logos.ts (run: bun run logos)
+public/logos/
+
 # cloudflare / wrangler
 .wrangler/
 .dev.vars

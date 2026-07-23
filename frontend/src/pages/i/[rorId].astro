@@ -70,7 +70,12 @@ const osmUrl =
     <header class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
       <div class="flex flex-col gap-4 sm:flex-row sm:items-start">
         <div class="shrink-0 rounded-lg border bg-white p-2">
-          <img src={uniLogo.src} alt={`${inst.name} logo`} class="size-24" />
+          <img
+            src={`/logos/${inst.ror_id}.svg`}
+            alt={`${inst.name} logo`}
+            class="size-24 object-contain"
+            onerror={`const e=['png','jpg','jpeg','gif'];let i=+(this.dataset.i||0);if(i<e.length){this.dataset.i=i+1;this.src='/logos/${inst.ror_id}.'+e[i]}else{this.onerror=null;this.src='${uniLogo.src}'}`}
+          />
         </div>
         <div class="flex flex-col gap-2">
           <h1 class="text-3xl font-bold tracking-tight">{inst.name}</h1>
