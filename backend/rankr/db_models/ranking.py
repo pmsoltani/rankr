@@ -1,7 +1,7 @@
 from decimal import Decimal
 from typing import TYPE_CHECKING
 
-from sqlalchemy import DECIMAL, Enum, ForeignKey, String
+from sqlalchemy import DECIMAL, Enum, ForeignKey, Index, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from config import enums as e
@@ -14,19 +14,18 @@ if TYPE_CHECKING:
 
 class Ranking(Base):
     __tablename__ = "ranking"
+    __table_args__ = (Index("ix_ranking_institution_id", "institution_id"),)
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     institution_id: Mapped[int | None] = mapped_column(ForeignKey("institution.id"))
     ranking_system: Mapped[e.RankingSystemEnum] = mapped_column(
-        Enum(e.RankingSystemEnum), index=True
+        Enum(e.RankingSystemEnum)
     )
-    ranking_type: Mapped[e.RankingTypeEnum] = mapped_column(
-        Enum(e.RankingTypeEnum), index=True
-    )
+    ranking_type: Mapped[e.RankingTypeEnum] = mapped_column(Enum(e.RankingTypeEnum))
     year: Mapped[int | None] = mapped_column()
     field: Mapped[str] = mapped_column(String(255))
     subject: Mapped[str] = mapped_column(String(255))
-    metric: Mapped[e.MetricEnum] = mapped_column(Enum(e.MetricEnum), index=True)
+    metric: Mapped[e.MetricEnum] = mapped_column(Enum(e.MetricEnum))
     raw_value: Mapped[str | None] = mapped_column(String(63))
     value: Mapped[Decimal | None] = mapped_column(DECIMAL(13, 3))
     value_type: Mapped[e.ValueTypeEnum] = mapped_column(Enum(e.ValueTypeEnum))

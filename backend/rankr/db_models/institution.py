@@ -1,6 +1,6 @@
 from typing import TYPE_CHECKING
 
-from sqlalchemy import ForeignKey, String
+from sqlalchemy import ForeignKey, Index, String, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from rankr.db_models.base import Base
@@ -61,3 +61,8 @@ class Institution(Base):
         if self.id:
             return f"{self.id} - {self.ror_id}: {self.name}"
         return f"{self.ror_id}: {self.name}"
+
+
+# Functional index for the exact-name match step (WHERE lower(name) = ?), which
+# would otherwise scan the whole institution table on every fresh-crawl lookup.
+Index("ix_institution_lower_name", func.lower(Institution.name))
