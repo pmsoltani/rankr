@@ -12,6 +12,7 @@ import WikiSummary from "@/components/WikiSummary";
 import { getDb } from "@/lib/db";
 import { getInstitutionByRorId } from "@/lib/queries";
 import { RANKING_SYSTEMS, SITE, type RankingSystemId } from "@/lib/site";
+import { MapPinIcon, ScaleIcon } from "lucide-react";
 
 const { rorId } = Astro.params;
 
@@ -90,11 +91,12 @@ const osmUrl =
                   target="_blank"
                   rel="noopener noreferrer"
                   class:list={[
-                    "hover:text-foreground",
+                    "flex items-center gap-1 hover:text-foreground",
                     { "pointer-events-none": !osmUrl },
                   ]}
                 >
-                  📍 {[inst.city, inst.country?.country].filter(Boolean).join(", ")}
+                  <MapPinIcon className="size-4" />
+                  {[inst.city, inst.country?.country].filter(Boolean).join(", ")}
                 </a>
               )
             }
@@ -150,9 +152,9 @@ const osmUrl =
         <h2 class="text-xl font-semibold">Rankings &amp; scores</h2>
         <a
           href={`/compare?ids=${inst.ror_id}`}
-          class="rounded-md border px-3 py-1.5 text-sm font-medium whitespace-nowrap hover:bg-neutral-100"
+          class="flex items-center gap-1 rounded-md border px-3 py-1.5 text-sm font-medium whitespace-nowrap hover:bg-neutral-100"
         >
-          ⇄ Compare
+          <ScaleIcon className="size-4" /> Compare
         </a>
       </div>
       {

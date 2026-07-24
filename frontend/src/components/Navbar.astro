@@ -1,6 +1,7 @@
 ---
 import appLogo from "@/assets/images/appLogo.svg";
 import SearchCommand from "@/components/SearchCommand";
+import { ScaleIcon } from "lucide-react";
 ---
 
 <header class="sticky top-0 z-40 border-b bg-white/90 backdrop-blur">
@@ -14,9 +15,9 @@ import SearchCommand from "@/components/SearchCommand";
     <nav class="flex items-center">
       <a
         href="/compare"
-        class="text-muted-foreground hover:text-foreground text-sm font-medium whitespace-nowrap"
+        class="flex items-center gap-1 text-muted-foreground hover:text-foreground text-sm font-medium whitespace-nowrap"
       >
-        Compare
+        <ScaleIcon className="size-4" /> Compare
       </a>
     </nav>
   </div>
