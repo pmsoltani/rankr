@@ -1,4 +1,4 @@
-from pydantic import ValidationInfo, field_validator, model_validator
+from pydantic import Field, ValidationInfo, field_validator, model_validator
 
 from config.base_config import BaseConfig
 
@@ -6,7 +6,7 @@ from config.base_config import BaseConfig
 class DBConfig(BaseConfig):
     DB_URL: str = ""
 
-    MATCHES: dict[str | None, dict[str, str]] = {}
+    MATCHES: dict[str | None, dict[str, str]] = Field(default_factory=dict)
 
     @model_validator(mode="after")
     def _set_db_url(self) -> "DBConfig":

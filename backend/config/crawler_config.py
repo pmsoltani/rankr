@@ -1,7 +1,7 @@
 from pathlib import Path
-from typing import Any
+from typing import Any, ClassVar
 
-from pydantic import ValidationInfo, field_validator
+from pydantic import Field, ValidationInfo, field_validator
 
 from config.base_config import BaseConfig
 from config.db_config import DBConfig
@@ -20,16 +20,16 @@ class CrawlerConfig(BaseConfig):
         + "Chrome/39.0.2171.95 "
         + "Safari/537.36"
     )
-    HEADERS: dict[str, str] = {}
+    HEADERS: dict[str, str] = Field(default_factory=dict)
 
     DOWNLOAD_DIR: Path = Path()
 
-    EXCLUSIONS: list[str] = []
-    COUNTRY_NAMES: dict[str, str] = {}
-    COUNTRIES: dict[str, dict[str, str]] = {}
+    EXCLUSIONS: list[str] = Field(default_factory=list)
+    COUNTRY_NAMES: dict[str, str] = Field(default_factory=dict)
+    COUNTRIES: dict[str, dict[str, str]] = Field(default_factory=dict)
 
-    RANKINGS: dict[str, Any] = {}
-    SUPPORTED_ENGINES: list[str] = []
+    RANKINGS: dict[str, Any] = Field(default_factory=dict)
+    SUPPORTED_ENGINES: list[str] = Field(default_factory=list)
 
     @field_validator("HEADERS")
     @classmethod
@@ -66,7 +66,7 @@ class CrawlerConfig(BaseConfig):
 
 class QSConfig(CrawlerConfig):
     BASE_URL: str = "https://www.topuniversities.com/"
-    URLS: list[dict[str, Any]] = []
+    URLS: list[dict[str, Any]] = Field(default_factory=list)
 
     @field_validator("URLS")
     @classmethod
@@ -78,7 +78,7 @@ class QSConfig(CrawlerConfig):
     def _download_dir_value(cls, download_dir, info: ValidationInfo) -> Path:
         return info.data["DATA_DIR"] / "qs"
 
-    FIELDS: dict[str, str] = {
+    FIELDS: ClassVar[dict[str, str]] = {
         "rank": "rank",
         "# rank": "rank",
         "university": "institution",
@@ -101,7 +101,7 @@ class QSConfig(CrawlerConfig):
 
 class ShanghaiConfig(CrawlerConfig):
     BASE_URL: str = "http://www.shanghairanking.com/"
-    URLS: list[dict[str, Any]] = []
+    URLS: list[dict[str, Any]] = Field(default_factory=list)
 
     @field_validator("URLS")
     @classmethod
@@ -113,7 +113,7 @@ class ShanghaiConfig(CrawlerConfig):
     def _download_dir_value(cls, download_dir, info: ValidationInfo) -> Path:
         return info.data["DATA_DIR"] / "shanghai"
 
-    FIELDS: dict[str, str] = {
+    FIELDS: ClassVar[dict[str, str]] = {
         "world rank": "rank",
         "url": "url",
         "national/regionalrank": "national rank",
@@ -134,7 +134,7 @@ class ShanghaiConfig(CrawlerConfig):
 
 class THEConfig(CrawlerConfig):
     BASE_URL: str = "https://www.timeshighereducation.com/"
-    URLS: list[dict[str, Any]] = []
+    URLS: list[dict[str, Any]] = Field(default_factory=list)
 
     @field_validator("URLS")
     @classmethod
@@ -146,7 +146,7 @@ class THEConfig(CrawlerConfig):
     def _download_dir_value(cls, download_dir, info: ValidationInfo) -> Path:
         return info.data["DATA_DIR"] / "the"
 
-    FIELDS: dict[str, str] = {
+    FIELDS: ClassVar[dict[str, str]] = {
         "rank": "rank",
         "name": "institution",
         "scores_overall": "overall",
@@ -166,8 +166,9 @@ class THEConfig(CrawlerConfig):
 
 class WikipediaConfig(CrawlerConfig):
     BASE_URL: str = "https://en.wikipedia.org/"
+    URLS: list[dict[str, Any]] = Field(default_factory=list)
 
-    ALLOWED_LOGO_FORMATS: list[str] = [".svg", ".png"]
+    ALLOWED_LOGO_FORMATS: ClassVar[list[str]] = [".svg", ".png"]
 
     @field_validator("DOWNLOAD_DIR")
     @classmethod
