@@ -6,7 +6,7 @@
  *   - only ranked institutions (and their links), the countries, the rankings;
  *   - the acronym/alias/label/type tables are dropped (their search text is
  *     already in institution.soup, and nothing renders them);
- *   - the `ranking` table is COLLAPSED — one row per (institution, system, type,
+ *   - the `ranking` table is COLLAPSED: one row per (institution, system, type,
  *     year, field, subject), with the per-metric values folded into a `metrics`
  *     JSON blob keyed by metric name. That shrinks the ranking table by about 90%
  *     and the whole DB from ~1.04M to ~50k, which fits a one-shot free-tier seed.

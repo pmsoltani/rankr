@@ -178,7 +178,7 @@ export async function searchInstitutions(
   if (!q) return [];
   // Match the pipe-joined `soup` blob (name | country | acronyms | aliases |
   // labels). The D1 institution table holds only ranked institutions (the seed
-  // projects them), so a plain scan over ~3k rows is cheap — no ranked-subset
+  // projects them), so a plain scan over ~3k rows is cheap, no ranked-subset
   // filter needed. Name-prefix matches rank first, then shorter names, so the
   // canonical institution surfaces near the top.
   return db.all<SearchResult>(
