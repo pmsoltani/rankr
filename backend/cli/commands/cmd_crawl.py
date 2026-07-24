@@ -1,9 +1,8 @@
 import json
-from contextlib import closing
 from typing import Any
 
 import typer
-from sqlalchemy.orm import Session
+from sqlalchemy import select
 
 from config import crwc, qsc, shac, thec, wikic
 from config import enums as e
@@ -57,17 +56,16 @@ def get_wikipedia_urls() -> list[dict[str, str]]:
     The Wikipedia URL is stored as a `link` row (type=wikipedia), not on the
     institution itself, so we join through the links relationship.
     """
-    db: Session
-    with closing(d.SessionLocal()) as db:
-        rows = (
-            db.query(d.Institution.ror_id, d.Link.link.label("wikipedia_url"))
-            .join(d.Institution.links)
-            .join(d.Institution.rankings)
-            .filter(d.Link.type == e.LinkTypeEnum.wikipedia)
-            .group_by(d.Institution.ror_id, d.Link.link)
-            .all()
-        )
-    return [row._asdict() for row in rows]
+    stmt = (
+        select(d.Institution.ror_id, d.Link.link.label("wikipedia_url"))
+        .join(d.Institution.links)
+        .join(d.Institution.rankings)
+        .where(d.Link.type == e.LinkTypeEnum.wikipedia)
+        .group_by(d.Institution.ror_id, d.Link.link)
+    )
+    with d.SessionLocal() as db:
+        rows = db.execute(stmt).all()
+    return [dict(row._mapping) for row in rows]
 
 
 def crawl(
@@ -109,17 +107,17 @@ def crawl(
                 w.crawl()
             continue
 
-        with closing(d.SessionLocal()) as db:
+        stmt = (
+            select(d.Institution.ror_id)
+            .join(d.Institution.types)
+            .where(d.Type.type == e.InstTypeEnum.Education)
+            .distinct()
+        )
+        with d.SessionLocal() as db:
             institution_repo = r.InstitutionRepo(db)
             # ROR ids typed "Education": used to break fuzzy-match ties toward
             # the canonical university (not a hospital / facility / sub-unit).
-            education_rors: set[str] = {
-                ror
-                for (ror,) in db.query(d.Institution.ror_id)
-                .join(d.Institution.types)
-                .filter(d.Type.type == e.InstTypeEnum.Education)
-                .distinct()
-            }
+            education_rors: set[str] = set(db.scalars(stmt).all())
             # Group soup by country for better performance.
             soup: dict[str, dict[str, str]] = {}
             for inst in institution_repo.get_db_institutions(limit=0):

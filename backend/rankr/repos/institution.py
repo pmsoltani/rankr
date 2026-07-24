@@ -7,7 +7,7 @@ from rankr.repos.base import BaseRepo
 from utils import fuzzy_matcher, match_ror_affiliation
 
 
-class InstitutionRepo(BaseRepo):
+class InstitutionRepo(BaseRepo[d.Institution]):
     def __init__(self, db: Session) -> None:
         self.db_model = d.Institution
         super().__init__(db, self.db_model)

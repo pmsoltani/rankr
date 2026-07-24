@@ -7,7 +7,8 @@ from config import dbc
 
 
 engine = create_engine(dbc.DB_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+# 2.0 sessions are non-autocommit; autoflush stays off for the bulk imports.
+SessionLocal = sessionmaker(bind=engine, autoflush=False)
 
 
 class Base(DeclarativeBase):

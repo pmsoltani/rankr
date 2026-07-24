@@ -5,7 +5,7 @@ from rankr import schemas as s
 from rankr.repos.base import BaseRepo
 
 
-class CountryRepo(BaseRepo):
+class CountryRepo(BaseRepo[d.Country]):
     def __init__(self, db: Session) -> None:
         self.db_model = d.Country
         super().__init__(db, self.db_model)

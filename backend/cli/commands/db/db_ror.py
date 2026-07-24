@@ -1,5 +1,3 @@
-from contextlib import closing
-
 import typer
 
 from rankr import crawlers as c
@@ -10,7 +8,7 @@ from rankr import repos as r
 def db_ror():
     """Populates the database with country & ROR data."""
     try:
-        with closing(d.SessionLocal()) as db:
+        with d.SessionLocal() as db:
             country_repo = r.CountryRepo(db)
             institution_repo = r.InstitutionRepo(db)
             ror_crawler = c.RORCrawler(country_repo, institution_repo)
