@@ -68,7 +68,23 @@ const rankLabel = (raw: string | null, value: number | string | null) =>
   String(raw ?? value ?? "").replace(/�/g, "–");
 ---
 
-<Layout title={SITE.name} description={SITE.description}>
+<Layout
+  title={SITE.name}
+  description="rankr aggregates the QS, Shanghai (ARWU), and Times Higher Education world university rankings — browse the tables, search any university, and track its rank and score history."
+>
+  <Fragment slot="head">
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: SITE.name,
+        url: SITE.url,
+        description: SITE.description,
+      })}
+    />
+  </Fragment>
   <div class="mx-auto max-w-300 px-4 py-8">
     <h1 class="text-2xl font-bold tracking-tight">World University Rankings</h1>
     <p class="text-muted-foreground mt-1 text-sm">

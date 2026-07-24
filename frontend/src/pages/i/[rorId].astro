@@ -63,9 +63,43 @@ const osmUrl =
   inst.lat && inst.lng
     ? `https://www.openstreetmap.org/?mlat=${inst.lat}&mlon=${inst.lng}#map=12/${inst.lat}/${inst.lng}`
     : undefined;
+
+const homepage = linkByType.get("homepage");
+const rankedSystems = [...new Set(inst.ranks.map((r) => r.ranking_system))]
+  .map((s) => RANKING_SYSTEMS[s as RankingSystemId]?.alias ?? s)
+  .join(", ");
+const description = rankedSystems
+  ? `${inst.name}${inst.country ? ` (${inst.country.country})` : ""} — ${rankedSystems} world university ranking positions and score trends over time.`
+  : `${inst.name} — world university ranking profile.`;
+
+// Structured data for rich results: entity name, founding, location, and
+// authoritative links (ROR, Wikipedia, ranking profiles) for reconciliation.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollegeOrUniversity",
+  name: inst.name,
+  ...(homepage ? { url: homepage } : {}),
+  ...(inst.established ? { foundingDate: String(inst.established) } : {}),
+  ...(inst.city || inst.country
+    ? {
+        address: {
+          "@type": "PostalAddress",
+          ...(inst.city ? { addressLocality: inst.city } : {}),
+          ...(inst.country ? { addressCountry: inst.country.country } : {}),
+        },
+      }
+    : {}),
+  sameAs: [
+    `${SITE.ror.baseURL}${inst.ror_id}`,
+    ...inst.links.filter((l) => l.type !== "homepage").map((l) => l.link),
+  ],
+};
 ---
 
-<Layout title={`${inst.name} — ${SITE.name}`} description={`${inst.name} rankings`}>
+<Layout title={`${inst.name} — ${SITE.name}`} description={description}>
+  <Fragment slot="head">
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
   <div class="mx-auto max-w-300 px-4 py-8">
     <!-- Header: profile (left) + stats (2x2 on wide screens, right) -->
     <header class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">

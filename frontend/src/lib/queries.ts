@@ -119,6 +119,15 @@ export async function getRankingSystems(db: Db): Promise<RankingSystems> {
   return systems;
 }
 
+// Every ranked institution's ROR id (the D1 institution table is already
+// projected to ranked-only), used to enumerate /i/[rorId] URLs in the sitemap.
+export async function getAllRankedRorIds(db: Db): Promise<string[]> {
+  const rows = await db.all<{ ror_id: string }>(
+    "SELECT ror_id FROM institution ORDER BY ror_id",
+  );
+  return rows.map((r) => r.ror_id);
+}
+
 export async function getRankingTable(
   db: Db,
   system: string,
