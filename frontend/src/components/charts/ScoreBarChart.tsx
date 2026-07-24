@@ -127,6 +127,7 @@ export default function ScoreBarChart({
                 position="top"
                 fontSize={16}
                 fill="#525252"
+                formatter={(value) => (value === 0 ? "" : value)}
               />
             </Bar>
           </BarChart>
