@@ -11,7 +11,14 @@
       "database_name": "rankr",
       // Placeholder for local dev; replace with the real id from
       // `wrangler d1 create rankr` before deploying.
-      "database_id": "local-rankr",
+      "database_id": "b52c8ea3-3ee8-4b36-8ef9-34b3804e512f",
+      "migrations_dir": "../../migrations",
+    },
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "SESSION",
+      "id": "420897a14b60434e9336d01c9d6bdc8e",
     },
   ],
 }
