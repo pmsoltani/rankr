@@ -122,7 +122,7 @@ export function CompareRankChart({
                 dot={{ r: 5, strokeDasharray: "0" }}
                 activeDot={{ r: 5, strokeDasharray: "0" }}
                 connectNulls={false}
-                isAnimationActive={false}
+                isAnimationActive={true}
               />
             ))}
           </LineChart>

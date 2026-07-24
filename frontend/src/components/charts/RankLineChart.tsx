@@ -115,7 +115,7 @@ export default function RankLineChart({
               dot={{ r: 5 }}
               activeDot={{ r: 5 }}
               connectNulls={false}
-              isAnimationActive={false}
+              isAnimationActive={true}
             />
           ))}
         </LineChart>

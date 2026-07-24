@@ -116,7 +116,7 @@ export function CompareRadarChart({
                 strokeDasharray={lineDash(i)}
                 fill={shades[i]}
                 fillOpacity={0.08}
-                isAnimationActive={false}
+                isAnimationActive={true}
               />
             ))}
           </RadarChart>

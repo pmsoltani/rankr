@@ -113,7 +113,7 @@ export default function ScoreBarChart({
             <Tooltip content={<ScoreTooltip />} cursor={{ fill: "rgba(0,0,0,0.04)" }} />
             <Bar
               dataKey="value"
-              isAnimationActive={false}
+              isAnimationActive={true}
               shape={(props: { payload?: ScoreRow }) => (
                 <Rectangle
                   {...props}
