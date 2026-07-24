@@ -41,11 +41,7 @@ export interface InstitutionLink {
 
 export interface InstitutionDetail extends Institution {
   country: Country | null;
-  acronyms: string[];
-  aliases: string[];
-  labels: { iso639: string; label: string }[];
   links: InstitutionLink[];
-  types: string[];
   ranks: Ranking[];
   scores: Ranking[];
   stats: Ranking[];
