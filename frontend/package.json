@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "deploy": "astro build && wrangler deploy",
     "preview": "wrangler dev",
     "check": "astro check",
     "seed:local": "bun scripts/seed-local-d1.ts",
+    "dump:d1": "bun scripts/dump-d1.ts",
     "logos": "bun scripts/prepare-logos.ts",
     "astro": "astro"
   },

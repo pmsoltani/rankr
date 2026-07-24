@@ -13,6 +13,8 @@ public/logos/
 # cloudflare / wrangler
 .wrangler/
 .dev.vars
+# remote-D1 seed artifact
+rankr-d1.sql
 
 # env
 .env
