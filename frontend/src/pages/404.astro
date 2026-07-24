@@ -1,7 +1,11 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 
-export const prerender = true;
+// SSR (not prerendered): dynamic routes reach this via `Astro.rewrite("/404")`,
+// and an SSR route cannot rewrite into a prerendered one (throws → 500 at the
+// edge). Rendering it server-side lets us return a real 404 status too.
+export const prerender = false;
+Astro.response.status = 404;
 ---
 
 <Layout title="rankr: Not Found" description="Page not found">

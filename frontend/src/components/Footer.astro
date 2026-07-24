@@ -7,65 +7,77 @@ import shanghaiColor from "@/assets/images/shanghaiColor.svg";
 import theColor from "@/assets/images/theColor.svg";
 import { RANKING_SYSTEMS, SITE } from "@/lib/site";
 
-const rankingLinks = [
-  { icon: qsColor.src, ...RANKING_SYSTEMS.qs },
-  { icon: shanghaiColor.src, ...RANKING_SYSTEMS.shanghai },
-  { icon: theColor.src, ...RANKING_SYSTEMS.the },
+// Column-major grid (3 rows): left column = ranking systems, right = resources.
+const footerLinks = [
+  {
+    icon: qsColor.src,
+    url: RANKING_SYSTEMS.qs.url,
+    label: RANKING_SYSTEMS.qs.label,
+    external: true,
+  },
+  {
+    icon: shanghaiColor.src,
+    url: RANKING_SYSTEMS.shanghai.url,
+    label: RANKING_SYSTEMS.shanghai.label,
+    external: true,
+  },
+  {
+    icon: theColor.src,
+    url: RANKING_SYSTEMS.the.url,
+    label: RANKING_SYSTEMS.the.label,
+    external: true,
+  },
+  { icon: rorInverse.src, url: SITE.ror.url, label: SITE.ror.label, external: true },
+  {
+    icon: githubInverse.src,
+    url: SITE.github,
+    label: "rankr on GitHub",
+    external: true,
+  },
+  { icon: null as string | null, url: "/about", label: "About rankr", external: false },
 ];
 ---
 
 <footer class="mt-16 bg-neutral-800 text-neutral-100">
-  <div class="mx-auto grid max-w-300 gap-8 px-6 py-10 sm:grid-cols-2 md:grid-cols-4">
-    <div>
-      <img src={appLogoInverse.src} alt="rankr logo" class="h-9" />
+  <div
+    class="mx-auto flex max-w-300 flex-col gap-6 px-4 py-10 md:grid md:grid-cols-[1fr_auto_1fr] md:items-start md:gap-4"
+  >
+    <img src={appLogoInverse.src} alt="rankr logo" class="h-9 self-start" />
+
+    <div class="flex flex-col items-center gap-4 self-center md:self-auto">
+      <nav
+        class="grid grid-flow-col grid-rows-3 gap-x-10 gap-y-2 text-sm"
+        aria-label="Footer"
+      >
+        {
+          footerLinks.map((l) => (
+            <a
+              href={l.url}
+              {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              class="flex items-center gap-2 text-neutral-300 hover:text-white"
+            >
+              {l.icon ? (
+                <img src={l.icon} alt="" class="size-5" />
+              ) : (
+                <span class="size-5" />
+              )}
+              {l.label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <p class="text-center text-sm text-neutral-400">
+        Made with <span class="text-red-500">&hearts;</span> by{" "}
+        <a
+          href={SITE.author.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline hover:text-white">{SITE.author.name}</a
+        >
+      </p>
     </div>
 
-    <nav class="flex flex-col gap-2 text-sm" aria-label="Ranking systems">
-      {
-        rankingLinks.map((rs) => (
-          <a
-            href={rs.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex items-center gap-2 text-neutral-300 hover:text-white"
-          >
-            <img src={rs.icon} alt="" class="size-5" />
-            {rs.label}
-          </a>
-        ))
-      }
-    </nav>
-
-    <nav class="flex flex-col gap-2 text-sm" aria-label="Resources">
-      <a
-        href={SITE.ror.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="flex items-center gap-2 text-neutral-300 hover:text-white"
-      >
-        <img src={rorInverse.src} alt="" class="size-5" />
-        {SITE.ror.label}
-      </a>
-      <a
-        href={SITE.github}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="flex items-center gap-2 text-neutral-300 hover:text-white"
-      >
-        <img src={githubInverse.src} alt="" class="size-5" />
-        rankr on GitHub
-      </a>
-      <a href="/about" class="text-neutral-300 hover:text-white">About rankr</a>
-    </nav>
-
-    <p class="text-sm text-neutral-400">
-      Made with <span class="text-red-500">&hearts;</span> by{" "}
-      <a
-        href={SITE.author.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="underline hover:text-white">{SITE.author.name}</a
-      >
-    </p>
+    <div class="hidden md:block" aria-hidden="true"></div>
   </div>
 </footer>
