@@ -2,7 +2,6 @@ import json
 
 import requests
 from bs4 import BeautifulSoup, Tag
-from furl import furl
 
 from config import qsc
 from rankr import schemas as s
@@ -42,10 +41,10 @@ class QSCrawler(CrawlerMixin):
         assert isinstance(node_tag, Tag)
 
         self.json_url = (
-            furl(qsc.BASE_URL)
-            / "sites/default/files/qs-rankings-data/en"
-            / f"{node_tag['data-history-node-id']}_indicators.txt"
-        ).url
+            qsc.BASE_URL.rstrip("/")
+            + "/sites/default/files/qs-rankings-data/en"
+            + f"/{node_tag['data-history-node-id']}_indicators.txt"
+        )
         return self.json_url
 
     def _get_tbl(self) -> list[dict[str, str]]:
@@ -89,7 +88,9 @@ class QSCrawler(CrawlerMixin):
                 if columns[col] == "institution":
                     a_tag = value.find("a")
                     assert isinstance(a_tag, Tag)
-                    url = furl(qsc.BASE_URL).join(a_tag["href"]).url
+                    href = a_tag.get("href")
+                    assert isinstance(href, str)
+                    url = f"{qsc.BASE_URL.rstrip('/')}/{href.lstrip('/')}"
                     values["url"] = url
                     values[columns[col]] = value.text.strip()
                     continue

@@ -2,7 +2,6 @@ import json
 import re
 
 import requests
-from furl import furl
 
 from config import thec
 from rankr import schemas as s
@@ -57,7 +56,7 @@ class THECrawler(CrawlerMixin):
                 if thec.FIELDS[col] == "country":
                     value = s.CountryCreate(country=value).country
                 if thec.FIELDS[col] == "url":
-                    value = furl(thec.BASE_URL).join(value).url
+                    value = f"{thec.BASE_URL.rstrip('/')}/{value.lstrip('/')}"
 
                 values[thec.FIELDS[col]] = value
 

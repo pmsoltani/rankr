@@ -4,7 +4,6 @@ from contextlib import closing
 
 import requests
 from bs4 import BeautifulSoup, Tag
-from furl import furl
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.remote.webelement import WebElement
@@ -111,7 +110,9 @@ class ShanghaiCrawler(CrawlerMixin):
                     url = None
                     a_tag = col.find("a")
                     if isinstance(a_tag, Tag):
-                        url = furl(shac.BASE_URL).join(a_tag["href"]).url
+                        href = a_tag.get("href")
+                        assert isinstance(href, str)
+                        url = f"{shac.BASE_URL.rstrip('/')}/{href.lstrip('/')}"
                     row_values.append(url)
                     span_tag = col.find("span")
                     assert isinstance(span_tag, Tag)

@@ -4,7 +4,6 @@ from pathlib import Path
 
 import requests
 from bs4 import BeautifulSoup, Tag
-from furl import furl
 
 from config import wikic
 
@@ -18,7 +17,7 @@ class WikipediaCrawler(object):
         tries: int = 5,
     ) -> None:
         self.ror_id = ror_id
-        self.url = furl(url).set(scheme="https").url
+        self.url = url.replace("http://", "https://")
 
         self.file_path = Path(wikic.DOWNLOAD_DIR) / self.ror_id
         self.file_path.parent.mkdir(parents=True, exist_ok=True)
@@ -61,7 +60,9 @@ class WikipediaCrawler(object):
         if not logo_page_elem:
             return None
 
-        logo_page_url = furl(wikic.BASE_URL) / logo_page_elem[0]["href"]
+        href = logo_page_elem[0]["href"]
+        assert isinstance(href, str)
+        logo_page_url = f"{wikic.BASE_URL.rstrip('/')}/{href.lstrip('/')}"
         logo_page = requests.get(logo_page_url, headers=wikic.HEADERS)
         self.page = BeautifulSoup(logo_page.content, "html.parser")
         return self.page
@@ -83,7 +84,9 @@ class WikipediaCrawler(object):
         if not isinstance(logo_anchor, Tag):
             return None
 
-        logo_url = furl(logo_anchor["href"]).set(scheme="https").url
+        href = logo_anchor.get("href")
+        assert isinstance(href, str)
+        logo_url = href.replace("http://", "https://")
         file_ext = Path(logo_url).suffix.lower()
         if file_ext not in [".png", ".svg"]:
             return None

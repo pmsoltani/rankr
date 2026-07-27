@@ -25,7 +25,6 @@ dependencies = [
   "requests>=2.24.0,<3",
   "beautifulsoup4>=4.9.1,<5",
   "sqlalchemy>=2.0,<3",
-  "furl>=2.1.0,<3",
   "tqdm>=4.48.2,<5",
   "fuzzywuzzy[speedup]>=0.18.0,<1",
   "typer>=0.3.2,<1",
