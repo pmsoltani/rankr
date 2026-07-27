@@ -3,6 +3,16 @@
   "name": "rankr",
   "compatibility_date": "2026-07-01",
   "compatibility_flags": ["nodejs_compat"],
+  "routes": [
+    {
+      "pattern": "rankr.online",
+      "custom_domain": true,
+    },
+    {
+      "pattern": "www.rankr.online",
+      "custom_domain": true,
+    },
+  ],
   // @astrojs/cloudflare v14 deploys as a Worker with static assets (not Pages),
   // so this is a Worker config; no `pages_build_output_dir`.
   "d1_databases": [
