@@ -30,7 +30,25 @@ class THECrawler(CrawlerMixin):
             str: The url for the ranking table data
         """
         page = requests.get(self.url, headers=thec.HEADERS)
-        json_url: str = re.findall(r"(https.*?\.json)", page.text)[0]
+        json_url = None
+
+        next_data_match = re.search(
+            r'<script[^>]+id="__NEXT_DATA__"[^>]*>(.*?)</script>',
+            page.text,
+            re.DOTALL,
+        )
+        if next_data_match:
+            next_data = json.loads(next_data_match.group(1))
+            json_url = (
+                next_data.get("props", {})
+                .get("pageProps", {})
+                .get("page", {})
+                .get("rankingsTableConfig", {})
+                .get("jsonUrl")
+            )
+
+        if not json_url:
+            json_url = re.findall(r"(https.*?\.json)", page.text)[0]
 
         self.json_url = json_url.replace("\\", "")
         return self.json_url
