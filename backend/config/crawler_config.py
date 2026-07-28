@@ -93,6 +93,7 @@ class QSConfig(CrawlerConfig):
         "international faculty ratio": "international faculty",
         "international students": "international students",
         "international students ratio": "international students",
+        "international student ratio": "international students",
         "citations per faculty": "citations per faculty",
         "h-index citations": "h-index citations",
         "citations per paper": "citations per paper",
