@@ -50,8 +50,19 @@ class RORCrawler:
         if not db_countries:
             new_countries: dict[str, s.CountryCreate] = {}
             for row in get_row(crwc.COUNTRIES_FILE):
+                raw_name = row["country"]
                 nullify(row)
                 country = s.CountryCreate(**row)
+                if country.country != raw_name:
+                    # An alias in COUNTRY_NAMES has renamed this row onto another
+                    # country, so it is about to be collapsed into it and every
+                    # institution ROR places here would be left without a country!
+                    raise ValueError(
+                        f"'{raw_name}' ({row['country_code']}) in "
+                        f"{crwc.COUNTRIES_FILE.name} resolves to "
+                        f"'{country.country}'. Point the COUNTRY_NAMES alias "
+                        f"at '{raw_name}' instead, or drop the row."
+                    )
                 new_countries[country.country] = country
             db_countries = self.country_repo.create_countries(
                 list(new_countries.values())
