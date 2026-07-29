@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 
 // Build the Wikipedia REST summary endpoint from a page URL, preserving the
-// language subdomain (e.g. de.wikipedia.org).
+// language subdomain (e.g. de.wikipedia.org). Always https: stored links may
+// use http, which the browser blocks as mixed content on the live site.
 function summaryApi(url: string): string | null {
   try {
     const u = new URL(url);
     const title = u.pathname.split("/wiki/")[1];
-    return title ? `${u.origin}/api/rest_v1/page/summary/${title}` : null;
+    return title ? `https://${u.host}/api/rest_v1/page/summary/${title}` : null;
   } catch {
     return null;
   }
