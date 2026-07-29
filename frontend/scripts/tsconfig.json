@@ -1,0 +1,9 @@
+{
+  "//": "Standalone tsconfig for bun-run dev scripts. These run under bun (not workerd), so they use bun/node types, not the app's @cloudflare/workers-types. The root tsconfig excludes scripts/.",
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "types": ["bun"],
+    "noEmit": true
+  },
+  "include": ["**/*.ts"]
+}

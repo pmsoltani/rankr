@@ -13,6 +13,7 @@ institution_types = [
     "Company",
     "Education",
     "Facility",
+    "Funder",
     "Government",
     "Healthcare",
     "Nonprofit",
@@ -22,16 +23,21 @@ InstTypeEnum = enum.Enum("InstTypeEnum", {t: t for t in institution_types})
 
 # institution link types: homepage, qs, ...
 link_types = ["homepage", "wikipedia"] + list(crwc.RANKINGS["metrics"])
-LinkTypeEnum = enum.Enum("LinkTypeEnum", {t: t for t in link_types},)
+LinkTypeEnum = enum.Enum(
+    "LinkTypeEnum",
+    {t: t for t in link_types},
+)
 
 # ranking system types: qs, shanghai, ...
 RankingSystemEnum = enum.Enum(
-    "RankingSystemEnum", {t: t for t in crwc.RANKINGS["metrics"]},
+    "RankingSystemEnum",
+    {t: t for t in crwc.RANKINGS["metrics"]},
 )
 
 # ranking types: university ranking, subject ranking
 RankingTypeEnum = enum.Enum(
-    "RankingTypeEnum", {t: t for t in crwc.RANKINGS["ranking_types"]},
+    "RankingTypeEnum",
+    {t: t for t in crwc.RANKINGS["ranking_types"]},
 )
 
 metric_types = []

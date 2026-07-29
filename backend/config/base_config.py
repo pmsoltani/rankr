@@ -1,16 +1,11 @@
 import enum
 from pathlib import Path
-from typing import Callable, Union
+from typing import Any, Callable
 
-from pydantic import Field, validator
+from pydantic import computed_field, field_validator
 
 from config.meta import ProjectMeta
 from utils.get_json import get_json
-
-
-class DialectEnum(str, enum.Enum):
-    mysql = "mysql"
-    postgresql = "postgresql"
 
 
 class BackendEnvEnum(str, enum.Enum):
@@ -23,11 +18,8 @@ class BaseConfig(ProjectMeta):
     BACKEND_ENV: BackendEnvEnum = BackendEnvEnum.dev
 
     ROOT_DIR: Path = Path.cwd()
-    BACKEND_DIR: Path = ROOT_DIR / ProjectMeta().BACKEND_NAME
-    MIGRATIONS_DIR: Path = BACKEND_DIR / "migrations"
     DATA_DIR: Path = ROOT_DIR / "data"
     ESSENTIALS_DIR: Path = ROOT_DIR / "essentials"
-    RESPONSES_DIR: Path = DATA_DIR / "responses"
 
     COUNTRIES_FILE: Path = ESSENTIALS_DIR / "countries.csv"
     COUNTRY_NAMES_FILE: Path = ESSENTIALS_DIR / "country_names.json"
@@ -38,36 +30,41 @@ class BaseConfig(ProjectMeta):
     SHANGHAI_URLS_FILE: Path = ESSENTIALS_DIR / "shanghai_urls.json"
     THE_URLS_FILE: Path = ESSENTIALS_DIR / "the_urls.json"
 
-    GRID_DATABASE_DIR: Path = DATA_DIR / "grid" / "full_tables"
+    ROR_DATA_DIR: Path = DATA_DIR / "ror"
+    EXCLUSIONS_FILE: Path = ESSENTIALS_DIR / "exclusions.json"
 
-    DB_DIALECT: DialectEnum = Field(..., env="DB_DIALECT")
+    @computed_field
+    @property
+    def ROR_DATA_FILE(self) -> Path:
+        files = sorted(self.ROR_DATA_DIR.glob("*ror-data.json"))
+        if not files:
+            raise FileNotFoundError(
+                f"No '*ror-data.json' dump found in {self.ROR_DATA_DIR}"
+            )
+        return files[-1]  # newest by versioned filename
 
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
-
-    @validator(
-        "BACKEND_DIR",
-        "MIGRATIONS_DIR",
+    @field_validator(
         "DATA_DIR",
         "ESSENTIALS_DIR",
-        "GRID_DATABASE_DIR",
-        "RESPONSES_DIR",
+        "ROR_DATA_DIR",
     )
+    @classmethod
     def _ensure_dir_exists(cls, directory: Path) -> Path:
         if not directory.exists():
             raise FileNotFoundError(directory)
         return directory
 
-    @validator(
+    @field_validator(
         "COUNTRIES_FILE",
         "COUNTRY_NAMES_FILE",
+        "EXCLUSIONS_FILE",
         "MATCHES_FILE",
         "RANKINGS_FILE",
         "QS_URLS_FILE",
         "SHANGHAI_URLS_FILE",
         "THE_URLS_FILE",
     )
+    @classmethod
     def _ensure_file_exists(cls, file: Path) -> Path:
         if not file.exists():
             raise FileNotFoundError(file)
@@ -75,6 +72,8 @@ class BaseConfig(ProjectMeta):
 
     @classmethod
     def read_json(
-        cls, file_path: Union[Path, str], object_hook: Callable = None
+        cls,
+        file_path: Path | str,
+        object_hook: Callable[..., Any] | None = None,
     ):
         return get_json(file_path=file_path, object_hook=object_hook)

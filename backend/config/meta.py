@@ -1,22 +1,38 @@
-from pathlib import Path
-from typing import Any, Dict
-
-import toml
-from pydantic import BaseSettings
-
-
-def _get_project_meta() -> Dict[str, Any]:
-    with open(Path.cwd() / "pyproject.toml") as pyproject:
-        file_contents = pyproject.read()
-    return toml.loads(file_contents)["tool"]["poetry"]
-
-
-meta = _get_project_meta()
+from pydantic import Field
+from pydantic_settings import (
+    BaseSettings,
+    PydanticBaseSettingsSource,
+    PyprojectTomlConfigSettingsSource,
+    SettingsConfigDict,
+)
 
 
 class ProjectMeta(BaseSettings):
-    BACKEND_NAME: str = meta["name"]
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        pyproject_toml_table_header=("project",),
+        extra="ignore",
+        # Preserve pydantic-v1 behavior where field validators populate the
+        # defaults (loading essentials files, deriving URLs, etc.).
+        validate_default=True,
+    )
 
-    DESCRIPTION = meta["description"]
-    AUTHORS = meta["authors"]
-    VERSION = meta["version"]
+    BACKEND_NAME: str = Field(validation_alias="name")
+    BACKEND_VERSION: str = Field(validation_alias="version")
+
+    @classmethod
+    def settings_customise_sources(
+        cls,
+        settings_cls: type[BaseSettings],
+        init_settings: PydanticBaseSettingsSource,
+        env_settings: PydanticBaseSettingsSource,
+        dotenv_settings: PydanticBaseSettingsSource,
+        file_secret_settings: PydanticBaseSettingsSource,
+    ) -> tuple[PydanticBaseSettingsSource, ...]:
+        return (
+            init_settings,
+            env_settings,
+            dotenv_settings,
+            PyprojectTomlConfigSettingsSource(settings_cls),
+        )

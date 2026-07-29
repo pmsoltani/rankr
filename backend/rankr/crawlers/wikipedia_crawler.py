@@ -1,23 +1,25 @@
 import shutil
 import time
 from pathlib import Path
-from typing import Optional
 
 import requests
-from bs4 import BeautifulSoup
-from furl import furl
+from bs4 import BeautifulSoup, Tag
 
 from config import wikic
 
 
 class WikipediaCrawler(object):
     def __init__(
-        self, grid_id: str, url: str, wait: int = 10, tries: int = 5,
+        self,
+        ror_id: str,
+        url: str,
+        wait: int = 10,
+        tries: int = 5,
     ) -> None:
-        self.grid_id = grid_id
-        self.url = furl(url).set(scheme="https").url
+        self.ror_id = ror_id
+        self.url = url.replace("http://", "https://")
 
-        self.file_path = Path(wikic.DOWNLOAD_DIR) / self.grid_id
+        self.file_path = Path(wikic.DOWNLOAD_DIR) / self.ror_id
         self.file_path.parent.mkdir(parents=True, exist_ok=True)
 
         self.wait = wait
@@ -37,7 +39,7 @@ class WikipediaCrawler(object):
 
             break
 
-    def _get_page(self) -> Optional[BeautifulSoup]:
+    def _get_page(self) -> BeautifulSoup | None:
         """Retrieves the page containing the institution logo.
 
         Raises:
@@ -51,32 +53,40 @@ class WikipediaCrawler(object):
             raise ConnectionError(f"Error getting page: {self.url}")
 
         wiki_page = BeautifulSoup(wiki_page.content, "html.parser")
-        info_card = wiki_page.find(
-            "table", attrs={"class": ["infobox", "vcard"]}
-        )
+        info_card = wiki_page.find("table", attrs={"class": ["infobox", "vcard"]})
+        if not isinstance(info_card, Tag):
+            return None
         logo_page_elem = info_card.find_all("a", attrs={"class": "image"})
         if not logo_page_elem:
             return None
 
-        logo_page_url = furl(wikic.BASE_URL) / logo_page_elem[0]["href"]
+        href = logo_page_elem[0]["href"]
+        assert isinstance(href, str)
+        logo_page_url = f"{wikic.BASE_URL.rstrip('/')}/{href.lstrip('/')}"
         logo_page = requests.get(logo_page_url, headers=wikic.HEADERS)
         self.page = BeautifulSoup(logo_page.content, "html.parser")
         return self.page
 
-    def _get_logo(self) -> Optional[requests.Response]:
-        """[summary]
+    def _get_logo(self) -> requests.Response | None:
+        """Retrieves the logo file from the page.
 
         Raises:
             ConnectionError: If the request is not successful
 
         Returns:
-            Optional[requests.Response]: The stream of logo file
+            requests.Response | None: The stream of logo file
         """
         logo_elem = self.page.find("div", attrs={"id": "file"})
-        if not logo_elem:
+        if not isinstance(logo_elem, Tag):
             return None
 
-        logo_url = furl(logo_elem.find("a")["href"]).set(scheme="https").url
+        logo_anchor = logo_elem.find("a")
+        if not isinstance(logo_anchor, Tag):
+            return None
+
+        href = logo_anchor.get("href")
+        assert isinstance(href, str)
+        logo_url = href.replace("http://", "https://")
         file_ext = Path(logo_url).suffix.lower()
         if file_ext not in [".png", ".svg"]:
             return None

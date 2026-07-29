@@ -1,16 +1,18 @@
 import io
 import json
 from pathlib import Path
-from typing import Callable, Union
+from typing import Any, Callable
 
 
-def get_json(file_path: Union[Path, str], object_hook: Callable = None):
+def get_json(
+    file_path: Path | str,
+    object_hook: Callable[..., Any] | None = None,
+):
     """Reads a .json file.
 
     Args:
-        file_path (Union[Path, str]): The path to the .json file
-        object_hook (Callable, optional): A function to process values.
-        Defaults to None.
+        file_path (Path | str): The path to the .json file
+        object_hook (Callable | None): A function to process values. Defaults to None.
 
     Returns:
         The contents of the .json file

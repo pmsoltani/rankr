@@ -1,0 +1,208 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import uniLogo from "@/assets/images/uniLogo.svg";
+import rorColor from "@/assets/images/rorColor.svg";
+import homeFill from "@/assets/images/homeFill.svg";
+import wikipediaIcon from "@/assets/images/wikipediaInverse.svg";
+import qsColor from "@/assets/images/qsColor.svg";
+import shanghaiColor from "@/assets/images/shanghaiColor.svg";
+import theColor from "@/assets/images/theColor.svg";
+import InstitutionCharts from "@/components/charts/InstitutionCharts";
+import WikiSummary from "@/components/WikiSummary";
+import { getDb } from "@/lib/db";
+import { getInstitutionByRorId } from "@/lib/queries";
+import { RANKING_SYSTEMS, SITE, type RankingSystemId } from "@/lib/site";
+import { MapPinIcon, ScaleIcon } from "lucide-react";
+
+const { rorId } = Astro.params;
+
+const db = getDb();
+const inst = rorId ? await getInstitutionByRorId(db, rorId) : null;
+
+if (!inst) {
+  return Astro.rewrite("/404");
+}
+
+function renderValue(value: number | string | null, valueType: string): string {
+  if (value === null || value === "") return "—";
+  if (valueType === "percent") return `${value}%`;
+  const num = Number(value);
+  return Number.isNaN(num) ? String(value) : num.toLocaleString();
+}
+
+const STAT_LABELS: Record<string, string> = {
+  "# FTE Students": "Total Students",
+  "# Students per Staff": "Students per Staff",
+  "% International Students": "Intl. Students",
+  "% Female Students": "Female Students",
+};
+
+const SYSTEM_ICON: Record<RankingSystemId, string> = {
+  qs: qsColor.src,
+  shanghai: shanghaiColor.src,
+  the: theColor.src,
+};
+
+// External links as icon buttons (previous design): ROR (always), homepage,
+// wikipedia, and each ranking-system profile.
+const linkByType = new Map(inst.links.map((l) => [l.type, l.link]));
+const externalLinks: { label: string; url: string | undefined; icon: string }[] = [
+  { label: "Homepage", url: linkByType.get("homepage"), icon: homeFill.src },
+  { label: "ROR", url: `${SITE.ror.baseURL}${inst.ror_id}`, icon: rorColor.src },
+  { label: "Wikipedia", url: linkByType.get("wikipedia"), icon: wikipediaIcon.src },
+  ...(Object.keys(RANKING_SYSTEMS) as RankingSystemId[]).map((id) => ({
+    label: `${RANKING_SYSTEMS[id].alias} profile`,
+    url: linkByType.get(id),
+    icon: SYSTEM_ICON[id],
+  })),
+].filter((l) => l.url);
+
+const wikiUrl = linkByType.get("wikipedia");
+
+const osmUrl =
+  inst.lat && inst.lng
+    ? `https://www.openstreetmap.org/?mlat=${inst.lat}&mlon=${inst.lng}#map=12/${inst.lat}/${inst.lng}`
+    : undefined;
+
+const homepage = linkByType.get("homepage");
+const rankedSystems = [...new Set(inst.ranks.map((r) => r.ranking_system))]
+  .map((s) => RANKING_SYSTEMS[s as RankingSystemId]?.alias ?? s)
+  .join(", ");
+const description = rankedSystems
+  ? `${inst.name}${inst.country ? ` (${inst.country.country})` : ""} — ${rankedSystems} world university ranking positions and score trends over time.`
+  : `${inst.name} — world university ranking profile.`;
+
+// Structured data for rich results: entity name, founding, location, and
+// authoritative links (ROR, Wikipedia, ranking profiles) for reconciliation.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollegeOrUniversity",
+  name: inst.name,
+  ...(homepage ? { url: homepage } : {}),
+  ...(inst.established ? { foundingDate: String(inst.established) } : {}),
+  ...(inst.city || inst.country
+    ? {
+        address: {
+          "@type": "PostalAddress",
+          ...(inst.city ? { addressLocality: inst.city } : {}),
+          ...(inst.country ? { addressCountry: inst.country.country } : {}),
+        },
+      }
+    : {}),
+  sameAs: [
+    `${SITE.ror.baseURL}${inst.ror_id}`,
+    ...inst.links.filter((l) => l.type !== "homepage").map((l) => l.link),
+  ],
+};
+---
+
+<Layout title={`${inst.name} — ${SITE.name}`} description={description}>
+  <Fragment slot="head">
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+  <div class="mx-auto max-w-300 px-4 py-8">
+    <!-- Header: profile (left) + stats (2x2 on wide screens, right) -->
+    <header class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-start">
+        <div class="shrink-0 rounded-lg border bg-white p-2">
+          <img
+            src={`/logos/${inst.ror_id}.svg`}
+            alt={`${inst.name} logo`}
+            class="size-24 object-contain"
+            onerror={`const e=['png','jpg','jpeg','gif'];let i=+(this.dataset.i||0);if(i<e.length){this.dataset.i=i+1;this.src='/logos/${inst.ror_id}.'+e[i]}else{this.onerror=null;this.src='${uniLogo.src}'}`}
+          />
+        </div>
+        <div class="flex flex-col gap-2">
+          <h1 class="text-3xl font-bold tracking-tight">{inst.name}</h1>
+          <div
+            class="text-muted-foreground flex flex-wrap items-center gap-x-3 gap-y-1 text-sm"
+          >
+            {inst.established && <span>since {inst.established}</span>}
+            {
+              (inst.city || inst.country) && (
+                <a
+                  href={osmUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class:list={[
+                    "flex items-center gap-1 hover:text-foreground",
+                    { "pointer-events-none": !osmUrl },
+                  ]}
+                >
+                  <MapPinIcon className="size-4" />
+                  {[inst.city, inst.country?.country].filter(Boolean).join(", ")}
+                </a>
+              )
+            }
+          </div>
+          <div class="flex flex-wrap items-center gap-3 pt-1">
+            {
+              externalLinks.map((l) => (
+                <a
+                  href={l.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={l.label}
+                  aria-label={l.label}
+                  class="transition-opacity hover:opacity-70"
+                >
+                  <img src={l.icon} alt="" class="size-5" />
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+
+      {
+        inst.stats.length > 0 && (
+          <section class="grid grid-cols-1 gap-3 sm:grid-cols-4 lg:w-80 lg:shrink-0 lg:grid-cols-2">
+            {inst.stats.map((s) => (
+              <div class="rounded-lg border bg-white p-4 text-center">
+                <div class="text-2xl font-semibold">
+                  {renderValue(s.value, s.value_type)}
+                </div>
+                <div class="text-muted-foreground text-xs">
+                  {STAT_LABELS[s.metric] ?? s.metric}
+                </div>
+              </div>
+            ))}
+          </section>
+        )
+      }
+    </header>
+
+    {
+      wikiUrl && (
+        <section class="mt-4">
+          <WikiSummary client:visible url={wikiUrl} />
+        </section>
+      )
+    }
+
+    <!-- Rankings & scores (tabbed charts) -->
+    <section class="mt-10">
+      <div class="mb-3 flex items-center justify-between gap-3">
+        <h2 class="text-xl font-semibold">Rankings &amp; scores</h2>
+        <a
+          href={`/compare?ids=${inst.ror_id}`}
+          class="flex items-center gap-1 rounded-md border px-3 py-1.5 text-sm font-medium whitespace-nowrap hover:bg-neutral-100"
+        >
+          <ScaleIcon className="size-4" /> Compare
+        </a>
+      </div>
+      {
+        inst.ranks.length === 0 && inst.scores.length === 0 ? (
+          <p class="text-muted-foreground text-sm">No ranking data available.</p>
+        ) : (
+          <InstitutionCharts
+            client:only="react"
+            ranks={inst.ranks}
+            scores={inst.scores}
+            name={inst.name}
+          />
+        )
+      }
+    </section>
+  </div>
+</Layout>

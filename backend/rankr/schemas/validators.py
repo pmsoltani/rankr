@@ -1,40 +1,35 @@
 import re
 from decimal import Decimal
-from typing import Optional
 
 
-def basic_process(text: str) -> Optional[str]:
+def basic_process(text: str) -> str | None:
     if not text:
         return None
     return text.strip()
 
 
-def text_process(text: str) -> Optional[str]:
+def text_process(text: str) -> str | None:
     if not text:
         return None
     parts = re.findall(r"[a-zA-Z0-9_.:/\&\(\)]+", text)
     return " ".join(parts)
 
 
-def value_process(
-    value: Optional[str], value_type: str = "integer"
-) -> Optional[str]:
+def value_process(value: str | None, value_type: str = "integer") -> str | None:
     """Cleans and processes raw values to be stored in the database.
 
-    Rank and score values from ranking tables can take many different
-    shapes. Examples include values like: "250-300", " =9", "+1001",
-    "800+", "1,532", "5%", "8 : 92", ...
+    Rank and score values from ranking tables can take many different shapes. Examples
+    include values like: "250-300", " =9", "+1001", "800+", "1,532", "5%", "8 : 92", ...
 
-    These will need to be converted into simple numeric forms, which is
-    the purpose of this function.
+    These will need to be converted into simple numeric forms, which is the purpose
+    of this function.
 
     Args:
-        value (Optional[str]): The string to be processed
-        value_type (str, optional): The type of the final value.
-        Defaults to "integer".
+        value (str | None): The string to be processed
+        value_type (str): The type of the final value. Defaults to "integer".
 
     Returns:
-        Optional[str]: [description]
+        str | None: [description]
     """
     if value is None:
         return None
@@ -50,13 +45,13 @@ def value_process(
 
     # Dealing with ranges (e.g. Rank = "800-1000" -> "900", Rank = "47" -> "47")
     range_pattern = r"(\d+\.*\d*)[-־᠆‐‑‒–—―⁻₋−⸺⸻﹘﹣－:]*(\d+\.*\d*)*"
-    matches: Optional[re.Match[str]] = re.search(range_pattern, value)
-    try:
-        lower_bound, upper_bound = matches.groups()
-        if upper_bound:  # e.g. Rank = "800-1000"
-            total = (Decimal(lower_bound) + Decimal(upper_bound)) / 2
-            return str(int(total)) if value_type == "integer" else str(total)
-
-        return lower_bound  # e.g. Rank = "47"
-    except AttributeError:
+    matches = re.search(range_pattern, value)
+    if matches is None:
         return None
+
+    lower_bound, upper_bound = matches.groups()
+    if upper_bound:  # e.g. Rank = "800-1000"
+        total = (Decimal(lower_bound) + Decimal(upper_bound)) / 2
+        return str(int(total)) if value_type == "integer" else str(total)
+
+    return lower_bound  # e.g. Rank = "47"

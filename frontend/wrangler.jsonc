@@ -1,0 +1,34 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "rankr",
+  "compatibility_date": "2026-07-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "routes": [
+    {
+      "pattern": "rankr.online",
+      "custom_domain": true,
+    },
+    {
+      "pattern": "www.rankr.online",
+      "custom_domain": true,
+    },
+  ],
+  // @astrojs/cloudflare v14 deploys as a Worker with static assets (not Pages),
+  // so this is a Worker config; no `pages_build_output_dir`.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "rankr",
+      // Placeholder for local dev; replace with the real id from
+      // `wrangler d1 create rankr` before deploying.
+      "database_id": "b52c8ea3-3ee8-4b36-8ef9-34b3804e512f",
+      "migrations_dir": "../../migrations",
+    },
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "SESSION",
+      "id": "420897a14b60434e9336d01c9d6bdc8e",
+    },
+  ],
+}

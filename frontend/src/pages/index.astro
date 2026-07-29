@@ -1,0 +1,243 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import qsColor from "@/assets/images/qsColor.svg";
+import shanghaiColor from "@/assets/images/shanghaiColor.svg";
+import theColor from "@/assets/images/theColor.svg";
+import { getDb } from "@/lib/db";
+import { getCountries, getRankingSystems, getRankingTable } from "@/lib/queries";
+import { RANKING_SYSTEMS, SITE, type RankingSystemId } from "@/lib/site";
+
+export const prerender = false;
+
+const SYSTEM_ICON: Record<RankingSystemId, string> = {
+  qs: qsColor.src,
+  shanghai: shanghaiColor.src,
+  the: theColor.src,
+};
+
+const db = getDb();
+const systems = await getRankingSystems(db);
+
+const available = (Object.keys(RANKING_SYSTEMS) as RankingSystemId[]).filter(
+  (id) => systems[id]?.length,
+);
+const defaultSystem: RankingSystemId = available.includes("qs")
+  ? "qs"
+  : (available[0] ?? "qs");
+
+const requestedSystem = Astro.url.searchParams.get("system");
+const system: RankingSystemId =
+  requestedSystem && available.includes(requestedSystem as RankingSystemId)
+    ? (requestedSystem as RankingSystemId)
+    : defaultSystem;
+
+const years = systems[system] ?? [];
+const requestedYear = Number(Astro.url.searchParams.get("year"));
+const year = years.includes(requestedYear) ? requestedYear : years[0];
+
+const countries = year ? await getCountries(db, system, year) : [];
+const requestedCountry = Astro.url.searchParams.get("country") ?? "";
+const country = countries.some((c) => c.country === requestedCountry)
+  ? requestedCountry
+  : "";
+
+const perPage = 50;
+const page = Math.max(1, Number(Astro.url.searchParams.get("page") ?? "1") || 1);
+const { rows, total } = year
+  ? await getRankingTable(db, system, year, page, perPage, country || undefined)
+  : { rows: [], total: 0 };
+const totalPages = Math.max(1, Math.ceil(total / perPage));
+
+const hrefFor = (opts: {
+  system?: RankingSystemId;
+  year?: number;
+  page?: number;
+  country?: string;
+}) => {
+  const p = new URLSearchParams();
+  p.set("system", opts.system ?? system);
+  p.set("year", String(opts.year ?? year));
+  const c = opts.country !== undefined ? opts.country : country;
+  if (c) p.set("country", c);
+  if (opts.page && opts.page > 1) p.set("page", String(opts.page));
+  return `/?${p.toString()}`;
+};
+
+// THE's numeric ranges arrive with a mangled dash (U+FFFD); clean it for display.
+const rankLabel = (raw: string | null, value: number | string | null) =>
+  String(raw ?? value ?? "").replace(/�/g, "–");
+---
+
+<Layout
+  title={SITE.name}
+  description="rankr aggregates the QS, Shanghai (ARWU), and Times Higher Education world university rankings — browse the tables, search any university, and track its rank and score history."
+>
+  <Fragment slot="head">
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: SITE.name,
+        url: SITE.url,
+        description: SITE.description,
+      })}
+    />
+  </Fragment>
+  <div class="mx-auto max-w-300 px-4 py-8">
+    <h1 class="text-2xl font-bold tracking-tight">World University Rankings</h1>
+    <p class="text-muted-foreground mt-1 text-sm">
+      {RANKING_SYSTEMS[system].alias}
+      {year}{country && ` · ${country}`} · {total.toLocaleString()} institutions
+    </p>
+
+    <div class="mt-6 flex flex-col gap-6 lg:flex-row-reverse lg:items-start">
+      <!-- Filters (right on desktop, top on mobile) -->
+      <aside class="flex shrink-0 flex-col gap-5 lg:w-56">
+        <div>
+          <h2 class="text-muted-foreground mb-2 text-xs font-semibold uppercase">
+            Ranking system
+          </h2>
+          <div class="flex flex-wrap gap-2 lg:flex-col">
+            {
+              available.map((id) => (
+                <a
+                  href={hrefFor({ system: id, year: systems[id]?.[0], country: "" })}
+                  class:list={[
+                    "flex items-center gap-2 rounded-md border px-3 py-1.5 text-sm font-medium",
+                    id === system
+                      ? "border-neutral-900 hover:bg-neutral-200 font-semibold"
+                      : "border-neutral-200 hover:bg-neutral-200",
+                  ]}
+                >
+                  <img src={SYSTEM_ICON[id]} alt="" class="size-5 shrink-0" />
+                  {RANKING_SYSTEMS[id].alias}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+
+        {
+          countries.length > 0 && (
+            <div>
+              <h2 class="text-muted-foreground mb-2 text-xs font-semibold uppercase">
+                Country
+              </h2>
+              <form method="get" action="/">
+                <input type="hidden" name="system" value={system} />
+                <input type="hidden" name="year" value={year} />
+                <select
+                  name="country"
+                  onchange="this.form.submit()"
+                  class="w-full rounded-md border bg-white px-2 py-1.5 text-sm"
+                >
+                  <option value="">All countries</option>
+                  {countries.map((c) => (
+                    <option value={c.country} selected={c.country === country}>
+                      {c.country}
+                    </option>
+                  ))}
+                </select>
+              </form>
+            </div>
+          )
+        }
+
+        <div>
+          <h2 class="text-muted-foreground mb-2 text-xs font-semibold uppercase">
+            Year
+          </h2>
+          <div class="flex flex-wrap gap-1.5">
+            {
+              years.map((y) => (
+                <a
+                  href={hrefFor({ year: y })}
+                  class:list={[
+                    "rounded border px-2 py-1 text-xs tabular-nums",
+                    y === year
+                      ? "border-neutral-900 hover:bg-neutral-200 font-semibold"
+                      : "border-neutral-200 hover:bg-neutral-200",
+                  ]}
+                >
+                  {y}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </aside>
+
+      <!-- Table (main) -->
+      <div class="min-w-0 flex-1">
+        <div class="overflow-x-auto rounded-lg border bg-white">
+          <table class="w-full text-sm">
+            <thead class="bg-neutral-50 text-left">
+              <tr>
+                <th class="w-28 px-4 py-2 text-center font-medium">Rank</th>
+                <th class="w-16 px-4 py-2 font-medium">Country</th>
+                <th class="px-4 py-2 font-medium">Institution</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                rows.map((row) => (
+                  <tr class="border-t hover:bg-neutral-50">
+                    <td class="px-4 py-2 text-center">
+                      <span class="inline-block rounded bg-neutral-200 px-2 py-0.5 text-xs font-medium whitespace-nowrap tabular-nums">
+                        {rankLabel(row.raw_value, row.value)}
+                      </span>
+                    </td>
+                    <td class="px-4 py-2">
+                      {row.country_code && (
+                        <span
+                          class={`fi fi-${row.country_code.toLowerCase()}`}
+                          title={row.country ?? ""}
+                        />
+                      )}
+                    </td>
+                    <td class="px-4 py-2">
+                      <a
+                        href={`/i/${row.ror_id}`}
+                        class="font-medium text-sky-700 hover:underline"
+                      >
+                        {row.name}
+                      </a>
+                    </td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mt-4 flex items-center justify-between text-sm">
+          <span class="text-muted-foreground">page {page} of {totalPages}</span>
+          <div class="flex gap-2">
+            {
+              page > 1 && (
+                <a
+                  href={hrefFor({ page: page - 1 })}
+                  class="rounded-md border px-3 py-1.5 hover:bg-neutral-100"
+                >
+                  Previous
+                </a>
+              )
+            }
+            {
+              page < totalPages && (
+                <a
+                  href={hrefFor({ page: page + 1 })}
+                  class="rounded-md border px-3 py-1.5 hover:bg-neutral-100"
+                >
+                  Next
+                </a>
+              )
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -1,94 +1,33 @@
-from typing import Dict, List, Optional, Tuple
-
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from config import dbc
-from rankr import db_models as d, schemas as s
+from rankr import db_models as d
 from rankr.repos.base import BaseRepo
-from utils import fuzzy_matcher
+from utils import fuzzy_matcher, match_ror_affiliation
 
 
-class InstitutionRepo(BaseRepo):
+class InstitutionRepo(BaseRepo[d.Institution]):
     def __init__(self, db: Session) -> None:
         self.db_model = d.Institution
-        self.schema = s.InstitutionDB
-        self.related_fields = [
-            "acronyms",
-            "aliases",
-            "country",
-            "labels",
-            "links",
-            "types",
-        ]  # "rankings" were not included to improve performance.
-        super().__init__(db, self.db_model, self.schema)
-
-    def create_institution(
-        self, new_institution: s.InstitutionCreate
-    ) -> s.InstitutionDB:
-        return self._create_object(new_institution)
-
-    def create_db_institution(
-        self, new_db_institution: d.Institution
-    ) -> d.Institution:
-        return self._create_db_object(new_db_institution)
-
-    def create_institutions(
-        self, new_institutions: List[s.InstitutionCreate], log: bool = True
-    ) -> List[s.InstitutionDB]:
-        return self._create_objects(new_institutions, log=log)
+        super().__init__(db, self.db_model)
 
     def create_db_institutions(
-        self, new_db_institutions: List[d.Institution], log: bool = True
-    ) -> List[d.Institution]:
+        self, new_db_institutions: list[d.Institution], log: bool = True
+    ) -> list[d.Institution]:
         return self._create_db_objects(new_db_institutions, log=log)
 
-    def get_institution_by_id(
-        self, institution_id: int
-    ) -> Optional[s.InstitutionDB]:
-        return self._get_object_by_id(
-            object_id=institution_id, related_fields=self.related_fields
-        )
-
-    def get_institution_by_grid_id(
-        self, grid_id: str
-    ) -> Optional[s.InstitutionDB]:
-        return self._get_object(
-            [self.db_model.grid_id == grid_id],
-            related_fields=self.related_fields,
-        )
-
-    def get_institution_by_name(
-        self, institution: str
-    ) -> Optional[s.InstitutionDB]:
-        return self._get_object(
-            [self.db_model.institution == institution],
-            related_fields=self.related_fields,
-        )
+    def get_institution_by_ror_id(self, ror_id: str) -> d.Institution | None:
+        return self._get_db_object([d.Institution.ror_id == ror_id])
 
     def get_db_institutions(
         self,
-        search_query: str = None,
+        search_query: str | None = None,
         offset: int = 0,
-        limit: Optional[int] = 25,
-    ) -> List[d.Institution]:
+        limit: int | None = 25,
+    ) -> list[d.Institution]:
         return self._get_db_objects(
             search_query=search_query, offset=offset, limit=limit
-        )
-
-    def get_institutions(
-        self,
-        search_query: str = None,
-        offset: int = 0,
-        limit: Optional[int] = 25,
-    ) -> List[s.InstitutionDB]:
-        return self._get_objects(
-            join=d.Ranking,
-            distinct=True,
-            search_query=search_query,
-            offset=offset,
-            limit=limit,
-            related_fields=self.related_fields,
         )
 
     def match_institution(
@@ -97,18 +36,31 @@ class InstitutionRepo(BaseRepo):
         institution_url: str,
         link_type: str,
         country_name: str,
-        soup: Dict[str, Dict[str, str]],
-    ) -> Tuple[Optional[d.Institution], bool]:
-        institution_name = institution_name.strip().lower()
+        soup: dict[str, dict[str, str]],
+        education_rors: set[str] | None = None,
+        cache: dict[str, dict[str, str]] | None = None,
+        use_api: bool = True,
+    ) -> tuple[d.Institution | None, bool]:
+        raw_name = institution_name.strip()
+        institution_name = raw_name.lower()
         fuzzy_flag = False
-        db_institution: Optional[d.Institution] = None
+        db_institution: d.Institution | None = None
 
-        # checking grid_id in manual matches
+        # checking ror_id in manual matches (curated overrides win over all)
         match = dbc.MATCHES.get(country_name, {}).get(institution_name)
         if match:
-            db_institution = self._get_db_object(
-                flt=[d.Institution.grid_id == match]
+            db_institution = self._get_db_object(flt=[d.Institution.ror_id == match])
+
+        # affiliation cache: a ranking URL is stable per institution, while the
+        # displayed name could drift year to year, so try the link first, then the name.
+        if not db_institution and cache is not None:
+            ror = (
+                cache.get("links", {}).get(institution_url) if institution_url else None
             )
+            if not ror:
+                ror = cache.get("names", {}).get(institution_name)
+            if ror:
+                db_institution = self._get_db_object(flt=[d.Institution.ror_id == ror])
 
         # checking link with institution links
         if not db_institution:
@@ -127,13 +79,30 @@ class InstitutionRepo(BaseRepo):
                 join=d.Institution.country, flt=flt
             )
 
-        # fuzzy-mataching of strings
-        if not db_institution:
-            match = fuzzy_matcher(institution_name, country_name, soup)
+        # ROR affiliation matcher (chosen:true); tuned for messy strings
+        if not db_institution and use_api:
+            query = f"{raw_name}, {country_name}" if country_name else raw_name
+            match = match_ror_affiliation(query)
             if match:
                 db_institution = self._get_db_object(
-                    flt=[d.Institution.grid_id == match]
+                    flt=[d.Institution.ror_id == match]
+                )
+
+        # local fuzzy fallback (offline / no chosen match); lower confidence
+        if not db_institution:
+            match = fuzzy_matcher(institution_name, country_name, soup, education_rors)
+            if match:
+                db_institution = self._get_db_object(
+                    flt=[d.Institution.ror_id == match]
                 )
                 fuzzy_flag = True
+
+        # remember confident matches so next year's entry with the same URL resolves
+        # instantly; fuzzy matches stay uncached so they are re-tried and re-flagged
+        # each crawl.
+        if db_institution and cache is not None and not fuzzy_flag:
+            cache.setdefault("names", {})[institution_name] = db_institution.ror_id
+            if institution_url:
+                cache.setdefault("links", {})[institution_url] = db_institution.ror_id
 
         return db_institution, fuzzy_flag

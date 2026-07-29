@@ -1,15 +1,18 @@
-from contextlib import closing
-from typing import Any, Dict, List, Tuple
+import json
+from typing import Any
 
 import typer
-from sqlalchemy.orm import Session
+from sqlalchemy import select
 
 from config import crwc, qsc, shac, thec, wikic
-from rankr import crawlers as c, db_models as d, repos as r
+from config import enums as e
+from rankr import crawlers as c
+from rankr import db_models as d
+from rankr import repos as r
 from utils import csv_export
 
 
-def engine_select(engine: str) -> Tuple[Any, Any]:
+def engine_select(engine: str) -> tuple[Any, Any]:
     """Returns the Crawler & the Config classes for the selected engine.
 
     Args:
@@ -19,7 +22,7 @@ def engine_select(engine: str) -> Tuple[Any, Any]:
         ValueError: If engine is not supported
 
     Returns:
-        Tuple[Any, Any]: The engines' Crawler & Config classes
+        tuple[Any, Any]: The engines' Crawler & Config classes
     """
     crawler_configs = [qsc, shac, thec, wikic]
     crawler_classes = [
@@ -29,16 +32,16 @@ def engine_select(engine: str) -> Tuple[Any, Any]:
         c.WikipediaCrawler,
     ]
     engines = zip(crwc.SUPPORTED_ENGINES, zip(crawler_configs, crawler_classes))
-    for e in engines:
-        if e[0] == engine:
-            return e[1]
+    for name, config_and_crawler in engines:
+        if name == engine:
+            return config_and_crawler
     raise typer.BadParameter(
         f"Wrong engine value '{engine}'. "
         + f"Only {crwc.SUPPORTED_ENGINES} are supported."
     )
 
 
-def engine_check(value: str) -> List[str]:
+def engine_check(value: str) -> list[str]:
     value = value.lower()
     if value == "all":
         return crwc.SUPPORTED_ENGINES
@@ -47,23 +50,28 @@ def engine_check(value: str) -> List[str]:
     return [value]
 
 
-def get_wikipedia_urls() -> List[Dict[str, str]]:
-    """Retrieves the list of Wikipedia URLS for ranked institutions."""
-    db: Session
-    with closing(d.SessionLocal()) as db:
-        query = (d.Institution.grid_id, d.Institution.wikipedia_url)
-        institutions = (
-            db.query(*query).join(d.Institution.rankings).group_by(*query).all()
-        )
-    return [institution._asdict() for institution in institutions]
+def get_wikipedia_urls() -> list[dict[str, str]]:
+    """Retrieves the list of Wikipedia URLs for ranked institutions.
+
+    The Wikipedia URL is stored as a `link` row (type=wikipedia), not on the
+    institution itself, so we join through the links relationship.
+    """
+    stmt = (
+        select(d.Institution.ror_id, d.Link.link.label("wikipedia_url"))
+        .join(d.Institution.links)
+        .join(d.Institution.rankings)
+        .where(d.Link.type == e.LinkTypeEnum.wikipedia)
+        .group_by(d.Institution.ror_id, d.Link.link)
+    )
+    with d.SessionLocal() as db:
+        rows = db.execute(stmt).all()
+    return [dict(row._mapping) for row in rows]
 
 
 def crawl(
     engines: str = typer.Argument(..., callback=engine_check),
     commit: bool = typer.Option(True, help="Commit the results to the DB?"),
-    offline: bool = typer.Option(
-        False, help="Only use CSV files (no web crawling)."
-    ),
+    offline: bool = typer.Option(False, help="Only use CSV files (no web crawling)."),
 ):
     """Crawls the ranking websites and commits the results to DB
 
@@ -74,12 +82,20 @@ def crawl(
     Special engine value: rankings = [qs, shanghai, the]
 
     Args:
-        engines (List[str]): The selected engines used for crawling
+        engines (list[str]): The selected engines used for crawling
         commit (bool): Whether or not commit the ranking table to DB
         offline (bool): Only use CSV files (no web crawling)
     """
     all_not_matched = []
     all_fuzzy_matched = []
+    # (name -> ror_id) and (link -> ror_id) of past confident matches, so a
+    # renamed-but-same-URL entry resolves without re-hitting the ROR API.
+    cache_path = crwc.DATA_DIR / "affiliation_cache.json"
+    cache: dict[str, dict[str, str]] = (
+        json.loads(cache_path.read_text(encoding="utf-8"))
+        if cache_path.exists()
+        else {"names": {}, "links": {}}
+    )
     for engine in engines:
         typer.secho(f"Processing '{engine}' urls.", fg=typer.colors.CYAN)
         config, crawler = engine_select(engine)
@@ -87,18 +103,27 @@ def crawl(
             # The WikipediaCrawler class works a little different.
             urls = get_wikipedia_urls() or config.URLS
             for url in urls:
-                w = crawler(url["grid_id"], url["wikipedia_url"])
+                w = crawler(url["ror_id"], url["wikipedia_url"])
                 w.crawl()
             continue
 
-        with closing(d.SessionLocal()) as db:
+        stmt = (
+            select(d.Institution.ror_id)
+            .join(d.Institution.types)
+            .where(d.Type.type == e.InstTypeEnum.Education)
+            .distinct()
+        )
+        with d.SessionLocal() as db:
             institution_repo = r.InstitutionRepo(db)
-            soup = {}  # Group soup by country for better performance.
+            # ROR ids typed "Education": used to break fuzzy-match ties toward
+            # the canonical university (not a hospital / facility / sub-unit).
+            education_rors: set[str] = set(db.scalars(stmt).all())
+            # Group soup by country for better performance.
+            soup: dict[str, dict[str, str]] = {}
             for inst in institution_repo.get_db_institutions(limit=0):
-                try:
-                    soup[inst.country.country][inst.soup] = inst.grid_id
-                except KeyError:
-                    soup[inst.country.country] = {inst.soup: inst.grid_id}
+                if not inst.country or inst.soup is None:
+                    continue
+                soup.setdefault(inst.country.country, {})[inst.soup] = inst.ror_id
 
             for page in config.URLS:
                 if not page.get("crawl"):
@@ -128,7 +153,11 @@ def crawl(
                 )
 
                 matched, not_matched, fuzzy_matched = p.crawl_and_process(
-                    institution_repo=institution_repo, soup=soup
+                    institution_repo=institution_repo,
+                    soup=soup,
+                    education_rors=education_rors,
+                    cache=cache,
+                    use_api=not offline,
                 )
                 if commit:
                     db.add_all(matched)
@@ -136,6 +165,9 @@ def crawl(
                 all_fuzzy_matched.extend(fuzzy_matched)
                 all_not_matched.extend(not_matched)
 
+    cache_path.write_text(
+        json.dumps(cache, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
     if all_fuzzy_matched:
         csv_export(crwc.DATA_DIR / "fuzz.csv", all_fuzzy_matched)
         typer.echo("Saved the list of fuzzy-matched institutions.")

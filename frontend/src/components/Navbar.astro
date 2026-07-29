@@ -1,0 +1,24 @@
+---
+import appLogo from "@/assets/images/appLogo.svg";
+import SearchCommand from "@/components/SearchCommand";
+import { ScaleIcon } from "lucide-react";
+---
+
+<header class="sticky top-0 z-40 border-b bg-white/90 backdrop-blur">
+  <div class="mx-auto flex h-14 max-w-300 items-center justify-between gap-4 px-4">
+    <a href="/" aria-label="rankr home" class="flex items-center">
+      <img src={appLogo.src} alt="rankr logo" class="h-9" />
+    </a>
+
+    <SearchCommand client:load />
+
+    <nav class="flex items-center">
+      <a
+        href="/compare"
+        class="flex items-center gap-1 text-muted-foreground hover:text-foreground text-sm font-medium whitespace-nowrap"
+      >
+        <ScaleIcon className="size-4" /> Compare
+      </a>
+    </nav>
+  </div>
+</header>

@@ -1,9 +1,7 @@
 import json
 import re
-from typing import Dict, List
 
 import requests
-from furl import furl
 
 from config import thec
 from rankr import schemas as s
@@ -32,22 +30,40 @@ class THECrawler(CrawlerMixin):
             str: The url for the ranking table data
         """
         page = requests.get(self.url, headers=thec.HEADERS)
-        json_url: str = re.findall(r"(https.*?\.json)", page.text)[0]
+        json_url = None
+
+        next_data_match = re.search(
+            r'<script[^>]+id="__NEXT_DATA__"[^>]*>(.*?)</script>',
+            page.text,
+            re.DOTALL,
+        )
+        if next_data_match:
+            next_data = json.loads(next_data_match.group(1))
+            json_url = (
+                next_data.get("props", {})
+                .get("pageProps", {})
+                .get("page", {})
+                .get("rankingsTableConfig", {})
+                .get("jsonUrl")
+            )
+
+        if not json_url:
+            json_url = re.findall(r"(https.*?\.json)", page.text)[0]
 
         self.json_url = json_url.replace("\\", "")
         return self.json_url
 
-    def _get_tbl(self) -> List[Dict[str, str]]:
+    def _get_tbl(self) -> list[dict[str, str]]:
         """Processes raw ranking data into a list of dictionaries.
 
         Returns:
-            List[Dict[str, str]]: Processed ranking data to be exported
+            list[dict[str, str]]: Processed ranking data to be exported
         """
         page = requests.get(self.json_url, headers=thec.HEADERS)
         raw_data = json.loads(page.text)
 
         # processing raw_data
-        processed_data: List[Dict[str, str]] = []
+        processed_data: list[dict[str, str]] = []
         for row in raw_data["data"]:
             values = {}
             for col in row:
@@ -58,7 +74,7 @@ class THECrawler(CrawlerMixin):
                 if thec.FIELDS[col] == "country":
                     value = s.CountryCreate(country=value).country
                 if thec.FIELDS[col] == "url":
-                    value = furl(thec.BASE_URL).join(value).url
+                    value = f"{thec.BASE_URL.rstrip('/')}/{value.lstrip('/')}"
 
                 values[thec.FIELDS[col]] = value
 

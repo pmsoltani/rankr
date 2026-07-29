@@ -1,42 +1,56 @@
-from sqlalchemy import Column, ForeignKey, Integer, String
-from sqlalchemy.orm import relationship
+from typing import TYPE_CHECKING
+
+from sqlalchemy import ForeignKey, Index, String, func
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from rankr.db_models.base import Base
+
+
+if TYPE_CHECKING:
+    from rankr.db_models.acronym import Acronym
+    from rankr.db_models.alias import Alias
+    from rankr.db_models.country import Country
+    from rankr.db_models.label import Label
+    from rankr.db_models.link import Link
+    from rankr.db_models.ranking import Ranking
+    from rankr.db_models.type import Type
 
 
 class Institution(Base):
     __tablename__ = "institution"
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    grid_id = Column(String(15), unique=True, nullable=False)
-    name = Column(String(255), nullable=False)
-    established = Column(Integer)
-    lat = Column(String(63))
-    lng = Column(String(63))
-    city = Column(String(63))
-    state = Column(String(63))
-    country_id = Column(Integer, ForeignKey("country.id"))
-    soup = Column(String(1000))
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    ror_id: Mapped[str] = mapped_column(String(9), unique=True)
+    # Retired identifier kept for provenance & legacy /i/grid.x redirects.
+    grid_id: Mapped[str | None] = mapped_column(String(15), unique=True)
+    name: Mapped[str] = mapped_column(String(255))
+    established: Mapped[int | None] = mapped_column()
+    lat: Mapped[str | None] = mapped_column(String(63))
+    lng: Mapped[str | None] = mapped_column(String(63))
+    city: Mapped[str | None] = mapped_column(String(63))
+    state: Mapped[str | None] = mapped_column(String(63))
+    country_id: Mapped[int | None] = mapped_column(ForeignKey("country.id"))
+    soup: Mapped[str | None] = mapped_column(String(1000))
 
     # Relationships
-    acronyms = relationship(
-        "Acronym", back_populates="institution", cascade="all, delete-orphan"
+    acronyms: Mapped[list["Acronym"]] = relationship(
+        back_populates="institution", cascade="all, delete-orphan"
     )
-    aliases = relationship(
-        "Alias", back_populates="institution", cascade="all, delete-orphan"
+    aliases: Mapped[list["Alias"]] = relationship(
+        back_populates="institution", cascade="all, delete-orphan"
     )
-    country = relationship("Country", back_populates="institutions")
-    labels = relationship(
-        "Label", back_populates="institution", cascade="all, delete-orphan"
+    country: Mapped["Country | None"] = relationship(back_populates="institutions")
+    labels: Mapped[list["Label"]] = relationship(
+        back_populates="institution", cascade="all, delete-orphan"
     )
-    links = relationship(
-        "Link", back_populates="institution", cascade="all, delete-orphan"
+    links: Mapped[list["Link"]] = relationship(
+        back_populates="institution", cascade="all, delete-orphan"
     )
-    rankings = relationship(
-        "Ranking", back_populates="institution", cascade="all, delete-orphan"
+    rankings: Mapped[list["Ranking"]] = relationship(
+        back_populates="institution", cascade="all, delete-orphan"
     )
-    types = relationship(
-        "Type", back_populates="institution", cascade="all, delete-orphan"
+    types: Mapped[list["Type"]] = relationship(
+        back_populates="institution", cascade="all, delete-orphan"
     )
 
     def __init__(self, **kwargs):
@@ -45,5 +59,10 @@ class Institution(Base):
 
     def __repr__(self):
         if self.id:
-            return f"{self.id} - {self.grid_id}: {self.name}"
-        return f"{self.grid_id}: {self.name}"
+            return f"{self.id} - {self.ror_id}: {self.name}"
+        return f"{self.ror_id}: {self.name}"
+
+
+# Functional index for the exact-name match step (WHERE lower(name) = ?), which
+# would otherwise scan the whole institution table on every fresh-crawl lookup.
+Index("ix_institution_lower_name", func.lower(Institution.name))

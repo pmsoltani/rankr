@@ -1,4 +1,7 @@
 [
+  { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2025, "field": "All", "subject": "All", "url": "https://www.shanghairanking.com/rankings/arwu/2025", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2024, "field": "All", "subject": "All", "url": "https://www.shanghairanking.com/rankings/arwu/2024", "crawl": true },
+  { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2023, "field": "All", "subject": "All", "url": "https://www.shanghairanking.com/rankings/arwu/2023", "crawl": true },
   { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2022, "field": "All", "subject": "All", "url": "https://www.shanghairanking.com/rankings/arwu/2022", "crawl": true },
   { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2021, "field": "All", "subject": "All", "url": "https://www.shanghairanking.com/rankings/arwu/2021", "crawl": true },
   { "ranking_system": "shanghai", "ranking_type": "university ranking", "year": 2020, "field": "All", "subject": "All", "url": "https://www.shanghairanking.com/rankings/arwu/2020", "crawl": true },

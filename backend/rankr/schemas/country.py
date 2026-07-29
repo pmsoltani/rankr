@@ -1,23 +1,32 @@
-from typing import Optional
-
-from pydantic import BaseModel, root_validator, validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    ValidationInfo,
+    field_validator,
+    model_validator,
+)
 
 from config import crwc
-from rankr.schemas.core import OrmBase
 from rankr.schemas.validators import text_process
 
 
 class CountryBase(BaseModel):
-    id: Optional[int]
-    country: str
-    country_code: Optional[str]
-    region: Optional[str]
-    sub_region: Optional[str]
+    # validate_default so country_code/region/sub_region get resolved from the
+    # COUNTRIES table even when only `country` is supplied.
+    model_config = ConfigDict(validate_default=True)
 
-    # validators
-    @root_validator(pre=True)
-    def _resolve_country_name_from_country_code(cls, values: dict):
-        if values.get("country_code") and not values["country"]:
+    id: int | None = None
+    country: str
+    country_code: str | None = None
+    region: str | None = None
+    sub_region: str | None = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def _resolve_country_name_from_country_code(cls, values):
+        if not isinstance(values, dict):
+            return values
+        if values.get("country_code") and not values.get("country"):
             filtered_country = [
                 k
                 for k, v in crwc.COUNTRIES.items()
@@ -28,9 +37,13 @@ class CountryBase(BaseModel):
             values["country"] = filtered_country[0]
         return values
 
-    _clean_name = validator("country", allow_reuse=True, pre=True)(text_process)
+    @field_validator("country", mode="before")
+    @classmethod
+    def _clean_name(cls, value):
+        return text_process(value)
 
-    @validator("country")
+    @field_validator("country")
+    @classmethod
     def _resolve_country_name(cls, country: str) -> str:
         try:
             return crwc.COUNTRY_NAMES.get(
@@ -39,18 +52,12 @@ class CountryBase(BaseModel):
         except AttributeError:  # country is None
             return country
 
-    @validator("country_code", "region", "sub_region", always=True)
-    def _resolve_country_info(cls, value, values, field) -> str:
-        return crwc.COUNTRIES[values["country"]][field.name]
+    @field_validator("country_code", "region", "sub_region")
+    @classmethod
+    def _resolve_country_info(cls, value, info: ValidationInfo) -> str:
+        assert info.field_name is not None
+        return crwc.COUNTRIES[info.data["country"]][info.field_name]
 
 
 class CountryCreate(CountryBase):
-    pass
-
-
-class CountryOut(CountryBase):
-    pass
-
-
-class CountryDB(OrmBase, CountryOut):
     pass

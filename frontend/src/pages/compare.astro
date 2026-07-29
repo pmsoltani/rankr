@@ -1,0 +1,24 @@
+---
+import CompareApp from "@/components/compare/CompareApp";
+import Layout from "@/layouts/Layout.astro";
+import { SITE } from "@/lib/site";
+
+// Static shell; the island reads/writes ?ids/system/year in the URL client-side.
+export const prerender = true;
+---
+
+<Layout
+  title={`Compare — ${SITE.name}`}
+  description="Compare universities' ranks and scores across QS, Shanghai, and THE."
+>
+  <div class="mx-auto max-w-300 px-4 py-8">
+    <h1 class="text-2xl font-bold tracking-tight">Compare institutions</h1>
+    <p class="text-muted-foreground mt-1 text-sm">
+      Add up to 3 institutions and compare their ranks and scores within a ranking
+      system.
+    </p>
+    <div class="mt-6">
+      <CompareApp client:only="react" />
+    </div>
+  </div>
+</Layout>

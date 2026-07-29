@@ -1,140 +1,72 @@
-from typing import List, Optional, Type
+from collections.abc import Sequence
+from typing import Any
 
 import typer
-from pydantic import BaseModel
-from sqlalchemy import or_
+from sqlalchemy import or_, select, true
 from sqlalchemy.orm import Session
 
 from rankr import db_models as d
 
 
-class BaseRepo:
-    def __init__(self, db: Session, db_model: Type[d.Base], schema) -> None:
+class BaseRepo[ModelT: d.Base]:
+    def __init__(self, db: Session, db_model: type[ModelT]) -> None:
         self.db = db
         self.db_model = db_model
-        self.schema = schema
 
-    def _db_to_dict(self, db_object, related_fields: List[str] = []) -> dict:
-        if not db_object:
-            return {}
-        parsed = db_object.__dict__
-        for field in related_fields:
-            value = getattr(db_object, field)
-            parsed[field] = getattr(value, "__dict__", None)
-            if isinstance(value, list):
-                parsed[field] = [item.__dict__ for item in value]
-        return parsed
+    def _log_committed(self, count: int) -> None:
+        typer.secho(
+            f"Committed {count} new '{self.db_model.__name__}' objects.",
+            fg=typer.colors.GREEN,
+        )
 
-    def _create_object(self, new_object: BaseModel):
-        db_object = self.db_model(**new_object.dict(exclude_unset=True))
-        self.db.add(db_object)
-        self.db.commit()
-        return self.schema.from_orm(db_object)
-
-    def _create_db_object(self, new_db_object: d.Base):
-        self.db.add(new_db_object)
-        self.db.commit()
-        return new_db_object
-
-    def _create_objects(self, new_objects, log: bool = True):
+    def _create_objects(self, new_objects, log: bool = True) -> list[ModelT]:
         db_objects = [
-            self.db_model(**new_obj.dict(exclude_unset=True))
-            for new_obj in new_objects
+            self.db_model(**obj.model_dump(exclude_unset=True)) for obj in new_objects
         ]
         self.db.add_all(db_objects)
         self.db.commit()
         if log:
-            object_type = self.db_model.__name__
-            typer.secho(
-                f"Committed {len(new_objects)} new '{object_type}' objects.",
-                fg=typer.colors.GREEN,
-            )
-        return [self.schema.from_orm(db_object) for db_object in db_objects]
+            self._log_committed(len(db_objects))
+        return db_objects
 
-    def _create_db_objects(self, new_db_objects, log: bool = True):
+    def _create_db_objects(
+        self, new_db_objects: list[ModelT], log: bool = True
+    ) -> list[ModelT]:
         self.db.add_all(new_db_objects)
         self.db.commit()
         if log:
-            object_type = self.db_model.__name__
-            typer.secho(
-                f"Committed {len(new_db_objects)} new '{object_type}' objects.",
-                fg=typer.colors.GREEN,
-            )
+            self._log_committed(len(new_db_objects))
         return new_db_objects
 
-    def _get_db_object(self, flt: list = []):
-        return self.db.query(self.db_model).filter(*flt).first()
+    def _get_db_object(self, flt: Sequence[Any] = ()) -> ModelT | None:
+        return self.db.scalars(select(self.db_model).where(*flt)).first()
 
-    def _get_object(self, flt: list = [], related_fields: List[str] = []):
-        db_object = self._get_db_object(flt=flt)
-        db_object_dict = self._db_to_dict(db_object, related_fields)
-        return self.schema(**db_object_dict) if db_object_dict else None
-
-    def _get_db_object_by_relation(self, join, flt: list):
-        return self.db.query(self.db_model).join(join).filter(*flt).first()
-
-    def _get_object_by_relation(
-        self, join, flt: list, related_fields: List[str] = []
-    ):
-        db_object = self._get_db_object_by_relation(join=join, flt=flt)
-        db_object_dict = self._db_to_dict(db_object, related_fields)
-        return self.schema(**db_object_dict) if db_object_dict else None
-
-    def _get_object_by_id(self, object_id: int, related_fields: List[str] = []):
-        return self._get_object([self.db_model.id == object_id], related_fields)
+    def _get_db_object_by_relation(
+        self, join: Any, flt: Sequence[Any]
+    ) -> ModelT | None:
+        return self.db.scalars(select(self.db_model).join(join).where(*flt)).first()
 
     def _get_db_objects(
         self,
-        join: Optional[Type[d.Base]] = None,
+        join: Any = None,
         distinct: bool = False,
-        search_query: str = None,
-        flt: list = [],
-        order_by: list = [],
+        search_query: str | None = None,
+        flt: Sequence[Any] = (),
+        order_by: Sequence[Any] = (),
         offset: int = 0,
-        limit: Optional[int] = 25,
-    ):
-        flt = [self.search(search_query), *flt]
-        query = self.db.query(self.db_model)
-        if join:
-            query = query.join(join)
+        limit: int | None = 25,
+    ) -> list[ModelT]:
+        stmt = select(self.db_model).where(self.search(search_query), *flt)
+        if join is not None:
+            stmt = stmt.join(join)
         if distinct:
-            query = query.distinct()
-        return (
-            query.filter(*flt)
-            .order_by(*order_by)
-            .offset(offset)
-            .limit(limit or None)
-            .all()
-        )
+            stmt = stmt.distinct()
+        stmt = stmt.order_by(*order_by).offset(offset).limit(limit or None)
+        return list(self.db.scalars(stmt).all())
 
-    def _get_objects(
-        self,
-        join: Optional[Type[d.Base]] = None,
-        distinct: bool = False,
-        search_query: str = None,
-        flt: list = [],
-        order_by: list = [],
-        offset: int = 0,
-        limit: Optional[int] = 25,
-        related_fields: List[str] = [],
-    ):
-        db_objects = self._get_db_objects(
-            join=join,
-            distinct=distinct,
-            search_query=search_query,
-            flt=flt,
-            offset=offset,
-            limit=limit,
-            order_by=order_by,
-        )
-        return [
-            self.schema(**self._db_to_dict(db_object, related_fields))
-            for db_object in db_objects
-        ]
-
-    def search(self, search_query: Optional[str]):
+    def search(self, search_query: str | None):
         if not search_query:
-            return or_()
+            return true()  # no filter (SQLAlchemy 2.0: empty or_() is invalid)
 
         search_query = f"%{search_query}%"
         search_chain = ()

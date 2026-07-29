@@ -1,27 +1,30 @@
 import time
 from pathlib import Path
-from typing import Callable, Dict, List, Union
+from typing import Any, Callable
 
-from tqdm import tqdm
 import typer
+from tqdm import tqdm
 
 from config import crwc
-from rankr import db_models as d, repos as r, schemas as s
+from rankr import db_models as d
+from rankr import repos as r
+from rankr import schemas as s
 from utils import csv_export
 
 
-class CrawlerMixin(object):
+class CrawlerMixin:
     """Common tools and settings across different ranking crawlers"""
 
-    _get_page: Callable
-    _get_tbl: Callable
+    # Implemented by each concrete crawler subclass.
+    _get_page: Callable[..., Any]
+    _get_tbl: Callable[..., Any]
     download_dir: Path
-    processed_data: List[Dict[str, str]]
+    processed_data: list[dict[str, str]]
     url: str
 
     def __init__(
         self,
-        year: Union[str, int],
+        year: str | int,
         ranking_system: str,
         ranking_type: str,
         field: str,
@@ -31,7 +34,7 @@ class CrawlerMixin(object):
     ) -> None:
         # self.ranking_info is mainly used to enrich ranking tables with
         # additional metadata
-        self.ranking_info: Dict[str, str] = {
+        self.ranking_info: dict[str, str] = {
             "ranking_system": ranking_system,
             "ranking_type": ranking_type,
             "year": str(year),
@@ -73,7 +76,10 @@ class CrawlerMixin(object):
     def crawl_and_process(
         self,
         institution_repo: r.InstitutionRepo,
-        soup: Dict[str, Dict[str, str]],
+        soup: dict[str, dict[str, str]],
+        education_rors: set[str] | None = None,
+        cache: dict[str, dict[str, str]] | None = None,
+        use_api: bool = True,
     ):
         for i in range(self.tries):
             try:
@@ -109,6 +115,9 @@ class CrawlerMixin(object):
                 link_type=row["ranking_system"],
                 country_name=row["country"],
                 soup=soup,
+                education_rors=education_rors,
+                cache=cache,
+                use_api=use_api,
             )
             db_institution, fuzzy_flag = match
             # could not match, or was matched before (with another institution)
@@ -123,10 +132,17 @@ class CrawlerMixin(object):
                 )
                 continue
             if fuzzy_flag:
+                # Flag matches whose winner is not an education org; the strongest
+                # signal of a fuzzy mis-match to review first.
+                non_education = (
+                    education_rors is not None
+                    and db_institution.ror_id not in education_rors
+                )
                 fuzzy_matched_list.append(
                     {
+                        "review": "NON-EDUCATION" if non_education else "",
                         "fuzzy": db_institution.name,
-                        "grid_id": db_institution.grid_id,
+                        "ror_id": db_institution.ror_id,
                         **inst_info,
                     }
                 )
@@ -138,7 +154,7 @@ class CrawlerMixin(object):
                     type=row["ranking_system"],
                     link=row["url"],
                 )
-                db_institution.links.append(d.Link(**link.dict()))
+                db_institution.links.append(d.Link(**link.model_dump()))
 
             for col in row:
                 if col in non_metric_cols:
@@ -155,7 +171,7 @@ class CrawlerMixin(object):
                     value_type=metric_types[row["ranking_system"]][col]["type"],
                     value=row[col],
                 )
-                db_institution.rankings.append(d.Ranking(**ranking.dict()))
+                db_institution.rankings.append(d.Ranking(**ranking.model_dump()))
 
             matched_institutions.append(db_institution)
 
