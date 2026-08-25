@@ -1,11 +1,5 @@
-import {
-  QueryClient,
-  QueryClientProvider,
-  keepPreviousData,
-  useQuery,
-} from "@tanstack/react-query";
 import { SearchIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import {
   Command,
@@ -15,33 +9,31 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import type { SearchResult } from "@/lib/types";
+import { type IndexEntry, loadSearchIndex, searchIndex } from "@/lib/search";
 
-const queryClient = new QueryClient({
-  defaultOptions: { queries: { staleTime: 60_000, retry: 1 } },
-});
-
-/** Debounce a value so the query key only changes once the user pauses. */
-function useDebounced<T>(value: T, delay = 300): T {
-  const [debounced, setDebounced] = useState(value);
-  useEffect(() => {
-    const timer = setTimeout(() => setDebounced(value), delay);
-    return () => clearTimeout(timer);
-  }, [value, delay]);
-  return debounced;
-}
-
-async function fetchSearch(q: string): Promise<SearchResult[]> {
-  const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`);
-  if (!res.ok) throw new Error(`search failed: ${res.status}`);
-  return res.json() as Promise<SearchResult[]>;
-}
-
-function SearchInner() {
+export default function SearchCommand() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const debounced = useDebounced(query, 300).trim();
+  // Matching is local, so there is no request to debounce; every keystroke can
+  // filter the corpus directly.
+  const debounced = query.trim();
   const active = debounced.length >= 2;
+
+  const [index, setIndex] = useState<IndexEntry[] | null>(null);
+  const [isError, setIsError] = useState(false);
+
+  // Load the corpus the first time the palette opens, not on page load.
+  useEffect(() => {
+    if (!open || index) return;
+    let cancelled = false;
+    loadSearchIndex().then(
+      (data) => !cancelled && setIndex(data),
+      () => !cancelled && setIsError(true),
+    );
+    return () => {
+      cancelled = true;
+    };
+  }, [open, index]);
 
   // Show the platform-correct modifier (⌘ on Mac, Ctrl elsewhere). Defaults to
   // "⌘K" so SSR and first client render match; the effect corrects it after mount.
@@ -63,16 +55,11 @@ function SearchInner() {
     return () => document.removeEventListener("keydown", onKey);
   }, []);
 
-  // TanStack Query keyed on the debounced query; this alone fixes the old
-  // keystroke-lag bug: only the latest key's data is rendered, stale responses
-  // are discarded, and keepPreviousData avoids flicker while retyping.
-  const { data, isFetching, isError } = useQuery({
-    queryKey: ["search", debounced],
-    queryFn: () => fetchSearch(debounced),
-    enabled: active,
-    placeholderData: keepPreviousData,
-  });
-  const results = active ? (data ?? []) : [];
+  const isFetching = active && !index && !isError;
+  const results = useMemo(
+    () => (active && index ? searchIndex(index, debounced) : []),
+    [active, index, debounced],
+  );
 
   const go = (rorId: string) => {
     setOpen(false);
@@ -88,7 +75,7 @@ function SearchInner() {
         aria-label="Search for institutions"
       >
         <SearchIcon className="size-4 shrink-0" aria-hidden="true" />
-        <span className="truncate">Search for institutions…</span>
+        <span className="truncate">Search for institutions...</span>
         <kbd className="ml-auto hidden items-center gap-0.5 rounded border bg-white px-2 py-0.5 font-mono text-xs sm:inline-flex">
           {modKey}
         </kbd>
@@ -104,7 +91,7 @@ function SearchInner() {
             <CommandInput
               value={query}
               onValueChange={setQuery}
-              placeholder="Search for institutions…"
+              placeholder="Search for institutions..."
             />
             <CommandList>
               {!active ? (
@@ -117,7 +104,7 @@ function SearchInner() {
                 </p>
               ) : results.length === 0 && isFetching ? (
                 <p className="text-muted-foreground py-6 text-center text-sm">
-                  Searching…
+                  Searching...
                 </p>
               ) : results.length === 0 ? (
                 <p className="text-muted-foreground py-6 text-center text-sm">
@@ -155,13 +142,5 @@ function SearchInner() {
         </DialogContent>
       </Dialog>
     </>
-  );
-}
-
-export default function SearchCommand() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <SearchInner />
-    </QueryClientProvider>
   );
 }

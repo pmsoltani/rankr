@@ -1,0 +1,30 @@
+---
+import RankingPage from "@/components/RankingPage.astro";
+import { getRankingSystems, getRankingTableData, pageCount } from "@/lib/data";
+import type { RankingSystemId } from "@/lib/site";
+
+export const prerender = true;
+
+// Pages 2..N of every table. Page 1 lives at the parent path (index.astro), so
+// it is excluded here rather than being reachable at two URLs.
+export function getStaticPaths() {
+  const systems = getRankingSystems();
+  return Object.entries(systems).flatMap(([system, years]) =>
+    years.flatMap((year) => {
+      const { rows } = getRankingTableData(system, year);
+      const pages = pageCount(rows.length);
+      return Array.from({ length: Math.max(0, pages - 1) }, (_, i) => {
+        const page = i + 2;
+        return {
+          params: { system, year: String(year), page: String(page) },
+          props: { system: system as RankingSystemId, year, page },
+        };
+      });
+    }),
+  );
+}
+
+const { system, year, page } = Astro.props;
+---
+
+<RankingPage system={system} year={year} page={page} />

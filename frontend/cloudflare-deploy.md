@@ -1,71 +1,76 @@
 # Cloudflare deploy runbook
 
-The frontend deploys as a **Cloudflare Worker** via `wrangler deploy` — _not_ Git-connected. Cloudflare never watches a branch; you push the built bundle with a command from whatever is checked out. The backend crawl runs locally; D1 is a slimmed projection of `backend/data/rankr.sqlite` (ranked institutions only, ranking rows collapsed into a JSON `metrics` column).
+The frontend deploys as a **Cloudflare Worker with static assets** via `wrangler deploy` (not Git-connected). Cloudflare never watches a branch; you push the built bundle with a command from whatever is checked out.
+
+The **entire site is prerendered at build time** from the crawler's SQLite. Ranking tables, institution profiles, the sitemap, the search corpus and the Compare payloads are all static files, served by Cloudflare's asset layer without invoking the Worker. There is no D1 binding at all.
 
 All commands run from `frontend/`.
 
-## One-time setup
+## Why it is built this way
+
+D1's free tier allows 5M rows read/day. Rendering every page per-request needs much more than that, as `getRankingSystems()` scanned the whole `ranking` table on every SSR render, and the table queries sorted a full (system, year) slice to show 50 rows.
+
+Since the data only changes when the crawler re-runs, none of those queries needed to happen per request. Prerendering removes them from the request path entirely rather than making them cheaper, which takes the read count to zero and makes the limit irrelevant.
+
+## Build inputs
+
+`bun run build:data` projects the read model into JSON before Astro runs, reading `backend/data/rankr.sqlite`, and the single source of truth for the site.
+
+It writes `.data/` (build-only) plus the runtime assets `public/data/*.json`, `public/api/institution/*.json` and `public/search.json`. All are gitignored.
 
 ```bash
-cd frontend
-bunx wrangler login                 # or: export CLOUDFLARE_API_TOKEN=...  (fully headless)
-bunx wrangler d1 create rankr       # paste the printed database_id into wrangler.jsonc,
-                                    # replacing the "local-rankr" placeholder (deploy fails without a real id)
+bun run build:data
 ```
-
-## Seed the remote D1 — NOT automatic
-
-`wrangler deploy` only wires up bindings; it never loads data. You must seed D1 yourself (and re-seed after every backend re-crawl), or every page 500s with `no such table: ranking`.
-
-```bash
-bun run dump:d1     # writes .dump/rankr-d1.sql (INSERTs byte-capped so none trips D1's SQLITE_TOOBIG)
-bunx wrangler d1 execute rankr --remote --file=.dump/rankr-d1.sql
-```
-
-- The dump starts with `DROP TABLE IF EXISTS`, so re-running the command is idempotent (clean re-seed, no manual drop).
-- `wrangler d1 import rankr --file=…` is a one-shot bulk loader too but needs **wrangler ≥ 4.114**; `d1 execute --file` works on any version.
-- Verify: `bunx wrangler d1 execute rankr --remote --command "SELECT count(*) FROM ranking"` → expect ~36,560.
-- ~50k rows is well under the 100k rows/day free write limit, so a full seed is one sitting.
 
 ## Deploy
 
 ```bash
-bun run deploy    # = astro build && wrangler deploy  ->  https://rankr.<subdomain>.workers.dev
+bun run deploy  # = build:data && astro build && wrangler deploy
 ```
 
-Test the `*.workers.dev` URL (table, filters, search, profile charts, compare) before touching the domain. The Worker reads D1 live, so after a re-seed you just reload — no redeploy.
+The build prerenders ~4,900 pages and takes 5-15 minutes. Output is ~10,500 files / ~313 MB, against a free-plan limit of 20,000 files and 25 MiB per file. `verify:build` fails the build before deploy if either limit is crossed. Wrangler only uploads assets whose hashes changed, so redeploys after the first are quick.
+
+Test the `*.workers.dev` URL (table, country filter, pagination, search, profile charts, compare) before touching the domain.
+
+## Updating after a re-crawl
+
+No database step. Crawl into `backend/data/rankr.sqlite`, then:
+
+```bash
+bun run logos     # only if new institutions appeared
+bun run deploy
+```
 
 ## Custom domain
 
 - Domain DNS already on Cloudflare: add a route / custom domain in `wrangler.jsonc`, then redeploy (CLI-only).
 - Domain not on Cloudflare yet: add the zone + point nameservers (one-time, dashboard or API), then attach.
 
-## dev -> main flow (Cloudflare doesn't track branches)
-
-1. Test on the `*.workers.dev` URL from the `dev` branch.
-2. Retire the VPS, merge `dev` -> `main`.
-3. `git checkout main && bun run deploy`.
-4. Attach the custom domain.
-
-## Local dev (reference)
+## Local dev
 
 ```bash
-bunx wrangler d1 execute rankr --local --command "SELECT 1"   # create the local D1 file (once)
-bun run seed:local                                            # project rankr.sqlite -> local D1
-bun run dev
+bun run dev       # runs build:data first, then astro dev
 ```
 
-## Gotchas (hit during the first deploy)
+`dev` needs no database or bindings; `build:data` produces everything the pages read.
 
-- **`database_id` placeholder** → `binding DB ... must have a valid database_id [10021]`. Fill in the real id from `d1 create`.
+## Traffic reports
+
+```bash
+bun run report                     # today, last 7 days, last 30 days -> stdout
+bun run report -- --out usage.md   # write to a file
+bun run report -- --top 25         # widen the top-N tables
+```
+
+When redirecting, use `--out` or `bun run --silent report > usage.md`; a plain `bun run report > usage.md` captures bun's `$ bun scripts/...` banner as the first line.
+
+Reads Cloudflare's GraphQL Analytics API. Uses `$CLOUDFLARE_API_TOKEN` (needs Zone:Read + Zone Analytics:Read) if set, otherwise the local `wrangler login` credentials.
+
+## Gotchas
+
+- **Every CLI here exits 1 on success (Windows)** → `astro build`, `astro check` and `wrangler deploy` all print full success and then return status 1. Astro's own `exit` event reports code 0 and its CLI promise resolves cleanly, so the status is being mangled during native process teardown; it reproduces under both bun and node. Astro's entry point ends in `.catch(() => process.exit(1))`, which swallows any error silently, so there is nothing to read either.
+  - For the build, `build` ignores the status and runs `verify:build`, which checks the output instead.
+  - For `deploy`, the exit code is cosmetic: read wrangler's output. A real success prints `Current Version ID: ...` and the deployed triggers. Confirm with `curl -o /dev/null -w '%{http_code}' https://rankr.online/`, or `bunx wrangler deployments list`.
 - **`SESSION` KV "namespace already exists" [10014]** → the `@astrojs/cloudflare` adapter auto-enables KV-backed **sessions** (`SESSION` binding) and **Cloudflare Images** (`IMAGES` binding), and wrangler tries to create the KV on deploy. If a prior attempt already made it, bind the existing one in `wrangler.jsonc`:
   `"kv_namespaces": [{ "binding": "SESSION", "id": "<from: wrangler kv namespace list>" }]`.
-  The app uses neither sessions nor Images — they can be trimmed later (e.g. `cloudflare({ imageService: "passthrough" })`).
-- **`SQLITE_TOOBIG` while seeding** → a single INSERT exceeded D1's statement-length cap. `dump:d1` now byte-caps every INSERT (≤40 KB), so this can't recur.
-
-## Free-tier notes
-
-- Limits: 5M rows **read**/day, 100k rows **written**/day, 5 GB.
-- The projection + JSON collapse keep the seed (~50k rows) inside the daily write budget; the D1 indexes (`ix_ranking_lookup`, `ix_ranking_institution`, `ix_link_institution`) keep per-request reads tiny.
-- The dump in `.dump/` is gitignored — regenerate with `bun run dump:d1` whenever `rankr.sqlite` changes.
-- Push-to-`main` auto-deploy without the dashboard: a GitHub Action running `wrangler deploy` with a `CLOUDFLARE_API_TOKEN` secret.
+  The app uses neither sessions nor Images; they can be trimmed later (e.g. `cloudflare({ imageService: "passthrough" })`).

@@ -25,9 +25,23 @@ ROR metadata wins on any discrepancy, i.e., if a ranking lists an institution un
 ## Architecture
 
 - **backend/** — a Python CLI (`uv`, `Typer`, `SQLAlchemy`, `requests`, and `Pydantic`) that crawls the rankings and builds `data/rankr.sqlite`.
-- **frontend/** — an `Astro` SSR site (with `shadcn/ui` components) deployed to `Cloudflare Workers`, reading from `Cloudflare D1`. D1 is a slimmed projection of `rankr.sqlite`: ranked institutions only, with the per-metric ranking rows collapsed into a single JSON column.
+- **frontend/** — an `Astro` site (with `shadcn/ui` components) deployed to `Cloudflare Workers`. Because the data only changes when the crawler re-runs, the whole site is **prerendered at build time** from `rankr.sqlite` and served as static assets. Nothing queries a database at request time.
 
 Migrating from the previous `FastAPI`/`PostgreSQL` and `ReactJS` stack to the current architecture reduced hosting costs and enhanced performance.
+
+### Publishing new results
+
+`backend/data/rankr.sqlite` is the single source of truth. After a re-crawl:
+
+```bash
+cd frontend
+bun run logos   # only if new institutions appeared
+bun run deploy  # projects the data, prerenders the pages, verifies, deploys
+```
+
+New years, new institutions, the year selector, the search corpus and the sitemap are all derived from the data. Adding a whole new _ranking system_ is the one manual step (an entry in `RANKING_SYSTEMS` in `frontend/src/lib/site.ts`).
+
+See [frontend/cloudflare-deploy.md](frontend/cloudflare-deploy.md) for the full runbook, including `bun run report` for traffic reports.
 
 ## Updates
 

@@ -1,0 +1,16 @@
+# Cache headers for Workers static assets.
+# These files are regenerated only when the crawl data changes (a redeploy), so
+# they can be cached hard, but not `immutable`: the paths are stable, not
+# content-hashed, so a redeploy must be able to supersede them.
+
+/data/*
+  Cache-Control: public, max-age=3600, stale-while-revalidate=604800
+
+/api/institution/*
+  Cache-Control: public, max-age=3600, stale-while-revalidate=604800
+
+/search.json
+  Cache-Control: public, max-age=3600, stale-while-revalidate=604800
+
+/logos/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=2592000

@@ -4,14 +4,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "deploy": "astro build && wrangler deploy",
+    "dev": "bun run build:data && astro dev",
+    "build": "bun run build:data && bun run clean:dist && (astro build || true) && bun run verify:build",
+    "deploy": "bun run build && wrangler deploy",
     "preview": "wrangler dev",
     "check": "astro check",
-    "seed:local": "bun scripts/seed-local-d1.ts",
-    "dump:d1": "bun scripts/dump-d1.ts",
+    "build:data": "bun scripts/build-data.ts",
+    "verify:build": "bun scripts/verify-build.ts",
+    "clean:dist": "bun -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
     "logos": "bun scripts/prepare-logos.ts",
+    "report": "bun scripts/usage-report.ts",
     "astro": "astro"
   },
   "dependencies": {
