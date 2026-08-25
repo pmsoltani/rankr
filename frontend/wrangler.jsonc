@@ -15,16 +15,11 @@
   ],
   // @astrojs/cloudflare v14 deploys as a Worker with static assets (not Pages),
   // so this is a Worker config; no `pages_build_output_dir`.
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "rankr",
-      // Placeholder for local dev; replace with the real id from
-      // `wrangler d1 create rankr` before deploying.
-      "database_id": "b52c8ea3-3ee8-4b36-8ef9-34b3804e512f",
-      "migrations_dir": "../../migrations",
-    },
-  ],
+  "assets": {
+    "not_found_handling": "404-page",
+    "run_worker_first": false,
+    "html_handling": "drop-trailing-slash",
+  },
   "kv_namespaces": [
     {
       "binding": "SESSION",

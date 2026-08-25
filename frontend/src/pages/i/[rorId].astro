@@ -1,27 +1,28 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import uniLogo from "@/assets/images/uniLogo.svg";
-import rorColor from "@/assets/images/rorColor.svg";
 import homeFill from "@/assets/images/homeFill.svg";
-import wikipediaIcon from "@/assets/images/wikipediaInverse.svg";
 import qsColor from "@/assets/images/qsColor.svg";
+import rorColor from "@/assets/images/rorColor.svg";
 import shanghaiColor from "@/assets/images/shanghaiColor.svg";
 import theColor from "@/assets/images/theColor.svg";
+import uniLogo from "@/assets/images/uniLogo.svg";
+import wikipediaIcon from "@/assets/images/wikipediaInverse.svg";
 import InstitutionCharts from "@/components/charts/InstitutionCharts";
 import WikiSummary from "@/components/WikiSummary";
-import { getDb } from "@/lib/db";
-import { getInstitutionByRorId } from "@/lib/queries";
+import Layout from "@/layouts/Layout.astro";
+import { getAllRankedRorIds, getInstitution } from "@/lib/data";
 import { RANKING_SYSTEMS, SITE, type RankingSystemId } from "@/lib/site";
 import { MapPinIcon, ScaleIcon } from "lucide-react";
 
-const { rorId } = Astro.params;
+export const prerender = true;
 
-const db = getDb();
-const inst = rorId ? await getInstitutionByRorId(db, rorId) : null;
-
-if (!inst) {
-  return Astro.rewrite("/404");
+// One page per ranked institution (~3.8k). Anything outside this set is not a
+// real profile, so it falls through to the static 404 instead of a rewrite.
+export function getStaticPaths() {
+  return getAllRankedRorIds().map((rorId) => ({ params: { rorId } }));
 }
+
+const { rorId } = Astro.params;
+const inst = getInstitution(rorId!);
 
 function renderValue(value: number | string | null, valueType: string): string {
   if (value === null || value === "") return "—";
@@ -46,10 +47,22 @@ const SYSTEM_ICON: Record<RankingSystemId, string> = {
 // External links as icon buttons (previous design): ROR (always), homepage,
 // wikipedia, and each ranking-system profile.
 const linkByType = new Map(inst.links.map((l) => [l.type, l.link]));
-const externalLinks: { label: string; url: string | undefined; icon: string }[] = [
+const externalLinks: {
+  label: string;
+  url: string | undefined;
+  icon: string;
+}[] = [
   { label: "Homepage", url: linkByType.get("homepage"), icon: homeFill.src },
-  { label: "ROR", url: `${SITE.ror.baseURL}${inst.ror_id}`, icon: rorColor.src },
-  { label: "Wikipedia", url: linkByType.get("wikipedia"), icon: wikipediaIcon.src },
+  {
+    label: "ROR",
+    url: `${SITE.ror.baseURL}${inst.ror_id}`,
+    icon: rorColor.src,
+  },
+  {
+    label: "Wikipedia",
+    url: linkByType.get("wikipedia"),
+    icon: wikipediaIcon.src,
+  },
   ...(Object.keys(RANKING_SYSTEMS) as RankingSystemId[]).map((id) => ({
     label: `${RANKING_SYSTEMS[id].alias} profile`,
     url: linkByType.get(id),
@@ -98,11 +111,17 @@ const jsonLd = {
 
 <Layout title={`${inst.name} — ${SITE.name}`} description={description}>
   <Fragment slot="head">
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(jsonLd)}
+    />
   </Fragment>
   <div class="mx-auto max-w-300 px-4 py-8">
     <!-- Header: profile (left) + stats (2x2 on wide screens, right) -->
-    <header class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+    <header
+      class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between"
+    >
       <div class="flex flex-col gap-4 sm:flex-row sm:items-start">
         <div class="shrink-0 rounded-lg border bg-white p-2">
           <img
@@ -130,7 +149,9 @@ const jsonLd = {
                   ]}
                 >
                   <MapPinIcon className="size-4" />
-                  {[inst.city, inst.country?.country].filter(Boolean).join(", ")}
+                  {[inst.city, inst.country?.country]
+                    .filter(Boolean)
+                    .join(", ")}
                 </a>
               )
             }
@@ -193,7 +214,9 @@ const jsonLd = {
       </div>
       {
         inst.ranks.length === 0 && inst.scores.length === 0 ? (
-          <p class="text-muted-foreground text-sm">No ranking data available.</p>
+          <p class="text-muted-foreground text-sm">
+            No ranking data available.
+          </p>
         ) : (
           <InstitutionCharts
             client:only="react"

@@ -1,0 +1,22 @@
+---
+import RankingPage from "@/components/RankingPage.astro";
+import { getRankingSystems } from "@/lib/data";
+import type { RankingSystemId } from "@/lib/site";
+
+export const prerender = true;
+
+// One page per (system, year), 53 in total. Page 1 of each table.
+export function getStaticPaths() {
+  const systems = getRankingSystems();
+  return Object.entries(systems).flatMap(([system, years]) =>
+    years.map((year) => ({
+      params: { system, year: String(year) },
+      props: { system: system as RankingSystemId, year },
+    })),
+  );
+}
+
+const { system, year } = Astro.props;
+---
+
+<RankingPage system={system} year={year} page={1} />
