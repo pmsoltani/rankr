@@ -1,6 +1,9 @@
-import { QueryClient, QueryClientProvider, useQueries } from "@tanstack/react-query";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQueries,
+} from "@tanstack/react-query";
 import { XIcon } from "lucide-react";
-import { NuqsAdapter } from "nuqs/adapters/react";
 import {
   parseAsArrayOf,
   parseAsInteger,
@@ -8,6 +11,7 @@ import {
   parseAsStringLiteral,
   useQueryState,
 } from "nuqs";
+import { NuqsAdapter } from "nuqs/adapters/react";
 import { useState } from "react";
 
 import { CompareRadarChart } from "@/components/charts/CompareRadarChart";
@@ -25,8 +29,12 @@ const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: 1, staleTime: 5 * 60 * 1000 } },
 });
 
-async function fetchInstitution(rorId: string): Promise<InstitutionRankingData> {
-  const res = await fetch(`/api/institution/${encodeURIComponent(rorId)}`);
+// A prebuilt static asset, not an endpoint: scripts/build-data.ts writes one of
+// these per ranked institution.
+async function fetchInstitution(
+  rorId: string,
+): Promise<InstitutionRankingData> {
+  const res = await fetch(`/api/institution/${encodeURIComponent(rorId)}.json`);
   if (!res.ok) throw new Error(`fetch failed: ${res.status}`);
   return res.json() as Promise<InstitutionRankingData>;
 }
@@ -70,7 +78,9 @@ function CompareInner() {
   const scoreYears = [
     ...new Set(
       institutions.flatMap((inst) =>
-        inst.scores.filter((s) => s.ranking_system === activeSystem).map((s) => s.year),
+        inst.scores
+          .filter((s) => s.ranking_system === activeSystem)
+          .map((s) => s.year),
       ),
     ),
   ].sort((a, b) => b - a);
@@ -96,7 +106,7 @@ function CompareInner() {
                 href={`/i/${id}`}
                 className="hover:text-foreground max-w-56 truncate hover:underline"
               >
-                {nameById.get(id) ?? nameHints[id] ?? "…"}
+                {nameById.get(id) ?? nameHints[id] ?? "..."}
               </a>
               <button
                 type="button"
@@ -108,7 +118,11 @@ function CompareInner() {
               </button>
             </span>
           ))}
-          <ComparePicker onAdd={add} disabled={ids.length >= MAX} excludeIds={ids} />
+          <ComparePicker
+            onAdd={add}
+            disabled={ids.length >= MAX}
+            excludeIds={ids}
+          />
         </div>
 
         {institutions.length > 0 && (
@@ -160,7 +174,9 @@ function CompareInner() {
           Add institutions to compare their ranks and scores.
         </p>
       ) : loading && institutions.length === 0 ? (
-        <p className="text-muted-foreground py-16 text-center text-sm">Loading…</p>
+        <p className="text-muted-foreground py-16 text-center text-sm">
+          Loading...
+        </p>
       ) : (
         <div className="grid gap-6 lg:grid-cols-2">
           <CompareRankChart institutions={institutions} system={activeSystem} />
