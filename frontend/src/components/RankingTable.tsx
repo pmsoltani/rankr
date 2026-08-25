@@ -4,6 +4,19 @@ import type { RankingTableRow } from "@/lib/types";
 
 const PER_PAGE = 50;
 
+/** A ranking-system link for the sidebar; hrefs are precomputed in Astro. */
+export interface SystemOption {
+  id: string;
+  alias: string;
+  icon: string;
+  href: string;
+}
+
+export interface YearOption {
+  year: number;
+  href: string;
+}
+
 interface Props {
   system: string;
   year: number;
@@ -13,6 +26,10 @@ interface Props {
   countries: { country: string; country_code: string }[];
   total: number;
   page: number;
+  /** Sidebar filters. Static links, but they share the aside with the country
+   *  select, which has to be here because it drives the table. */
+  systemOptions: SystemOption[];
+  yearOptions: YearOption[];
 }
 
 const pageHref = (system: string, year: number, page: number) =>
@@ -39,6 +56,8 @@ export default function RankingTable({
   countries,
   total,
   page,
+  systemOptions,
+  yearOptions,
 }: Props) {
   const [country, setCountry] = useState("");
   const [clientPage, setClientPage] = useState(1);
@@ -116,35 +135,76 @@ export default function RankingTable({
 
   return (
     <div className="flex flex-col gap-6 lg:flex-row-reverse lg:items-start">
+      {/* Filters: right on desktop, above the table on mobile. */}
       <aside className="flex shrink-0 flex-col gap-5 lg:w-56">
         <div>
           <h2 className="text-muted-foreground mb-2 text-xs font-semibold uppercase">
-            Country
+            Ranking system
           </h2>
-          <select
-            value={country}
-            onChange={(e) => onCountry(e.target.value)}
-            className="w-full rounded-md border bg-white px-2 py-1.5 text-sm"
-            aria-label="Filter by country"
-          >
-            <option value="">All countries</option>
-            {countries.map((c) => (
-              <option key={c.country} value={c.country}>
-                {c.country}
-              </option>
+          <div className="flex flex-wrap gap-2 lg:flex-col">
+            {systemOptions.map((o) => (
+              <a
+                key={o.id}
+                href={o.href}
+                className={[
+                  "flex items-center gap-2 rounded-md border px-3 py-1.5 text-sm font-medium",
+                  o.id === system
+                    ? "border-neutral-900 font-semibold hover:bg-neutral-200"
+                    : "border-neutral-200 hover:bg-neutral-200",
+                ].join(" ")}
+              >
+                <img src={o.icon} alt="" className="size-5 shrink-0" />
+                {o.alias}
+              </a>
             ))}
-          </select>
+          </div>
+        </div>
+
+        {countries.length > 0 && (
+          <div>
+            <h2 className="text-muted-foreground mb-2 text-xs font-semibold uppercase">
+              Country
+            </h2>
+            <select
+              value={country}
+              onChange={(e) => onCountry(e.target.value)}
+              className="w-full rounded-md border bg-white px-2 py-1.5 text-sm"
+              aria-label="Filter by country"
+            >
+              <option value="">All countries</option>
+              {countries.map((c) => (
+                <option key={c.country} value={c.country}>
+                  {c.country}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
+        <div>
+          <h2 className="text-muted-foreground mb-2 text-xs font-semibold uppercase">
+            Year
+          </h2>
+          <div className="flex flex-wrap gap-1.5">
+            {yearOptions.map((o) => (
+              <a
+                key={o.year}
+                href={o.href}
+                className={[
+                  "rounded border px-2 py-1 text-xs tabular-nums",
+                  o.year === year
+                    ? "border-neutral-900 font-semibold hover:bg-neutral-200"
+                    : "border-neutral-200 hover:bg-neutral-200",
+                ].join(" ")}
+              >
+                {o.year}
+              </a>
+            ))}
+          </div>
         </div>
       </aside>
 
       <div className="min-w-0 flex-1">
-        <p className="text-muted-foreground mb-3 text-sm">
-          {loading && !filtered
-            ? "Loading..."
-            : `${shownTotal.toLocaleString()} institutions`}
-          {filtering && ` · ${country}`}
-        </p>
-
         <div className="overflow-x-auto rounded-lg border bg-white">
           <table className="w-full text-sm">
             <thead className="bg-neutral-50 text-left">

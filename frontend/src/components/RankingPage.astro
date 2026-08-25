@@ -51,6 +51,17 @@ const pageRows = pageSlice(rows, page);
 const totalPages = pageCount(rows.length);
 const alias = RANKING_SYSTEMS[system].alias;
 
+const systemOptions = available.map((id) => ({
+  id,
+  alias: RANKING_SYSTEMS[id].alias,
+  icon: SYSTEM_ICON[id],
+  href: `/rankings/${id}/${systems[id]?.includes(year) ? year : systems[id]![0]}`,
+}));
+const yearOptions = years.map((y) => ({
+  year: y,
+  href: `/rankings/${system}/${y}`,
+}));
+
 const title =
   titleProp ??
   (page > 1
@@ -89,49 +100,10 @@ const description =
 
   <div class="mx-auto max-w-300 px-4 py-8">
     <h1 class="text-2xl font-bold tracking-tight">World University Rankings</h1>
-    <p class="text-muted-foreground mt-1 text-sm">{alias} {year}</p>
-
-    <!-- Ranking-system tabs -->
-    <div class="mt-4 flex flex-wrap gap-2">
-      {
-        available.map((id) => {
-          const target = systems[id]?.includes(year) ? year : systems[id]![0];
-          return (
-            <a
-              href={`/rankings/${id}/${target}`}
-              class:list={[
-                "flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium",
-                id === system
-                  ? "bg-primary text-primary-foreground"
-                  : "border hover:bg-neutral-100",
-              ]}
-            >
-              <img src={SYSTEM_ICON[id]} alt="" class="size-5 shrink-0" />
-              {RANKING_SYSTEMS[id].alias}
-            </a>
-          );
-        })
-      }
-    </div>
-
-    <!-- Year selector -->
-    <div class="mt-3 flex flex-wrap gap-1.5">
-      {
-        years.map((y) => (
-          <a
-            href={`/rankings/${system}/${y}`}
-            class:list={[
-              "rounded px-2 py-1 text-xs tabular-nums",
-              y === year
-                ? "bg-neutral-900 text-white"
-                : "border hover:bg-neutral-100",
-            ]}
-          >
-            {y}
-          </a>
-        ))
-      }
-    </div>
+    <p class="text-muted-foreground mt-1 text-sm">
+      {alias}
+      {year} · {rows.length.toLocaleString()} institutions
+    </p>
 
     <div class="mt-6">
       <RankingTable
@@ -142,6 +114,8 @@ const description =
         countries={countries}
         total={rows.length}
         page={page}
+        systemOptions={systemOptions}
+        yearOptions={yearOptions}
       />
     </div>
   </div>
