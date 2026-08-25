@@ -13,6 +13,7 @@
     "verify:build": "bun scripts/verify-build.ts",
     "clean:dist": "bun -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
     "logos": "bun scripts/prepare-logos.ts",
+    "report": "bun scripts/usage-report.ts",
     "astro": "astro"
   },
   "dependencies": {
