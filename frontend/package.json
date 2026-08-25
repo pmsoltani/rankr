@@ -11,6 +11,7 @@
     "check": "astro check",
     "seed:local": "bun scripts/seed-local-d1.ts",
     "dump:d1": "bun scripts/dump-d1.ts",
+    "build:data": "bun scripts/build-data.ts",
     "logos": "bun scripts/prepare-logos.ts",
     "astro": "astro"
   },

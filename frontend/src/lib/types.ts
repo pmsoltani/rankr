@@ -6,32 +6,30 @@ export interface Country {
   sub_region: string | null;
 }
 
+/**
+ * One metric datum for an institution in a given ranking system and year.
+ *
+ * Deliberately narrower than the crawler's `ranking` row. Every row in the
+ * source is `university ranking` / `All` / `All`, and nothing renders the
+ * surrogate keys, so `id`, `institution_id`, `ranking_type`, `field` and
+ * `subject` are dropped during projection (scripts/build-data.ts). They are
+ * pure overhead here: these rows are serialized into every institution page's
+ * hydration payload, ~400 of them for a long-ranked university.
+ */
 export interface Ranking {
-  id: number;
-  institution_id: number;
   ranking_system: string;
-  ranking_type: string;
   year: number;
-  field: string;
-  subject: string;
   metric: string;
   raw_value: string | null;
   value: number | string | null;
-  value_type: string;
 }
 
-export interface Institution {
-  id: number;
-  ror_id: string;
-  grid_id: string | null;
-  name: string;
-  established: number | null;
-  lat: string | null;
-  lng: string | null;
-  city: string | null;
-  state: string | null;
-  country_id: number | null;
-  soup: string | null;
+/**
+ * A THE student statistic (FTE students, % international, ...). Unlike ranks and
+ * scores these are rendered as values with units, so they keep `value_type`.
+ */
+export interface InstitutionStat extends Ranking {
+  value_type: string;
 }
 
 export interface InstitutionLink {
@@ -39,12 +37,19 @@ export interface InstitutionLink {
   link: string;
 }
 
-export interface InstitutionDetail extends Institution {
+/** Everything /i/{rorId} renders. Built at build time, never shipped whole. */
+export interface InstitutionDetail {
+  ror_id: string;
+  name: string;
+  established: number | null;
+  lat: string | null;
+  lng: string | null;
+  city: string | null;
   country: Country | null;
   links: InstitutionLink[];
   ranks: Ranking[];
   scores: Ranking[];
-  stats: Ranking[];
+  stats: InstitutionStat[];
 }
 
 /** Lean payload for the Compare island (fetched client-side per institution). */
