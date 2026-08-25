@@ -11,25 +11,25 @@ export const prerender = true;
   >
     <h1 class="text-3xl font-bold">rankr</h1>
     <p>
-      <strong>rankr</strong> is a free and open-source platform for aggregating the results
-      of different academic rankings.
+      <strong>rankr</strong> is a free and open-source platform for aggregating the
+      results of different academic rankings.
     </p>
 
     <h2>🔍 What does it do?</h2>
     <p>
-      rankr crawls university ranking tables and, after some pre-processing, aggregates
-      them. It currently supports{" "}
+      rankr crawls university ranking tables and, after some pre-processing,
+      aggregates them. It currently supports{" "}
       <a href="https://www.topuniversities.com/">QS</a>,{" "}
       <a href="http://www.shanghairanking.com">Shanghai (ARWU)</a>, and{" "}
-      <a href="https://www.timeshighereducation.com">Times Higher Education</a>, for
-      both their world university rankings and subject rankings.
+      <a href="https://www.timeshighereducation.com">Times Higher Education</a>,
+      for both their world university rankings and subject rankings.
     </p>
     <p>
       To match institutions across ranking systems, rankr uses the{" "}
-      <a href="https://ror.org">Research Organization Registry (ROR)</a> (the open successor
-      to GRID) which assigns a persistent identifier to each research organization. Matching
-      is done via institution profile URLs, name &amp; country, fuzzy matching, and a curated
-      set of manual matches.
+      <a href="https://ror.org">Research Organization Registry (ROR)</a> (the open
+      successor to GRID) which assigns a persistent identifier to each research organization.
+      Matching is done via institution profile URLs, name &amp; country, fuzzy matching,
+      and a curated set of manual matches.
     </p>
 
     <h2>🛠️ Technologies</h2>
@@ -41,7 +41,9 @@ export const prerender = true;
           >BeautifulSoup</a
         > for crawling,{" "}
         <a href="https://www.sqlalchemy.org">SQLAlchemy</a> +{" "}
-        <a href="https://docs.pydantic.dev">Pydantic</a> for the data model, and{" "}
+        <a href="https://docs.pydantic.dev">Pydantic</a> for the data model, and{
+          " "
+        }
         <a href="https://github.com/seatgeek/thefuzz">FuzzyWuzzy</a> for name matching.
       </li>
       <li>
@@ -54,10 +56,10 @@ export const prerender = true;
       </li>
       <li>
         <strong>Hosting:</strong>{" "}
-        <a href="https://www.cloudflare.com/developer-platform/products/pages/"
-          >Cloudflare Pages</a
-        > with a{" "}
-        <a href="https://developers.cloudflare.com/d1/">D1</a> (SQLite) database.
+        <a href="https://developers.cloudflare.com/workers/"
+          >Cloudflare Workers</a
+        >. The ranking tables and institution profiles are prerendered at build
+        time from the crawler's SQLite, so the site is served as static assets.
       </li>
     </ul>
   </article>
