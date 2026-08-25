@@ -1,11 +1,16 @@
 #!/usr/bin/env bun
 /**
  * Render a markdown traffic report for rankr.online from Cloudflare's GraphQL
- * Analytics API.
+ * Analytics API: traffic for today, the last 7 days and the last 30 days, then
+ * account usage against the free-tier limits.
  *
- *   bun run report                    # today, last 7 days, last 30 days
+ *   bun run report                    # full report
  *   bun run report -- --out usage.md  # write to a file instead of stdout
  *   bun run report -- --top 25        # widen the "top N" tables
+ *
+ * The free-tier section exists because there is no `wrangler` equivalent:
+ * wrangler introspects one product at a time (`d1 info`, `d1 insights`,
+ * `kv namespace list`) and the dashboard splits the same numbers across pages.
  *
  * Tables are emitted with their borders aligned, so the report is as readable in
  * a terminal as it is rendered, and the output is already formatted;
@@ -27,7 +32,13 @@
  *     not by oversight.
  */
 
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import {
+  existsSync,
+  readFileSync,
+  readdirSync,
+  statSync,
+  writeFileSync,
+} from "node:fs";
 import { homedir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -72,26 +83,7 @@ function readWranglerToken(): { token: string; expires: number } | undefined {
   return undefined;
 }
 
-/**
- * The wrangler OAuth token expires hourly and only wrangler refreshes it, so a
- * stale one on disk yields a bare "Invalid access token" from the API. Nudge
- * wrangler into refreshing rather than making that the caller's problem. A real
- * API token (`$CLOUDFLARE_API_TOKEN`) skips all of this and is what CI wants.
- */
-function wranglerToken(): string | undefined {
-  let creds = readWranglerToken();
-  if (creds && creds.expires - Date.now() < 60_000) {
-    const refresh = Bun.spawnSync(["bunx", "wrangler", "whoami"], {
-      cwd: FRONTEND,
-      stdout: "ignore",
-      stderr: "ignore",
-    });
-    if (refresh.success) creds = readWranglerToken();
-  }
-  return creds?.token;
-}
-
-const TOKEN = process.env.CLOUDFLARE_API_TOKEN ?? wranglerToken();
+let TOKEN = process.env.CLOUDFLARE_API_TOKEN ?? readWranglerToken()?.token;
 if (!TOKEN) {
   console.error(
     "no Cloudflare credentials found.\n" +
@@ -99,6 +91,58 @@ if (!TOKEN) {
       "Zone:Read + Zone Analytics:Read and export it as CLOUDFLARE_API_TOKEN.",
   );
   process.exit(1);
+}
+
+/**
+ * The wrangler OAuth token lives about an hour and only wrangler renews it, so
+ * ask wrangler to, then re-read the file.
+ *
+ * Deliberately ignores the exit status: every CLI on Windows returns 1 even on
+ * a fully successful run (see scripts/verify-build.ts), so the only trustworthy
+ * signal is whether the token on disk actually changed.
+ */
+function refreshToken(): boolean {
+  if (process.env.CLOUDFLARE_API_TOKEN) return false; // not ours to refresh
+  const before = TOKEN;
+  Bun.spawnSync(["bunx", "wrangler", "whoami"], {
+    cwd: FRONTEND,
+    stdout: "ignore",
+    stderr: "ignore",
+  });
+  TOKEN = readWranglerToken()?.token ?? TOKEN;
+  return TOKEN !== before;
+}
+
+const looksLikeAuthFailure = (message: string) =>
+  /authentication|invalid access token|unauthor|forbidden|9109|10000/i.test(message);
+
+/**
+ * Fetch with one refresh-and-retry on an auth failure.
+ *
+ * Expiry cannot be predicted reliably from `expiration_time`: a concurrent
+ * wrangler command (a `tail`, another deploy) rotates the token and invalidates
+ * the copy read a moment earlier, so a token that looks fresh can still be
+ * rejected. Reacting to the rejection covers both that race and plain expiry.
+ */
+async function authedFetch(
+  url: string,
+  init: RequestInit = {},
+  retried = false,
+): Promise<{ body: any; authFailed: boolean }> {
+  const res = await fetch(url, {
+    ...init,
+    headers: { ...init.headers, Authorization: `Bearer ${TOKEN}` },
+  });
+  const body = await res.json();
+  const messages = [
+    ...(body?.errors ?? []).map((e: { message?: string }) => e?.message ?? ""),
+    res.status === 401 || res.status === 403 ? "unauthorized" : "",
+  ].join(" ");
+  const authFailed = Boolean(messages.trim()) && looksLikeAuthFailure(messages);
+  if (authFailed && !retried && refreshToken()) {
+    return authedFetch(url, init, true);
+  }
+  return { body, authFailed };
 }
 
 /** Distinguish an expired local token from a genuinely wrong one. */
@@ -109,41 +153,60 @@ function authHint(): string {
         "or export a CLOUDFLARE_API_TOKEN with Zone:Read + Zone Analytics:Read.";
 }
 
-async function gql<T>(query: string, variables: Record<string, unknown>): Promise<T> {
-  const res = await fetch(GRAPHQL, {
+async function graphql<T>(
+  scope: "zones" | "accounts",
+  query: string,
+  variables: Record<string, unknown>,
+): Promise<T> {
+  const { body, authFailed } = await authedFetch(GRAPHQL, {
     method: "POST",
-    headers: { Authorization: `Bearer ${TOKEN}`, "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ query, variables }),
   });
-  const json = (await res.json()) as {
-    data?: { viewer?: { zones?: T[] } };
+  const json = body as {
+    data?: { viewer?: Record<string, T[]> };
     errors?: { message: string }[];
   };
   if (json.errors?.length) {
-    throw new Error(json.errors.map((e) => e.message).join("; "));
+    const reason = json.errors.map((e) => e.message).join("; ");
+    throw new Error(authFailed ? `${reason}\n${authHint()}` : reason);
   }
-  const zone = json.data?.viewer?.zones?.[0];
-  if (!zone) throw new Error("no analytics returned for this zone");
-  return zone;
+  const node = json.data?.viewer?.[scope]?.[0];
+  if (!node) throw new Error(`no analytics returned for this ${scope.slice(0, -1)}`);
+  return node;
 }
 
-async function zoneId(): Promise<string> {
-  if (process.env.CLOUDFLARE_ZONE_ID) return process.env.CLOUDFLARE_ZONE_ID;
-  const res = await fetch(
-    `https://api.cloudflare.com/client/v4/zones?name=${encodeURIComponent(ZONE_NAME)}`,
-    { headers: { Authorization: `Bearer ${TOKEN}` } },
-  );
-  const json = (await res.json()) as {
+const gql = <T>(query: string, variables: Record<string, unknown>) =>
+  graphql<T>("zones", query, variables);
+
+/** Resolve a single id from a REST list endpoint. */
+async function restId(url: string, what: string): Promise<string> {
+  const { body } = await authedFetch(url);
+  const json = body as {
     success: boolean;
     result?: { id: string }[];
     errors?: { message: string }[];
   };
   if (!json.success || !json.result?.length) {
     const reason = json.errors?.map((e) => e.message).join("; ") ?? "not found";
-    throw new Error(`could not resolve zone "${ZONE_NAME}": ${reason}\n${authHint()}`);
+    throw new Error(`could not resolve ${what}: ${reason}\n${authHint()}`);
   }
   return json.result[0].id;
 }
+
+/** Free-tier limits are per account, so quota checks need the account, not the zone. */
+const accountId = () =>
+  process.env.CLOUDFLARE_ACCOUNT_ID
+    ? Promise.resolve(process.env.CLOUDFLARE_ACCOUNT_ID)
+    : restId("https://api.cloudflare.com/client/v4/accounts", "account");
+
+const zoneId = () =>
+  process.env.CLOUDFLARE_ZONE_ID
+    ? Promise.resolve(process.env.CLOUDFLARE_ZONE_ID)
+    : restId(
+        `https://api.cloudflare.com/client/v4/zones?name=${encodeURIComponent(ZONE_NAME)}`,
+        `zone "${ZONE_NAME}"`,
+      );
 
 // ------------------------------------------------------------------- helpers --
 const iso = (d: Date) => d.toISOString().slice(0, 10);
@@ -487,6 +550,238 @@ async function monthSection(zone: string): Promise<string> {
   ].join("\n");
 }
 
+// ------------------------------------------------------------- free-tier use --
+/**
+ * Usage against the free-tier limits.
+ *
+ * Every limit here is per *account*, so a second Worker in the same account
+ * draws on the same daily request budget. The per-script breakdown below exists
+ * to make that visible.
+ */
+
+// Verified against Cloudflare's published free-plan limits.
+const LIMITS = {
+  workerRequests: 100_000, // per day, account-wide; static-asset hits are exempt
+  d1RowsRead: 5_000_000, // per day
+  d1RowsWritten: 100_000, // per day
+  kvReads: 100_000, // per day
+  kvWrites: 1_000, // per day
+  assetFiles: 20_000, // per Worker version
+  assetFileBytes: 25 * 1024 * 1024, // per file
+};
+
+interface WorkerRow {
+  dimensions: { scriptName: string };
+  sum: { requests: number; errors: number };
+}
+interface D1Row {
+  dimensions: { databaseId: string };
+  sum: { rowsRead: number; rowsWritten: number };
+}
+interface KvRow {
+  dimensions: { namespaceId: string; actionType: string };
+  sum: { requests: number };
+}
+
+async function quotaSection(): Promise<string> {
+  let account: string;
+  try {
+    account = await accountId();
+  } catch (err) {
+    return `## Free-tier usage\n\n_Unavailable: ${(err as Error).message}_\n`;
+  }
+
+  const since = `${iso(new Date())}T00:00:00Z`;
+  const until = new Date().toISOString();
+  const today = iso(new Date());
+  const tomorrow = iso(daysAgo(-1));
+
+  const workers = await graphql<{ workersInvocationsAdaptive: WorkerRow[] }>(
+    "accounts",
+    `
+      query ($a: String!, $since: Time!, $until: Time!) {
+        viewer {
+          accounts(filter: { accountTag: $a }) {
+            workersInvocationsAdaptive(
+              limit: 100
+              filter: { datetime_geq: $since, datetime_lt: $until }
+            ) {
+              dimensions {
+                scriptName
+              }
+              sum {
+                requests
+                errors
+              }
+            }
+          }
+        }
+      }
+    `,
+    { a: account, since, until },
+  ).catch(() => ({ workersInvocationsAdaptive: [] as WorkerRow[] }));
+
+  const d1 = await graphql<{ d1AnalyticsAdaptiveGroups: D1Row[] }>(
+    "accounts",
+    `
+      query ($a: String!, $since: Date!, $until: Date!) {
+        viewer {
+          accounts(filter: { accountTag: $a }) {
+            d1AnalyticsAdaptiveGroups(
+              limit: 100
+              filter: { date_geq: $since, date_lt: $until }
+            ) {
+              dimensions {
+                databaseId
+              }
+              sum {
+                rowsRead
+                rowsWritten
+              }
+            }
+          }
+        }
+      }
+    `,
+    { a: account, since: today, until: tomorrow },
+  ).catch(() => ({ d1AnalyticsAdaptiveGroups: [] as D1Row[] }));
+
+  const kv = await graphql<{ kvOperationsAdaptiveGroups: KvRow[] }>(
+    "accounts",
+    `
+      query ($a: String!, $since: Date!, $until: Date!) {
+        viewer {
+          accounts(filter: { accountTag: $a }) {
+            kvOperationsAdaptiveGroups(
+              limit: 100
+              filter: { date_geq: $since, date_lt: $until }
+            ) {
+              dimensions {
+                namespaceId
+                actionType
+              }
+              sum {
+                requests
+              }
+            }
+          }
+        }
+      }
+    `,
+    { a: account, since: today, until: tomorrow },
+  ).catch(() => ({ kvOperationsAdaptiveGroups: [] as KvRow[] }));
+
+  const sum = <T>(list: T[], pick: (row: T) => number) =>
+    list.reduce((n, row) => n + pick(row), 0);
+
+  const rows: (string | number)[][] = [];
+  const add = (label: string, used: number, limit: number, fmt = num) => {
+    const ratio = limit ? used / limit : 0;
+    rows.push([
+      label,
+      fmt(used),
+      fmt(limit),
+      `${(ratio * 100).toFixed(ratio < 0.1 ? 2 : 1)}%`,
+      ratio >= 1 ? "OVER" : ratio >= 0.8 ? "high" : "ok",
+    ]);
+  };
+
+  add(
+    "Worker requests",
+    sum(workers.workersInvocationsAdaptive, (w) => w.sum.requests),
+    LIMITS.workerRequests,
+  );
+  add(
+    "D1 rows read",
+    sum(d1.d1AnalyticsAdaptiveGroups, (d) => d.sum.rowsRead),
+    LIMITS.d1RowsRead,
+  );
+  add(
+    "D1 rows written",
+    sum(d1.d1AnalyticsAdaptiveGroups, (d) => d.sum.rowsWritten),
+    LIMITS.d1RowsWritten,
+  );
+  const kvOps = (type: string) =>
+    sum(
+      kv.kvOperationsAdaptiveGroups.filter((k) => k.dimensions.actionType === type),
+      (k) => k.sum.requests,
+    );
+  add("KV reads", kvOps("read"), LIMITS.kvReads);
+  add("KV writes", kvOps("write"), LIMITS.kvWrites);
+
+  // Asset counts come from the local build: the cap is per deployed version, not
+  // per day, so this is only meaningful right after `bun run build`.
+  const client = join(FRONTEND, "dist", "client");
+  if (existsSync(client)) {
+    let files = 0;
+    let biggest = 0;
+    (function walk(dir: string) {
+      for (const entry of readdirSync(dir, { withFileTypes: true })) {
+        const path = join(dir, entry.name);
+        if (entry.isDirectory()) walk(path);
+        else {
+          files++;
+          biggest = Math.max(biggest, statSync(path).size);
+        }
+      }
+    })(client);
+    add("Static asset files", files, LIMITS.assetFiles);
+    add("Largest single asset", biggest, LIMITS.assetFileBytes, bytes);
+  }
+
+  const out = [
+    "## Free-tier usage",
+    "",
+    "_Today so far (UTC). Limits are per account, not per Worker or zone._",
+    "",
+    table(["Resource", "Used", "Limit", "Share", ""], rows),
+  ];
+
+  const scripts = workers.workersInvocationsAdaptive
+    .filter((w) => w.sum.requests > 0)
+    .sort((a, b) => b.sum.requests - a.sum.requests);
+  if (scripts.length > 1) {
+    out.push(
+      "### Worker requests by script",
+      "",
+      "_All scripts in the account share the same 100k/day budget._",
+      "",
+      table(
+        ["Script", "Requests", "Errors"],
+        scripts.map((w) => [
+          `\`${w.dimensions.scriptName}\``,
+          num(w.sum.requests),
+          num(w.sum.errors),
+        ]),
+      ),
+    );
+  }
+
+  const kvByNamespace = new Map<string, number>();
+  for (const k of kv.kvOperationsAdaptiveGroups) {
+    kvByNamespace.set(
+      k.dimensions.namespaceId,
+      (kvByNamespace.get(k.dimensions.namespaceId) ?? 0) + k.sum.requests,
+    );
+  }
+  if (kvByNamespace.size) {
+    out.push(
+      "### KV namespaces in use",
+      "",
+      "_Check here before deleting a namespace that looks unreferenced._",
+      "",
+      table(
+        ["Namespace", "Operations"],
+        [...kvByNamespace]
+          .sort((a, b) => b[1] - a[1])
+          .map(([id, n]) => [`\`${id}\``, num(n)]),
+      ),
+    );
+  }
+
+  return out.join("\n");
+}
+
 // ---------------------------------------------------------------------- main --
 const zone = await zoneId();
 const now = new Date();
@@ -527,6 +822,8 @@ const report = tidy(
     ),
     "",
     await monthSection(zone),
+    "",
+    await quotaSection(),
   ].join("\n"),
 );
 

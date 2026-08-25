@@ -57,10 +57,12 @@ bun run dev       # runs build:data first, then astro dev
 ## Traffic reports
 
 ```bash
-bun run report                     # today, last 7 days, last 30 days -> stdout
+bun run report                     # traffic + free-tier usage -> stdout
 bun run report -- --out usage.md   # write to a file
 bun run report -- --top 25         # widen the top-N tables
 ```
+
+Covers traffic for today, the last 7 days and the last 30 days, then a **free-tier usage** section: Worker requests, D1 rows read/written, KV reads/writes, and static-asset counts, each against its limit.
 
 When redirecting, use `--out` or `bun run --silent report > usage.md`; a plain `bun run report > usage.md` captures bun's `$ bun scripts/...` banner as the first line.
 
