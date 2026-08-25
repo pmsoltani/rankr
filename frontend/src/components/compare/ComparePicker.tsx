@@ -1,6 +1,5 @@
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { PlusIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import {
   Command,
@@ -10,22 +9,8 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { type IndexEntry, loadSearchIndex, searchIndex } from "@/lib/search";
 import type { SearchResult } from "@/lib/types";
-
-function useDebounced<T>(value: T, delay = 300): T {
-  const [debounced, setDebounced] = useState(value);
-  useEffect(() => {
-    const timer = setTimeout(() => setDebounced(value), delay);
-    return () => clearTimeout(timer);
-  }, [value, delay]);
-  return debounced;
-}
-
-async function fetchSearch(q: string): Promise<SearchResult[]> {
-  const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`);
-  if (!res.ok) throw new Error(`search failed: ${res.status}`);
-  return res.json() as Promise<SearchResult[]>;
-}
 
 export function ComparePicker({
   onAdd,
@@ -38,17 +23,34 @@ export function ComparePicker({
 }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const debounced = useDebounced(query, 300).trim();
+  // Matching runs against the locally cached index, so there is nothing to debounce.
+  const debounced = query.trim();
   const active = debounced.length >= 2;
 
-  const { data, isFetching } = useQuery({
-    queryKey: ["search", debounced],
-    queryFn: () => fetchSearch(debounced),
-    enabled: active,
-    placeholderData: keepPreviousData,
-  });
-  const results = (active ? (data ?? []) : []).filter(
-    (r) => !excludeIds.includes(r.ror_id),
+  const [index, setIndex] = useState<IndexEntry[] | null>(null);
+
+  // Shared with the navbar palette: whichever opens first pays for the fetch.
+  useEffect(() => {
+    if (!open || index) return;
+    let cancelled = false;
+    loadSearchIndex().then(
+      (data) => !cancelled && setIndex(data),
+      () => {},
+    );
+    return () => {
+      cancelled = true;
+    };
+  }, [open, index]);
+
+  const isFetching = active && !index;
+  const results = useMemo(
+    () =>
+      active && index
+        ? searchIndex(index, debounced).filter(
+            (r) => !excludeIds.includes(r.ror_id),
+          )
+        : [],
+    [active, index, debounced, excludeIds],
   );
 
   const pick = (r: SearchResult) => {
@@ -71,7 +73,9 @@ export function ComparePicker({
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="overflow-hidden p-0" showCloseButton={false}>
-          <DialogTitle className="sr-only">Add institution to compare</DialogTitle>
+          <DialogTitle className="sr-only">
+            Add institution to compare
+          </DialogTitle>
           <Command
             shouldFilter={false}
             className="[&_[cmdk-input-wrapper]_svg]:size-5 **:[[cmdk-input]]:h-12 **:[[cmdk-item]]:px-3 **:[[cmdk-item]]:py-2.5"
@@ -79,7 +83,7 @@ export function ComparePicker({
             <CommandInput
               value={query}
               onValueChange={setQuery}
-              placeholder="Search institutions to compare…"
+              placeholder="Search institutions to compare..."
             />
             <CommandList>
               {!active ? (
@@ -88,7 +92,7 @@ export function ComparePicker({
                 </p>
               ) : results.length === 0 && isFetching ? (
                 <p className="text-muted-foreground py-6 text-center text-sm">
-                  Searching…
+                  Searching...
                 </p>
               ) : results.length === 0 ? (
                 <p className="text-muted-foreground py-6 text-center text-sm">
